@@ -49,10 +49,10 @@ public class SignUpServlet extends HttpServlet {
         String url = siteMaps.getProperty(
                 MyApplicationConstants.CreateAccountServlet.ERROR_PAGE);
         String name = request.getParameter("txtName");
-       
+
         byte[] bytes = name.getBytes(StandardCharsets.ISO_8859_1);
         name = new String(bytes, StandardCharsets.UTF_8);
-        
+
         String password = request.getParameter("txtPassword");
         String email = request.getParameter("txtEmail");
         String birthDateTxt = request.getParameter("txtBirthDate");
@@ -62,6 +62,7 @@ public class SignUpServlet extends HttpServlet {
         CustomerCreateError errors = new CustomerCreateError();
         try {
             //Check all user error
+            CustomerDAO dao = new CustomerDAO();
             if (name.trim().length() < 1) {
                 errorFound = true;
                 errors.setNameLengthError("You can't leave this empty");
@@ -80,6 +81,9 @@ public class SignUpServlet extends HttpServlet {
             if (email.trim().length() < 1) {
                 errorFound = true;
                 errors.setEmailLengthError("You can't leave this empty");
+            } else if (dao.checkEmail(email)) {
+                errorFound = true;
+                errors.setEmailIsExisted(email + " is existed!!!");
             }
             if (errorFound) {
                 //catch error
@@ -91,11 +95,13 @@ public class SignUpServlet extends HttpServlet {
 //                Date birthDate = DFormat.parse(birthDateTxt);
                 Date birthDate = new SimpleDateFormat("yyyy-MM-dd")
                         .parse(birthDateTxt);
-                boolean sex = new Boolean(sexTxt);
-                CustomerDAO dao = new CustomerDAO();
+                boolean sex = false;
+                if (sexTxt.equals("Male")) {
+                    sex = true;
+                }
                 CustomerDTO dto
-                        = new CustomerDTO(name, password, birthDate, "none", email
-                                , "none", "none",  false, 0, true);
+                        = new CustomerDTO(name, password, birthDate, "none", email,
+                                 "none", "none", false, 0, sex);
                 boolean result = dao.createAccount(dto);
                 if (result) {
                     url = siteMaps.getProperty(
@@ -105,15 +111,11 @@ public class SignUpServlet extends HttpServlet {
         } catch (SQLException ex) {
             String msg = ex.getMessage();
             log("SignUp _ SQL _ " + msg);
-            if (msg.contains("duplicate")) {
-                errors.setEmailIsExisted(email + " is existed!!!!");
-                request.setAttribute("SIGNUP_ERROR", errors);
-            }
         } catch (NamingException ex) {
             log("SignUp _ Naming _ " + ex.getMessage());
-        } catch(ParseException ex){
+        } catch (ParseException ex) {
             log("DateFormat _ Parse _" + ex.getMessage());
-        }finally {
+        } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
