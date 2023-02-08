@@ -109,6 +109,37 @@ body {
   font-size: 16px;
   flex-direction: column;
 }
+.register-form-radio {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  position: relative;
+}
+.register-form-input-check-logo {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: var(--form-color);
+  border-radius: 50%;
+  z-index: -1;
+}
+.register-form-input-check-logo::after {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  background-color: #7a7a7a;
+  border-radius: 50%;
+  visibility: hidden;
+}
+.register-form-input-radio {
+  width: 40px;
+  position: relative;
+  opacity: 0;
+}
 .register-form-gender {
   display: flex;
   flex-direction: row;
@@ -214,6 +245,10 @@ body {
   text-decoration: none;
   color: var(--font-color);
   font-weight: 700;
+  transition: all 0.2s linear;
+}
+.register-function-register-hightlight:hover {
+  opacity: 0.6;
 }
 .register-link {
   text-decoration: none;
@@ -249,6 +284,10 @@ body {
 }
 .footer-menu-link:hover {
   opacity: 0.6;
+}
+
+.register-form-input-radio:checked ~ .register-form-input-check-logo::after {
+  visibility: visible;
 }
 
 /*# sourceMappingURL=register.css.map */

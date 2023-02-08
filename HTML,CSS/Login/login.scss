@@ -132,12 +132,6 @@ body {
       width: 34px;
       height: 34px;
     }
-    &-keep {
-      padding-left: 10px;
-      font-size: 14px;
-      opacity: 0.6;
-      font-weight: 600;
-    }
   }
   &-option {
     display: flex;
@@ -147,12 +141,46 @@ body {
     margin-bottom: 45px;
     &-checkbox {
       display: flex;
-      justify-content: center;
+      flex-wrap: nowrap;
       align-items: center;
-      height: 31px;
+      position: relative;
+    }
+    &-input {
+      &-check-logo {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-color: var(--form-color);
+        z-index: -1;
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0.5rem;
+          left: 0.5rem;
+          bottom: 0.5rem;
+          right: 0.5rem;
+          background-color: #7a7a7a;
+          visibility: hidden;
+        }
+      }
+      &-checkbox {
+        width: 40px;
+        height: 30px;
+        position: relative;
+        opacity: 0;
+      }
+      &-keep {
+        padding-left: 10px;
+        font-size: 14px;
+        opacity: 0.6;
+        font-weight: 600;
+      }
     }
   }
-
+  .login-option-input-checkbox:checked ~ .login-option-input-check-logo::after {
+    visibility: visible;
+  }
   &-function {
     display: flex;
     align-items: center;

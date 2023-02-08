@@ -1,0 +1,26 @@
+<div class="register-form-radio">
+                  <input
+                    type="radio"
+                    class="register-form-input-radio"
+                    id="gender-male"
+                    name="gender-check"
+                    value="male"
+                  />
+                  <span class="register-form-input-check-logo"></span>
+                  <label for="gender-male" class="register-form-input-male"
+                    >Male</label
+                  >
+                </div>
+____________________________________________________________________________
+<div class="login-option-checkbox">
+                <input
+                  type="checkbox"
+                  class="login-option-checkbox"
+                  id="create-acc"
+                  name="create-acc"
+                />
+                <span class="login-option-input-check-logo"><i class="fa-solid fa-check"></i></span>
+                <label for="create-acc" class="login-option-input-keep"
+                  >Keep me logged in</label
+                >
+              </div>
