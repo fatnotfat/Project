@@ -1,3 +1,5 @@
+REGISTER(HTML)
+____________________________________________________________________________
 <div class="register-form-radio">
                   <input
                     type="radio"
@@ -11,11 +13,71 @@
                     >Male</label
                   >
                 </div>
-____________________________________________________________________________
+REGISTER(SCSS)
+___________________________________________________________________________
+.register-form-input-radio:checked ~ .register-form-input-check-logo::after {
+  visibility: visible;
+}
+&-form {
+    display: flex;
+    font-size: 16px;
+    flex-direction: column;
+    &-radio {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      position: relative;
+    }
+    &-input {
+      &-check-logo {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-color: var(--form-color);
+        border-radius: 50%;
+        z-index: -1;
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0.5rem;
+          left: 0.5rem;
+          bottom: 0.5rem;
+          right: 0.5rem;
+          background-color: #7a7a7a;
+          border-radius: 50%;
+          visibility: hidden;
+        }
+      }
+      &-radio {
+        width: 40px;
+        // height: 30px;
+        position: relative;
+        opacity: 0;
+      }
+    }
+    &-gender {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 30px;
+    }
+
+    &-input-male {
+      padding-right: 10px;
+      line-height: 17px;
+      font-weight: 600;
+    }
+    &-input-female {
+      line-height: 17px;
+      font-weight: 600;
+    }
+  }
+___________________________________________________________________________
+LOGIN(html)
 <div class="login-option-checkbox">
                 <input
                   type="checkbox"
-                  class="login-option-checkbox"
+                  class="login-option-input-checkbox"
                   id="create-acc"
                   name="create-acc"
                 />
@@ -24,3 +86,5 @@ ____________________________________________________________________________
                   >Keep me logged in</label
                 >
               </div>
+LOGIN(SCSS)
+____________________________________________________________________________
