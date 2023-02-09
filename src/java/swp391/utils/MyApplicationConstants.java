@@ -76,5 +76,9 @@ public class MyApplicationConstants {
         public static final String RESETPASSWORD_PAGE = "resetPasswordPage";
         public static final String LOGIN_PAGE = "loginPage";
     }
+    
+    public class ShowMainPageServlet {
+        public static final String MAIN_PAGE = "mainPage";
+    }
 
 }

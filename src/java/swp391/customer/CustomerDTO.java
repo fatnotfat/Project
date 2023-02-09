@@ -17,13 +17,13 @@ public class CustomerDTO implements Serializable {
     private String name;
     private String password;
     private Date birthDate;
-    private String avatar;
     private String email;
     private String phone;
     private String address;
     private boolean role;
     private int rankID;
     private boolean sex;
+    private boolean typeOfLogin;
 
     public CustomerDTO() {
     }
@@ -32,18 +32,18 @@ public class CustomerDTO implements Serializable {
         this.name = name;
     }
     
-    public CustomerDTO(String name, String password, Date birthDate, String avatar
-            , String email, String phone, String address, boolean role, int rankID, boolean sex) {
+    public CustomerDTO(String name, String password, Date birthDate,
+            String email, String phone, String address, boolean role, int rankID, boolean sex, boolean typeOfLogin) {
         this.name = name;
         this.password = password;
         this.birthDate = birthDate;
-        this.avatar = avatar;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.role = role;
         this.rankID = rankID;
         this.sex = sex;
+        this.typeOfLogin = typeOfLogin;
     }
 
     /**
@@ -88,19 +88,6 @@ public class CustomerDTO implements Serializable {
         this.birthDate = birthDate;
     }
 
-    /**
-     * @return the avatar
-     */
-    public String getAvatar() {
-        return avatar;
-    }
-
-    /**
-     * @param avatar the avatar to set
-     */
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
 
     /**
      * @return the email
@@ -184,6 +171,14 @@ public class CustomerDTO implements Serializable {
      */
     public void setSex(boolean sex) {
         this.sex = sex;
+    }
+
+    public boolean isTypeOfLogin() {
+        return typeOfLogin;
+    }
+
+    public void setTypeOfLogin(boolean typeOfLogin) {
+        this.typeOfLogin = typeOfLogin;
     }
 
     

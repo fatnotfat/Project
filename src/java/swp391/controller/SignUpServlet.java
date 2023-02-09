@@ -49,10 +49,9 @@ public class SignUpServlet extends HttpServlet {
         String url = siteMaps.getProperty(
                 MyApplicationConstants.CreateAccountServlet.ERROR_PAGE);
         String name = request.getParameter("txtName");
-
         byte[] bytes = name.getBytes(StandardCharsets.ISO_8859_1);
         name = new String(bytes, StandardCharsets.UTF_8);
-
+        
         String password = request.getParameter("txtPassword");
         String email = request.getParameter("txtEmail");
         String birthDateTxt = request.getParameter("txtBirthDate");
@@ -85,6 +84,10 @@ public class SignUpServlet extends HttpServlet {
                 errorFound = true;
                 errors.setEmailIsExisted(email + " is existed!!!");
             }
+            if (birthDateTxt.trim().length() < 1) {
+                errorFound = true;
+                errors.setBirthDateLengthError("You must set your birthday!!!");
+            }
             if (errorFound) {
                 //catch error
                 request.setAttribute("SIGNUP_ERROR", errors);
@@ -100,8 +103,8 @@ public class SignUpServlet extends HttpServlet {
                     sex = true;
                 }
                 CustomerDTO dto
-                        = new CustomerDTO(name, password, birthDate, "none", email,
-                                 "none", "none", false, 0, sex);
+                        = new CustomerDTO(name, password, birthDate, email,
+                                 "none", "none", false, 1, sex, false);
                 boolean result = dao.createAccount(dto);
                 if (result) {
                     url = siteMaps.getProperty(

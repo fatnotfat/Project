@@ -23,7 +23,7 @@ import="java.sql.*"
         <form action="signUpController" method="POST">
             <c:set var = "errors" value="${requestScope.SIGNUP_ERROR}"/>
             Name* <input type="text" name="txtName" 
-                         value="${param.txtName}" /><br/>
+                         value="" /><br/>
             <c:if test="${not empty errors.nameLengthError}">
                 <font color="red">
                 ${errors.nameLengthError}
@@ -56,7 +56,12 @@ import="java.sql.*"
 
             Birthday <input type="date" name="txtBirthDate" 
                              value="${param.txtBirthDate}" /><br/>
-
+            <c:if test="${not empty errors.birthDateLengthError}">
+                <font color="red">
+                ${errors.birthDateLengthError}
+                </font><br/>
+            </c:if>
+            
             Sex <br/><input type="radio" name="txtSex" value="Male" checked> Male<br>
             <input type="radio" name="txtSex" value="Female"> Female<br>
             

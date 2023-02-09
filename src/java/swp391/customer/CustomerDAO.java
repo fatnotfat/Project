@@ -10,6 +10,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.naming.NamingException;
 import swp391.utils.DBHelper;
@@ -19,6 +23,7 @@ import swp391.utils.DBHelper;
  * @author Chau Nhat Truong
  */
 public class CustomerDAO implements Serializable {
+
     public CustomerDTO checkLogin(String email, String password)
             throws SQLException, NamingException {;
         Connection con = null;
@@ -32,7 +37,7 @@ public class CustomerDAO implements Serializable {
                 //Create SQL String
                 String sql = "Select Name, Email, Phone, Address "
                         + "From Customer "
-                        + "Where Email = ? And Password = ?";
+                        + "Where Email = ? And Password = ? And TypeOfLogin = 0";
                 //Create statement
                 stm = con.prepareStatement(sql);
                 stm.setString(1, email);
@@ -64,8 +69,9 @@ public class CustomerDAO implements Serializable {
     public List<CustomerDTO> getAccountList() {
         return accountList;
     }
+
     public boolean createAccount(CustomerDTO dto)
-            throws SQLException, NamingException {;
+            throws SQLException, NamingException, ParseException {;
         Connection con = null;
         PreparedStatement stm = null;
         boolean result = false;
@@ -75,7 +81,7 @@ public class CustomerDAO implements Serializable {
             if (con != null) {
                 //2. Create SQL String
                 String sql = "Insert Into Customer("
-                        + "Name, Password, DateOfBirth, Avatar, Email, Phone, Address, Role, RankID, Sex"
+                        + "Name, Password, DateOfBirth, Email, Phone, Address, Role, RankID, Sex, TypeOfLogin"
                         + ") "
                         + "Values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?"
                         + ")";
@@ -83,15 +89,23 @@ public class CustomerDAO implements Serializable {
                 stm = con.prepareStatement(sql);
                 stm.setString(1, dto.getName());
                 stm.setString(2, dto.getPassword());
-                java.sql.Date sqlDate = new java.sql.Date(dto.getBirthDate().getTime());
-                stm.setDate(3, sqlDate);
-                stm.setString(4, dto.getAvatar());
-                stm.setString(5, dto.getEmail());
-                stm.setString(6, dto.getPhone());
-                stm.setString(7, dto.getAddress());
-                stm.setBoolean(8, dto.isRole());
-                stm.setInt(9, dto.getRankID());
-                stm.setBoolean(10, dto.isSex());
+                if (dto.getBirthDate() != null) {
+                    java.sql.Date sqlDate = new java.sql.Date(dto.getBirthDate().getTime());
+                    stm.setDate(3, sqlDate);
+                } else {
+                    String date = "00-00-0000";
+                    DateFormat df = new SimpleDateFormat("MM-dd-0000");
+                    Date defaultDate = df.parse(date);
+                    java.sql.Date sqlDate = new java.sql.Date(defaultDate.getTime());
+                    stm.setDate(3, sqlDate);
+                }
+                stm.setString(4, dto.getEmail());
+                stm.setString(5, dto.getPhone());
+                stm.setString(6, dto.getAddress());
+                stm.setBoolean(7, dto.isRole());
+                stm.setInt(8, dto.getRankID());
+                stm.setBoolean(9, dto.isSex());
+                stm.setBoolean(10, dto.isTypeOfLogin());
                 //4. ExecuteQuery
                 int effectedRows = stm.executeUpdate();
                 //5. Process result
