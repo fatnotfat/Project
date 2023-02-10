@@ -6,12 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%--<%@ page language="java"
-contentType="text/html;
-charset=utf-8"
-pageEncoding="utf-8"
-import="java.sql.*"
-%>--%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,24 +15,12 @@ import="java.sql.*"
     <body>
         <h1>Create new account</h1>
         <form action="signUpController" method="POST">
-            <c:set var = "errors" value="${requestScope.SIGNUP_ERROR}"/>
+            <c:set var = "errors" value="${requestScope.CREATE_ERROR}"/>
             Name* <input type="text" name="txtName" 
-                         value="" /><br/>
+                         value="${param.txtName}" /><br/>
             <c:if test="${not empty errors.nameLengthError}">
                 <font color="red">
                 ${errors.nameLengthError}
-                </font><br/>
-            </c:if>
-            Email* <input type="text" name="txtEmail" 
-                          value="${param.txtEmail}" /><br/>
-            <c:if test="${not empty errors.emailLengthError}">
-                <font color="red">
-                ${errors.emailLengthError}
-                </font><br/>
-            </c:if>
-            <c:if test="${not empty errors.emailIsExisted}">
-                <font color="red">
-                ${errors.emailIsExisted}
                 </font><br/>
             </c:if>
             Password* <input type="password" name="txtPassword" value="" /> (e.g, 6 - 30 chars)<br/>
@@ -53,18 +35,39 @@ import="java.sql.*"
                 ${errors.confirmNotMatched}
                 </font><br/>
             </c:if>
-
-            Birthday <input type="date" name="txtBirthDate" 
-                             value="${param.txtBirthDate}" /><br/>
-            <c:if test="${not empty errors.birthDateLengthError}">
+            Email* <input type="text" name="txtEmail" 
+                          value="${param.txtEmail}" /><br/>
+            <c:if test="${not empty errors.emailLengthError}">
                 <font color="red">
-                ${errors.birthDateLengthError}
+                ${errors.emailLengthError}
                 </font><br/>
             </c:if>
-            
-            Sex <br/><input type="radio" name="txtSex" value="Male" checked> Male<br>
-            <input type="radio" name="txtSex" value="Female"> Female<br>
-            
+            <c:if test="${not empty errors.emailIsExisted}">
+                <font color="red">
+                ${errors.emailIsExisted}
+                </font><br/>
+            </c:if>
+            Phone* <input type="tel" name="txtPhone" 
+                          value="${param.txtPhone}" /><br/>
+            <c:if test="${not empty errors.phoneLengthError}">
+                <font color="red">
+                ${errors.phoneLengthError}
+                </font><br/>
+            </c:if>
+            Address* <input type="text" name="txtAddress" 
+                            value="${param.txtAddress}" /><br/>
+            <c:if test="${not empty errors.addressLengthError}">
+                <font color="red">
+                ${errors.addressLengthError}
+                </font><br/>
+            </c:if>
+            Birthday <input type="date" name="txtBirthDate" 
+                             value="${param.txtBirthDate}" /><br/>
+
+            Sex <br/><input type="radio" name="txtSex" value="male" checked> Male<br>
+            <input type="radio" name="txtSex" value="female"> Female<br>
+            <input type="radio" name="txtSex" value="other"> Other<br>
+
             <input type="submit" value="Sign up" name="btAction" /><br/>
         </form>
         Already have an account? <a href="loginPage">Login</a> here<br/>

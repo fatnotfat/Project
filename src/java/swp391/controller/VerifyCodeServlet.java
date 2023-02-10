@@ -7,18 +7,13 @@ package swp391.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Properties;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import swp391.customer.CustomerForgotPassword;
-import swp391.utils.MyApplicationConstants;
-import swp391.verify.VerifyError;
+import swp391.forgotpassword.User;
 
 /**
  *
@@ -39,34 +34,19 @@ public class VerifyCodeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ServletContext context = this.getServletContext();
-        Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
-        String url = siteMaps.getProperty(
-                MyApplicationConstants.VerifyCodeServlet.VERIFYCODE_PAGE);
-        String code = request.getParameter("txtCode");
-        HttpSession session = request.getSession();
-        CustomerForgotPassword customer = (CustomerForgotPassword) session.getAttribute("authcode");
-        boolean errorFound = false;
-        VerifyError errors = new VerifyError();
-        try {
-            if (code.trim().length() < 1) {
-                errorFound = true;
-                errors.setCodeLengthError("You can't leave this empty");
-            }
-            if (errorFound) {
-                request.setAttribute("VERIFYCODE_SCOPE", errors);
+        try (PrintWriter out = response.getWriter()) {
+
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("authcode");
+
+            String code = request.getParameter("authcode");
+
+            if (code.equals(user.getCode())) {
+                out.println("Verification Done");
             } else {
-                if (code.equals(customer.getCode())) {
-                    url = siteMaps.getProperty(
-                            MyApplicationConstants.VerifyCodeServlet.RESETPASSWORD_PAGE);
-                } else {
-                    errors.setCodeNotExisted("Sorry, code is not existed");
-                    request.setAttribute("VERIFYCODE_SCOPE", errors);
-                }
+                out.println("Incorrect verification code");
             }
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+
         }
     }
 

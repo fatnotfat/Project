@@ -28,6 +28,12 @@ import swp391.utils.MyApplicationConstants;
  * @author Chau Nhat Truong
  */
 public class LoginServlet extends HttpServlet {
+
+//    private final String INVALID_PAGE = "invalid.html";
+//    private final String SEARCH_PAGE = "search.html";
+//    private final String SEARCH_PAGE = "searchPage";
+//    private final String SEARCH_PAGE = "search.jsp";
+//    private final String ERROR_PAGE = "error.html";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,6 +47,8 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+//        String url = INVALID_PAGE;
+
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
@@ -50,7 +58,7 @@ public class LoginServlet extends HttpServlet {
         boolean errorFound = false;
         LoginError errors = new LoginError();
         try {
-            //Check all user error
+            //1. Check all user error
             if (email.trim().length() < 1) {
                 errorFound = true;
                 errors.setEmailLengthError("You can't leave this empty");
@@ -60,9 +68,9 @@ public class LoginServlet extends HttpServlet {
                 errors.setPasswordLengthError("You can't leave this empty");
             }
             if (errorFound) {
-                //catch error
+                //1.1 catch error
                 request.setAttribute("LOGIN_ERROR", errors);
-                //transfer to inform users
+                //1.2 transfer to inform users
             } else {
                 //Call Model/DAO ==> new object & call method of that object
                 CustomerDAO dao = new CustomerDAO();
@@ -73,10 +81,11 @@ public class LoginServlet extends HttpServlet {
                     errors.setLoginFail("Incorrect email or password");
                 }
                 if (errorFound) {
-                    //catch error
+                    //1.1 catch error
                     request.setAttribute("LOGIN_ERROR", errors);
-                    //transfer to inform users
+                    //1.2 transfer to inform users
                 } else {
+//                url = SEARCH_PAGE;
                     url = siteMaps.getProperty(
                             MyApplicationConstants.LoginServlet.LOGIN_PAGE);
 
@@ -88,10 +97,13 @@ public class LoginServlet extends HttpServlet {
                 }
             }//end user is existed
         } catch (NamingException ex) {
+//            ex.printStackTrace();
             log("LoginServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {
+//            ex.printStackTrace();
             log("LoginServlet _ SQL _ " + ex.getMessage());
         } finally {
+//            response.sendRedirect(url); //Sửa lại send redirect nó mới giữ cái welcome
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }

@@ -35,11 +35,8 @@
                 ${errors.loginFail}
                 </font><br/>
             </c:if>
-            <a href="customerVerifyPage">Forgot password?</a><br/>
+            <a href="forgotPasswordPage">Forgot password?</a><br/>
             New member? <a href="signUpPage">Sign up</a> here<br/>
-            Or <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/SWP391ProjectMVC/LoginGoogleHandler&response_type=code
-		   &client_id=781842961263-gokuov74qslei1a1t44nufilc8u0d8sb.apps.googleusercontent.com&approval_prompt=force">Login with Google</a>
-            
         </form><br/>
     </body>
 </html>

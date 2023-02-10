@@ -16,34 +16,29 @@ public class CustomerDTO implements Serializable {
 
     private String name;
     private String password;
-    private Date birthDate;
     private String email;
     private String phone;
     private String address;
-    private boolean role;
-    private int rankID;
+    private Date birthDate;
     private boolean sex;
-    private boolean typeOfLogin;
+    private boolean status;
 
     public CustomerDTO() {
     }
-    
-    public CustomerDTO(String name) {
-        this.name = name;
-    }
-    
-    public CustomerDTO(String name, String password, Date birthDate,
-            String email, String phone, String address, boolean role, int rankID, boolean sex, boolean typeOfLogin) {
+
+    public CustomerDTO(String name, String password, String email, String phone, String address, Date birthDate, boolean sex, boolean status) {
         this.name = name;
         this.password = password;
-        this.birthDate = birthDate;
         this.email = email;
         this.phone = phone;
         this.address = address;
-        this.role = role;
-        this.rankID = rankID;
+        this.birthDate = birthDate;
         this.sex = sex;
-        this.typeOfLogin = typeOfLogin;
+        this.status = status;
+    }
+
+    public CustomerDTO(String password) {
+        this.password = password;
     }
 
     /**
@@ -73,21 +68,6 @@ public class CustomerDTO implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    /**
-     * @return the birthDate
-     */
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    /**
-     * @param birthDate the birthDate to set
-     */
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
 
     /**
      * @return the email
@@ -132,31 +112,31 @@ public class CustomerDTO implements Serializable {
     }
 
     /**
-     * @return the role
+     * @return the status
      */
-    public boolean isRole() {
-        return role;
+    public boolean isStatus() {
+        return status;
     }
 
     /**
-     * @param role the role to set
+     * @param status the status to set
      */
-    public void setRole(boolean role) {
-        this.role = role;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     /**
-     * @return the rankID
+     * @return the birthDate
      */
-    public int getRankID() {
-        return rankID;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
     /**
-     * @param rankID the rankID to set
+     * @param birthDate the birthDate to set
      */
-    public void setRankID(int rankID) {
-        this.rankID = rankID;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     /**
@@ -172,15 +152,5 @@ public class CustomerDTO implements Serializable {
     public void setSex(boolean sex) {
         this.sex = sex;
     }
-
-    public boolean isTypeOfLogin() {
-        return typeOfLogin;
-    }
-
-    public void setTypeOfLogin(boolean typeOfLogin) {
-        this.typeOfLogin = typeOfLogin;
-    }
-
-    
 
 }

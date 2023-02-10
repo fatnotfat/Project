@@ -6,25 +6,22 @@
 package swp391.controller;
 
 import java.io.IOException;
-import java.util.Properties;
-import javax.servlet.ServletContext;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import swp391.customer.CustomerDTO;
-import swp391.utils.MyApplicationConstants;
+import swp391.forgotpassword.SendEmail;
+import swp391.forgotpassword.User;
 
 /**
  *
  * @author Chau Nhat Truong
  */
-@WebServlet(name = "LogoutServlet", urlPatterns = {"/LogoutServlet"})
-public class LogoutServlet extends HttpServlet {
-//    private final String LOGIN_PAGE = "login.html";
+@WebServlet(name = "UserVerifyServlet", urlPatterns = {"/UserVerifyServlet"})
+public class UserVerifyServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,38 +35,35 @@ public class LogoutServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        String url = LOGIN_PAGE;
-        ServletContext context = this.getServletContext();
-        Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
-        String url = siteMaps.getProperty(
-                MyApplicationConstants.LogoutServlet.LOGIN_PAGE);
-        String username = "";
-        Cookie cookie = null;
-        try {
-            HttpSession session = request.getSession(false);
-            if (session != null) {
-                CustomerDTO result = (CustomerDTO) session.getAttribute("USER");
-                if (result != null) {
-                    username = result.getEmail();
-                }
-                session.invalidate();
-            }//end of destroy session 
-            Cookie cookies[] = request.getCookies();
-            if (cookies != null) {
-                for (Cookie ck : cookies) {
-                    if (ck.getName().equals(username)) {
-                        cookie = new Cookie(username, "");
-                        cookie.setMaxAge(0);
-                        response.addCookie(cookie);
-                    }//end of destroy cookie
-                }//end of traverse cookie
-            }//end of user is logout
-        } finally {
-            response.sendRedirect(url);
+        try (PrintWriter out = response.getWriter()) {
+            //feth form value
+            String name = request.getParameter("nametxt");
+            String email = request.getParameter("emailtxt");
+
+            //create instance object of the SendEmail Class
+            SendEmail sm = new SendEmail();
+            //get the 6-digit code
+            String code = sm.getRandom();
+
+            //craete new user using all information
+            User user = new User(name, email, code);
+
+            //call the send email method
+            boolean test = sm.sendEmail(user);
+
+            //check if the email send successfully
+            if (test) {
+                HttpSession session = request.getSession();
+                session.setAttribute("authcode", user);
+                response.sendRedirect("forgotPassword.jsp");
+            } else {
+                out.println("Failed to send verification email");
+            }
+
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

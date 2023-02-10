@@ -38,13 +38,12 @@ public class MyApplicationConstants {
     }
 
     public class LoginServlet {
-
+        
         public static final String LOGIN_PAGE = "loginPage";
         public static final String FORGOT_PASSWORD_PAGE = "ForgotPasswordPage";
     }
-
-    public class ForgotPasswordServlet {
-
+    
+    public class ForgotPasswordServlet{
         public static final String FORGOTPASSWORD_CONTROLLER = "forgotPasswordController";
         public static final String FORGOTPASSWORD_PAGE = "forgotPasswordPage";
     }
@@ -53,32 +52,9 @@ public class MyApplicationConstants {
 
         public static final String LOGIN_PAGE = "loginPage";
     }
-
+    
     public class UpdateAccountServlet {
 
         public static final String ERROR_PAGE = "errorPage";
     }
-
-    public class CustomerVerifyServlet {
-
-        public static final String CUSTOMERVERIFY_PAGE = "customerVerifyPage";
-        public static final String VERIFYCODE_PAGE = "verifyCodePage";
-    }
-
-    public class VerifyCodeServlet {
-
-        public static final String VERIFYCODE_PAGE = "verifyCodePage";
-        public static final String RESETPASSWORD_PAGE = "resetPasswordPage";
-    }
-
-    public class ResetPasswordServlet {
-
-        public static final String RESETPASSWORD_PAGE = "resetPasswordPage";
-        public static final String LOGIN_PAGE = "loginPage";
-    }
-    
-    public class ShowMainPageServlet {
-        public static final String MAIN_PAGE = "mainPage";
-    }
-
 }
