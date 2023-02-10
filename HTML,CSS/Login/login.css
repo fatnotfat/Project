@@ -108,6 +108,12 @@ body {
   font-size: 16px;
   flex-direction: column;
 }
+.login-link {
+  transition: all 0.2s linear;
+}
+.login-link:hover {
+  opacity: 0.6;
+}
 .login-input-email {
   border: 0;
   outline: none;
@@ -216,6 +222,10 @@ body {
   text-decoration: none;
   color: var(--font-color);
   font-weight: 700;
+  transition: all 0.2s linear;
+}
+.login-function-register-hightlight:hover {
+  opacity: 0.6;
 }
 .login-link {
   text-decoration: none;
@@ -298,6 +308,9 @@ body {
     gap: 35px;
     flex-direction: column;
     padding: 0;
+  }
+  .login-function-register {
+    padding-bottom: 10rem;
   }
 }
 @media screen and (max-width: 479px) {

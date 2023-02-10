@@ -287,21 +287,6 @@ body {
     line-height: 1.21875;
     font-weight: 600;
   }
-  .login-space {
-    // transform: rotate(90deg);
-    // padding: 2rem;
-    display: none;
-
-  }
-  .login .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: column;
-  }
-  .login-form {
-    padding-top: 5rem;
-  }
   .footer-menu {
     gap: 35px;
     flex-direction: column;
