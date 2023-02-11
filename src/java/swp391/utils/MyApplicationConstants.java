@@ -35,12 +35,14 @@ public class MyApplicationConstants {
     public class FirstTimeRequestServlet {
 
         public static final String LOGIN_PAGE = "loginPage";
+        public static final String MAIN_PAGE = "mainPage";
     }
 
     public class LoginServlet {
 
         public static final String LOGIN_PAGE = "loginPage";
         public static final String FORGOT_PASSWORD_PAGE = "ForgotPasswordPage";
+        public static final String MAIN_PAGE = "mainPage";
     }
 
     public class ForgotPasswordServlet {

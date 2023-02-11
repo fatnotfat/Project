@@ -7,6 +7,7 @@ package swp391.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.Properties;
 import javax.naming.NamingException;
@@ -28,6 +29,7 @@ import swp391.utils.MyApplicationConstants;
  * @author Chau Nhat Truong
  */
 public class LoginServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -47,6 +49,7 @@ public class LoginServlet extends HttpServlet {
                 MyApplicationConstants.LoginServlet.LOGIN_PAGE);
         String email = request.getParameter("txtEmail");
         String password = request.getParameter("txtPassword");
+        String checkLogged = request.getParameter("create-acc");
         boolean errorFound = false;
         LoginError errors = new LoginError();
         try {
@@ -78,13 +81,16 @@ public class LoginServlet extends HttpServlet {
                     //transfer to inform users
                 } else {
                     url = siteMaps.getProperty(
-                            MyApplicationConstants.LoginServlet.LOGIN_PAGE);
+                            MyApplicationConstants.LoginServlet.MAIN_PAGE);
 
                     HttpSession session = request.getSession();
                     session.setAttribute("USER", result);
-                    Cookie cookie = new Cookie(email, password);
-                    cookie.setMaxAge(60 * 3);
-                    response.addCookie(cookie);
+                    if (checkLogged != null) {
+                        email = URLEncoder.encode(email, "UTF-8");
+                        Cookie cookie = new Cookie(email, password);
+                        cookie.setMaxAge(60 * 3);
+                        response.addCookie(cookie);
+                    }//check if user want to logged for next access
                 }
             }//end user is existed
         } catch (NamingException ex) {

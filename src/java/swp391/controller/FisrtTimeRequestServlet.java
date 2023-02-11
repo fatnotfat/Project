@@ -6,6 +6,7 @@
 package swp391.controller;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.util.Properties;
 import javax.naming.NamingException;
@@ -27,6 +28,7 @@ import swp391.utils.MyApplicationConstants;
  */
 @WebServlet(name = "FisrtTimeRequestServlet", urlPatterns = {"/FisrtTimeRequestServlet"})
 public class FisrtTimeRequestServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -48,19 +50,24 @@ public class FisrtTimeRequestServlet extends HttpServlet {
             Cookie[] cookies = request.getCookies();
             //Read last cookies
             if (cookies != null) {
-                Cookie lastCookies = cookies[cookies.length - 1];
-                String email = lastCookies.getName();
-                String password = lastCookies.getValue();
-                //Call DAO to checkLogin
-                CustomerDAO dao = new CustomerDAO();
-                CustomerDTO result = dao.checkLogin(email, password);
-                HttpSession session = request.getSession();
-                session.setAttribute("USER", result);
-                //Process
-                if (result != null) {
-                    url = siteMaps.getProperty(
-                            MyApplicationConstants.FirstTimeRequestServlet.LOGIN_PAGE);
-                }//end user has existed
+//                Cookie lastCookies = cookies[cookies.length - 1];
+                for (Cookie cookie : cookies) {
+                    String email = cookie.getName();
+                    email = URLDecoder.decode(email, "UTF-8");
+                    String password = cookie.getValue();
+                    //Call DAO to checkLogin
+                    CustomerDAO dao = new CustomerDAO();
+                    CustomerDTO result = dao.checkLogin(email, password);
+
+                    //Process
+                    if (result != null) {
+                        url = siteMaps.getProperty(
+                                MyApplicationConstants.FirstTimeRequestServlet.MAIN_PAGE);
+                        HttpSession session = request.getSession();
+                        session.setAttribute("USER", result);
+                        break;
+                    }//end user has existed
+                }
             }//end cookies has existed
         } catch (SQLException ex) {
             log("FirstTimeRequestServlet _ SQL _ " + ex.getMessage());
