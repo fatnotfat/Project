@@ -13,7 +13,8 @@ import java.io.Serializable;
  */
 public class CustomerCreateError implements Serializable {
 
-    private String nameLengthError;
+    private String firstNameLengthError;
+    private String lastNameLengthError;
     private String passwordLengthError;
     private String emailLengthError;
     private String phoneLengthError;
@@ -26,8 +27,9 @@ public class CustomerCreateError implements Serializable {
     public CustomerCreateError() {
     }
 
-    public CustomerCreateError(String nameLengthError, String passwordLengthError, String emailLengthError, String phoneLengthError, String addressLengthError, String birthDateLengthError, String sexLengthError, String confirmNotMatched, String emailIsExisted) {
-        this.nameLengthError = nameLengthError;
+    public CustomerCreateError(String firstNameLengthError, String lastNameLengthError, String passwordLengthError, String emailLengthError, String phoneLengthError, String addressLengthError, String birthDateLengthError, String sexLengthError, String confirmNotMatched, String emailIsExisted) {
+        this.firstNameLengthError = firstNameLengthError;
+        this.lastNameLengthError = lastNameLengthError;
         this.passwordLengthError = passwordLengthError;
         this.emailLengthError = emailLengthError;
         this.phoneLengthError = phoneLengthError;
@@ -38,19 +40,22 @@ public class CustomerCreateError implements Serializable {
         this.emailIsExisted = emailIsExisted;
     }
 
-    /**
-     * @return the nameLengthError
-     */
-    public String getNameLengthError() {
-        return nameLengthError;
+    public String getFirstNameLengthError() {
+        return firstNameLengthError;
     }
 
-    /**
-     * @param nameLengthError the nameLengthError to set
-     */
-    public void setNameLengthError(String nameLengthError) {
-        this.nameLengthError = nameLengthError;
+    public void setFirstNameLengthError(String firstNameLengthError) {
+        this.firstNameLengthError = firstNameLengthError;
     }
+
+    public String getLastNameLengthError() {
+        return lastNameLengthError;
+    }
+
+    public void setLastNameLengthError(String lastNameLengthError) {
+        this.lastNameLengthError = lastNameLengthError;
+    }
+
 
     /**
      * @return the passwordLengthError

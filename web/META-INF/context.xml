@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/SWP391ProjectMVC">
-  <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" name="SWP391" password="12345" type="javax.sql.DataSource" url="jdbc:sqlserver://localhost:1433;databaseName=SWP391;instanceName=SQLEXPRESS" username="sa"/>
+  <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" 
+            name="SWP391" password="12345" type="javax.sql.DataSource" 
+            url="jdbc:sqlserver://localhost:1433;databaseName=SWP391" username="sa"/>
 </Context>

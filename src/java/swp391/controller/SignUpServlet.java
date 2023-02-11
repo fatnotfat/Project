@@ -6,7 +6,10 @@
 package swp391.controller;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 import javax.naming.NamingException;
@@ -28,8 +31,6 @@ import swp391.utils.MyApplicationConstants;
  */
 @WebServlet(name = "SignUpServlet", urlPatterns = {"/SignUpServlet"})
 public class SignUpServlet extends HttpServlet {
-//    private final String ERROR_PAGE = "createNewAccount.jsp";
-//    private final String LOGIN_PAGE = "login.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,29 +44,37 @@ public class SignUpServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-//        String url = ERROR_PAGE;
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
                 MyApplicationConstants.CreateAccountServlet.ERROR_PAGE);
-        String name = request.getParameter("txtName");
+        String firstName = request.getParameter("txtFirstName");
+        byte[] bytes1 = firstName.getBytes(StandardCharsets.ISO_8859_1);
+        firstName = new String(bytes1, StandardCharsets.UTF_8);
+        
+        String lastName = request.getParameter("txtLastName");
+        byte[] bytes2 = lastName.getBytes(StandardCharsets.ISO_8859_1);
+        lastName = new String(bytes2, StandardCharsets.UTF_8);
+        
         String password = request.getParameter("txtPassword");
         String email = request.getParameter("txtEmail");
-        String phone = request.getParameter("txtPhone");
-        String address = request.getParameter("txtAddress");
         String birthDateTxt = request.getParameter("txtBirthDate");
         String sexTxt = request.getParameter("txtSex");
         String confirm = request.getParameter("txtConfirm");
         boolean errorFound = false;
         CustomerCreateError errors = new CustomerCreateError();
-
         try {
-            //1. Check all user error
-            if (name.trim().length() < 1) {
+            //Check all user error
+            CustomerDAO dao = new CustomerDAO();
+            if (firstName.trim().length() < 1) {
                 errorFound = true;
-                errors.setNameLengthError("You can't leave this empty");
+                errors.setFirstNameLengthError("You can't leave this empty");
             }
+            if (lastName.trim().length() < 1) {
+                errorFound = true;
+                errors.setLastNameLengthError("You can't leave this empty");
+            }
+            
             if (password.trim().length() < 1) {
                 errorFound = true;
                 errors.setPasswordLengthError("You can't leave this empty");
@@ -80,43 +89,44 @@ public class SignUpServlet extends HttpServlet {
             if (email.trim().length() < 1) {
                 errorFound = true;
                 errors.setEmailLengthError("You can't leave this empty");
-            }
-            if (phone.trim().length() < 1) {
+            } else if (dao.checkEmail(email)) {
                 errorFound = true;
-                errors.setPhoneLengthError("You can't leave this empty");
+                errors.setEmailIsExisted(email + " is existed!!!");
             }
-            if (address.trim().length() < 1) {
+            if (birthDateTxt.trim().length() < 1) {
                 errorFound = true;
-                errors.setAddressLengthError("You can't leave this empty");
+                errors.setBirthDateLengthError("You must set your birthday!!!");
             }
             if (errorFound) {
-                //1.1 catch error
-                request.setAttribute("CREATE_ERROR", errors);
-                //1.2 transfer to inform users
+                //catch error
+                request.setAttribute("SIGNUP_ERROR", errors);
+                //transfer to inform users
             } else {
-                //2. Call DAO to insert DB
-                Date birthDate = new Date(birthDateTxt);
-                boolean sex = new Boolean(sexTxt);
-                CustomerDAO dao = new CustomerDAO();
+                //Call DAO to insert DB
+//                DateFormat DFormat = new SimpleDateFormat("MM-dd-yyyy");
+//                Date birthDate = DFormat.parse(birthDateTxt);
+                Date birthDate = new SimpleDateFormat("yyyy-MM-dd")
+                        .parse(birthDateTxt);
+                boolean sex = false;
+                if (sexTxt.equals("Male")) {
+                    sex = true;
+                }
                 CustomerDTO dto
-                        = new CustomerDTO(name, password, email, phone, address, birthDate, sex, true);
+                        = new CustomerDTO(firstName + " " + lastName, password, birthDate, email,
+                                 "none", "none", false, 1, sex, false);
                 boolean result = dao.createAccount(dto);
                 if (result) {
-//                    url = LOGIN_PAGE;
                     url = siteMaps.getProperty(
                             MyApplicationConstants.CreateAccountServlet.LOGIN_PAGE);
                 }
-                //3. Process & check system error --> transfer to login or error page
-            }//end checking user errors
+            }
         } catch (SQLException ex) {
             String msg = ex.getMessage();
-            log("Create Account _ SQL _ " + msg);
-            if (msg.contains("duplicate")) {
-                errors.setEmailIsExisted(email + " is existed!!!!");
-                request.setAttribute("CREATE_ERROR", errors);
-            }
+            log("SignUp _ SQL _ " + msg);
         } catch (NamingException ex) {
-            log("Create Account _ Naming _ " + ex.getMessage());
+            log("SignUp _ Naming _ " + ex.getMessage());
+        } catch (ParseException ex) {
+            log("DateFormat _ Parse _" + ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

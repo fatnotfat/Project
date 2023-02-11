@@ -54,8 +54,8 @@ public class LoginGoogleHandler extends HttpServlet {
         if (user != null) {
             try {
                 String name = user.getName();
-                byte[] bytes = name.getBytes(StandardCharsets.ISO_8859_1);
-                name = new String(bytes, StandardCharsets.UTF_8);
+//                byte[] bytes = name.getBytes(StandardCharsets.ISO_8859_1);
+//                name = new String(bytes, StandardCharsets.UTF_8);
                 String email = user.getEmail();
                 //1.Call dao
                 CustomerDAO dao = new CustomerDAO();
@@ -63,7 +63,7 @@ public class LoginGoogleHandler extends HttpServlet {
                     //TH1: Check trc neu chua ton tai email thi tu dang ky tai khoan
                     CustomerDTO dto
                             = new CustomerDTO(name, "none", null, email,
-                                    "none", "none", false, 0, false, true);
+                                    "none", "none", false, 1, false, true);
                     boolean result = dao.createAccount(dto);
                     if (result) {
                         url = siteMaps.getProperty(
@@ -77,9 +77,9 @@ public class LoginGoogleHandler extends HttpServlet {
             }catch(ParseException ex){
                 log("LoginGoogle _ Parse _ " + ex.getMessage());
             }catch (SQLException ex) {
-                log("LoginGoogle _ Naming _ " + ex.getMessage());
-            } catch (NamingException ex) {
                 log("LoginGoogle _ SQL _ " + ex.getMessage());
+            } catch (NamingException ex) {
+                log("LoginGoogle _ Naming _ " + ex.getMessage());
             } finally {
 //                    RequestDispatcher rd = request.getRequestDispatcher(url);
 //                    rd.forward(request, response);
