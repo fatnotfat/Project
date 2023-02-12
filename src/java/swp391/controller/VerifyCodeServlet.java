@@ -43,24 +43,28 @@ public class VerifyCodeServlet extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
                 MyApplicationConstants.VerifyCodeServlet.VERIFYCODE_PAGE);
-        String code = request.getParameter("txtCode");
+        String code1 = request.getParameter("txtCode1");
+        String code2 = request.getParameter("txtCode2");
+        String code3 = request.getParameter("txtCode3");
+        String code4 = request.getParameter("txtCode4");
+        String stringCode = code1 + code2 + code3 + code4;
         HttpSession session = request.getSession();
         CustomerForgotPassword customer = (CustomerForgotPassword) session.getAttribute("authcode");
         boolean errorFound = false;
         VerifyError errors = new VerifyError();
         try {
-            if (code.trim().length() < 1) {
+            if (stringCode.trim().length() < 1) {
                 errorFound = true;
                 errors.setCodeLengthError("You can't leave this empty");
             }
             if (errorFound) {
                 request.setAttribute("VERIFYCODE_SCOPE", errors);
             } else {
-                if (code.equals(customer.getCode())) {
+                if (stringCode.equals(customer.getCode())) {
                     url = siteMaps.getProperty(
                             MyApplicationConstants.VerifyCodeServlet.RESETPASSWORD_PAGE);
                 } else {
-                    errors.setCodeNotExisted("Sorry, code is not existed");
+                    errors.setCodeNotExisted("Sorry, code is not wrong, please recheck and try again!");
                     request.setAttribute("VERIFYCODE_SCOPE", errors);
                 }
             }

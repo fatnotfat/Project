@@ -74,6 +74,26 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="nav-bot-responsive">
+                    <div class="container">
+                        <div class="menu-responsive-icon">
+                            <img
+                                class="menu-responsive-icon-img"
+                                srcset="images/shopping-cart.png 2x"
+                                alt=""
+                                />
+                        </div>
+                        <a href="#!" class="menu-responsive-logo"> LOGO </a>
+                        <div class="menu-responsive-icon">
+                            <img
+                                class="menu-responsive-icon-img"
+                                srcset="images/textalign-justifycenter.png 2x"
+                                alt=""
+                                />
+                        </div>
+                    </div>
+                </div>
             </header>
             <img src="images/Nav-line.png" alt="" />
             <div class="login">
@@ -81,7 +101,8 @@
                     <div class="login-heading">
                         <h1>Login</h1>
                     </div>
-                    <img srcset="images/Login-line.png 2x" alt="" />
+                    <img srcset="images/Login-line.png 2x" alt="" 
+                         class="login-space"/>
                     <div class="login-form-container">
 
                         <form action="loginController" method="POST">
@@ -103,6 +124,11 @@
                                 <c:if test="${not empty errors.passwordLengthError}">
                                     <font color="red">
                                     ${errors.passwordLengthError}
+                                    </font><br/>
+                                </c:if>
+                                <c:if test="${not empty errors.loginFail}">
+                                    <font color="red">
+                                    ${errors.loginFail}
                                     </font><br/>
                                 </c:if>
                             </div>
@@ -132,23 +158,18 @@
                                     apply.
                                 </p>
                                 <input class="login-function-btn" type="submit" value="Login" name="btAction" />
-                                <c:if test="${not empty errors.loginFail}">
-                                    <font color="red">
-                                    ${errors.loginFail}
-                                    </font><br/>
-                                </c:if>
                                 <p class="login-function-register">
                                     <span class="login-function-register-question">
                                         Don't have an account?
                                     </span>
                                     <a href="signUpPage" class="login-function-register-hightlight"
-                                       >Register</a> <span class="login-function-register-question"> here</span>
-                                       <br/>
-                                       
+                                       >Register</a>
+                                    <br/>
+
                                 </p>
                                 <span class="login-function-register-question">Or</span>
                                 <a class="login-link" href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/SWP391ProjectMVC/LoginGoogleHandler&response_type=code
-                                  &client_id=781842961263-gokuov74qslei1a1t44nufilc8u0d8sb.apps.googleusercontent.com&approval_prompt=force">Login with Google</a>
+                                   &client_id=781842961263-gokuov74qslei1a1t44nufilc8u0d8sb.apps.googleusercontent.com&approval_prompt=force">Login with Google</a>
                             </div>                              
                         </form><br/>
                     </div>

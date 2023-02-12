@@ -83,6 +83,7 @@ import="java.sql.*"
                         <h1>Register</h1>
                     </div>
                     <img src="images/Login-line.png" alt="" />
+                    
                         <div class="register-form-container">
                             <form action="signUpController" method="POST">
                             <div class="register-form">
@@ -172,7 +173,6 @@ import="java.sql.*"
                                 </c:if>
                                     
                             </div>
-                                
                             <div class="register-function">
                                 <p class="register-function-security">
                                     This site is protected by reCAPTCHA and the Google
