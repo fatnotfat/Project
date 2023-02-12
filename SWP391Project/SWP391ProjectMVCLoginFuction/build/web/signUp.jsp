@@ -14,6 +14,7 @@
     </head>
     <body>
         <h1>Create new account</h1>
+        <h2>Hero waru</h2>
         <form action="signUpController" method="POST">
             <c:set var = "errors" value="${requestScope.SIGNUP_ERROR}"/>
             Name* <input type="text" name="txtName"
