@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package truongcn.controller;
+package swp391.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,19 +18,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import swp391.customer.CustomerDAO;
+import swp391.product.ProductDAO;
+import swp391.product.ProductDTO;
 import swp391.utils.MyApplicationConstants;
-
 
 /**
  *
  * @author Chau Nhat Truong
  */
-@WebServlet(name = "SearchServlet", urlPatterns = {"/SearchServlet"})
-public class SearchServlet extends HttpServlet {
+@WebServlet(name = "SearchByFilterServlet", urlPatterns = {"/SearchByFilterServlet"})
+public class SearchByFilterServlet extends HttpServlet {
 
-//    private final String SEARCH_PAGE = "search.html";
-//    private final String SEARCH_RESULT_PAGE = "search.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,34 +41,32 @@ public class SearchServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String searchValue = request.getParameter("txtSearchValue");
-//        String url = SEARCH_PAGE;
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
-                MyApplicationConstants.SearchLastNameServlet.SEARCH_PAGE);
-
+                MyApplicationConstants.SearchByFilterServlet.SEARCHBYFILTER_PAGE);
+        String name = request.getParameter("txtName");
+        String txtPriceFrom = request.getParameter("txtPriceFrom");
+        float priceFrom = Float.parseFloat(txtPriceFrom);
+        String txtPriceTo = request.getParameter("txtPriceTo");
+        float priceTo = Float.parseFloat(txtPriceTo);
+        String txtSize = request.getParameter("txtSize");
+        int size = Integer.parseInt(txtSize);
+        String txtCategory = request.getParameter("txtCategory");
+        int category = Integer.parseInt(txtCategory);
         try {
-            //1. check valid search value --> search
-            if (searchValue.trim().length() > 0) {
-                //2. call DAO
-                CustomerDAO dao = new CustomerDAO();
-                dao.search(searchValue);
-                //3. process
-                List<CustomerDTO> result = dao.getAccountList();
-                //4. send to view
-                request.setAttribute("SEARCH_RESULT", result);
-//                url = SEARCH_RESULT_PAGE;
+            if (name.trim().length() > 0) {
+                ProductDAO dao = new ProductDAO();
+                dao.searchByFilter(name, priceFrom, priceTo, size, category);
+                List<ProductDTO> result = dao.getItemsList();
+                request.setAttribute("SEARCHBYFILTER_RESULT", result);
                 url = siteMaps.getProperty(
-                        MyApplicationConstants.SearchLastNameServlet.SEARCH_PAGE);
+                        MyApplicationConstants.SearchByFilterServlet.SEARCHBYFILTER_PAGE);
             }
         } catch (NamingException ex) {
-//            ex.printStackTrace();
-            log("SearchLastnameServlet _ Naming _ " + ex.getMessage());
+            log("SearchByFilterServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {
-//            ex.printStackTrace();
-            log("SearchLastnameServlet _ SQL _ " + ex.getMessage());
+            log("SearchByFilterServlet _ SQL _ " + ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

@@ -194,53 +194,5 @@ public class CustomerDAO implements Serializable {
         }
         return result;
     }
-    
-    public void searchLastName(String searchValue)
-            throws SQLException, /*ClassNotFoundException*/ NamingException {;
-        Connection con = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-//        boolean result = false;
-        try {
-            //1. connect DB
-            con = DBHelper.makeConnection();
-            if (con != null) {
-                //2. Create SQL String
-                String sql = "Select username, password, lastname, isAdmin "
-                        + "From Registration "
-                        + "Where lastname Like ?";
-                //3. Create statement
-                stm = con.prepareStatement(sql);
-                stm.setString(1, "%" + searchValue + "%");
-                //4. ExecuteQuery
-                rs = stm.executeQuery();
-                //5. Process result
-                while (rs.next()) {
-                    //get field/column
-                    String username = rs.getString("username");
-                    String password = rs.getString("password");
-                    String lastname = rs.getString("lastname");
-                    boolean role = rs.getBoolean("isAdmin");
-                    //create DTO instance
-                    CustomerDTO dto = new CustomerDTO(username,
-                            password, lastname, role);
-                    //add to account list
-                    if (this.accountList == null) {
-                        this.accountList = new ArrayList<>();
-                    }//end account list is not existed
-                    this.accountList.add(dto);
-                }//end account list is traversed
-            }//end con is available
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-    }
+ 
 }
