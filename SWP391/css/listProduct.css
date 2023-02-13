@@ -176,9 +176,9 @@ header {
     line-height: 1.8rem;
     margin: 10px 10px;
     height: 3.6rem;
-    overflow: hidden;
     display: block;
     display: -webkit-box;
+    overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     text-overflow: ellipsis;

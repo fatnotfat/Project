@@ -29,6 +29,12 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
+
+        <!-- animation libary -->
+        <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
 </head>
 
 <body>
@@ -52,7 +58,7 @@
 
                                             <ul class="filter-select__list">
                                                 <li class="filter-select__item">
-                                                    <a href="" class="filter-select__link">Dây chuyền</a>
+                                                    <a href="listProduct.html" class="filter-select__link">Dây chuyền</a>
                                                 </li>
                                                 <li class="filter-select__item">
                                                     <a href="" class="filter-select__link">Vòng tay</a>
@@ -68,6 +74,18 @@
                                                 </li>
                                                 <li class="filter-select__item">
                                                     <a href="" class="filter-select__link">Mat kinh</a>
+                                                </li>
+                                                <li class="filter-select__item">
+                                                    <a href="" class="filter-select__link">Nhẫn</a>
+                                                </li>
+                                                <li class="filter-select__item">
+                                                    <a href="" class="filter-select__link">Nhẫn</a>
+                                                </li>
+                                                <li class="filter-select__item">
+                                                    <a href="" class="filter-select__link">Nhẫn</a>
+                                                </li>
+                                                <li class="filter-select__item">
+                                                    <a href="" class="filter-select__link">Nhẫn</a>
                                                 </li>
                                                 <li class="filter-select__item">
                                                     <a href="" class="filter-select__link">Nhẫn</a>
@@ -99,8 +117,19 @@
 
                             <ul class="nav_right">
                                 <li>
-                                    
-                                   
+                                    <div class="search__bar-container">
+                                        <div class="search__box">
+                                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M11.5 21.5C16.7467 21.5 21 17.2467 21 12C21 6.75329 16.7467 2.5 11.5 2.5C6.25329 2.5 2 6.75329 2 12C2 17.2467 6.25329 21.5 11.5 21.5Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M22 22.5L20 20.5" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <form name="search" class="search__box-form">
+                                                <input type="text" class="search__box-form-input" name="txt" onmouseout="this.value = ''; this.blur();">
+                                                <button type="search">Seach</button>
+                                            </form>
+                                        </div>
+                                    </div>
+
                                 </li>
                                 <li>
                                     <!-- cart shopping -->
@@ -124,7 +153,7 @@
                                     </svg>
 
                                     <span class="cart__shopping-notice">
-                                        3
+                                        1
                                     </span>
 
                                     <!-- No product in your's cart  bỏ class cart__shopping-list--no-cart nên nó ko hiện "Chưa có sản phẩm"  -->
@@ -145,9 +174,11 @@
                                                             Chú vịt vui vẻ hehehehehehe
                                                         </h5>
 
-                                                        <span class="cart__shopping-item-price">1.000.000đ</span>
-                                                        <span class="cart__shopping-item-multiply">x</span>
-                                                        <span class="cart__shopping-item-quantity">10</span>
+                                                        <div class="cart__shoping-item-price-wrap">
+                                                            <span class="cart__shopping-item-price">1.000.000đ</span>
+                                                            <span class="cart__shopping-item-multiply">x</span>
+                                                            <span class="cart__shopping-item-quantity">10</span>
+                                                        </div>
 
                                                     </div>
 
@@ -162,9 +193,11 @@
                                                     </div>
                                                 </div>
                                             </li>
+                                           
+                                            
                                         </ul>
 
-                                        <button class="btn__view-cart">
+                                        <button class="cart__shopping-view-cart btn__view-cart">
                                             Xem giỏ hàng
                                         </button>
                                     </div>
@@ -172,9 +205,43 @@
 
                                 </li>
                                 <li>
-                                    <span class="material-symbols-outlined">
-                                        Account_circle
-                                    </span>
+                                    <!-- User -->
+                                   <div class="user__shopping">
+                                    <!-- No account  -->
+                                    <!-- <div class="user__shopping user__shopping--no-account ">
+                                        <div class="user__shopping-icon">
+                                            <span class="material-symbols-outlined">
+                                                Account_circle
+                                            </span>
+                                        </div>
+                                        <ul class="user__shopping--no-account-list">
+                                            <li class="user__shopping--no-account-list-item">
+                                                <a href="" class="user__shopping--no-account-link">Đăng kí</a>
+                                            </li>
+                                            <li class="user__shopping--no-account-list-item">
+                                                <a href="" class="user__shopping--no-account-link">Đăng nhập</a>
+                                            </li>
+                                        </ul>
+                                    </div> -->
+
+                                    <!-- Login success -->
+                                    <div class="user__shopping user__shopping--login-success ">
+                                        <div class="user__shopping-icon">
+                                            <span class="material-symbols-outlined">
+                                                Account_circle
+                                            </span>
+                                        </div>
+                                        <ul class="user__shopping--login-success-list">
+                                            <li class="user__shopping--login-success-list-item">
+                                                <a href="" class="user__shopping--login-success-link">Truong Dinh Dang Khoa</a>
+                                            </li>
+                                            <li class="user__shopping--login-success-list-item">
+                                                <a href="" class="user__shopping--login-success-link">Log Out</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                   </div>
                                 </li>
                             </ul>
 
@@ -266,10 +333,10 @@
                             </div>
 
                             <div class="product_secondline">
-                                <img src="assets/image/Group (1).jpg" alt="">
+                                <img class="product_secondline-img" src="assets/image/Group (1).jpg" alt="">
 
                                 <div class="product-info">
-                                    <div class="product-content">
+                                    <div class="product-content-1">
                                         <h4>Gold Woven Chain Bracelet In Black</h4>
                                         <p>
                                             Lorem ipsum dolor sit amet consectetur.
@@ -279,7 +346,7 @@
                                         </p>
                                     </div>
 
-                                    <div class="product-size">
+                                    <div class="product-size-1">
                                         <h4>Size</h4>
                                         <ul class="product-size-list">
                                             <li>
@@ -301,7 +368,7 @@
 
                                     </div>
 
-                                    <form class="product-buy" action="#">
+                                    <form class="product-buy-1" action="#">
                                         <button>Add To Cart</button>
                                         <p>26.339.000 đ</p>
                                     </form>
@@ -312,7 +379,7 @@
                             <div class="product_thirdline">
 
                                 <div class="product-info">
-                                    <div class="product-content">
+                                    <div class="product-content-2">
                                         <h4>Gold Black Coral Ring</h4>
                                         <p>
                                             Lorem ipsum dolor sit amet consectetur.
@@ -322,34 +389,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="product-size">
+                                    <div class="product-size-2">
                                         <h4>Size</h4>
                                         <ul class="product-size-list">
                                             <li>
-                                                <input type="checkbox" id="check_1" name="check_1" value="check_1">
-                                                <label for="check_1">S</label>
+                                                <input type="checkbox" id="check_4" name="check_4" value="check_4">
+                                                <label for="check_4">S</label>
 
                                             </li>
                                             <li>
-                                                <input type="checkbox" id="check_2" name="check_2" value="check_2">
-                                                <label for="check_2">M</label>
+                                                <input type="checkbox" id="check_5" name="check_5" value="check_5">
+                                                <label for="check_5">M</label>
 
                                             </li>
                                             <li>
-                                                <input type="checkbox" id="check_3" name="check_3" value="check_3">
-                                                <label for="check_3">L</label>
+                                                <input type="checkbox" id="check_6" name="check_6" value="check_6">
+                                                <label for="check_6">L</label>
 
                                             </li>
                                         </ul>
 
                                     </div>
 
-                                    <form class="product-buy" action="#">
+                                    <form class="product-buy-2" action="#">
                                         <button>Add To Cart</button>
                                         <p>13.339.000 đ</p>
                                     </form>
                                 </div>
-                                <img src="assets/image/Vector.jpg" alt="">
+                                <img class="product_thirdline-img" src="assets/image/Vector.jpg" alt="">
 
                             </div>
                         </div>
@@ -357,14 +424,14 @@
 
                         <div class="outstanding">
                             <div class="frame">
-                                <img src="assets/image/5 50.png" alt="">
+                                <img class="frame__first-img" src="assets/image/5 50.png" alt="">
                                 <div class="content">
-                                    <h3>
+                                    <h3 class="content__first-title ">
                                         Luxury-Shop’s Best
                                         Collections
                                     </h3>
                                     <div class="content-comfort">
-                                        <h4>Comfort</h4>
+                                        <h4 class="content-comfort-title">Comfort</h4>
                                         <p class="content-comfort-info">Lorem ipsum dolor sit amet
                                             consectetur.Sollicitudin morbi molestie at amet praesent tortor.Maecenas non
                                             tempus at consequat ac est varius. Tortor aliquet nulla consequat
@@ -377,21 +444,21 @@
                             <div class="frame">
                                 <div class="content">
                                     <div class="content-gold">
-                                        <h3>100% Gold</h3>
+                                        <h3 class="content__second-title">100% Gold</h3>
                                         <p class="content-gold-info">Lorem ipsum dolor sit amet consectetur.Sollicitudin
                                             morbi molestie at amet praesent tortor.Maecenas non tempus at consequat ac
                                             est varius. Tortor aliquet nulla consequat risus.consequatconsequat
                                         </p>
                                     </div>
                                 </div>
-                                <img src="assets/image/6 1.png" alt="">
+                                <img class="frame__second-img" src="assets/image/6 1.png" alt="">
                             </div>
 
                             <div class="frame">
-                                <img src="assets/image/7 1.png" alt="">
+                                <img class="frame__third-img" src="assets/image/7 1.png" alt="">
                                 <div class="content">
                                     <div class="content-trend">
-                                        <h3>Trendy</h3>
+                                        <h3 class="content__third-title">Trendy</h3>
                                         <p class="content-trend-info">Lorem ipsum dolor sit amet
                                             consectetur.Sollicitudin morbi molestie at amet praesent tortor.Maecenas non
                                             tempus at consequat ac est varius. Tortor aliquet nulla consequat
@@ -546,6 +613,6 @@
     </div>
 </body>
 
-<script src="js/main.js"></script>
+<script src="js/mainPage.js"></script>
 
 </html>
