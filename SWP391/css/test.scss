@@ -1,0 +1,145 @@
+@import "compass/css3";
+
+@import "compass";
+
+html {
+	font: 62.5%/1 "Lato", sans-serif;
+}
+
+body {
+	width: 480px;
+	margin: 20px auto;
+	color: #0b171f;
+	background-color: #fff;
+}
+
+body > header {
+	@include pie-clearfix;
+	position: relative;
+	color: #fff;
+	background-color: #25323d;
+
+	h1 {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 0;
+		margin: 0;
+		width: 100%;
+		line-height: 60px;
+		font-size: 2.4em;
+		font-weight: 300;
+		text-align: center;
+		text-transform: uppercase;
+		letter-spacing: 0.3em;
+	}
+}
+
+.header-button {
+	@include box-sizing(border-box);
+	@include hide-text();
+	position: relative;
+	z-index: 1;
+	display: block;
+	width: 60px;
+	height: 60px;
+	margin: 0;
+	padding: 0;
+  outline: none;
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAA8CAQAAABlJ1gMAAABfElEQVR42u3ZsU7CUBhA4U6Iib5IITigOzMzzwUMmNA3MRofwMSRCDB1MPIAOoDBHAch0VhUCb2Ecr4uBJb23Oa/FKJIkiRJkiRJkiRJygENElJSEhpEmxz6W+Z7Vu43S71PlxvTZsiMGQ+0iTe7szY6EuCOmJg7IClwaEr0eOOzN/ocBwqdwnJhYyAtbGhK3ACQcEGZMhckANxSChIayHxduNCXwISzL6deYQT0Chma3+RzmRUWQO3b+2fAgkrOgbd0vfsQurN2A0qATgFD72hwDIHzzNM/B4YBRkbW6Chg6DlwlHn6R8Dc0PmHPgWeA22C//lsT2f0+tFRBwaGDrMZdgsYekejo7rm610NWFA1dIgHlqtgDyoHEXr1CN6nTokT6vQBgAktZ/Q2j6wfla6ZAOMcUx9g6I9h0WXEKy8M6FIlosU419SHNjp+WPp8Uxs6UGpDZ6Y2dJDUedzRTz/uSFP/nN3WAjaZrs38SNPQkiRJkiRJkiRJKoB36w+U2Cj/A/EAAAAASUVORK5CYII=');
+	border: none;
+	cursor: pointer;
+}
+
+#toggle-menu {
+	float: left;
+	background-position: 0 0;
+	background-color: #bc0023;
+}
+
+#toggle-search {
+	float: right;
+	background-position: -60px 0;
+
+	&.open:after {
+		top: 40px;
+	}
+
+	&:after {
+		@include transition(top, 0.5s);
+		position: absolute;
+		top: 52px;
+		left: 50%;
+		margin-left: -8px;
+		content: "";
+		border-color: transparent transparent #e1e4e7;
+		border-style: solid;
+		border-width: 8px 8px 12px;
+	}
+}
+
+#toggle-basket {
+	position: relative;
+	float: right;
+	background-position: -120px 0;
+
+	&:before {
+		position: absolute;
+		top: 5px;
+		left: 0;
+		width: 2px;
+		height: 50px;
+		content: "";
+		background-color: #000;
+	}
+}
+
+#search-form {
+	@include transition(max-height, 0.5s);
+	position: absolute;
+	top: 60px;
+	left: 0;
+	width: 100%;
+	max-height: 0;
+	overflow: hidden;
+	background-color: #e1e4e7;
+
+	&.open {
+		max-height: 60px;
+	}
+
+	fieldset {
+		position: relative;
+		margin: 0 60px 0 0;
+		padding: 0;
+		border: none;
+	}
+
+	input {
+		@include box-sizing(border-box);
+		display: block;
+		height: 60px;
+	}
+
+	input[type="search"] {
+		width: 100%;
+		padding: 0 5px 0 22px;
+		background: transparent;
+		border: none;
+	}
+
+	input[type="submit"] {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		width: 60px;
+		margin: 0;
+		padding: 0;
+		font-weight: 700;
+		text-transform: uppercase;
+		color: #516270;
+		background: #c6cacd;
+		border: none;
+		cursor: pointer;
+	}
+}
