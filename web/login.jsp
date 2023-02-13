@@ -61,6 +61,7 @@
                                 srcset="images/search-normal.png 2x"
                                 alt=""
                                 />
+
                             <img
                                 class="menu-icon-img"
                                 srcset="images/profile-circle.png 2x"

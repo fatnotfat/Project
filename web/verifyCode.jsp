@@ -88,19 +88,19 @@
                             <div class="forgot-form">
                                 <c:set var = "scope" value="${requestScope.VERIFYCODE_SCOPE}"/>
                                 <div class="forgot-input">
-                                    <input type="text" class="forgot-input-otp"
+                                    <input type="number" class="forgot-input-otp"
                                            name="txtCode1" value="${param.txtCode1}"/><br/>
                                 </div>
                                 <div class="forgot-input">
-                                    <input type="text" class="forgot-input-otp"
+                                    <input type="number" class="forgot-input-otp"
                                            name="txtCode2" value="${param.txtCode2}"/><br/>
                                 </div>
                                 <div class="forgot-input">
-                                    <input type="text" class="forgot-input-otp"
+                                    <input type="number" class="forgot-input-otp"
                                            name="txtCode3" value="${param.txtCode3}"/><br/>
                                 </div>
                                 <div class="forgot-input">
-                                    <input type="text" class="forgot-input-otp"
+                                    <input type="number" class="forgot-input-otp"
                                            name="txtCode4" value="${param.txtCode4}"/><br/>
                                 </div>
                                 <!--                                Code <input type="text" name="txtCode"

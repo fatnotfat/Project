@@ -20,9 +20,17 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>swp391.controller.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchTextServlet</servlet-name>
+        <servlet-class>swp391.controller.SearchTextServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchTextServlet</servlet-name>
+        <url-pattern>/SearchTextServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

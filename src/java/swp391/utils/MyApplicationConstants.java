@@ -82,5 +82,10 @@ public class MyApplicationConstants {
     public class ShowMainPageServlet {
         public static final String MAIN_PAGE = "mainPage";
     }
+    
+    public class SearchServlet{
+        public static final String SEARCH_TEXT_PAGE = "searchTextPage";
+        public static final String SEARCH_FILTER_PAGE = "searchFilterPage";
+    }
 
 }

@@ -42,7 +42,6 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(

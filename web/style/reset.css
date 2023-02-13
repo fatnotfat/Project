@@ -48,3 +48,8 @@ html {
   font-size: 62.5%;
   scroll-behavior: smooth;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
