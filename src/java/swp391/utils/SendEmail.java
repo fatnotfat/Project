@@ -29,8 +29,8 @@ public class SendEmail {
     public boolean sendEmail(CustomerForgotPassword customer) {
         boolean test = false;
         String toEmail = customer.getEmail();
-        String fromEmail = "phatntse160374@fpt.edu.vn";
-        String password = "Phat@2711";
+        String fromEmail = "";
+        String password = "";
         //Use email does not 2-layer security registration
         try {
             // your host email smtp server details
