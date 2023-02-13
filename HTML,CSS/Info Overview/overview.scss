@@ -258,7 +258,7 @@ body {
   }
 }
 // RESPONSIVE
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1024px) {
   .menu {
     padding: 0 10rem;
   }
@@ -268,6 +268,64 @@ body {
   .footer-menu {
     gap: 75px;
     padding: 0;
+  }
+  .nav-overview {
+    &-logo {
+      font-size: 45px;
+    }
+  }
+  .overview {
+    &-space {
+      padding: 0 40px;
+      height: 500px;
+    }
+    &-left {
+      &-title {
+        font-size: 30px;
+      }
+      &-list {
+        font-size: 13px;
+      }
+      &-item--circle::before {
+        width: 12px;
+        height: 12px;
+      }
+    }
+    &-right {
+      &-account-info {
+        &-title {
+          font-size: 30px;
+        }
+        &-option {
+          font-size: 14px;
+        }
+      }
+      &-latest-order {
+        padding-bottom: 5rem;
+        &-title {
+          font-size: 30px;
+          padding-bottom: 1rem;
+        }
+        &-table {
+          padding: 30px 0;
+          &-title {
+            &-list {
+              padding-bottom: 10px;
+              &-item {
+                font-size: 12px;
+              }
+            }
+          }
+          &-desc {
+            &-list {
+              &-item {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -294,7 +352,71 @@ body {
   }
 }
 
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 600px) {
+  .overview .container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5rem;
+  }
+  .overview {
+    &-space {
+      display: none;
+    }
+    &-left {
+      padding-bottom: 20px;
+      &-title {
+        font-size: 20px;
+      }
+      &-list {
+        font-size: 14px;
+      }
+      &-item {
+        &--circle::before {
+          width: 10px;
+          height: 10px;
+        }
+      }
+    }
+    &-right {
+      &-account-info {
+        &-title {
+          font-size: 20px;
+        }
+        &-option {
+          font-size: 14px;
+        }
+      }
+      &-latest-order {
+        padding-bottom: 5rem;
+        &-title {
+          font-size: 20px;
+          padding-bottom: 1rem;
+        }
+        &-table {
+          padding: 20px 0;
+          &-title {
+            &-list {
+              padding-bottom: 10px;
+              &-item {
+                font-size: 10px;
+              }
+            }
+          }
+          &-desc {
+            &-list {
+              &-item {
+                font-size: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .nav-overview-logo {
+    font-size: 30px;
+    border-bottom: 3px solid black;
+  }
   .nav-bot .container {
     display: flex;
     align-items: center;
@@ -316,7 +438,7 @@ body {
     display: block !important;
   }
 }
-// NAV MOBILE 
+// NAV MOBILE
 .nav-bot-responsive .container {
   display: flex;
   align-items: center;
@@ -324,7 +446,7 @@ body {
   padding: 0 20px;
   flex-wrap: wrap;
 }
-.menu-responsive{
+.menu-responsive {
   &-icon {
     cursor: pointer;
     width: 24px;

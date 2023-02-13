@@ -90,6 +90,9 @@ body {
   justify-content: space-evenly;
 }
 
+.login-space-mobile {
+  display: none;
+}
 .login-heading {
   font-size: 54px;
   font-weight: 700;
@@ -313,7 +316,7 @@ body {
     padding-bottom: 10rem;
   }
 }
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 600px) {
   .nav-bot .container {
     display: flex;
     align-items: center;
@@ -333,6 +336,13 @@ body {
   }
   .nav-bot-responsive {
     display: block !important;
+  }
+  .login-heading {
+    margin-bottom: 10px;
+    border-bottom: 3px solid black;
+  }
+  .login-space-mobile {
+    display: block;
   }
 }
 .nav-bot-responsive .container {

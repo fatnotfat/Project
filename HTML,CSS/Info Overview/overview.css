@@ -253,6 +253,48 @@ body {
     gap: 75px;
     padding: 0;
   }
+  .nav-overview-logo {
+    font-size: 45px;
+  }
+  .overview-space {
+    padding: 0 40px;
+    height: 500px;
+  }
+  .overview-left-title {
+    font-size: 30px;
+  }
+  .overview-left-list {
+    font-size: 13px;
+  }
+  .overview-left-item--circle::before {
+    width: 12px;
+    height: 12px;
+  }
+  .overview-right-account-info-title {
+    font-size: 30px;
+  }
+  .overview-right-account-info-option {
+    font-size: 14px;
+  }
+  .overview-right-latest-order {
+    padding-bottom: 5rem;
+  }
+  .overview-right-latest-order-title {
+    font-size: 30px;
+    padding-bottom: 1rem;
+  }
+  .overview-right-latest-order-table {
+    padding: 30px 0;
+  }
+  .overview-right-latest-order-table-title-list {
+    padding-bottom: 10px;
+  }
+  .overview-right-latest-order-table-title-list-item {
+    font-size: 12px;
+  }
+  .overview-right-latest-order-table-desc-list-item {
+    font-size: 12px;
+  }
 }
 @media screen and (max-width: 768px) {
   .nav-bot .container {
@@ -276,7 +318,57 @@ body {
     padding: 0;
   }
 }
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 600px) {
+  .overview .container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5rem;
+  }
+  .overview-space {
+    display: none;
+  }
+  .overview-left {
+    padding-bottom: 20px;
+  }
+  .overview-left-title {
+    font-size: 20px;
+  }
+  .overview-left-list {
+    font-size: 14px;
+  }
+  .overview-left-item--circle::before {
+    width: 10px;
+    height: 10px;
+  }
+  .overview-right-account-info-title {
+    font-size: 20px;
+  }
+  .overview-right-account-info-option {
+    font-size: 14px;
+  }
+  .overview-right-latest-order {
+    padding-bottom: 5rem;
+  }
+  .overview-right-latest-order-title {
+    font-size: 20px;
+    padding-bottom: 1rem;
+  }
+  .overview-right-latest-order-table {
+    padding: 20px 0;
+  }
+  .overview-right-latest-order-table-title-list {
+    padding-bottom: 10px;
+  }
+  .overview-right-latest-order-table-title-list-item {
+    font-size: 10px;
+  }
+  .overview-right-latest-order-table-desc-list-item {
+    font-size: 10px;
+  }
+  .nav-overview-logo {
+    font-size: 30px;
+    border-bottom: 3px solid black;
+  }
   .nav-bot .container {
     display: flex;
     align-items: center;
