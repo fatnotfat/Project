@@ -17,126 +17,43 @@ header {
 }
 
 .container {
-    padding-top: 10px;
 }
 
-.category__filter {
-    background-color: #E5E5E5;
+
+.image__include{
     width: 100%;
-    height: 100px;
-    border-radius: 10px;
-
-}
-
-
-.category__filter-include {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    margin: auto;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.category__filter-include li {
-    margin: auto;
-    padding-top: 15px;
-    padding-bottom: 15px;
-
-
-}
-
-.category__filter-include li p {
-    font-size: 1.5rem;
-    font-family: 'Montserrat', sans-serif;
-
-}
-
-
-.category__filter-include-type {
-    display: flex;
-    justify-content: center;
-}
-
-.category__filter-include-type hr {
-    margin: auto;
-    height: 2.3rem;
-    border: 1px solid #000;
-    border-radius: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
-    transform: rotate(90deg);
-    background-color: #000;
-
-}
-
-.category__filter-include-type input {
-    width: 10rem;
-    height: 4rem;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 10px;
-}
-
-.category__filter-search-btn {
-    width: 7rem;
-    height: 4rem;
-    margin: auto;
-    border-radius: 10px;
-
-}
-
-.category__filter-search-btn:focus {}
-
-.filter-select {
-    background-color: #ccc;
-    width: 20rem;
-    height: 4rem;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 10px;
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: space-between;
     position: relative;
 }
 
-.filter-select:hover .filter-select__list {
-    display: block;
-}
 
 
-
-.filter-select__label {
-    margin: auto;
-
-}
-
-.filter-select__list {
-    display: none;
+.image__background-background{
+    width: 100%;
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 100%;
-    list-style: none;
-    padding: 8px 16px;
-
-
-    /* background-color: #000; */
 }
 
-.filter-select__link {
-    text-decoration: none;
-    display: block;
-    padding: 4px 0;
-    color: #000;
-    font-weight: bold;
+.image__include-title{
+    position: absolute;
+    bottom: 276px;
+    text-align: center;
+    font-size: 40px;
+    color: #fff;
 }
 
-.filter-select__link:hover {
-    color: yellow;
-
+.image__include-title hr{
+    background-color: #fff;
+    border: 1px solid #fff;
+    height: 3px;
+    width: 50px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    
 }
+
+
+
 
 
 /* ----------product--------------- */
