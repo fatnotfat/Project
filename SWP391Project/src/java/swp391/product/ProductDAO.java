@@ -27,7 +27,7 @@ public class ProductDAO implements Serializable {
         return itemsList;
     }
 
-    public void searchByFilter(String name, float priceFrom, float priceTo, int size, int category)
+    public void searchByFilter(float priceFrom, float priceTo, int size)
             throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -35,12 +35,12 @@ public class ProductDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select * "
+                String sql = "Select Name, Description, Quantity, Price, Size "
                         + "From Product "
-                        + "Where Name Like ?";
+                        + "Where ";
 
                 if (priceFrom >= 0) {
-                    sql += " And Price >= ?";
+                    sql += " Price >= ?";
                 }
                 if (priceTo != 0) {
                     sql += " And Price <= ?";
@@ -48,25 +48,19 @@ public class ProductDAO implements Serializable {
                 if (size != 0) {
                     sql += " And Size = ?";
                 }
-                if (category != 0) {
-                    sql += " And CateID = ?";
-                }
                 stm = con.prepareStatement(sql);
-                stm.setString(1, name);
-                stm.setFloat(2, priceFrom);
-                stm.setFloat(3, priceTo);
-                stm.setInt(4, size);
-                stm.setInt(5, category);
+                stm.setFloat(1, priceFrom);
+                stm.setFloat(2, priceTo);
+                stm.setInt(3, size);
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    //get field/column
-                    name = rs.getString("name");
-                    priceFrom = rs.getFloat("priceFrom");
-                    priceTo = rs.getFloat("priceTo");
-                    size = rs.getInt("size");
-                    category = rs.getInt("category");
+                    String name = rs.getString("Name");
+                    String description = rs.getString("Description");
+                    int quantity = rs.getInt("Quantity");
+                    float price = rs.getFloat("Price");
+                    size = rs.getInt("Size");
                     ProductDTO dto = new ProductDTO(
-                            name, priceFrom, priceTo, size, category);
+                            name, description, price, quantity, size);
                     if (this.itemsList == null) {
                         this.itemsList = new ArrayList<>();
                     }

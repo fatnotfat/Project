@@ -17,20 +17,17 @@ public class ProductDTO implements Serializable {
     private String description;
     private float price;
     private int quantity;
-    private float priceFrom;
-    private float priceTo;
     private int size;
-    private int category;
 
     public ProductDTO() {
     }
 
-    public ProductDTO(String name, float priceFrom, float priceTo, int size, int category) {
+    public ProductDTO(String name, String description, float price, int quantity, int size) {
         this.name = name;
-        this.priceFrom = priceFrom;
-        this.priceTo = priceTo;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
         this.size = size;
-        this.category = category;
     }
 
     /**
@@ -45,62 +42,6 @@ public class ProductDTO implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * @return the priceFrom
-     */
-    public float getPriceFrom() {
-        return priceFrom;
-    }
-
-    /**
-     * @param priceFrom the priceFrom to set
-     */
-    public void setPriceFrom(float priceFrom) {
-        this.priceFrom = priceFrom;
-    }
-
-    /**
-     * @return the priceTo
-     */
-    public float getPriceTo() {
-        return priceTo;
-    }
-
-    /**
-     * @param priceTo the priceTo to set
-     */
-    public void setPriceTo(float priceTo) {
-        this.priceTo = priceTo;
-    }
-
-    /**
-     * @return the size
-     */
-    public int getSize() {
-        return size;
-    }
-
-    /**
-     * @param size the size to set
-     */
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    /**
-     * @return the category
-     */
-    public int getCategory() {
-        return category;
-    }
-
-    /**
-     * @param category the category to set
-     */
-    public void setCategory(int category) {
-        this.category = category;
     }
 
     /**
@@ -145,4 +86,20 @@ public class ProductDTO implements Serializable {
         this.quantity = quantity;
     }
 
+    /**
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    
+    
 }

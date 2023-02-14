@@ -45,24 +45,19 @@ public class SearchByFilterServlet extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
                 MyApplicationConstants.SearchByFilterServlet.SEARCHBYFILTER_PAGE);
-        String name = request.getParameter("txtName");
         String txtPriceFrom = request.getParameter("txtPriceFrom");
         float priceFrom = Float.parseFloat(txtPriceFrom);
         String txtPriceTo = request.getParameter("txtPriceTo");
         float priceTo = Float.parseFloat(txtPriceTo);
-        String txtSize = request.getParameter("txtSize");
+        String txtSize = request.getParameter("cboSize");
         int size = Integer.parseInt(txtSize);
-        String txtCategory = request.getParameter("txtCategory");
-        int category = Integer.parseInt(txtCategory);
         try {
-            if (name.trim().length() > 0) {
-                ProductDAO dao = new ProductDAO();
-                dao.searchByFilter(name, priceFrom, priceTo, size, category);
-                List<ProductDTO> result = dao.getItemsList();
-                request.setAttribute("SEARCHBYFILTER_RESULT", result);
-                url = siteMaps.getProperty(
-                        MyApplicationConstants.SearchByFilterServlet.SEARCHBYFILTER_PAGE);
-            }
+            ProductDAO dao = new ProductDAO();
+            dao.searchByFilter(priceFrom, priceTo, size);
+            List<ProductDTO> result = dao.getItemsList();
+            request.setAttribute("SEARCHBYFILTER_RESULT", result);
+            url = siteMaps.getProperty(
+                    MyApplicationConstants.SearchByFilterServlet.SEARCHBYFILTER_PAGE);
         } catch (NamingException ex) {
             log("SearchByFilterServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {

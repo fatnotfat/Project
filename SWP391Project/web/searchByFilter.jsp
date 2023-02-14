@@ -15,11 +15,16 @@
     <body>
         <h1>Filtered Results</h1>
         <form action="searchByFilterController" method="POST">
-            Name <input type="text" name="txtName" value="${param.txtName}" /><br/>
             Price From <input type="number" name="txtPriceFrom" value="0" /><br/>
-            Price To <input type="number" name="txtPriceTo" value="20" /><br/>
-            Size <input type="number" name="txtSize" value="5" /><br/>
-            Category <input type="text" name="txtCategory" value="10" /><br/>
+            Price To <input type="number" name="txtPriceTo" value="100000000" /><br/>
+            Size <select name="cboSize">
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+            </select><br/>
             <input type="submit" value="Search" name="btAction" /><br/>
         </form><br/>
         <c:set var="result" value="${requestScope.SEARCHBYFILTER_RESULT}"/>
@@ -28,31 +33,27 @@
                 <thead>
                     <tr>
                         <th>Number</th>
-                        <th>Name</th>
                         <th>Description</th>
                         <th>Quantity</th>
                         <th>Price</th>
                         <th>Size</th>
-                        <th>Category</th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach var="dto" items="${result}" varStatus="counter">
                         <tr>
                             <td>${counter.count}</td>
-                            <td>${dto.name}</td>
                             <td>${dto.description}</td>
                             <td>${dto.quantity}</td>
                             <td>${dto.price}</td>
                             <td>${dto.size}</td>
-                            <td>${dto.category}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
         </c:if>
         <c:if test="${empty result}">
-            <h2>Sorry, We could not find anything for "${param.txtName}".</h2>
+            <h2>Sorry, We could not find anything</h2>
         </c:if>
     </body>
 </html>
