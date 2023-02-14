@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,23 +8,58 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/test.css">
 </head>
+
 <body>
-    <header>
-        <h1>Katsuno</h1>
-        <button id="toggle-menu" class="header-button">Menu</button>
-        <button id="toggle-basket" class="header-button">Cart</button></li>
-        <button id="toggle-search" class="header-button">Search</button></li>
-        <form id="search-form" action="">
-            <fieldset>
-                <input name="search-terms" type="search" placeholder="Search (for example: skirt)" />
-            </fieldset>
-            <input type="submit" value="Ok" />
-        </form>
-    </header>
-
-    <div class="main">
+    <div class="wrapper">
+        <header class="header">
+            <div class="nav-top">
+                <div class="container">
+                    <div class="shipping">
+                        <p class="shipping-text">Free shipping with recept from 200$</p>
+                    </div>
+                </div>
+            </div>
+            <img src="./../images/Nav-line.png" alt="" />
+            <!-- NAV DESKTOP - TABLET -->
+            <div class="nav-bot">
+                <div class="container">
+                    <a href="#!" class="menu-logo"> LOGO </a>
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <a href="#!" class="menu-link">Categories</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#!" class="menu-link">About</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#!" class="menu-link">Shop</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#!" class="menu-link">Contact</a>
+                        </li>
+                    </ul>
+                    <div class="menu-icon">
+                        <img class="menu-icon-img" srcset="./../images/search-normal.png 2x" alt="" />
+                        <img class="menu-icon-img" srcset="./../images/profile-circle.png 2x" alt="" />
+                        <img class="menu-icon-img" srcset="./../images/shopping-cart.png 2x" alt="" />
+                    </div>
+                </div>
+            </div>
+            <!-- NAV MOBILE -->
+            <div class="nav-bot-responsive">
+                <div class="container">
+                    <div class="menu-responsive-icon">
+                        <img class="menu-responsive-icon-img" srcset="./../images/shopping-cart.png 2x" alt="" />
+                    </div>
+                    <a href="#!" class="menu-responsive-logo"> LOGO </a>
+                    <div class="menu-responsive-icon">
+                        <img class="menu-responsive-icon-img" srcset="./../images/textalign-justifycenter.png 2x"
+                            alt="" />
+                    </div>
+                </div>
+            </div>
+        </header>
     </div>
-
-    <script src="js/test.js"></script>
 </body>
+
 </html>
