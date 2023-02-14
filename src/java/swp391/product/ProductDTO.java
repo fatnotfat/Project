@@ -24,6 +24,14 @@ public class ProductDTO {
     public ProductDTO() {
     }
 
+    public ProductDTO(int id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+    
+    
+
     public ProductDTO(int id, String name, String description, int quantity, float price, boolean status, int size, Date createTime) {
         this.id = id;
         this.name = name;

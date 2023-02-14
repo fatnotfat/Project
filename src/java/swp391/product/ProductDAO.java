@@ -21,36 +21,48 @@ import swp391.utils.DBHelper;
  * @author nguye
  */
 public class ProductDAO implements Serializable {
-    
-    private List<ProductDTO> listProduct; 
-    
-    
+
+    private List<ProductDTO> listProduct;
 
     public List<ProductDTO> getListProduct() {
         return listProduct;
     }
-    
-    
-    
-    public void searchProduct(String searchValue)
-            throws NamingException, SQLException{
+
+    public List<ProductDTO> getProducts(int start, int total)
+            throws NamingException, SQLException {
+        List<ProductDTO> list = new ArrayList<>();
+        try (Connection connection = DBHelper.makeConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Product LIMIT " + start + "," + total)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("ProductID");
+                String name = resultSet.getString("Name");
+                String description = resultSet.getString("Description");
+                list.add(new ProductDTO(id, name, description));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public int searchProduct(String searchValue)
+            throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
 
-        
-        try{
+        try {
             con = DBHelper.makeConnection();
-            if(con!=null){
+            if (con != null) {
                 String sql = "SELECT ProductID, Name, Description, Quantity, Price, Status, Size, CreateTime "
                         + "FROM Product "
                         + "WHERE Name LIKE ? ";
-                
+
                 stm = con.prepareStatement(sql);
-                stm.setString(1, "%"+searchValue+"%");
+                stm.setString(1, "%" + searchValue + "%");
                 rs = stm.executeQuery();
-                
-                while(rs.next()){
+                while (rs.next()) {
                     int id = rs.getInt("ProductID");
                     String name = rs.getString("Name");
                     String descr = rs.getString("Description");
@@ -58,28 +70,107 @@ public class ProductDAO implements Serializable {
                     float price = rs.getFloat("Price");
                     boolean status = rs.getBoolean("Status");
                     int size = rs.getInt("Size");
-                    Date date = rs.getDate("CreateTime");   
-                    
+                    Date date = rs.getDate("CreateTime");
+
                     ProductDTO dto = new ProductDTO(id, name, descr, quantity, price, status, size, date);
-                   
-                    if(this.listProduct == null){
+
+                    if (this.listProduct == null) {
                         this.listProduct = new ArrayList<>();
                     }
                     this.listProduct.add(dto);
                 }
             }
-        }finally{
-            if(rs != null){
+        } finally {
+            if (rs != null) {
                 rs.close();
             }
-            
-            if(stm != null){
+
+            if (stm != null) {
                 stm.close();
             }
-            
-            if(con != null){
+
+            if (con != null) {
                 con.close();
             }
         }
+        return this.listProduct.size();
     }
+
+//    public ArrayList<ProductDTO> getTop(int index, int page)throws 
+//            NamingException,SQLException{
+//        ArrayList<ProductDTO> list = new ArrayList<>();
+//        Connection con = null;
+//        PreparedStatement stm = null;
+//        ResultSet rs = null;
+//        try {
+//            con = DBHelper.makeConnection();
+//            if(con != null){
+//                String sql = "SELECT ProductID, Name, Description, Quantity, Price, Status, Size, CreateTime "
+//                        + "FROM Product "
+//                        + "WHERE  "
+//                        + "BETWEEN ? AND ?";
+//            }
+//        } finally {
+//            if (rs != null) {
+//                rs.close();
+//            }
+//
+//            if (stm != null) {
+//                stm.close();
+//            }
+//
+//            if (con != null) {
+//                con.close();
+//            }
+//        }
+//    }
+    public List<ProductDTO> pagingAccount(int index, String searchValue, int recordsPerPage)
+            throws NamingException, SQLException {
+
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<ProductDTO> list = new ArrayList<>();
+
+        try {
+            con = DBHelper.makeConnection();
+            String sql = "SELECT ProductID, Name, Description, Quantity, Price, Status, Size, CreateTime "
+                    + "FROM Product\n"
+                    + "WHERE Name LIKE ? "
+                    + "ORDER BY ProductID\n"
+                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, "%" + searchValue + "%");
+            stm.setInt(2, (index - 1) * recordsPerPage);
+            stm.setInt(3, recordsPerPage);
+            rs = stm.executeQuery();
+            
+            while(rs.next()){
+                list.add(new ProductDTO(rs.getInt("ProductID")
+                        , rs.getString("Name")
+                        , rs.getString("Description")
+                        , rs.getInt("Quantity")
+                        , rs.getFloat("Price")
+                        , rs.getBoolean("Status")
+                        , rs.getInt("Size")
+                        , rs.getDate("CreateTime")
+                ));
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (stm != null) {
+                stm.close();
+            }
+
+            if (con != null) {
+                con.close();
+            }
+        }
+        return list;
+    }
+
 }

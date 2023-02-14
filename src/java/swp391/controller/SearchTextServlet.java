@@ -5,8 +5,8 @@
  */
 package swp391.controller;
 
+import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
@@ -40,25 +40,67 @@ public class SearchTextServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext context = this.getServletContext();
-        Properties siteMaps =(Properties) context.getAttribute("SITE_MAP");
+        Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
                 MyApplicationConstants.SearchServlet.SEARCH_TEXT_PAGE);
         String searchValue = request.getParameter("txtSearch");
+        String indexPage = request.getParameter("index");
+        if(indexPage == null){
+            indexPage = "1";
+        }
+        int index = Integer.parseInt(indexPage);
         
-        try{
-            if(searchValue.trim().length()>0){
+        try {
+            if (searchValue.trim().length() > 0) {
                 //Call DAO
                 ProductDAO dao = new ProductDAO();
-                dao.searchProduct(searchValue);
+                int size = dao.searchProduct(searchValue);
                 List<ProductDTO> list = dao.getListProduct();
                 request.setAttribute("PRODUCT_RESULT", list);
+                
+                //paging 
+                int recordsPerPage = 5;
+                int endPage = 0;
+                    endPage = size / recordsPerPage;
+                if(size % recordsPerPage != 0){
+                    endPage++;
+                }              
+                
+                List<ProductDTO> pagingList = dao.pagingAccount(index, searchValue, recordsPerPage);
+                request.setAttribute("PAGING_RESULT", pagingList);
+                request.setAttribute("END_PAGE", endPage);  
+                request.setAttribute("CURRENT_PAGE", index);
+//                //pagination
+//                int page = 1;
+//                int recordsPerPage = 5;
+//                if (request.getParameter("page") != null) {
+//                    page = Integer.parseInt(request.getParameter("page"));
+//                }
+//                List<ProductDTO> paginationList = dao.getProducts((page - 1) * recordsPerPage, recordsPerPage);
+//                int noOfRecords = dao.searchProduct(searchValue);
+//                int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+//                request.setAttribute("productList", list);
+//                request.setAttribute("noOfPages", noOfPages);
+//                request.setAttribute("currentPage", page);
+//
+//                response.setContentType("application/json");
+//                response.setCharacterEncoding("UTF-8");
+//                response.getWriter().write(new Gson().toJson(list));
+//                //end pagination
+                  
+
             }
-        }catch(NamingException ex){
+        } 
+//        catch (IOException ex) {
+//            log("IOException :" + ex.getMessage());
+//        } 
+        catch (NumberFormatException ex) {
+            log("NumberFormatException :" + ex.getMessage());
+        } catch (NamingException ex) {
             log("Naming exception :" + ex.getMessage());
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             log("SQL exception :" + ex.getMessage());
-        }
-        finally{
+        } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }

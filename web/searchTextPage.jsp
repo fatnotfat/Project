@@ -10,7 +10,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Search Page</title>
+        <link href="style/paging.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <form action="searchTextController" method="GET">       
@@ -25,7 +26,6 @@
                 <table border="1">
                     <thead>
                         <tr>
-                            <th>No.</th>
                             <th>Name</th>
                             <th>Description</th>
                             <th>Quantity</th>
@@ -36,7 +36,7 @@
                     </thead>
                     <tbody>
 
-                        <c:forEach var="dto" items="${result}" varStatus="counter">
+                        <%-- <c:forEach var="dto" items="${result}" varStatus="counter">
 
                             <!--<form action="updateAccountController">-->
                             <tr>
@@ -67,6 +67,19 @@
                             </tr>
                             <!--</form>-->
                         </c:forEach>
+                        --%>
+                            
+                            <c:forEach items="${PAGING_RESULT}" var="dto">
+                                <tr> 
+                                    <td>${dto.name}</td>
+                                    <td>${dto.description}</td>
+                                    <td>${dto.quantity}</td>
+                                    <td>${dto.price}</td>
+                                    <td>${dto.status}</td>
+                                    <td>${dto.size}</td>
+                                    
+                                </tr>
+                            </c:forEach>
                     </tbody>
                 </table>
             </c:if>
@@ -76,6 +89,15 @@
                     No record is matched!!!
                 </h2>
             </c:if>
+            
+            <div class="paging">
+                    <c:forEach begin="1" end="${END_PAGE}" var="i">
+                        <a class="${CURRENT_PAGE == i?"active":""}" href="SearchTextServlet?txtSearch=${param.txtSearch}&index=${i}">${i}</a>
+                    </c:forEach>
+            </div>
+            
+            <%--<c:forEach items="${PAGING_RESULT}" var="dto">--%>                
+            <%--</c:forEach>--%>
         </c:if>
     </body>
 </html>
