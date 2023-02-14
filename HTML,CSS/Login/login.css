@@ -198,18 +198,35 @@ body {
   margin-bottom: 15px;
 }
 .login-function-btn {
+  border: 1px solid black;
   margin-bottom: 180px;
   padding: 14px 26px;
-  background-color: var(--button-color);
-  color: white;
+  background-color: transparent;
+  color: black;
   font-size: 16px;
   font-weight: 700;
   transition: all 0.2s linear;
+  position: relative;
   cursor: pointer;
 }
+.login-function-btn::after {
+  content: "";
+  position: absolute;
+  background-color: var(--button-color);
+  color: white;
+  top: 0;
+  height: 100%;
+  width: 0;
+  right: 0;
+  transition: 0.3s;
+  z-index: -1;
+}
 .login-function-btn:hover {
-  background-color: white;
-  color: var(--button-color);
+  color: white;
+}
+.login-function-btn:hover::after {
+  left: 0;
+  width: 100%;
 }
 .login-function-security {
   font-size: 14px;

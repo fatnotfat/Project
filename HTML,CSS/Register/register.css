@@ -221,18 +221,35 @@ body {
   margin-bottom: 15px;
 }
 .register-function-btn {
-  margin-bottom: 75px;
+  border: 1px solid black;
+  margin-bottom: 180px;
   padding: 14px 26px;
-  background-color: var(--button-color);
-  color: white;
+  background-color: transparent;
+  color: black;
   font-size: 16px;
   font-weight: 700;
   transition: all 0.2s linear;
+  position: relative;
   cursor: pointer;
 }
+.register-function-btn::after {
+  content: "";
+  position: absolute;
+  background-color: var(--button-color);
+  color: white;
+  top: 0;
+  height: 100%;
+  width: 0;
+  right: 0;
+  transition: 0.3s;
+  z-index: -1;
+}
 .register-function-btn:hover {
-  background-color: white;
-  color: var(--button-color);
+  color: white;
+}
+.register-function-btn:hover::after {
+  left: 0;
+  width: 100%;
 }
 .register-function-security {
   font-size: 14px;
@@ -303,6 +320,11 @@ body {
   .footer-menu {
     gap: 75px;
     padding: 0;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .register-space {
+    height: 900px;
   }
 }
 @media screen and (max-width: 768px) {
