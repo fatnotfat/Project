@@ -16,7 +16,7 @@
         <h1>Filtered Results</h1>
         <form action="searchByFilterController" method="POST">
             Name <input type="text" name="txtName" value="${param.txtName}" /><br/>
-            Price From <input type="number" name="txtPriceFrom" value="1" /><br/>
+            Price From <input type="number" name="txtPriceFrom" value="0" /><br/>
             Price To <input type="number" name="txtPriceTo" value="20" /><br/>
             Size <input type="number" name="txtSize" value="5" /><br/>
             Category <input type="text" name="txtCategory" value="10" /><br/>

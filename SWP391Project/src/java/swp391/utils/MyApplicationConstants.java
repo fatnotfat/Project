@@ -78,15 +78,17 @@ public class MyApplicationConstants {
         public static final String RESETPASSWORD_PAGE = "resetPasswordPage";
         public static final String LOGIN_PAGE = "loginPage";
     }
-    
+
     public class ShowMainPageServlet {
+
         public static final String MAIN_PAGE = "mainPage";
     }
-    
-    public class SearchByFilterServlet{
+
+    public class SearchByFilterServlet {
+
         public static final String SEARCHBYFILTER_PAGE = "searchByFilterPage";
         public static final String SEARCH_PAGE = "searchPage";
-        
+
     }
 
 }

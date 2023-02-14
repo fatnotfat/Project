@@ -39,7 +39,7 @@ public class ProductDAO implements Serializable {
                         + "From Product "
                         + "Where Name Like ?";
 
-                if (priceFrom != 0) {
+                if (priceFrom >= 0) {
                     sql += " And Price >= ?";
                 }
                 if (priceTo != 0) {
