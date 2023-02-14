@@ -545,6 +545,8 @@ margin-right: auto;
   padding: 4px 0;
   color: #000;
   font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  
 }
 
 .user__shopping--login-success-link:hover {
@@ -561,19 +563,6 @@ margin-right: auto;
   border-style: solid;
   border-color: transparent transparent #F8F3E9 transparent;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1501,7 +1490,7 @@ footer {
 }
 
 .footer_about ul li a:hover {
-  color: #F8F3E9;
+  color: #ecd7ab  ;
 
 }
 
@@ -1527,7 +1516,7 @@ footer {
 }
 
 .footer_support ul li a:hover {
-  color: #F8F3E9;
+  color: #ecd7ab;
 
 }
 
@@ -2523,51 +2512,3 @@ footer {
 
 
 
-@keyframes appear {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fromTheLeftTo {
-  from {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0%);
-
-  }
-}
-
-
-@keyframes fromTheRightTo {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0%);
-
-  }
-}
-
-@keyframes fromTheToptoBottom {
-  from {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0%);
-  }
-}
