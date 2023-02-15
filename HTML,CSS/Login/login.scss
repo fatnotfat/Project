@@ -97,7 +97,7 @@ body {
         }
         position: relative;
         &-content .container {
-          display: none;
+          // display: none;
           z-index: 20;
           position: absolute;
           padding: 0;
@@ -123,6 +123,7 @@ body {
           }
         }
         &-content {
+          display: none;
           &-title {
             padding: 20px;
             padding-bottom: 20px;
@@ -148,7 +149,7 @@ body {
         }
         position: relative;
         &-content .container {
-          display: none;
+          // display: none;
           z-index: 20;
           position: absolute;
           // padding: 0;
@@ -174,6 +175,7 @@ body {
           }
         }
         &-content {
+          display: none;
           &-title {
             padding: 20px;
             padding-bottom: 20px;
@@ -214,6 +216,9 @@ body {
       }
       // CART
       &-cart {
+        &-space {
+          display: none;
+        }
         &-input {
           width: 358px;
           border: 0;
@@ -227,20 +232,23 @@ body {
         }
         position: relative;
         &-content .container {
-          // display: none;
           z-index: 20;
           position: absolute;
           padding: 0;
-          height: 155px;
+          height: 320px;
           top: 50px;
-          left: -307px;
-          width: 400px;
+          left: -357px;
+          width: 450px;
           background-color: var(--tab-color);
           border: 1px solid var(--tab-color);
           box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
           border-radius: 3px;
           transition: all 0.2s linear;
-          // display: none;
+          display: flex;
+          flex-direction: column;
+          flex-wrap: nowrap;
+          justify-content: flex-start;
+          align-items: stretch;
           &::after {
             content: "";
             position: absolute;
@@ -253,13 +261,100 @@ body {
           }
         }
         &-content {
+          display: none;
+          &-function {
+            &-total {
+              padding: 20px;
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              align-items: center;
+              justify-content: space-between;
+              &-txt {
+                font-size: 14px;
+                font-weight: 600;
+                opacity: 0.6;
+              }
+              &-price {
+                font-size: 16px;
+                color: red;
+                font-weight: 600;
+              }
+            }
+            &-method {
+              padding: 0 20px;
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              align-items: center;
+              justify-content: space-between;
+              &-btn {
+                border: 1px solid black;
+                padding: 14px 26px;
+                background-color: transparent;
+                color: black;
+                font-size: 16px;
+                font-weight: 700;
+                transition: all 0.2s linear;
+                position: relative;
+                cursor: pointer;
+                &::after {
+                  content: "";
+                  position: absolute;
+                  background-color: var(--button-color);
+                  color: white;
+                  top: 0;
+                  height: 100%;
+                  width: 0;
+                  right: 0;
+                  transition: 0.3s;
+                  z-index: -1;
+                }
+                &:hover {
+                  // background-color: white;
+                  color: white;
+                }
+                &:hover::after {
+                  left: 0;
+                  width: 100%;
+                  // color: white;
+                  // background-color: #333333;
+                  // z-index: 1;
+                }
+              }
+            }
+          }
           &-title {
             padding: 20px;
             padding-bottom: 20px;
+            // border: 1px solid black;
+            &-container {
+              border: 1px solid black;
+              width: inherit;
+              border-radius: 3px;
+              background-color: #f3f5f6;
+            }
             &-desc {
               font-size: 16px;
-              padding-bottom: 10px;
+              padding: 10px;
               text-align: center;
+              font-weight: 600;
+            }
+          }
+          &-show {
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 10px;
+            &-icon {
+              padding-bottom: 10px;
+            }
+            &-txt {
+              font-size: 14px;
+              font-weight: 600;
+              opacity: 0.6;
             }
           }
         }
