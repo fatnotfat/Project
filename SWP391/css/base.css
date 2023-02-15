@@ -28,6 +28,7 @@ html{
 .grid__row{
     display: flex;
     flex-wrap: wrap;
+    
 }
 
 
