@@ -89,6 +89,9 @@ body {
   flex-wrap: wrap;
 }
 .register {
+  &-space {
+    height: 1100px;
+  }
   &-space-mobile {
     display: none;
   }

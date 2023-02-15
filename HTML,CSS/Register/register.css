@@ -91,6 +91,9 @@ body {
   flex-wrap: wrap;
 }
 
+.register-space {
+  height: 1100px;
+}
 .register-space-mobile {
   display: none;
 }
