@@ -27,11 +27,12 @@ public class CustomerDTO implements Serializable {
 
     public CustomerDTO() {
     }
-    
-    public CustomerDTO(String name) {
+
+    public CustomerDTO(String name, boolean role) {
         this.name = name;
+        this.role = role;
     }
-    
+
     public CustomerDTO(String name, String password, Date birthDate,
             String email, String phone, String address, boolean role, int rankID, boolean sex, boolean typeOfLogin) {
         this.name = name;
@@ -87,7 +88,6 @@ public class CustomerDTO implements Serializable {
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
-
 
     /**
      * @return the email
@@ -180,7 +180,5 @@ public class CustomerDTO implements Serializable {
     public void setTypeOfLogin(boolean typeOfLogin) {
         this.typeOfLogin = typeOfLogin;
     }
-
-    
 
 }
