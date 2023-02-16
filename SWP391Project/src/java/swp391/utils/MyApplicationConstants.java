@@ -45,12 +45,6 @@ public class MyApplicationConstants {
         public static final String MAIN_PAGE = "mainPage";
     }
 
-    public class ForgotPasswordServlet {
-
-        public static final String FORGOTPASSWORD_CONTROLLER = "forgotPasswordController";
-        public static final String FORGOTPASSWORD_PAGE = "forgotPasswordPage";
-    }
-
     public class LogoutServlet {
 
         public static final String LOGIN_PAGE = "loginPage";
