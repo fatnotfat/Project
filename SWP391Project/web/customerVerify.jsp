@@ -99,6 +99,11 @@
                                     ${scope.emailNotExisted}
                                     </font><br/>
                                 </c:if>
+                                <c:if test="${not empty scope.loginGoogleError}">
+                                    <font color="red">
+                                    ${scope.loginGoogleError}
+                                    </font><br/>
+                                </c:if>
                             </div>
                             <div class="forgot-function">
                                 <p class="forgot-function-security">

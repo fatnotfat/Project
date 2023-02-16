@@ -162,6 +162,44 @@ public class CustomerDAO implements Serializable {
         return result;
     }
 
+    public boolean checkTypeOfLogin(String email)
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        boolean result = false;
+        try {
+            //1. connect DB
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                //2. Create SQL String
+                String sql = "Select TypeOfLogin "
+                        + "From Customer "
+                        + "Where Email = ?";
+                //3. Create statement
+                stm = con.prepareStatement(sql);
+                stm.setString(1, email);
+                //4. ExecuteQuery
+                rs = stm.executeQuery();
+                //5. Process result
+                if (rs.next()) {
+                    return true;
+                }
+            }//end con is available
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
     public boolean updatePassword(String email, String password)
             throws SQLException, NamingException {
         Connection con = null;
@@ -194,5 +232,5 @@ public class CustomerDAO implements Serializable {
         }
         return result;
     }
- 
+
 }

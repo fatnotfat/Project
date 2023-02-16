@@ -13,7 +13,19 @@ public class VerifyError implements Serializable {
     private String emailNotExisted;
     private String codeLengthError;
     private String codeNotExisted;
-    
+    private String loginGoogleError;
+
+    public VerifyError() {
+    }
+
+    public VerifyError(String emailLengthError, String emailNotExisted, String codeLengthError, String codeNotExisted, String loginGoogleError) {
+        this.emailLengthError = emailLengthError;
+        this.emailNotExisted = emailNotExisted;
+        this.codeLengthError = codeLengthError;
+        this.codeNotExisted = codeNotExisted;
+        this.loginGoogleError = loginGoogleError;
+    }
+
     /**
      * @return the emailLengthError
      */
@@ -69,7 +81,19 @@ public class VerifyError implements Serializable {
     public void setCodeNotExisted(String codeNotExisted) {
         this.codeNotExisted = codeNotExisted;
     }
-    
-    
+
+    /**
+     * @return the loginGoogleError
+     */
+    public String getLoginGoogleError() {
+        return loginGoogleError;
+    }
+
+    /**
+     * @param loginGoogleError the loginGoogleError to set
+     */
+    public void setLoginGoogleError(String loginGoogleError) {
+        this.loginGoogleError = loginGoogleError;
+    }
+
 }
-    

@@ -58,9 +58,14 @@ public class CustomerVerifyServlet extends HttpServlet {
                 request.setAttribute("VERIFYMAIL_SCOPE", errors);
             } else {
                 CustomerDAO dao = new CustomerDAO();
-                boolean result = dao.checkEmail(email);
-                if (!result) {
-                    errors.setEmailNotExisted("Sorry, this email is not sign up");
+                boolean result1 = dao.checkEmail(email);
+                boolean result2 = dao.checkTypeOfLogin(email);
+                if (!result1) {
+                    errors.setLoginGoogleError("Sorry, this email is not sign up");
+                    request.setAttribute("VERIFYMAIL_SCOPE", errors);
+                }
+                if (result2) {
+                    errors.setEmailNotExisted("Sorry, this email is sign up by Google");
                     request.setAttribute("VERIFYMAIL_SCOPE", errors);
                 } else {
                     //create instance object of the SendEmail Class
