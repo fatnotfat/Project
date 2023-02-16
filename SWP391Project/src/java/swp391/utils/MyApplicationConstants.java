@@ -43,6 +43,7 @@ public class MyApplicationConstants {
         public static final String LOGIN_PAGE = "loginPage";
         public static final String FORGOT_PASSWORD_PAGE = "ForgotPasswordPage";
         public static final String MAIN_PAGE = "mainPage";
+        public static final String ADMIN_PAGE = "adminPage";
     }
 
     public class LogoutServlet {

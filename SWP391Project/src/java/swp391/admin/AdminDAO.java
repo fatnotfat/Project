@@ -5,10 +5,12 @@
  */
 package swp391.admin;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Chau Nhat Truong
  */
-public class AdminDAO {
+public class AdminDAO implements Serializable{
     
 }

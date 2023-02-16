@@ -5,10 +5,12 @@
  */
 package swp391.admin;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Chau Nhat Truong
  */
-public class AdminDTO {
+public class AdminDTO implements Serializable{
     
 }
