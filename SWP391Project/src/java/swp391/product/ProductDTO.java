@@ -15,11 +15,27 @@ public class ProductDTO implements Serializable {
 
     private String name;
     private String description;
-    private float price;
     private int quantity;
+    private float price;
+    private boolean status;
     private int size;
+    private int CateID;
+    private int BrandID;
+    private int FeBkID;
 
     public ProductDTO() {
+    }
+
+    public ProductDTO(String name, String description, int quantity, float price, boolean status, int size, int CateID, int BrandID, int FeBkID) {
+        this.name = name;
+        this.description = description;
+        this.quantity = quantity;
+        this.price = price;
+        this.status = status;
+        this.size = size;
+        this.CateID = CateID;
+        this.BrandID = BrandID;
+        this.FeBkID = FeBkID;
     }
 
     public ProductDTO(String name, String description, float price, int quantity, int size) {
@@ -100,6 +116,60 @@ public class ProductDTO implements Serializable {
         this.size = size;
     }
 
-    
-    
+    /**
+     * @return the status
+     */
+    public boolean isStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    /**
+     * @return the CateID
+     */
+    public int getCateID() {
+        return CateID;
+    }
+
+    /**
+     * @param CateID the CateID to set
+     */
+    public void setCateID(int CateID) {
+        this.CateID = CateID;
+    }
+
+    /**
+     * @return the BrandID
+     */
+    public int getBrandID() {
+        return BrandID;
+    }
+
+    /**
+     * @param BrandID the BrandID to set
+     */
+    public void setBrandID(int BrandID) {
+        this.BrandID = BrandID;
+    }
+
+    /**
+     * @return the FeBkID
+     */
+    public int getFeBkID() {
+        return FeBkID;
+    }
+
+    /**
+     * @param FeBkID the FeBkID to set
+     */
+    public void setFeBkID(int FeBkID) {
+        this.FeBkID = FeBkID;
+    }
+
 }

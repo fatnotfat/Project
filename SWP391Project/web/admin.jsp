@@ -9,9 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Admin Page</title>
+        <title>Admin Login Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Administrator Login Page</h1>
+        <form action="adminLoginController" method="POST">
+            Username <input type="text" name="txtUsername" value="" /><br/>
+            Password <input type="password" name="txtPassword" value="" /><br/>
+            <input type="submit" value="Login" />
+        </form>
     </body>
 </html>

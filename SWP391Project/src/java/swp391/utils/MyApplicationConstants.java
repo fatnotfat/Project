@@ -85,5 +85,9 @@ public class MyApplicationConstants {
         public static final String SEARCH_PAGE = "searchPage";
 
     }
+    public class AdminLoginServlet {
+         public static final String ADMIN_PAGE = "adminPage";
+         public static final String ADMINMANAGE_PAGE = "adminManagePage";
+    }
 
 }

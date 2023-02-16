@@ -7,9 +7,11 @@ package swp391.product;
 
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
@@ -78,5 +80,127 @@ public class ProductDAO implements Serializable {
                 con.close();
             }
         }
+    }
+
+    public int createProduct(ProductDTO dto)
+            throws SQLException, NamingException {;
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        long milis = System.currentTimeMillis();
+        Date date = new Date(milis);
+        int key = 0;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Insert Into Product("
+                        + "Name, Description, Quantity, Price, Status, Size, "
+                        + "CreateTime, CateID, BrandID, FeBkID "
+                        + ") "
+                        + "Values(?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
+                        + ")";
+                stm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                stm.setString(1, dto.getName());
+                stm.setString(2, dto.getDescription());
+                stm.setInt(3, dto.getQuantity());
+                stm.setFloat(4, dto.getPrice());
+                stm.setBoolean(5, dto.isStatus());
+                stm.setInt(6, dto.getSize());
+                stm.setDate(7, date);
+                stm.setInt(8, dto.getCateID());
+                stm.setInt(9, dto.getBrandID());
+                stm.setInt(10, dto.getFeBkID());
+                int effectedRows = stm.executeUpdate();
+                rs = stm.getGeneratedKeys();
+                if (rs.next()) {
+                    key = rs.getInt(1);
+                }
+                if (effectedRows > 0) {
+                    return key;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return key;
+    }
+
+    public boolean updateProduct(int productID, String name, String description, int quantity,
+            float price, boolean status, int size)
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+        try {
+            //1. Connect DB
+            con = DBHelper.makeConnection();
+            //2. Create SQL String
+            String sql = "Update Product "
+                    + "Set Name = ?, Description = ?, Quantity = ?, Price = ?, "
+                    + "Status = ?, Size = ? "
+                    + "Where ProductID = ?";
+            //3. Create statement
+            stm = con.prepareStatement(sql);
+            stm.setString(1, name);
+            stm.setString(2, description);
+            stm.setInt(3, quantity);
+            stm.setFloat(4, price);
+            stm.setBoolean(5, status);
+            stm.setInt(6, size);
+            stm.setInt(7, productID);
+            //4. Execute query
+            int effectedRows = stm.executeUpdate();
+            //5. Process result
+            if (effectedRows > 0) {
+                result = true;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    public boolean deleteProduct(int productID)
+            throws SQLException, NamingException {;
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+        try {
+            //1. connect DB
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                //2. Create SQL String
+                String sql = "Update Product "
+                    + "Set Status = false "
+                    + "Where ProductID = ?";
+                //3. Create statement
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, productID);
+                //4. ExecuteQuery
+                int effectedRows = stm.executeUpdate();
+                //5. Process result
+                if (effectedRows > 0) {
+                    result = true;
+                }
+            }//end con is available
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
     }
 }
