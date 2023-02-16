@@ -39,11 +39,7 @@ html{
     width: 16.6667%;
 }
 
-.grid__column-3{
-    padding-left: 5px;
-    padding-right: 5px;
-    width: 25%;
-}
+
 
 .grid__column-2-4{
     padding-left: 10px;
@@ -61,11 +57,64 @@ html{
     padding-left: 5px;
     padding-right: 5px;
     width: 83.3333%;
+    
 }
 
 .grid__column-9{
     padding-left: 5px;
     padding-right: 5px;
     width: 75%;
+    display: flex;
+    justify-content: center;
 }
+
+.grid__column-3{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.grid__column-4{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 33.3333%;
+    display: flex;
+    justify-content: center;
+}
+
+.grid__column-8{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 66.6667%;
+    display: flex;
+    justify-content: center;
+}
+.grid__column-5{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 41.6667%;
+    display: flex;
+    justify-content: center;
+}
+
+.grid__column-7{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 58.3333%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.grid__column-6{
+    padding-left: 50px;
+    padding-right: 50px;
+    width: 50%;
+    
+}
+
 

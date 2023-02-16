@@ -68,3 +68,4 @@ const slider = {
 
 let intervalF = setInterval(slider.nextSlide, interval);
 slider.init();
+

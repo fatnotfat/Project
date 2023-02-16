@@ -930,11 +930,10 @@ header {
     color: #fff;
     font-size: 1.6rem;
     letter-spacing: 0.3rem;
-  font-family: "Montserrat", sans-serif;
-  border-radius: 5px ;
+   font-family: "Montserrat", sans-serif;
+   border-radius: 5px ;
     opacity: 0;
     cursor: pointer;
-
     transition: opacity 900ms ease-out 100ms, background-color 900ms ease-out 100ms;
 
 }
