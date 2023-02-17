@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import swp391.admin.AdminDAO;
+import swp391.admin.AdminDTO;
 import swp391.login.LoginError;
 import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
@@ -44,12 +46,11 @@ public class AdminLoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
                 MyApplicationConstants.AdminLoginServlet.ADMIN_PAGE);
-        String email = request.getParameter("txtEmail");
+        String email = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
         String checkLogged = request.getParameter("create-acc");
         boolean errorFound = false;
@@ -66,8 +67,8 @@ public class AdminLoginServlet extends HttpServlet {
             if (errorFound) {
                 request.setAttribute("LOGIN_ERROR", errors);
             } else {
-                CustomerDAO dao = new CustomerDAO();
-                CustomerDTO result = dao.checkLogin(email, password);
+                AdminDAO dao = new AdminDAO();
+                AdminDTO result = dao.checkLogin(email, password);
                 if (result == null) {
                     errorFound = true;
                     errors.setLoginFail("Incorrect email or password");

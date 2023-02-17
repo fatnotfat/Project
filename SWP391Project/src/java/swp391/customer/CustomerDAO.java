@@ -37,7 +37,7 @@ public class CustomerDAO implements Serializable {
                 //Create SQL String
                 String sql = "Select Name, Email, Phone, Address, Role "
                         + "From Customer "
-                        + "Where Email = ? And Password = ? And TypeOfLogin = 0";
+                        + "Where Email = ? And Password = ?";
                 //Create statement
                 stm = con.prepareStatement(sql);
                 stm.setString(1, email);

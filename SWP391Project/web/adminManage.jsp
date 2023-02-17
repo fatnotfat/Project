@@ -13,7 +13,6 @@
     </head>
     <body>
         <h1>Administrator Page</h1>
-        <a href="adminManagePage">Manage Account</a><br/>
         <a href="adminNewProductPage">New Product</a><br/>
         <a href="adminUpdateProductPage">Update Product</a><br/>
     </body>
