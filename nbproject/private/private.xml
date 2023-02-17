@@ -11,30 +11,6 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/controller/CustomerVerifyServlet.java</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/google/UserGoogleDTO.java</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/web/style/login.css</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/controller/ResetPasswordServlet.java</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/google/Constants.java</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/web/login.jsp</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/customer/CustomerCreateError.java</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/controller/SignUpServlet.java</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/utils/SendEmail.java</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/controller/LogoutServlet.java</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/customer/CustomerForgotPassword.java</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/controller/VerifyCodeServlet.java</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/web/META-INF/context.xml</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/verify/VerifyError.java</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/google/LoginGoogleHandler.java</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/customer/CustomerDTO.java</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/web/style/reset.css</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/controller/LoginServlet.java</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/web/style/register.css</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/web/signUp.jsp</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/customer/CustomerDAO.java</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/utils/MyApplicationConstants.java</file>
-            <file>file:/E:/Tai%20lieu%20cua%20o%20F/FU/Ky5/SWP391/SWP391Project-main/web/WEB-INF/siteMaps.properties</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

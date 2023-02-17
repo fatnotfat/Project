@@ -54,6 +54,7 @@ public class MyApplicationConstants {
     public class LogoutServlet {
 
         public static final String LOGIN_PAGE = "loginPage";
+        public static final String MAIN_PAGE = "mainPage";
     }
 
     public class UpdateAccountServlet {

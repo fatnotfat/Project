@@ -81,9 +81,8 @@ public class LoginServlet extends HttpServlet {
                 } else {
                     url = siteMaps.getProperty(
                             MyApplicationConstants.LoginServlet.MAIN_PAGE);
-
-                    HttpSession session = request.getSession();
-                    session.setAttribute("USER", result);
+                        HttpSession session = request.getSession();
+                        session.setAttribute("USER", result);
                     if (checkLogged != null) {
                         email = URLEncoder.encode(email, "UTF-8");
                         Cookie cookie = new Cookie(email, password);

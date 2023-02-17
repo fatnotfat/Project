@@ -12,6 +12,7 @@ import java.util.Date;
  * @author nguye
  */
 public class ProductDTO {
+
     private int id;
     private String name;
     private String description;
@@ -29,23 +30,31 @@ public class ProductDTO {
         this.name = name;
         this.description = description;
     }
+
+    public ProductDTO(int id, String name, float price, String description) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+    }
     
-    
+    public ProductDTO(int id, String name, float price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
 
     public ProductDTO(int id, String name, String description, int quantity, float price, boolean status, int size, Date createTime) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.quantity = quantity;
-        this.price = price; 
+        this.price = price;
         this.status = status;
         this.size = size;
         this.createTime = createTime;
     }
-    
-    
-    
-    
+
     public ProductDTO(String name, String description, int quantity, float price, boolean status, int size, Date createTime) {
         this.name = name;
         this.description = description;
@@ -161,7 +170,5 @@ public class ProductDTO {
     public void setId(int id) {
         this.id = id;
     }
-    
-    
-    
+
 }

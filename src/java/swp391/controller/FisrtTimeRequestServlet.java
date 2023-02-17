@@ -44,8 +44,11 @@ public class FisrtTimeRequestServlet extends HttpServlet {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
-                MyApplicationConstants.FirstTimeRequestServlet.LOGIN_PAGE);
+                MyApplicationConstants.FirstTimeRequestServlet.MAIN_PAGE);
         try {
+            //end session before login
+            HttpSession session = request.getSession(true);
+            session.invalidate();
             //Get cookies
             Cookie[] cookies = request.getCookies();
             //Read last cookies
@@ -61,9 +64,9 @@ public class FisrtTimeRequestServlet extends HttpServlet {
 
                     //Process
                     if (result != null) {
-                        url = siteMaps.getProperty(
-                                MyApplicationConstants.FirstTimeRequestServlet.MAIN_PAGE);
-                        HttpSession session = request.getSession();
+//                        url = siteMaps.getProperty(
+//                                MyApplicationConstants.FirstTimeRequestServlet.MAIN_PAGE);
+                        session = request.getSession(true);
                         session.setAttribute("USER", result);
                         break;
                     }//end user has existed

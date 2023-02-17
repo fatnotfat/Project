@@ -21,7 +21,9 @@
             />
         <link
             rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+            integrity="sha384-rfVu76QvwHTPBoTlWt22iL/szRJBUHpGnwvz8EKFPeX9ykV7OLOdNPSuys7N+h+N"
+            crossorigin="anonymous"
             />
         <link rel="stylesheet" href=" style/reset.css" />
         <link rel="stylesheet" href=" style/login.css" />
@@ -38,6 +40,9 @@
                     </div>
                 </div>
                 <img src="images/Nav-line.png" alt="" />
+
+                <!--NAV DESKTOP - TABLET-->
+
                 <div class="nav-bot">
                     <div class="container">
                         <a href="#!" class="menu-logo"> LOGO </a>
@@ -56,26 +61,140 @@
                             </li>
                         </ul>
                         <div class="menu-icon">
-                            <img
-                                class="menu-icon-img"
-                                srcset="images/search-normal.png 2x"
-                                alt=""
-                                />
 
-                            <img
-                                class="menu-icon-img"
-                                srcset="images/profile-circle.png 2x"
-                                alt=""
-                                />
-                            <img
-                                class="menu-icon-img"
-                                srcset="images/shopping-cart.png 2x"
-                                alt=""
-                                />
+                            <!--SEARCH-->
+
+                            <div class="menu-icon-tab">
+                                <button class="menu-icon-tab-search" href="#!">
+                                    <img
+                                        class="menu-icon-img"
+                                        srcset="images/search-normal.png 2x"
+                                        alt=""
+                                        />
+                                </button>
+                                <div class="menu-icon-tab-search-content">
+                                    <div class="container">
+                                        <div class="menu-icon-tab-search-content-title">
+                                            <p class="menu-icon-tab-search-content-title-desc">
+                                                SEARCH
+                                            </p>
+                                            <img srcset="images/Footer-line.png 2x" alt="" />
+                                        </div>
+                                        <div class="menu-icon-tab-search-form">
+                                            <form action="searchTextController">
+                                            <input
+                                                type="text"
+                                                class="menu-icon-tab-search-input"
+                                                placeholder="Search Product..."
+                                                name="txtSearch" value="${param.txtSearch}"
+                                                />
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--PROFILE-->
+                            <div class="menu-icon-tab">
+                                <button class="menu-icon-tab-profile" href="#!">
+                                    <img
+                                        class="menu-icon-img"
+                                        srcset="images/profile-circle.png 2x"
+                                        alt=""
+                                        />
+                                </button>
+                                <div class="menu-icon-tab-profile-content">
+                                    <div class="container">
+                                        <div class="menu-icon-tab-profile-content-title">
+                                            <p class="menu-icon-tab-profile-content-title-desc">
+                                                ACCOUNT INFORMATION
+                                            </p>
+                                            <img srcset="images/Footer-line.png 2x" alt="" />
+                                        </div>
+                                        <div class="menu-icon-tab-profile-form">
+                                            <p class="menu-icon-tab-profile-form-name">NAME</p>
+                                            <a href="#!" class="menu-icon-tab-profile-form-link"
+                                               >My account</a
+                                            >
+                                            <a href="#!" class="menu-icon-tab-profile-form-link"
+                                               >Address List</a
+                                            >
+                                            <a href="#!" class="menu-icon-tab-profile-form-link"
+                                               >Log out</a
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--CART-->
+                            <div class="menu-icon-tab">
+                                <button class="menu-icon-tab-cart" href="#!">
+                                    <img
+                                        class="menu-icon-img"
+                                        srcset="images/shopping-cart.png 2x"
+                                        alt=""
+                                        />
+                                </button>
+                                <div class="menu-icon-tab-cart-content">
+                                    <div class="container">
+                                        <div class="menu-icon-tab-cart-content-title">
+                                            <div class="menu-icon-tab-cart-content-title-container">
+                                                <p class="menu-icon-tab-cart-content-title-desc">
+                                                    Cart
+                                                </p>
+                                                <img
+                                                    srcset="images/Footer-line.png 2x"
+                                                    alt=""
+                                                    class="menu-icon-tab-cart-space"
+                                                    />
+                                            </div>
+                                        </div>
+                                        <div class="menu-icon-tab-cart-content-show">
+                                            <div class="menu-icon-tab-cart-content-show-icon">
+                                                <img
+                                                    srcset="images/shopping-icon-tab.png 2x"
+                                                    alt=""
+                                                    />
+                                            </div>
+                                            <div class="menu-icon-tab-cart-content-show-txt">
+                                                <p class="menu-icon-tab-cart-content-show-txt-desc">
+                                                    There are currently no products
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <img srcset="images/Footer-line.png 2x" alt="" />
+                                        <div class="menu-icon-tab-cart-content-function">
+                                            <div class="menu-icon-tab-cart-content-function-total">
+                                                <p
+                                                    class="menu-icon-tab-cart-content-function-total-txt"
+                                                    >
+                                                    TOTAL AMOUNT
+                                                </p>
+                                                <p
+                                                    class="menu-icon-tab-cart-content-function-total-price"
+                                                    >
+                                                    0₫
+                                                </p>
+                                            </div>
+                                            <div class="menu-icon-tab-cart-content-function-method">
+                                                <button
+                                                    class="menu-icon-tab-cart-content-function-method-btn"
+                                                    >
+                                                    VIEW CART
+                                                </button>
+                                                <button
+                                                    class="menu-icon-tab-cart-content-function-method-btn"
+                                                    >
+                                                    PAY
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
+                <!-- NAV MOBILE -->
                 <div class="nav-bot-responsive">
                     <div class="container">
                         <div class="menu-responsive-icon">
@@ -104,8 +223,14 @@
                     </div>
                     <img srcset="images/Login-line.png 2x" alt="" 
                          class="login-space"/>
-                    <div class="login-form-container">
 
+
+                    <img
+                        class="login-space-mobile"
+                        srcset="images/register-line-mobile.png 2x"
+                        alt=""
+                        />
+                    <div class="login-form-container">
                         <form action="loginController" method="POST">
                             <div class="login-form">
                                 <c:set var = "errors" value="${requestScope.LOGIN_ERROR}"/>
@@ -158,7 +283,8 @@
                                     >
                                     apply.
                                 </p>
-                                <input class="login-function-btn" type="submit" value="Login" name="btAction" />
+                                <!--<input class="login-function-btn" type="submit" value="Login" name="btAction" />-->
+                                <button class="login-function-btn" type="submit">Login</button>
                                 <p class="login-function-register">
                                     <span class="login-function-register-question">
                                         Don't have an account?
@@ -205,5 +331,6 @@
                 </div>
             </footer>
         </div>
+        <script src="js/app.js"></script>
     </body>
 </html>

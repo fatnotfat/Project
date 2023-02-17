@@ -39,6 +39,7 @@ import="java.sql.*"
                     </div>
                 </div>
                 <img src="images/Nav-line.png" alt="" />
+                <!-- NAV DESKTOP - TABLET -->
                 <div class="nav-bot">
                     <div class="container">
                         <a href="#!" class="menu-logo"> LOGO </a>
@@ -57,24 +58,158 @@ import="java.sql.*"
                             </li>
                         </ul>
                         <div class="menu-icon">
+                            <!-- SEARCH -->
+                            <div class="menu-icon-tab">
+                                <button class="menu-icon-tab-search" href="#!">
+                                    <img
+                                        class="menu-icon-img"
+                                        srcset="images/search-normal.png 2x"
+                                        alt=""
+                                        />
+                                </button>
+                                <div class="menu-icon-tab-search-content">
+                                    <div class="container">
+                                        <div class="menu-icon-tab-search-content-title">
+                                            <p class="menu-icon-tab-search-content-title-desc">
+                                                SEARCH
+                                            </p>
+                                            <img srcset="images/Footer-line.png 2x" alt="" />
+                                        </div>
+                                        <div class="menu-icon-tab-search-form">
+                                            <form action="searchTextController">
+                                                <input
+                                                    type="text"
+                                                    class="menu-icon-tab-search-input"
+                                                    placeholder="Search Product..."
+                                                    name="txtSearch" value="${param.txtSearch}"
+                                                    />
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- PROFILE -->
+                            <div class="menu-icon-tab">
+                                <button class="menu-icon-tab-profile" href="#!">
+                                    <img
+                                        class="menu-icon-img"
+                                        srcset="images/profile-circle.png 2x"
+                                        alt=""
+                                        />
+                                </button>
+                                <div class="menu-icon-tab-profile-content">
+                                    <div class="container">
+                                        <div class="menu-icon-tab-profile-content-title">
+                                            <p class="menu-icon-tab-profile-content-title-desc">
+                                                ACCOUNT INFORMATION
+                                            </p>
+                                            <img srcset="images/Footer-line.png 2x" alt="" />
+                                        </div>
+                                        <div class="menu-icon-tab-profile-form">
+                                            <p class="menu-icon-tab-profile-form-name">NAME</p>
+                                            <a href="#!" class="menu-icon-tab-profile-form-link"
+                                               >My account</a
+                                            >
+                                            <a href="#!" class="menu-icon-tab-profile-form-link"
+                                               >Address List</a
+                                            >
+                                            <a href="#!" class="menu-icon-tab-profile-form-link"
+                                               >Log out</a
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- CART -->
+                            <div class="menu-icon-tab">
+                                <button class="menu-icon-tab-cart" href="#!">
+                                    <img
+                                        class="menu-icon-img"
+                                        srcset="images/shopping-cart.png 2x"
+                                        alt=""
+                                        />
+                                </button>
+                                <div class="menu-icon-tab-cart-content">
+                                    <div class="container">
+                                        <div class="menu-icon-tab-cart-content-title">
+                                            <div class="menu-icon-tab-cart-content-title-container">
+                                                <p class="menu-icon-tab-cart-content-title-desc">
+                                                    Cart
+                                                </p>
+                                                <img
+                                                    srcset="images/Footer-line.png 2x"
+                                                    alt=""
+                                                    class="menu-icon-tab-cart-space"
+                                                    />
+                                            </div>
+                                        </div>
+                                        <div class="menu-icon-tab-cart-content-show">
+                                            <div class="menu-icon-tab-cart-content-show-icon">
+                                                <img
+                                                    srcset="images/shopping-icon-tab.png 2x"
+                                                    alt=""
+                                                    />
+                                            </div>
+                                            <div class="menu-icon-tab-cart-content-show-txt">
+                                                <p class="menu-icon-tab-cart-content-show-txt-desc">
+                                                    There are currently no products
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <img srcset="images/Footer-line.png 2x" alt="" />
+                                        <div class="menu-icon-tab-cart-content-function">
+                                            <div class="menu-icon-tab-cart-content-function-total">
+                                                <p
+                                                    class="menu-icon-tab-cart-content-function-total-txt"
+                                                    >
+                                                    TOTAL AMOUNT
+                                                </p>
+                                                <p
+                                                    class="menu-icon-tab-cart-content-function-total-price"
+                                                    >
+                                                    0₫
+                                                </p>
+                                            </div>
+                                            <div class="menu-icon-tab-cart-content-function-method">
+                                                <button
+                                                    class="menu-icon-tab-cart-content-function-method-btn"
+                                                    >
+                                                    VIEW CART
+                                                </button>
+                                                <button
+                                                    class="menu-icon-tab-cart-content-function-method-btn"
+                                                    >
+                                                    PAY
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- NAV MOBILE -->
+                <div class="nav-bot-responsive">
+                    <div class="container">
+                        <div class="menu-responsive-icon">
                             <img
-                                class="menu-icon-img"
-                                srcset="images/search-normal.png 2x"
-                                alt=""
-                                />
-                            <img
-                                class="menu-icon-img"
-                                srcset="images/profile-circle.png 2x"
-                                alt=""
-                                />
-                            <img
-                                class="menu-icon-img"
+                                class="menu-responsive-icon-img"
                                 srcset="images/shopping-cart.png 2x"
+                                alt=""
+                                />
+                        </div>
+                        <a href="#!" class="menu-responsive-logo"> LOGO </a>
+                        <div class="menu-responsive-icon">
+                            <img
+                                class="menu-responsive-icon-img"
+                                srcset="images/textalign-justifycenter.png 2x"
                                 alt=""
                                 />
                         </div>
                     </div>
                 </div>
+                <!--  -->
             </header>
             <img src="images/Nav-line.png" alt="" />
             <div class="register">
@@ -82,34 +217,34 @@ import="java.sql.*"
                     <div class="register-heading">
                         <h1>Register</h1>
                     </div>
-                    <img src="images/Login-line.png" alt="" />
-                    
-                        <div class="register-form-container">
-                            <form action="signUpController" method="POST">
+                    <img class="register-space" src="images/Login-line.png" alt="" />
+                    <img class="register-space-mobile" srcset="images/register-line-mobile.png 2x" alt="" />
+                    <div class="register-form-container">
+                        <form action="signUpController" method="POST">
                             <div class="register-form">
-                                
+
                                 <c:set var = "errors" value="${requestScope.SIGNUP_ERROR}"/>
                                 <input type="text" name="txtFirstName"
-                                                   class="register-input-first-name"
-                                                   placeholder="First name"
-                                                   value="" /><br/>
+                                       class="register-input-first-name"
+                                       placeholder="First name"
+                                       value="" /><br/>
                                 <c:if test="${not empty errors.firstNameLengthError}">
-                                    <font color="red">
-                                    ${errors.firstNameLengthError}
-                                    </font><br/>
+                                    <small color="red">
+                                        ${errors.firstNameLengthError}
+                                    </small><br/>
                                 </c:if>
                                 <input type="text" name="txtLastName"
-                                                  class="register-input-last-name"
-                                                  placeholder="Last name"
-                                                  value="" /><br/>
+                                       class="register-input-last-name"
+                                       placeholder="Last name"
+                                       value="" /><br/>
                                 <c:if test="${not empty errors.lastNameLengthError}">
-                                    <font color="red">
-                                    ${errors.lastNameLengthError}
-                                    </font><br/>
+                                    <small color="red">
+                                        ${errors.lastNameLengthError}
+                                    </small><br/>
                                 </c:if>
 
                                 <div class="register-form-gender">
-                                <br/>
+                                    <br/>
                                     <div class="register-form-radio">
                                         <input type="radio" name="txtSex"
                                                class="register-form-input-radio"
@@ -129,49 +264,49 @@ import="java.sql.*"
                                     </div>
                                 </div>
                                 <input type="date" name="txtBirthDate"
-                                                class="register-input-date"
-                                                placeholder="mm/dd/yyyy"
-                                                value="${param.txtBirthDate}" /><br/>
+                                       class="register-input-date"
+                                       placeholder="mm/dd/yyyy"
+                                       value="${param.txtBirthDate}" /><br/>
                                 <c:if test="${not empty errors.birthDateLengthError}">
-                                    <font color="red">
-                                    ${errors.birthDateLengthError}
-                                    </font><br/>
+                                    <small color="red">
+                                        ${errors.birthDateLengthError}
+                                    </small><br/>
                                 </c:if>
 
                                 <input type="text" name="txtEmail"
-                                              class="register-input-email"
-                                              placeholder="Email"
-                                              value="${param.txtEmail}" /><br/>
+                                       class="register-input-email"
+                                       placeholder="Email"
+                                       value="${param.txtEmail}" /><br/>
                                 <c:if test="${not empty errors.emailLengthError}">
-                                    <font color="red">
-                                    ${errors.emailLengthError}
-                                    </font><br/>
+                                    <small color="red">
+                                        ${errors.emailLengthError}
+                                    </small><br/>
                                 </c:if>
                                 <c:if test="${not empty errors.emailIsExisted}">
-                                    <font color="red">
-                                    ${errors.emailIsExisted}
-                                    </font><br/>
+                                    <small color="red">
+                                        ${errors.emailIsExisted}
+                                    </small>><br/>
                                 </c:if>
 
                                 <input type="password" name="txtPassword"
-                                                 class="register-input-password"
-                                                 placeholder="Password"
-                                                 value="" /> (e.g, 6 - 30 chars)<br/>
+                                       class="register-input-password"
+                                       placeholder="Password"
+                                       value="" /> (e.g, 6 - 30 chars)<br/>
                                 <c:if test="${not empty errors.passwordLengthError}">
-                                    <font color="red">
-                                    ${errors.passwordLengthError}
-                                    </font><br/>
+                                    <small color="red">
+                                        ${errors.passwordLengthError}
+                                    </small><br/>
                                 </c:if>
                                 <input type="password" name="txtConfirm"
-                                                class="register-input-confirm-password"
-                                                placeholder="Confirm Password"
-                                                value="" /><br/>
+                                       class="register-input-confirm-password"
+                                       placeholder="Confirm Password"
+                                       value="" /><br/>
                                 <c:if test="${not empty errors.confirmNotMatched}">
-                                    <font color="red">
-                                    ${errors.confirmNotMatched}
-                                    </font><br/>
+                                    <small color="red">
+                                        ${errors.confirmNotMatched}
+                                    </small><br/>
                                 </c:if>
-                                    
+
                             </div>
                             <div class="register-function">
                                 <p class="register-function-security">
@@ -182,19 +317,18 @@ import="java.sql.*"
                                        >Terms of Service</a>
                                     apply.
                                 </p>
-                                <input class="register-function-btn"
-                                       type="submit" value="Sign up"
-                                       name="btAction" /><br/>
-
+                                <!--                                <input class="register-function-btn"
+                                                                       type="submit" value="Sign up"
+                                                                       name="btAction" /><br/>-->
+                                <button class="register-function-btn" type="submit">Sign up</button>
                                 <p class="register-function-register">
                                     <span class="register-function-register-question">
                                         Already have an account?
                                     </span> <a href="loginPage" class="register-function-register-hightlight" >Login</a> here<br/>
                                 </p>
                             </div>
-                            </form>
-                        </div>
-                    
+                        </form>
+                    </div>
                 </div>
             </div>
             <img src="images/Footer-line.png" alt="" />
@@ -226,5 +360,6 @@ import="java.sql.*"
                 </div>
             </footer>
         </div>
+        <script src="js/app.js"></script>
     </body>   
 </html>

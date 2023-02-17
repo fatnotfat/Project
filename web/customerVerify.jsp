@@ -33,6 +33,8 @@
                     </div>
                 </div>
                 <img src="images/Nav-line.png" alt="" />
+
+                <!--NAV  DESKTOP - TABLET-->
                 <div class="nav-bot">
                     <div class="container">
                         <a href="#!" class="menu-logo"> LOGO </a>
@@ -51,24 +53,155 @@
                             </li>
                         </ul>
                         <div class="menu-icon">
+                            <!--SEARCH-->
+                            <div class="menu-icon-tab">
+                                <button class="menu-icon-tab-search" href="#!">
+                                    <img
+                                        class="menu-icon-img"
+                                        srcset="images/search-normal.png 2x"
+                                        alt=""
+                                        />
+                                </button>
+                                <div class="menu-icon-tab-search-content">
+                                    <div class="container">
+                                        <div class="menu-icon-tab-search-content-title">
+                                            <p class="menu-icon-tab-search-content-title-desc">
+                                                SEARCH
+                                            </p>
+                                            <img srcset="images/Footer-line.png 2x" alt="" />
+                                        </div>
+                                        <div class="menu-icon-tab-search-form">
+                                            <input
+                                                type="text"
+                                                class="menu-icon-tab-search-input"
+                                                placeholder="Search Product..."
+                                                />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- PROFILE -->
+                            <div class="menu-icon-tab">
+                                <button class="menu-icon-tab-profile" href="#!">
+                                    <img
+                                        class="menu-icon-img"
+                                        srcset="images/profile-circle.png 2x"
+                                        alt=""
+                                        />
+                                </button>
+                                <div class="menu-icon-tab-profile-content">
+                                    <div class="container">
+                                        <div class="menu-icon-tab-profile-content-title">
+                                            <p class="menu-icon-tab-profile-content-title-desc">
+                                                ACCOUNT INFORMATION
+                                            </p>
+                                            <img srcset="images/Footer-line.png 2x" alt="" />
+                                        </div>
+                                        <div class="menu-icon-tab-profile-form">
+                                            <p class="menu-icon-tab-profile-form-name">NAME</p>
+                                            <a href="#!" class="menu-icon-tab-profile-form-link"
+                                               >My account</a
+                                            >
+                                            <a href="#!" class="menu-icon-tab-profile-form-link"
+                                               >Address List</a
+                                            >
+                                            <a href="#!" class="menu-icon-tab-profile-form-link"
+                                               >Log out</a
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- CART -->
+                            <div class="menu-icon-tab">
+                                <button class="menu-icon-tab-cart" href="#!">
+                                    <img
+                                        class="menu-icon-img"
+                                        srcset="images/shopping-cart.png 2x"
+                                        alt=""
+                                        />
+                                </button>
+                                <div class="menu-icon-tab-cart-content">
+                                    <div class="container">
+                                        <div class="menu-icon-tab-cart-content-title">
+                                            <div class="menu-icon-tab-cart-content-title-container">
+                                                <p class="menu-icon-tab-cart-content-title-desc">
+                                                    Cart
+                                                </p>
+                                                <img
+                                                    srcset="images/Footer-line.png 2x"
+                                                    alt=""
+                                                    class="menu-icon-tab-cart-space"
+                                                    />
+                                            </div>
+                                        </div>
+                                        <div class="menu-icon-tab-cart-content-show">
+                                            <div class="menu-icon-tab-cart-content-show-icon">
+                                                <img
+                                                    srcset="images/shopping-icon-tab.png 2x"
+                                                    alt=""
+                                                    />
+                                            </div>
+                                            <div class="menu-icon-tab-cart-content-show-txt">
+                                                <p class="menu-icon-tab-cart-content-show-txt-desc">
+                                                    There are currently no products
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <img srcset="images/Footer-line.png 2x" alt="" />
+                                        <div class="menu-icon-tab-cart-content-function">
+                                            <div class="menu-icon-tab-cart-content-function-total">
+                                                <p
+                                                    class="menu-icon-tab-cart-content-function-total-txt"
+                                                    >
+                                                    TOTAL AMOUNT
+                                                </p>
+                                                <p
+                                                    class="menu-icon-tab-cart-content-function-total-price"
+                                                    >
+                                                    0₫
+                                                </p>
+                                            </div>
+                                            <div class="menu-icon-tab-cart-content-function-method">
+                                                <button
+                                                    class="menu-icon-tab-cart-content-function-method-btn"
+                                                    >
+                                                    VIEW CART
+                                                </button>
+                                                <button
+                                                    class="menu-icon-tab-cart-content-function-method-btn"
+                                                    >
+                                                    PAY
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- NAV MOBILE -->
+                <div class="nav-bot-responsive">
+                    <div class="container">
+                        <div class="menu-responsive-icon">
                             <img
-                                class="menu-icon-img"
-                                srcset="images/search-normal.png 2x"
-                                alt=""
-                                />
-                            <img
-                                class="menu-icon-img"
-                                srcset="images/profile-circle.png 2x"
-                                alt=""
-                                />
-                            <img
-                                class="menu-icon-img"
+                                class="menu-responsive-icon-img"
                                 srcset="images/shopping-cart.png 2x"
+                                alt=""
+                                />
+                        </div>
+                        <a href="#!" class="menu-responsive-logo"> LOGO </a>
+                        <div class="menu-responsive-icon">
+                            <img
+                                class="menu-responsive-icon-img"
+                                srcset="images/textalign-justifycenter.png 2x"
                                 alt=""
                                 />
                         </div>
                     </div>
                 </div>
+                <!--  -->
             </header>
             <img src="images/Nav-line.png" alt="" />
             <div class="forgot">
@@ -76,11 +209,12 @@
                     <div class="forgot-heading">
                         <h1>Login</h1>
                     </div>
-                    <img srcset="images/Login-line.png 2x" alt="" />
+                    <img class="forgot-space" srcset="images/Login-line.png 2x" alt="" />
+                    <img class="forgot-space-mobile" srcset="images/register-line-mobile.png 2x" alt="">
                     <div class="forgot-form-container">
-                        
+
                         <form action="customerVerifyController" method="POST">
-                        <p class="forgot-text">Password Recovery</p>
+                            <p class="forgot-text">Password Recovery</p>
                             <c:set var = "scope" value="${requestScope.VERIFYMAIL_SCOPE}"/>
                             <div class="forgot-form">
                                 <input type="email" name="txtEmail"
@@ -88,11 +222,11 @@
                                        placeholder="Email"
                                        value="${param.txtEmail}"><br/>
                                 <div class="phat">
-                                <c:if test="${not empty scope.emailLengthError}">
-                                    <font color="red" >
-                                    ${scope.emailLengthError}
-                                    </font><br/>
-                                </c:if>
+                                    <c:if test="${not empty scope.emailLengthError}">
+                                        <font color="red" >
+                                        ${scope.emailLengthError}
+                                        </font><br/>
+                                    </c:if>
                                 </div>
                                 <c:if test="${not empty scope.emailNotExisted}">
                                     <font color="red">
@@ -107,8 +241,7 @@
                                     <a href="https://policies.google.com/privacy">Terms of Service</a> apply.
                                 </p>
                                 <div class="forgot-function-choose">
-                                    <input class="forgot-function-btn" type="submit" value="Send"
-                                           name = "btAction">
+                                    <button class="forgot-function-btn" type="submit">Send</button>
                                     <a href="loginPage" class="forgot-function-cancel">Cancel</a>
                                 </div>
                             </div>
@@ -145,5 +278,6 @@
                 </div>
             </footer>
         </div>
+        <script src="js/app.js"></script>
     </body>
 </html>

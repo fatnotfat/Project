@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import swp391.product.ProductDAO;
 import swp391.product.ProductDTO;
 import swp391.utils.MyApplicationConstants;
@@ -45,11 +46,12 @@ public class SearchTextServlet extends HttpServlet {
                 MyApplicationConstants.SearchServlet.SEARCH_TEXT_PAGE);
         String searchValue = request.getParameter("txtSearch");
         String indexPage = request.getParameter("index");
-        if(indexPage == null){
+
+        if (indexPage == null) {
             indexPage = "1";
         }
         int index = Integer.parseInt(indexPage);
-        
+//        boolean responseCommitted = false;
         try {
             if (searchValue.trim().length() > 0) {
                 //Call DAO
@@ -57,52 +59,45 @@ public class SearchTextServlet extends HttpServlet {
                 int size = dao.searchProduct(searchValue);
                 List<ProductDTO> list = dao.getListProduct();
                 request.setAttribute("PRODUCT_RESULT", list);
-                
+
                 //paging 
                 int recordsPerPage = 5;
                 int endPage = 0;
-                    endPage = size / recordsPerPage;
-                if(size % recordsPerPage != 0){
+                endPage = size / recordsPerPage;
+                if (size % recordsPerPage != 0) {
                     endPage++;
-                }              
-                
+                }
+
                 List<ProductDTO> pagingList = dao.pagingAccount(index, searchValue, recordsPerPage);
                 request.setAttribute("PAGING_RESULT", pagingList);
-                request.setAttribute("END_PAGE", endPage);  
+                request.setAttribute("END_PAGE", endPage);
                 request.setAttribute("CURRENT_PAGE", index);
-//                //pagination
-//                int page = 1;
-//                int recordsPerPage = 5;
-//                if (request.getParameter("page") != null) {
-//                    page = Integer.parseInt(request.getParameter("page"));
-//                }
-//                List<ProductDTO> paginationList = dao.getProducts((page - 1) * recordsPerPage, recordsPerPage);
-//                int noOfRecords = dao.searchProduct(searchValue);
-//                int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-//                request.setAttribute("productList", list);
-//                request.setAttribute("noOfPages", noOfPages);
-//                request.setAttribute("currentPage", page);
-//
+//                
+                List<ProductDTO> list2 = dao.pagingAccount(index, searchValue, recordsPerPage);
+                String json = new Gson().toJson(list);
+
+// Set the content type and write the JSON to the response
 //                response.setContentType("application/json");
 //                response.setCharacterEncoding("UTF-8");
-//                response.getWriter().write(new Gson().toJson(list));
-//                //end pagination
-                  
+//                response.getWriter().write(json);
+                HttpSession session = request.getSession();
+                session.setAttribute("products", json);
 
             }
-        } 
-//        catch (IOException ex) {
-//            log("IOException :" + ex.getMessage());
-//        } 
-        catch (NumberFormatException ex) {
+        } catch (NumberFormatException ex) {
             log("NumberFormatException :" + ex.getMessage());
         } catch (NamingException ex) {
             log("Naming exception :" + ex.getMessage());
         } catch (SQLException ex) {
             log("SQL exception :" + ex.getMessage());
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+//            if (!responseCommitted) {
+                // forward the request to another page or servlet
+                RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+                dispatcher.forward(request, response);
+//            }
+//            RequestDispatcher rd = request.getRequestDispatcher(url);
+//            rd.forward(request, response);
         }
     }
 
