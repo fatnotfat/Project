@@ -1,3 +1,4 @@
+// ________________________________________NAVIGATION_____________________________________________________
 // Get references to the search tab and its content
 const searchTab = document.querySelector(".menu-icon-tab-search");
 const searchContent = document.querySelector(".menu-icon-tab-search-content");
@@ -54,3 +55,87 @@ cartTab.addEventListener("click", function () {
   searchContent.classList.remove("menu-icon-tab-search-content-active");
   profileContent.classList.remove("menu-icon-tab-profile-content-active");
 });
+// ________________________________________________VALIDATE_______________________________________
+
+var firstName = document.querySelector('#first-name')
+var lastName = document.querySelector('#last-name')
+var male = document.querySelector('#gender-male')
+var female = document.querySelector('#gender-female')
+var date = document.querySelector('#date')
+var email = document.querySelector('#email')
+var password = document.querySelector('#password')
+var confirmPassword = document.querySelector('#confirm-password')
+var form = document.querySelector('form')
+// Ham show error
+function showError(input, message) {
+  let parent = input.parentElement;
+  let small = parent.querySelector('small')
+ 
+
+  parent.classList.add('error')
+  small.innerText = message
+}
+// Ham show no error
+function showSuccess(input) {
+  let parent = input.parentElement;
+  let small = parent.querySelector('small')
+ 
+
+  parent.classList.remove('error')
+  small.innerText = ''
+}
+// Ham kiem tra empty
+function checkEmptyError(listInput) {
+  let isEmptyError = false;
+  listInput.forEach(input => {
+      input.value = input.value.trim()
+
+      if(!input.value){
+          isEmptyError = true; 
+          showError(input, 'Does not allow empty!')
+      }else{
+          showSuccess(input)
+      }
+  });
+  return isEmptyError;
+}
+// Ham kiem tra email
+function checkEmail(input) {
+  const regexEmail =
+/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  input.value = input.value.trim()
+
+  let isEmailError = !regexEmail.test(input.value)
+
+  if(regexEmail.test(input.value)){
+      showSuccess(input)
+  }else{
+      showError(input, 'Email Invalid!')
+  }
+
+  return isEmailError
+}
+// Ham kiem tra do dai ki tu 
+function checkLengthError(input, min, max) {
+  input.value = input.value.trim()
+
+  if(input.value.length < min){
+      showError(input, `Must contain at least ${min} characters` )
+      return true
+  }
+  if(input.value.length > max){
+      showError(input, `No more than ${max} characters` )
+      return true
+  }
+
+  return false
+}
+// Ham kiem tra confirm password 
+function checkMatchPasswordError(passwordInput, cfPasswordInput) {
+  if(passwordInput.value !== cfPasswordInput.value){
+      showError(cfPasswordInput, 'Password does not match')
+      return true
+  }
+
+  return false
+}

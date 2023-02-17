@@ -5,6 +5,7 @@
   --font-color: #000000;
   --form-color: #d9d9d9;
   --tab-color: #fcf9f3;
+  --error-color: #e74c3c;
 }
 body {
   font-family: var(--primary-font);
@@ -414,11 +415,17 @@ body {
     display: flex;
     font-size: 16px;
     flex-direction: column;
+    &-control .error small {
+      color: var(--error-color);
+    }
     &-radio {
       display: flex;
       flex-wrap: nowrap;
       align-items: center;
       position: relative;
+    }
+    &-radio .error small {
+      color: var(--error-color);
     }
     &-input {
       &-check-logo {
@@ -467,6 +474,7 @@ body {
   //   INPUT
   &-input {
     &-first-name {
+      width: 100%;
       border: 0;
       outline: none;
       margin-bottom: 30px;
@@ -476,6 +484,7 @@ body {
       flex-grow: 1;
     }
     &-last-name {
+      width: 100%;
       border: 0;
       outline: none;
       margin-bottom: 30px;
@@ -485,6 +494,7 @@ body {
       flex-grow: 1;
     }
     &-date {
+      width: 100%;
       border: 0;
       outline: none;
       margin-bottom: 30px;
@@ -494,6 +504,7 @@ body {
       flex-grow: 1;
     }
     &-email {
+      width: 100%;
       border: 0;
       outline: none;
       margin-bottom: 30px;
@@ -503,6 +514,7 @@ body {
       flex-grow: 1;
     }
     &-password {
+      width: 100%;
       border: 0;
       outline: none;
       margin-bottom: 30px;
@@ -512,6 +524,7 @@ body {
       flex-grow: 1;
     }
     &-confirm-password {
+      width: 100%;
       border: 0;
       outline: none;
       margin-bottom: 30px;

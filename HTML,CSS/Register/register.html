@@ -200,68 +200,117 @@
           <div class="register-heading">
             <h1>Register</h1>
           </div>
-          <img class="register-space" srcset="./../images/Login-line.png 2x" alt="" />
-          <img class="register-space-mobile" srcset="./../images/register-line-mobile.png 2x" alt="" />
+          <img
+            class="register-space"
+            srcset="./../images/Login-line.png 2x"
+            alt=""
+          />
+          <img
+            class="register-space-mobile"
+            srcset="./../images/register-line-mobile.png 2x"
+            alt=""
+          />
+          <form action="">
           <div class="register-form-container">
             <div class="register-form">
-              <input
-              type="text"
-              class="register-input-first-name"
-              placeholder="First name"
-              />
-              <input
-              type="text"
-              class="register-input-last-name"
-              placeholder="Last name"
-              />
+              <div class="register-form-control">
+                <input
+                  type="text"
+                  id="first-name"
+                  class="register-input-first-name"
+                  placeholder="First name"
+                />
+                <small></small>
+              </div>
+              <!--  -->
+              <div class="register-form-control">
+                <input
+                  type="text"
+                  id="last-name"
+                  class="register-input-last-name"
+                  placeholder="Last name"
+                />
+                <small></small>
+              </div>
+              <!--  -->
               <div class="register-form-gender">
                 <div class="register-form-radio">
-                  <input
-                    type="radio"
-                    class="register-form-input-radio"
-                    id="gender-male"
-                    name="gender-check"
-                    value="male"
-                  />
-                  <span class="register-form-input-check-logo"></span>
-                  <label for="gender-male" class="register-form-input-male"
-                    >Male</label
-                  >
+                  <!-- <div class="register-form-control"> -->
+                    <input
+                      type="radio"
+                      class="register-form-input-radio"
+                      id="gender-male"
+                      name="gender-check"
+                      value="male"
+                    />
+                    <span class="register-form-input-check-logo"></span>
+                    <label for="gender-male" class="register-form-input-male"
+                      >Male</label
+                    >
+                    <small></small>
+                  <!-- </div> -->
                 </div>
+                <!--  -->
                 <div class="register-form-radio">
-                  <input
-                    type="radio"
-                    class="register-form-input-radio"
-                    id="gender-female"
-                    name="gender-check"
-                    value="female"
-                  />
-                  <span class="register-form-input-check-logo"></span>
-                  <label for="gender-female" class="register-form-input-female"
-                    >Female</label
-                  >
+                  <!-- <div class="register-form-control"> -->
+                    <input
+                      type="radio"
+                      class="register-form-input-radio"
+                      id="gender-female"
+                      name="gender-check"
+                      value="female"
+                    />
+                    <span class="register-form-input-check-logo"></span>
+                    <label
+                      for="gender-female"
+                      class="register-form-input-female"
+                      >Female</label
+                    >
+                    <small></small>
+                  <!-- </div> -->
                 </div>
+                <!--  -->
               </div>
-              <input
-                type="date"
-                class="register-input-date"
-                placeholder="mm/dd/yyyy"
-              />
-              <input
-                type="email"
-                class="register-input-email"
-                placeholder="Email"
-              />
-              <input
-                type="password"
-                class="register-input-password"
-                placeholder="Password"
-              />
-              <input
-                type="password"
-                class="register-input-confirm-password"
-                placeholder="Confirm Password"
-              />
+              <div class="register-form-control">
+                <input
+                  type="date"
+                  id="date"
+                  class="register-input-date"
+                  placeholder="mm/dd/yyyy"
+                />
+                <small></small>
+              </div>
+              <!--  -->
+              <div class="register-form-control">
+                <input
+                  type="email"
+                  id="email"
+                  class="register-input-email"
+                  placeholder="Email"
+                />
+                <small></small>
+              </div>
+              <!--  -->
+              <div class="register-form-control">
+                <input
+                  type="password"
+                  id="password"
+                  class="register-input-password"
+                  placeholder="Password"
+                />
+                <small></small>
+              </div>
+              <!--  -->
+              <div class="register-form-control">
+                <input
+                  type="password"
+                  id="confirm-password"
+                  class="register-input-confirm-password"
+                  placeholder="Confirm Password"
+                />
+                <small></small>
+              </div>
+              <!--  -->
             </div>
             <div class="register-function">
               <p class="register-function-security">
@@ -284,6 +333,7 @@
               </p>
             </div>
           </div>
+        </form>
         </div>
       </div>
       <img src="./../images/Footer-line.png" alt="" />

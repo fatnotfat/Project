@@ -5,6 +5,7 @@
   --font-color: #000000;
   --form-color: #d9d9d9;
   --tab-color: #fcf9f3;
+  --error-color: #e74c3c;
 }
 
 body {
@@ -399,11 +400,17 @@ body {
   font-size: 16px;
   flex-direction: column;
 }
+.register-form-control .error small {
+  color: var(--error-color);
+}
 .register-form-radio {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
   position: relative;
+}
+.register-form-radio .error small {
+  color: var(--error-color);
 }
 .register-form-input-check-logo {
   content: "";
@@ -445,6 +452,7 @@ body {
   font-weight: 600;
 }
 .register-input-first-name {
+  width: 100%;
   border: 0;
   outline: none;
   margin-bottom: 30px;
@@ -454,6 +462,7 @@ body {
   flex-grow: 1;
 }
 .register-input-last-name {
+  width: 100%;
   border: 0;
   outline: none;
   margin-bottom: 30px;
@@ -463,6 +472,7 @@ body {
   flex-grow: 1;
 }
 .register-input-date {
+  width: 100%;
   border: 0;
   outline: none;
   margin-bottom: 30px;
@@ -472,6 +482,7 @@ body {
   flex-grow: 1;
 }
 .register-input-email {
+  width: 100%;
   border: 0;
   outline: none;
   margin-bottom: 30px;
@@ -481,6 +492,7 @@ body {
   flex-grow: 1;
 }
 .register-input-password {
+  width: 100%;
   border: 0;
   outline: none;
   margin-bottom: 30px;
@@ -490,6 +502,7 @@ body {
   flex-grow: 1;
 }
 .register-input-confirm-password {
+  width: 100%;
   border: 0;
   outline: none;
   margin-bottom: 30px;
