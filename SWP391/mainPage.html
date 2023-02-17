@@ -30,21 +30,20 @@
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
 
-        <!-- animation libary -->
-        <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+    <!-- animation libary -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Responsive library -->
+    <link rel="stylesheet" href="css/grid.css">
 </head>
 
 <body>
     <div class="main">
         <header>
-            <div class="grid">
+            <div class="grid wide">
                 <div class="grid__row">
                     <div class="grid__full-width">
-                        <nav>
-                            <div class="nav_left">
+                        <nav >
+                            <div class="nav_left ">
                                 <h2><a href="">LUXURY</a></h2>
                             </div>
                             <ul class="nav_center">
@@ -58,7 +57,8 @@
 
                                             <ul class="filter-select__list">
                                                 <li class="filter-select__item">
-                                                    <a href="listProduct.html" class="filter-select__link">Dây chuyền</a>
+                                                    <a href="listProduct.html" class="filter-select__link">Dây
+                                                        chuyền</a>
                                                 </li>
                                                 <li class="filter-select__item">
                                                     <a href="" class="filter-select__link">Vòng tay</a>
@@ -99,7 +99,7 @@
 
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="about.html">
                                         About
                                     </a>
                                 </li>
@@ -119,12 +119,18 @@
                                 <li>
                                     <div class="search__bar-container">
                                         <div class="search__box">
-                                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M11.5 21.5C16.7467 21.5 21 17.2467 21 12C21 6.75329 16.7467 2.5 11.5 2.5C6.25329 2.5 2 6.75329 2 12C2 17.2467 6.25329 21.5 11.5 21.5Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M22 22.5L20 20.5" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M11.5 21.5C16.7467 21.5 21 17.2467 21 12C21 6.75329 16.7467 2.5 11.5 2.5C6.25329 2.5 2 6.75329 2 12C2 17.2467 6.25329 21.5 11.5 21.5Z"
+                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path d="M22 22.5L20 20.5" stroke="#292D32" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                             <form name="search" class="search__box-form">
-                                                <input type="text" class="search__box-form-input" name="txt" onmouseout="this.value = ''; this.blur();">
+                                                <input type="text" class="search__box-form-input" name="txt"
+                                                    onmouseout="this.value = ''; this.blur();">
                                                 <button type="search">Seach</button>
                                             </form>
                                         </div>
@@ -133,82 +139,85 @@
                                 </li>
                                 <li>
                                     <!-- cart shopping -->
-                                   <div class="cart__shopping"> 
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M1.66663 1.66669H3.11663C4.01663 1.66669 4.72496 2.44169 4.64996 3.33335L3.95829 11.6333C3.84163 12.9917 4.91662 14.1583 6.28329 14.1583H15.1583C16.3583 14.1583 17.4083 13.175 17.5 11.9834L17.95 5.73336C18.05 4.35002 17 3.22502 15.6083 3.22502H4.84997"
-                                        stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M13.5417 18.3333C14.117 18.3333 14.5833 17.867 14.5833 17.2917C14.5833 16.7164 14.117 16.25 13.5417 16.25C12.9664 16.25 12.5 16.7164 12.5 17.2917C12.5 17.867 12.9664 18.3333 13.5417 18.3333Z"
-                                        stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M6.87504 18.3333C7.45034 18.3333 7.91671 17.867 7.91671 17.2917C7.91671 16.7164 7.45034 16.25 6.87504 16.25C6.29974 16.25 5.83337 16.7164 5.83337 17.2917C5.83337 17.867 6.29974 18.3333 6.87504 18.3333Z"
-                                        stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M7.5 6.66669H17.5" stroke="#292D32" stroke-width="1.5"
-                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
+                                    <div class="cart__shopping">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M1.66663 1.66669H3.11663C4.01663 1.66669 4.72496 2.44169 4.64996 3.33335L3.95829 11.6333C3.84163 12.9917 4.91662 14.1583 6.28329 14.1583H15.1583C16.3583 14.1583 17.4083 13.175 17.5 11.9834L17.95 5.73336C18.05 4.35002 17 3.22502 15.6083 3.22502H4.84997"
+                                                stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path
+                                                d="M13.5417 18.3333C14.117 18.3333 14.5833 17.867 14.5833 17.2917C14.5833 16.7164 14.117 16.25 13.5417 16.25C12.9664 16.25 12.5 16.7164 12.5 17.2917C12.5 17.867 12.9664 18.3333 13.5417 18.3333Z"
+                                                stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path
+                                                d="M6.87504 18.3333C7.45034 18.3333 7.91671 17.867 7.91671 17.2917C7.91671 16.7164 7.45034 16.25 6.87504 16.25C6.29974 16.25 5.83337 16.7164 5.83337 17.2917C5.83337 17.867 6.29974 18.3333 6.87504 18.3333Z"
+                                                stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M7.5 6.66669H17.5" stroke="#292D32" stroke-width="1.5"
+                                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
 
-                                    <span class="cart__shopping-notice">
-                                        1
-                                    </span>
-
-                                    <!-- No product in your's cart  bỏ class cart__shopping-list--no-cart nên nó ko hiện "Chưa có sản phẩm"  -->
-                                    <div class="cart__shopping-list">
-                                        <img src="assets/image/no-cart.png" alt="" class="cart__shopping-list--no-cart-img">
-                                        <span class="cart__shopping-list--no-cart-message">
-                                            Chưa có sản phẩm trong giỏ hàng
+                                        <span class="cart__shopping-notice">
+                                            1
                                         </span>
 
-                                        <h4 class="cart__shopping-heading">Sản phẩm đã thêm vào giỏ hàng</h4>
-                                        <!-- Product in your's cart  -->
-                                        <ul class="cart__shopping-list-item">
-                                            <li class="cart__shopping-item">
-                                                <img src="assets/image/duck-light.jpg" alt="" class="cart__shopping-img">
-                                                <div class="cart__shopping-item-info">
-                                                    <div class="cart__shopping-item-head">
-                                                        <h5 class="cart__shopping-item-name">
-                                                            Chú vịt vui vẻ hehehehehehe
-                                                        </h5>
+                                        <!-- No product in your's cart  bỏ class cart__shopping-list--no-cart nên nó ko hiện "Chưa có sản phẩm"  -->
+                                        <div class="cart__shopping-list">
+                                            <img src="assets/image/no-cart.png" alt=""
+                                                class="cart__shopping-list--no-cart-img">
+                                            <span class="cart__shopping-list--no-cart-message">
+                                                Chưa có sản phẩm trong giỏ hàng
+                                            </span>
 
-                                                        <div class="cart__shoping-item-price-wrap">
-                                                            <span class="cart__shopping-item-price">1.000.000đ</span>
-                                                            <span class="cart__shopping-item-multiply">x</span>
-                                                            <span class="cart__shopping-item-quantity">10</span>
+                                            <h4 class="cart__shopping-heading">Sản phẩm đã thêm vào giỏ hàng</h4>
+                                            <!-- Product in your's cart  -->
+                                            <ul class="cart__shopping-list-item">
+                                                <li class="cart__shopping-item">
+                                                    <img src="assets/image/duck-light.jpg" alt=""
+                                                        class="cart__shopping-img">
+                                                    <div class="cart__shopping-item-info">
+                                                        <div class="cart__shopping-item-head">
+                                                            <h5 class="cart__shopping-item-name">
+                                                                Chú vịt vui vẻ hehehehehehe
+                                                            </h5>
+
+                                                            <div class="cart__shoping-item-price-wrap">
+                                                                <span
+                                                                    class="cart__shopping-item-price">1.000.000đ</span>
+                                                                <span class="cart__shopping-item-multiply">x</span>
+                                                                <span class="cart__shopping-item-quantity">10</span>
+                                                            </div>
+
                                                         </div>
 
+                                                        <div class="cart__shopping-item-body">
+                                                            <span class="cart__shopping-item-description">
+                                                                Loại sản phẩm: vàng
+                                                            </span>
+
+                                                            <span class="cart__shopping-item-remove">
+                                                                Xóa
+                                                            </span>
+                                                        </div>
                                                     </div>
+                                                </li>
 
-                                                    <div class="cart__shopping-item-body">
-                                                        <span class="cart__shopping-item-description">
-                                                            Loại sản phẩm: vàng
-                                                        </span>
 
-                                                        <span class="cart__shopping-item-remove">
-                                                            Xóa
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                           
-                                            
-                                        </ul>
+                                            </ul>
 
-                                        <button class="cart__shopping-view-cart btn__view-cart">
-                                            Xem giỏ hàng
-                                        </button>
+                                            <button class="cart__shopping-view-cart btn__view-cart">
+                                                Xem giỏ hàng
+                                            </button>
+                                        </div>
                                     </div>
-                                   </div>
 
                                 </li>
                                 <li>
                                     <!-- User -->
-                                   <div class="user__shopping">
-                                    <!-- No account  -->
-                                    <!-- <div class="user__shopping user__shopping--no-account ">
+                                    <div class="user__shopping">
+                                        <!-- No account  -->
+                                        <!-- <div class="user__shopping user__shopping--no-account ">
                                         <div class="user__shopping-icon">
                                             <span class="material-symbols-outlined">
                                                 Account_circle
@@ -224,24 +233,25 @@
                                         </ul>
                                     </div> -->
 
-                                    <!-- Login success -->
-                                    <div class="user__shopping user__shopping--login-success ">
-                                        <div class="user__shopping-icon">
-                                            <span class="material-symbols-outlined">
-                                                Account_circle
-                                            </span>
+                                        <!-- Login success -->
+                                        <div class="user__shopping user__shopping--login-success ">
+                                            <div class="user__shopping-icon">
+                                                <span class="material-symbols-outlined">
+                                                    Account_circle
+                                                </span>
+                                            </div>
+                                            <ul class="user__shopping--login-success-list">
+                                                <li class="user__shopping--login-success-list-item">
+                                                    <a href="" class="user__shopping--login-success-link">Truong Dinh
+                                                        Dang Khoa</a>
+                                                </li>
+                                                <li class="user__shopping--login-success-list-item">
+                                                    <a href="" class="user__shopping--login-success-link">Log Out</a>
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <ul class="user__shopping--login-success-list">
-                                            <li class="user__shopping--login-success-list-item">
-                                                <a href="" class="user__shopping--login-success-link">Truong Dinh Dang Khoa</a>
-                                            </li>
-                                            <li class="user__shopping--login-success-list-item">
-                                                <a href="" class="user__shopping--login-success-link">Log Out</a>
-                                            </li>
-                                        </ul>
-                                    </div>
 
-                                   </div>
+                                    </div>
                                 </li>
                             </ul>
 
@@ -293,42 +303,46 @@
 
         <div class="main_page">
 
-            <div class="grid">
+            <div class="grid wide">
                 <div class="grid__row">
+
                     <div class="grid__full-width">
 
                         <div class="product">
-                            <div class="product_firstline">
-                                <div class="first-ring">
-                                    <img src="assets/image/Group.jpg" alt="cat">
-                                    <h1 class="first-title">Jewelery tells a freat story</h1>
-                                    <ul class="first-content">
-                                        <li>
-                                            <h2>
-                                                Gold
-                                            </h2>
-                                            <p>
-                                                Her previson acuteness had two why intention
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <h2>
-                                                Sliver
-                                            </h2>
-                                            <p>
-                                                Her previson acuteness had two why intention
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="second-ring">
-                                    <p class="second-title">Our Story</p>
-                                    <p class="second-content">
-                                        Lorem ipsum dolor sit amet consectetur. Sollicitudin morbi
-                                        molestie at amet praesent tortor. Maecenas non tempus at
-                                        consequat ac est varius. Tortor aliquet nulia consequat risus.
-                                    </p>
-                                    <img src="./assets/image/2 1.jpg" alt="humuhumu">
+                            <div class="row">
+
+                                <div class="product_firstline">
+                                    <div class="first-ring">
+                                        <img  src="assets/image/Group-removebg-preview.png" alt="cat">
+                                        <h1 class="first-title">Jewelery tells a freat story</h1>
+                                        <ul class="first-content">
+                                            <li>
+                                                <h2>
+                                                    Gold
+                                                </h2>
+                                                <p>
+                                                    Her previson acuteness had two why intention
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <h2>
+                                                    Sliver
+                                                </h2>
+                                                <p>
+                                                    Her previson acuteness had two why intention
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="second-ring">
+                                        <p class="second-title">Our Story</p>
+                                        <p class="second-content">
+                                            Lorem ipsum dolor sit amet consectetur. Sollicitudin morbi
+                                            molestie at amet praesent tortor. Maecenas non tempus at
+                                            consequat ac est varius. Tortor aliquet nulia consequat risus.
+                                        </p>
+                                        <img src="./assets/image/2_1-removebg-preview.png" alt="humuhumu">
+                                    </div>
                                 </div>
                             </div>
 
@@ -528,7 +542,7 @@
 
 
         <footer>
-            <div class="grid">
+            <div class="grid wide">
                 <div class="grid__row">
                     <div class="grid__full-width">
 
