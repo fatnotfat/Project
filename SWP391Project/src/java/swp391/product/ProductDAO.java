@@ -137,9 +137,7 @@ public class ProductDAO implements Serializable {
         PreparedStatement stm = null;
         boolean result = false;
         try {
-            //1. Connect DB
             con = DBHelper.makeConnection();
-            //2. Create SQL String
             String sql = "Update Product "
                     + "Set Name = ?, Description = ?, Quantity = ?, Price = ?, "
                     + "Status = ?, Size = ? "
@@ -153,9 +151,7 @@ public class ProductDAO implements Serializable {
             stm.setBoolean(5, status);
             stm.setInt(6, size);
             stm.setInt(7, productID);
-            //4. Execute query
             int effectedRows = stm.executeUpdate();
-            //5. Process result
             if (effectedRows > 0) {
                 result = true;
             }
@@ -179,20 +175,16 @@ public class ProductDAO implements Serializable {
             //1. connect DB
             con = DBHelper.makeConnection();
             if (con != null) {
-                //2. Create SQL String
                 String sql = "Update Product "
-                    + "Set Status = false "
-                    + "Where ProductID = ?";
-                //3. Create statement
+                        + "Set Status = false "
+                        + "Where ProductID = ?";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, productID);
-                //4. ExecuteQuery
                 int effectedRows = stm.executeUpdate();
-                //5. Process result
                 if (effectedRows > 0) {
                     result = true;
                 }
-            }//end con is available
+            }
         } finally {
             if (stm != null) {
                 stm.close();
