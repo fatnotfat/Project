@@ -20,9 +20,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import swp391.admin.AdminCreateError;
 import swp391.admin.AdminDAO;
 import swp391.admin.AdminDTO;
-import swp391.login.LoginError;
+import swp391.admin.AdminLoginError;
+import swp391.customer.CustomerLoginError;
 import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
 import swp391.utils.MyApplicationConstants;
@@ -50,40 +52,38 @@ public class AdminLoginServlet extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
                 MyApplicationConstants.AdminLoginServlet.ADMIN_PAGE);
-        String email = request.getParameter("txtUsername");
+        String username = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
-        String checkLogged = request.getParameter("create-acc");
         boolean errorFound = false;
-        LoginError errors = new LoginError();
+        AdminLoginError errors = new AdminLoginError();
         try {
-            if (email.trim().length() < 1) {
+            if (username.trim().length() < 1) {
                 errorFound = true;
-                errors.setEmailLengthError("You can't leave this empty");
+                errors.setUsernameLengthError("You can't leave this empty");
             }
             if (password.trim().length() < 1) {
                 errorFound = true;
                 errors.setPasswordLengthError("You can't leave this empty");
             }
             if (errorFound) {
-                request.setAttribute("LOGIN_ERROR", errors);
+                request.setAttribute("ADMINLOGIN_ERROR", errors);
             } else {
                 AdminDAO dao = new AdminDAO();
-                AdminDTO result = dao.checkLogin(email, password);
+                AdminDTO result = dao.checkLogin(username, password);
                 if (result == null) {
                     errorFound = true;
                     errors.setLoginFail("Incorrect email or password");
                 }
                 if (errorFound) {
-                    request.setAttribute("LOGIN_ERROR", errors);
+                    request.setAttribute("ADMINLOGIN_ERROR", errors);
                 } else {
                     url = siteMaps.getProperty(
                             MyApplicationConstants.AdminLoginServlet.ADMINMANAGE_PAGE);
 
                     HttpSession session = request.getSession();
                     session.setAttribute("USER", result);
-                    if (checkLogged != null) {
-                        email = URLEncoder.encode(email, "UTF-8");
-                        Cookie cookie = new Cookie(email, password);
+                    if (result != null) {
+                        Cookie cookie = new Cookie(username, password);
                         cookie.setMaxAge(60 * 3);
                         response.addCookie(cookie);
                     }

@@ -13,6 +13,10 @@
     </head>
     <body>
         <h1>Administrator Page</h1>
+        <a href="adminNewCategoryPage">New Category</a><br/>
+        <a href="adminUpdateCategoryPage">Update Category</a><br/>
+        <a href="adminNewBrandPage">New Brand</a><br/>
+        <a href="adminUpdateBrandPage">Update Brand</a><br/>
         <a href="adminNewProductPage">New Product</a><br/>
         <a href="adminUpdateProductPage">Update Product</a><br/>
     </body>

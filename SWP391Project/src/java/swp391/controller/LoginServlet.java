@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import swp391.login.LoginError;
+import swp391.customer.CustomerLoginError;
 import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
 import swp391.utils.MyApplicationConstants;
@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("txtPassword");
         String checkLogged = request.getParameter("create-acc");
         boolean errorFound = false;
-        LoginError errors = new LoginError();
+        CustomerLoginError errors = new CustomerLoginError();
         try {
             //Check all user error
             if (email.trim().length() < 1) {

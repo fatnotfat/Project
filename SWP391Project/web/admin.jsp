@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,9 +15,27 @@
     <body>
         <h1>Administrator Login Page</h1>
         <form action="adminLoginController" method="POST">
-            Username <input type="text" name="txtUsername" value="" /><br/>
+            <c:set var="errors" value="${requestScope.ADMINLOGIN_ERROR}"/>
+            Username <input type="text" name="txtUsername" 
+                            value="${param.txtUsername}" /><br/>
+            <c:if test="${not empty errors.usernameLengthError}">
+                <font color="red">
+                ${errors.usernameLengthError}
+                </font><br/>
+            </c:if>
             Password <input type="password" name="txtPassword" value="" /><br/>
+            <c:if test="${not empty errors.passwordLengthError}">
+                <font color="red">
+                ${errors.passwordLengthError}
+                </font><br/>
+            </c:if>
+            <c:if test="${not empty errors.loginFail}">
+                <font color="red">
+                ${errors.loginFail}
+                </font><br/>
+            </c:if>
             <input type="submit" value="Login" />
         </form>
+            
     </body>
 </html>

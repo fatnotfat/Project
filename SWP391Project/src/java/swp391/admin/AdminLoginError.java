@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package swp391.login;
+package swp391.admin;
 
 import java.io.Serializable;
 
@@ -11,34 +11,33 @@ import java.io.Serializable;
  *
  * @author Chau Nhat Truong
  */
-public class LoginError implements Serializable{
-    private String emailLengthError;
+public class AdminLoginError implements Serializable {
+
+    private String usernameLengthError;
     private String passwordLengthError;
     private String loginFail;
 
-    public LoginError() {
+    public AdminLoginError() {
     }
 
-    public LoginError(String emailLengthError, String passwordLengthError, String loginFail) {
-        this.emailLengthError = emailLengthError;
+    public AdminLoginError(String usernameLengthError, String passwordLengthError, String loginFail) {
+        this.usernameLengthError = usernameLengthError;
         this.passwordLengthError = passwordLengthError;
         this.loginFail = loginFail;
     }
-    
-    
 
     /**
-     * @return the emailLengthError
+     * @return the usernameLengthError
      */
-    public String getEmailLengthError() {
-        return emailLengthError;
+    public String getUsernameLengthError() {
+        return usernameLengthError;
     }
 
     /**
-     * @param emailLengthError the emailLengthError to set
+     * @param usernameLengthError the usernameLengthError to set
      */
-    public void setEmailLengthError(String emailLengthError) {
-        this.emailLengthError = emailLengthError;
+    public void setUsernameLengthError(String usernameLengthError) {
+        this.usernameLengthError = usernameLengthError;
     }
 
     /**
@@ -68,4 +67,5 @@ public class LoginError implements Serializable{
     public void setLoginFail(String loginFail) {
         this.loginFail = loginFail;
     }
+
 }
