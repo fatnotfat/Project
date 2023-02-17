@@ -57,85 +57,134 @@ cartTab.addEventListener("click", function () {
 });
 // ________________________________________________VALIDATE_______________________________________
 
-var firstName = document.querySelector('#first-name')
-var lastName = document.querySelector('#last-name')
-var male = document.querySelector('#gender-male')
-var female = document.querySelector('#gender-female')
-var date = document.querySelector('#date')
-var email = document.querySelector('#email')
-var password = document.querySelector('#password')
-var confirmPassword = document.querySelector('#confirm-password')
-var form = document.querySelector('form')
+var firstName = document.querySelector("#first-name");
+var lastName = document.querySelector("#last-name");
+// var male = document.querySelector('#gender-male')
+// var female = document.querySelector('#gender-female')
+var date = document.querySelector("#date");
+var email = document.querySelector("#email");
+var password = document.querySelector("#password");
+var confirmPassword = document.querySelector("#confirm-password");
+var form = document.querySelector("form");
 // Ham show error
 function showError(input, message) {
   let parent = input.parentElement;
-  let small = parent.querySelector('small')
- 
+  let small = parent.querySelector("small");
 
-  parent.classList.add('error')
-  small.innerText = message
+  parent.classList.add("error");
+  small.innerText = message;
 }
 // Ham show no error
 function showSuccess(input) {
   let parent = input.parentElement;
-  let small = parent.querySelector('small')
- 
+  let small = parent.querySelector("small");
 
-  parent.classList.remove('error')
-  small.innerText = ''
+  parent.classList.remove("error");
+  small.innerText = "";
 }
 // Ham kiem tra empty
 function checkEmptyError(listInput) {
   let isEmptyError = false;
-  listInput.forEach(input => {
-      input.value = input.value.trim()
+  listInput.forEach((input) => {
+    input.value = input.value.trim();
 
-      if(!input.value){
-          isEmptyError = true; 
-          showError(input, 'Does not allow empty!')
-      }else{
-          showSuccess(input)
-      }
+    if (!input.value) {
+      isEmptyError = true;
+      showError(input, "Does not allow empty!");
+    } else {
+      showSuccess(input);
+    }
   });
   return isEmptyError;
 }
 // Ham kiem tra email
 function checkEmail(input) {
   const regexEmail =
-/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-  input.value = input.value.trim()
+    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  input.value = input.value.trim();
 
-  let isEmailError = !regexEmail.test(input.value)
+  let isEmailError = !regexEmail.test(input.value);
 
-  if(regexEmail.test(input.value)){
-      showSuccess(input)
-  }else{
-      showError(input, 'Email Invalid!')
+  if (regexEmail.test(input.value)) {
+    showSuccess(input);
+  } else {
+    showError(input, "Email Invalid!");
   }
 
-  return isEmailError
+  return isEmailError;
 }
-// Ham kiem tra do dai ki tu 
+// Ham kiem tra do dai ki tu
 function checkLengthError(input, min, max) {
-  input.value = input.value.trim()
+  input.value = input.value.trim();
 
-  if(input.value.length < min){
-      showError(input, `Must contain at least ${min} characters` )
-      return true
+  if (input.value.length < min) {
+    showError(input, `Must contain at least ${min} characters`);
+    return true;
   }
-  if(input.value.length > max){
-      showError(input, `No more than ${max} characters` )
-      return true
+  if (input.value.length > max) {
+    showError(input, `No more than ${max} characters`);
+    return true;
   }
 
-  return false
+  return false;
 }
-// Ham kiem tra confirm password 
+// Ham kiem tra confirm password
 function checkMatchPasswordError(passwordInput, cfPasswordInput) {
-  if(passwordInput.value !== cfPasswordInput.value){
-      showError(cfPasswordInput, 'Password does not match')
-      return true
+  if (passwordInput.value !== cfPasswordInput.value) {
+    showError(cfPasswordInput, "Password does not match");
+    return true;
   }
 
-  return false
+  return false;
 }
+// Ham check gender
+// function checkEmptyGender() {
+//   const radios = document.getElementsByName("gender");
+
+//   let isValid = false;
+
+//   for (let i = 0; i < radios.length; i++) {
+//     if (radios[i].checked) {
+//       isValid = true;
+//       break;
+//     }
+//   }
+
+//   if (!isValid) {
+//     showError(radios[0], "Please select a gender");
+//     return false;
+//   }
+
+//   return true;
+// }
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  let isEmptyError = checkEmptyError([
+    firstName,
+    lastName,
+    date,
+    email,
+    password,
+    confirmPassword,
+  ]);
+  let isEmailError = checkEmail(email);
+  let isFirstNameLengthError = checkLengthError(firstName, 3, 10);
+  let isLastnameLengthError = checkLengthError(lastName, 3, 10);
+  let isPasswordLengthError = checkLengthError(password, 3, 10);
+  let isMatchError = checkMatchPasswordError(password, confirmPassword);
+  let isEmptyGender = checkEmptyGender(); 
+  if (
+    isEmptyError ||
+    isEmailError ||
+    isPasswordLengthError ||
+    isMatchError ||
+    isFirstNameLengthError ||
+    isLastnameLengthError
+  ) {
+    //do nothing
+  } else {
+    //logic, call API, gọi service, .....
+  }
+});
