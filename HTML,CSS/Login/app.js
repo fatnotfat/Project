@@ -72,3 +72,14 @@ document.addEventListener('click', (event) => {
     dropdown.classList.remove('active');
   }
 });
+
+// __________________________________NAV-RESPONSIVE_____________________________________
+const menuIcon = document.querySelector(".menu-responsive-icon-img-bar");
+const navBot = document.querySelector(".nav-bot");
+const menu = document.querySelector(".menu");
+
+
+menuIcon.addEventListener("click", () => {
+  navBot.classList.toggle("active");
+  menu.classList.toggle("active");
+});

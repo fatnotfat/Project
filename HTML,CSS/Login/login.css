@@ -26,6 +26,12 @@ body {
   padding: 0 15px;
 }
 
+header {
+  position: fixed;
+  z-index: 999;
+  background-color: var(--primary-color);
+}
+
 .shipping {
   text-align: center;
 }
@@ -432,8 +438,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  padding-top: 100px;
 }
 
+.login-space {
+  height: 815px;
+}
 .login-space-mobile {
   display: none;
 }
@@ -687,13 +697,52 @@ body {
     flex-direction: row;
   }
   .nav-bot {
-    display: none;
+    display: block;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--primary-color);
+    z-index: 999;
+    overflow-y: auto;
+    padding: 24px;
+    transition: transform 0.2s ease-in-out;
+    transform: translateY(-120%);
+  }
+  .nav-bot.active {
+    transform: translateY(0);
   }
   .menu {
     display: none;
   }
+  .menu-logo {
+    display: none;
+  }
+  .menu.active {
+    display: block;
+  }
   .menu-icon {
     display: none;
+  }
+  .menu-link {
+    font-size: 18px;
+  }
+  .menu-link-category-tab {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .menu-link-category-tab-list {
+    padding: 0 !important;
+  }
+  .menu-item {
+    padding: 20px 0;
+  }
+  .menu-link-category-tab .container {
+    flex-direction: column;
+    width: auto;
   }
   .nav-bot-responsive {
     display: block !important;

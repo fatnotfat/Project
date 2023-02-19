@@ -25,7 +25,14 @@ body {
   padding: 0 15px;
   // text-align: center;
 }
-
+//_________________________________ HEADER______________________________________________
+// _____________________________________________________________________________________
+header {
+  position: fixed;
+  z-index: 999;
+  background-color: var(--primary-color);
+}
+// ____________________________________________________________________________________
 .shipping {
   text-align: center;
   &-text {
@@ -35,7 +42,6 @@ body {
     font-weight: 600;
   }
 }
-
 .nav-bot .container {
   display: flex;
   align-items: center;
@@ -103,7 +109,9 @@ body {
           align-items: stretch;
         }
         &-list {
-          padding: 20px 0!important;
+// ______________________________________________________________________________________________________-
+          padding: 20px 0 !important;
+// ______________________________________________________________________________________________________
           display: flex;
           list-style: none;
           padding: 0;
@@ -450,13 +458,20 @@ body {
     font-size: 27px;
   }
 }
-
+// _________________________________________LOGIN_______________________________________
 .login .container {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+// ________________________________________________________________________________
+  padding-top: 100px;
 }
+// ____________________________________________________________________________________
 .login {
+  &-space {
+    height: 815px;
+  }
+// ______________________________________________________________________________________
   &-space-mobile {
     display: none;
   }
@@ -629,6 +644,7 @@ body {
     font-weight: 700;
   }
 }
+// ____________________________________________FOOTER___________________________________
 .footer .container {
   display: flex;
   align-items: center;
@@ -722,15 +738,60 @@ body {
     flex-wrap: nowrap;
     flex-direction: row;
   }
+// UPDATE________________________________________________________________________________________________________
   .nav-bot {
-    display: none;
+    display: block;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--primary-color);
+    z-index: 999;
+    overflow-y: auto;
+    padding: 24px;
+    transition: transform 0.2s ease-in-out;
+    transform: translateY(-120%);
   }
+
+  .nav-bot.active {
+    transform: translateY(0);
+  }
+
   .menu {
+    &-logo {
+      display: none;
+    }
     display: none;
+    &.active {
+      display: block;
+    }
     &-icon {
       display: none;
     }
+    &-link {
+      font-size: 18px;
+      &-category {
+        &-tab {
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          justify-content: center;
+          &-list {
+            padding: 0!important;
+          }
+        }
+      }
+    }
+    &-item {
+      padding: 20px 0;
+    }
   }
+  .menu-link-category-tab .container {
+    flex-direction: column;
+    width: auto;
+  }
+  // ____________________________________________________________________________________UPDATE______________________________________________________
   .nav-bot-responsive {
     display: block !important;
   }
