@@ -46,36 +46,29 @@ public class FisrtTimeRequestServlet extends HttpServlet {
         String url = siteMaps.getProperty(
                 MyApplicationConstants.FirstTimeRequestServlet.LOGIN_PAGE);
         try {
-            //Get cookies
             Cookie[] cookies = request.getCookies();
-            //Read last cookies
             if (cookies != null) {
-//                Cookie lastCookies = cookies[cookies.length - 1];
                 for (Cookie cookie : cookies) {
                     String email = cookie.getName();
                     email = URLDecoder.decode(email, "UTF-8");
                     String password = cookie.getValue();
-                    //Call DAO to checkLogin
                     CustomerDAO dao = new CustomerDAO();
                     CustomerDTO result = dao.checkLogin(email, password);
-
-                    //Process
                     if (result != null) {
                         url = siteMaps.getProperty(
                                 MyApplicationConstants.FirstTimeRequestServlet.MAIN_PAGE);
                         HttpSession session = request.getSession();
                         session.setAttribute("USER", result);
                         break;
-                    }//end user has existed
+                    }
                 }
-            }//end cookies has existed
+            }
         } catch (SQLException ex) {
             log("FirstTimeRequestServlet _ SQL _ " + ex.getMessage());
         } catch (NamingException ex) {
             log("FirstTimeRequestServlet _ Naming _ " + ex.getMessage());
         } finally {
             response.sendRedirect(url);
-            //cái nào cũng được vì trình duyệt hỗ trợ hàm lưu cookie nên send Redirect 
         }
     }
 

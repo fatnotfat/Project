@@ -11,7 +11,8 @@ import java.io.Serializable;
  *
  * @author Chau Nhat Truong
  */
-public class CategoryDTO implements Serializable{
+public class CategoryDTO implements Serializable {
+
     private String name;
     private String description;
     private boolean status;
@@ -23,6 +24,11 @@ public class CategoryDTO implements Serializable{
         this.name = name;
         this.description = description;
         this.status = status;
+    }
+
+    public CategoryDTO(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
     /**
@@ -66,6 +72,5 @@ public class CategoryDTO implements Serializable{
     public void setStatus(boolean status) {
         this.status = status;
     }
-    
-    
+
 }

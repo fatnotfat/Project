@@ -64,7 +64,6 @@ public class SignUpServlet extends HttpServlet {
         boolean errorFound = false;
         CustomerCreateError errors = new CustomerCreateError();
         try {
-            //Check all user error
             CustomerDAO dao = new CustomerDAO();
             if (firstName.trim().length() < 1) {
                 errorFound = true;
@@ -98,13 +97,8 @@ public class SignUpServlet extends HttpServlet {
                 errors.setBirthDateLengthError("You must set your birthday!!!");
             }
             if (errorFound) {
-                //catch error
                 request.setAttribute("SIGNUP_ERROR", errors);
-                //transfer to inform users
             } else {
-                //Call DAO to insert DB
-//                DateFormat DFormat = new SimpleDateFormat("MM-dd-yyyy");
-//                Date birthDate = DFormat.parse(birthDateTxt);
                 Date birthDate = new SimpleDateFormat("yyyy-MM-dd")
                         .parse(birthDateTxt);
                 boolean sex = false;
@@ -122,11 +116,11 @@ public class SignUpServlet extends HttpServlet {
             }
         } catch (SQLException ex) {
             String msg = ex.getMessage();
-            log("SignUp _ SQL _ " + msg);
+            log("SignUpServlet _ SQL _ " + msg);
         } catch (NamingException ex) {
-            log("SignUp _ Naming _ " + ex.getMessage());
+            log("SignUpServlet _ Naming _ " + ex.getMessage());
         } catch (ParseException ex) {
-            log("DateFormat _ Parse _" + ex.getMessage());
+            log("SignUpServlet _ ParseDateFormat _" + ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

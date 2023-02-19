@@ -51,7 +51,7 @@ public class LogoutServlet extends HttpServlet {
                     username = result.getEmail();
                 }
                 session.invalidate();
-            }//end of destroy session 
+            }
             Cookie cookies[] = request.getCookies();
             if (cookies != null) {
                 for (Cookie ck : cookies) {
@@ -59,9 +59,9 @@ public class LogoutServlet extends HttpServlet {
                         cookie = new Cookie(username, "");
                         cookie.setMaxAge(0);
                         response.addCookie(cookie);
-                    }//end of destroy cookie
-                }//end of traverse cookie
-            }//end of user is logout
+                    }
+                }
+            }
         } finally {
             response.sendRedirect(url);
         }

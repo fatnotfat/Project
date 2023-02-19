@@ -20,7 +20,7 @@ public class BrandDTO implements Serializable {
     public BrandDTO() {
     }
 
-    public BrandDTO(String name, String description, Date date) {
+    public BrandDTO(String name, String description) {
         this.name = name;
         this.description = description;
     }

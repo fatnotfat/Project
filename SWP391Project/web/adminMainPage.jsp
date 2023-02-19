@@ -5,19 +5,18 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Manage Account Page</title>
+        <title>Administrator Page</title>
     </head>
     <body>
-        <h1>Administrator Page</h1>
-        <a href="adminNewCategoryPage">New Category</a><br/>
-        <a href="adminUpdateCategoryPage">Update Category</a><br/>
-        <a href="adminNewBrandPage">New Brand</a><br/>
-        <a href="adminUpdateBrandPage">Update Brand</a><br/>
-        <a href="adminNewProductPage">New Product</a><br/>
-        <a href="adminUpdateProductPage">Update Product</a><br/>
+        <h1>Administrator page</h1>
+        <a href="adminNewCategoryPage">New category</a><br/>
+        <a href="adminNewBrandPage">New brand</a><br/>
+        <a href="adminNewProductPage">New product</a><br/>
+        <a href="adminSearchProductPage">Update product</a><br/>
     </body>
 </html>

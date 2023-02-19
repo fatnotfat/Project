@@ -17,16 +17,20 @@ public class AdminCreateError implements Serializable {
     private String passwordLengthError;
     private String nameLengthError;
     private String confirmNotMatched;
+    private String descriptionLengthError;
 
     public AdminCreateError() {
     }
 
-    public AdminCreateError(String usernameLengthError, String passwordLengthError, String nameLengthError, String confirmNotMatched) {
+    public AdminCreateError(String usernameLengthError, String passwordLengthError, String nameLengthError, String confirmNotMatched, String descriptionLengthError) {
         this.usernameLengthError = usernameLengthError;
         this.passwordLengthError = passwordLengthError;
         this.nameLengthError = nameLengthError;
         this.confirmNotMatched = confirmNotMatched;
+        this.descriptionLengthError = descriptionLengthError;
     }
+
+    
 
     /**
      * @return the usernameLengthError
@@ -82,6 +86,20 @@ public class AdminCreateError implements Serializable {
      */
     public void setConfirmNotMatched(String confirmNotMatched) {
         this.confirmNotMatched = confirmNotMatched;
+    }
+
+    /**
+     * @return the descriptionLengthError
+     */
+    public String getDescriptionLengthError() {
+        return descriptionLengthError;
+    }
+
+    /**
+     * @param descriptionLengthError the descriptionLengthError to set
+     */
+    public void setDescriptionLengthError(String descriptionLengthError) {
+        this.descriptionLengthError = descriptionLengthError;
     }
 
 }

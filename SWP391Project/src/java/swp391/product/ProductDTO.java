@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 public class ProductDTO implements Serializable {
 
+    private int productID;
     private String name;
     private String description;
     private int quantity;
@@ -26,7 +27,8 @@ public class ProductDTO implements Serializable {
     public ProductDTO() {
     }
 
-    public ProductDTO(String name, String description, int quantity, float price, boolean status, int size, int CateID, int BrandID, int FeBkID) {
+    public ProductDTO(int productID, String name, String description, int quantity, float price, boolean status, int size, int CateID, int BrandID, int FeBkID) {
+        this.productID = productID;
         this.name = name;
         this.description = description;
         this.quantity = quantity;
@@ -38,6 +40,27 @@ public class ProductDTO implements Serializable {
         this.FeBkID = FeBkID;
     }
 
+    
+    public ProductDTO(String name, String description, int quantity, float price, int size, int CateID, int BrandID) {
+        this.name = name;
+        this.description = description;
+        this.quantity = quantity;
+        this.price = price;
+        this.size = size;
+        this.CateID = CateID;
+        this.BrandID = BrandID;
+    }
+
+    public ProductDTO(int productID, String name, String description, int quantity, float price, boolean status, int size) {
+        this.productID = productID;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.status = status;
+        this.size = size;
+    }
+    
     public ProductDTO(String name, String description, float price, int quantity, int size) {
         this.name = name;
         this.description = description;
@@ -45,6 +68,8 @@ public class ProductDTO implements Serializable {
         this.quantity = quantity;
         this.size = size;
     }
+    
+    
 
     /**
      * @return the name
@@ -170,6 +195,20 @@ public class ProductDTO implements Serializable {
      */
     public void setFeBkID(int FeBkID) {
         this.FeBkID = FeBkID;
+    }
+
+    /**
+     * @return the productID
+     */
+    public int getProductID() {
+        return productID;
+    }
+
+    /**
+     * @param productID the productID to set
+     */
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
 }

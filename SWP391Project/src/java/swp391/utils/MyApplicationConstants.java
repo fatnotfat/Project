@@ -85,9 +85,38 @@ public class MyApplicationConstants {
         public static final String SEARCH_PAGE = "searchPage";
 
     }
+
     public class AdminLoginServlet {
-         public static final String ADMIN_PAGE = "adminPage";
-         public static final String ADMINMANAGE_PAGE = "adminManagePage";
+
+        public static final String ADMIN_PAGE = "adminPage";
+        public static final String ADMINMAIN_PAGE = "adminMainPage";
     }
 
+    public class AdminNewBrandServlet {
+
+        public static final String ADMINNEWBRAND_PAGE = "adminNewBrandPage";
+        public static final String ADMINMAIN_PAGE = "adminMainPage";
+    }
+
+    public class AdminNewCategoryServlet {
+
+        public static final String ADMINNEWCATEGORY_PAGE = "adminNewCategoryPage";
+        public static final String ADMINMAIN_PAGE = "adminMainPage";
+    }
+
+    public class AdminNewProductServlet {
+
+        public static final String ADMINNEWPRODUCT_PAGE = "adminNewProductPage";
+        public static final String ADMINMAIN_PAGE = "adminMainPage";
+    }
+
+    public class AdminSearchProductServlet {
+
+        public static final String ADMINSEARCHPRODUCT_PAGE = "adminSearchProductPage";
+    }
+
+    public class AdminUpdateProductServlet {
+
+        public static final String ADMINSEARCHPRODUCT_PAGE = "adminSearchProductPage";
+    }
 }

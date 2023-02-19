@@ -18,18 +18,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import swp391.admin.AdminCreateError;
-import swp391.brand.BrandDAO;
-import swp391.brand.BrandDTO;
-import swp391.category.CategoryDAO;
-import swp391.category.CategoryDTO;
+import swp391.product.ProductDAO;
+import swp391.product.ProductDTO;
 import swp391.utils.MyApplicationConstants;
 
 /**
  *
  * @author Chau Nhat Truong
  */
-@WebServlet(name = "AdminNewCategoryServlet", urlPatterns = {"/AdminNewCategoryServlet"})
-public class AdminNewCategoryServlet extends HttpServlet {
+@WebServlet(name = "AdminUpdateProductServlet", urlPatterns = {"/AdminUpdateProductServlet"})
+public class AdminUpdateProductServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,9 +44,23 @@ public class AdminNewCategoryServlet extends HttpServlet {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
-                MyApplicationConstants.AdminNewCategoryServlet.ADMINNEWCATEGORY_PAGE);
+                MyApplicationConstants.AdminUpdateProductServlet.ADMINSEARCHPRODUCT_PAGE);
+        String searchValue = request.getParameter("lastSearchValue");
+        String txtProductID = request.getParameter("txtProductID");
+        int productID = Integer.parseInt(txtProductID);
         String name = request.getParameter("txtName");
         String description = request.getParameter("txtDescription");
+        String txtQuantity = request.getParameter("txtQuantity");
+        int quantity = Integer.parseInt(txtQuantity);
+        String txtPrice = request.getParameter("txtPrice");
+        float price = Float.parseFloat(txtPrice);
+        String txtStatus = request.getParameter("chkStatus");
+        boolean status = false;
+        if(txtStatus != null){
+            status = true;
+        }
+        String txtSize = request.getParameter("txtSize");
+        int size = Integer.parseInt(txtSize);
         boolean errorFound = false;
         AdminCreateError errors = new AdminCreateError();
         try {
@@ -61,20 +73,22 @@ public class AdminNewCategoryServlet extends HttpServlet {
                 errors.setDescriptionLengthError("You can't leave this empty");
             }
             if (errorFound) {
-                request.setAttribute("ADMINNEWCATEGORY_ERROR", errors);
+                request.setAttribute("UPDATE_ERROR", errors);
+                url = "AdminSearchProductServlet"
+                            + "?txtSearchValue=" + searchValue;
             } else {
-                CategoryDAO dao = new CategoryDAO();
-                CategoryDTO dto = new CategoryDTO(name, description);
-                boolean result = dao.createCategory(dto);
+                ProductDAO dao = new ProductDAO();
+                boolean result = dao.updateProduct(productID, name, description,
+                        quantity, price, status, size);
                 if (result) {
-                    url = siteMaps.getProperty(
-                            MyApplicationConstants.AdminNewCategoryServlet.ADMINMAIN_PAGE);
+                    url = "AdminSearchProductServlet"
+                            + "?txtSearchValue=" + searchValue;
                 }
             }
         } catch (NamingException ex) {
-            log("AdminNewCategoryServlet _ Naming _ " + ex.getMessage());
+            log("AdminUpdateProductServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {
-            log("AdminNewCategoryServlet _ SQL _ " + ex.getMessage());
+            log("AdminUpdateProductServlet _ SQL _ " + ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

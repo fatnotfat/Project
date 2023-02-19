@@ -63,9 +63,7 @@ public class ResetPasswordServlet extends HttpServlet {
                 errors.setConfirmNotMatched("Confirm must be matched password");
             }
             if (errorFound) {
-                //catch error
                 request.setAttribute("RESETPASSWORD_ERROR", errors);
-                //transfer to inform users
             } else {
                 HttpSession session = request.getSession();
                 String email = (String) session.getAttribute("email");
@@ -77,9 +75,9 @@ public class ResetPasswordServlet extends HttpServlet {
                 }
             }
         } catch (NamingException ex) {
-            log("ResetPassword _ Naming _ " + ex.getMessage());
+            log("ResetPasswordServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {
-            log("ResetPassword _ SQL _ " + ex.getMessage());
+            log("ResetPasswordServlet _ SQL _ " + ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

@@ -82,41 +82,122 @@ public class ProductDAO implements Serializable {
         }
     }
 
-    public int createProduct(ProductDTO dto)
+    public void showProduct()
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select ProductID, Name, "
+                        + "Description, Quantity, Price, Status, Size "
+                        + "From Product";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int productID = rs.getInt("ProductID");
+                    String name = rs.getString("Name");
+                    String description = rs.getString("Description");
+                    int quantity = rs.getInt("Quantity");
+                    float price = rs.getInt("Price");
+                    boolean status = rs.getBoolean("Status");
+                    int size = rs.getInt("Size");
+                    //Create DTO instance
+                    ProductDTO dto = new ProductDTO(productID,
+                            name, description, quantity, price, status, size);
+                    //add to bookList
+                    if (this.itemsList == null) {
+                        this.itemsList = new ArrayList<>();
+                    }
+                    this.itemsList.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void searchProduct(String searchValue)
             throws SQLException, NamingException {;
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select ProductID, Name, Description, "
+                        + "Quantity, Price, Status, Size "
+                        + "From Product "
+                        + "Where Name like ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + searchValue + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int productID = rs.getInt("ProductID");
+                    String name = rs.getString("Name");
+                    String description = rs.getString("Description");
+                    int quantity = rs.getInt("Quantity");
+                    float price = rs.getInt("Price");
+                    boolean status = rs.getBoolean("Status");
+                    int size = rs.getInt("Size");
+                    ProductDTO dto = new ProductDTO(productID, name, description,
+                            quantity, price, status, size);
+                    if (this.itemsList == null) {
+                        this.itemsList = new ArrayList<>();
+                    }
+                    this.itemsList.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public boolean createProduct(ProductDTO dto)
+            throws SQLException, NamingException {;
+        Connection con = null;
+        PreparedStatement stm = null;
         long milis = System.currentTimeMillis();
         Date date = new Date(milis);
-        int key = 0;
+        boolean result = false;
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Insert Into Product("
                         + "Name, Description, Quantity, Price, Status, Size, "
-                        + "CreateTime, CateID, BrandID, FeBkID "
+                        + "CreateTime, CateID, BrandID "
                         + ") "
-                        + "Values(?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
+                        + "Values(?, ?, ?, ?, 1, ?, ?, ?, ? "
                         + ")";
-                stm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                stm = con.prepareStatement(sql);
                 stm.setString(1, dto.getName());
                 stm.setString(2, dto.getDescription());
                 stm.setInt(3, dto.getQuantity());
                 stm.setFloat(4, dto.getPrice());
-                stm.setBoolean(5, dto.isStatus());
-                stm.setInt(6, dto.getSize());
-                stm.setDate(7, date);
-                stm.setInt(8, dto.getCateID());
-                stm.setInt(9, dto.getBrandID());
-                stm.setInt(10, dto.getFeBkID());
+                stm.setInt(5, dto.getSize());
+                stm.setDate(6, date);
+                stm.setInt(7, dto.getCateID());
+                stm.setInt(8, dto.getBrandID());
                 int effectedRows = stm.executeUpdate();
-                rs = stm.getGeneratedKeys();
-                if (rs.next()) {
-                    key = rs.getInt(1);
-                }
                 if (effectedRows > 0) {
-                    return key;
+                    result = true;
                 }
             }
         } finally {
@@ -127,7 +208,7 @@ public class ProductDAO implements Serializable {
                 con.close();
             }
         }
-        return key;
+        return result;
     }
 
     public boolean updateProduct(int productID, String name, String description, int quantity,

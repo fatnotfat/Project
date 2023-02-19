@@ -53,7 +53,6 @@ public class LoginServlet extends HttpServlet {
         boolean errorFound = false;
         CustomerLoginError errors = new CustomerLoginError();
         try {
-            //Check all user error
             if (email.trim().length() < 1) {
                 errorFound = true;
                 errors.setEmailLengthError("You can't leave this empty");
@@ -63,22 +62,16 @@ public class LoginServlet extends HttpServlet {
                 errors.setPasswordLengthError("You can't leave this empty");
             }
             if (errorFound) {
-                //catch error
                 request.setAttribute("LOGIN_ERROR", errors);
-                //transfer to inform users
             } else {
-                //Call Model/DAO ==> new object & call method of that object
                 CustomerDAO dao = new CustomerDAO();
-//            boolean result = dao.checkLogin(email, password);
                 CustomerDTO result = dao.checkLogin(email, password);
                 if (result == null) {
                     errorFound = true;
                     errors.setLoginFail("Incorrect email or password");
                 }
                 if (errorFound) {
-                    //catch error
                     request.setAttribute("LOGIN_ERROR", errors);
-                    //transfer to inform users
                 } else {
                     if (result.isRole() == true) {
                         url = siteMaps.getProperty(
@@ -94,10 +87,10 @@ public class LoginServlet extends HttpServlet {
                             Cookie cookie = new Cookie(email, password);
                             cookie.setMaxAge(60 * 3);
                             response.addCookie(cookie);
-                        }//check if user want to logged for next access
+                        }
                     }
                 }
-            }//end user is existed
+            }
         } catch (NamingException ex) {
             log("LoginServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {

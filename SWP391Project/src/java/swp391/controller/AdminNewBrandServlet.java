@@ -6,12 +6,20 @@
 package swp391.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.Properties;
+import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import swp391.admin.AdminCreateError;
+import swp391.brand.BrandDAO;
+import swp391.brand.BrandDTO;
+import swp391.utils.MyApplicationConstants;
 
 /**
  *
@@ -32,10 +40,41 @@ public class AdminNewBrandServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
+        String url = siteMaps.getProperty(
+                MyApplicationConstants.AdminNewBrandServlet.ADMINNEWBRAND_PAGE);
+        String name = request.getParameter("txtName");
+        String description = request.getParameter("txtDescription");
+        boolean errorFound = false;
+        AdminCreateError errors = new AdminCreateError();
         try {
-            
+            if (name.trim().length() < 1) {
+                errorFound = true;
+                errors.setNameLengthError("You can't leave this empty");
+            }
+            if (description.trim().length() < 1) {
+                errorFound = true;
+                errors.setDescriptionLengthError("You can't leave this empty");
+            }
+            if (errorFound) {
+                request.setAttribute("ADMINNEWBRAND_ERROR", errors);
+            } else {
+                BrandDAO dao = new BrandDAO();
+                BrandDTO dto = new BrandDTO(name, description);
+                boolean result = dao.createBrand(dto);
+                if (result) {
+                    url = siteMaps.getProperty(
+                            MyApplicationConstants.AdminNewBrandServlet.ADMINMAIN_PAGE);
+                }
+            }
+        } catch (NamingException ex) {
+            log("AdminNewBrandServlet _ Naming _ " + ex.getMessage());
+        } catch (SQLException ex) {
+            log("AdminNewBrandServlet _ SQL _ " + ex.getMessage());
         } finally {
-
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 

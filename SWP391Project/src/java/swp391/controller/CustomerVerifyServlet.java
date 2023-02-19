@@ -89,9 +89,9 @@ public class CustomerVerifyServlet extends HttpServlet {
                 }
             }
         } catch (NamingException ex) {
-            log("CustomerVerify _ Naming _ " + ex.getMessage());
+            log("CustomerVerifyServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {
-            log("CustomerVerify _ SQL _ " + ex.getMessage());
+            log("CustomerVerifyServlet _ SQL _ " + ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

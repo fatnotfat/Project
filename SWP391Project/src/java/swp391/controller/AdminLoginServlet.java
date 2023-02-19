@@ -6,8 +6,6 @@
 package swp391.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.Properties;
 import javax.naming.NamingException;
@@ -20,13 +18,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import swp391.admin.AdminCreateError;
 import swp391.admin.AdminDAO;
 import swp391.admin.AdminDTO;
 import swp391.admin.AdminLoginError;
-import swp391.customer.CustomerLoginError;
-import swp391.customer.CustomerDAO;
-import swp391.customer.CustomerDTO;
 import swp391.utils.MyApplicationConstants;
 
 /**
@@ -78,7 +72,7 @@ public class AdminLoginServlet extends HttpServlet {
                     request.setAttribute("ADMINLOGIN_ERROR", errors);
                 } else {
                     url = siteMaps.getProperty(
-                            MyApplicationConstants.AdminLoginServlet.ADMINMANAGE_PAGE);
+                            MyApplicationConstants.AdminLoginServlet.ADMINMAIN_PAGE);
 
                     HttpSession session = request.getSession();
                     session.setAttribute("USER", result);
@@ -90,9 +84,9 @@ public class AdminLoginServlet extends HttpServlet {
                 }
             }
         } catch (NamingException ex) {
-            log("LoginServlet _ Naming _ " + ex.getMessage());
+            log("AdminLoginServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {
-            log("LoginServlet _ SQL _ " + ex.getMessage());
+            log("AdminLoginServlet _ SQL _ " + ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
