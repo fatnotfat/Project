@@ -1,3 +1,5 @@
+
+// ______________________________________ICON____________________________________________
 // Get references to the search tab and its content
 const searchTab = document.querySelector(".menu-icon-tab-search");
 const searchContent = document.querySelector(".menu-icon-tab-search-content");
@@ -53,4 +55,20 @@ cartTab.addEventListener("click", function () {
   // Hide the search and profile content
   searchContent.classList.remove("menu-icon-tab-search-content-active");
   profileContent.classList.remove("menu-icon-tab-profile-content-active");
+});
+
+// ____________________________CATEGORY_______________________________________________
+const menuLink = document.querySelector('.menu-link-category');
+const dropdown = document.querySelector('.menu-link-category-tab');
+
+// toggle the dropdown when the menu link is clicked
+menuLink.addEventListener('click', () => {
+  dropdown.classList.toggle('active');
+});
+
+// hide the dropdown when the user clicks outside of it
+document.addEventListener('click', (event) => {
+  if (!menuLink.contains(event.target) && !dropdown.contains(event.target)) {
+    dropdown.classList.remove('active');
+  }
 });

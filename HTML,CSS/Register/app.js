@@ -188,3 +188,18 @@ form.addEventListener("submit", function (e) {
     //logic, call API, gọi service, .....
   }
 });
+// ____________________________CATEGORY_______________________________________________
+const menuLink = document.querySelector('.menu-link-category');
+const dropdown = document.querySelector('.menu-link-category-tab');
+
+// toggle the dropdown when the menu link is clicked
+menuLink.addEventListener('click', () => {
+  dropdown.classList.toggle('active');
+});
+
+// hide the dropdown when the user clicks outside of it
+document.addEventListener('click', (event) => {
+  if (!menuLink.contains(event.target) && !dropdown.contains(event.target)) {
+    dropdown.classList.remove('active');
+  }
+});
