@@ -36,40 +36,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-
-                        <%-- <c:forEach var="dto" items="${result}" varStatus="counter">
-
-                            <!--<form action="updateAccountController">-->
-                            <tr>
-                                <td>
-                                    ${counter.count} 
-                                    .</td>
-                                <td>
-                                    ${dto.name}
-                                    
-                                </td>
-                                <td>
-                                    ${dto.description}
-                                    
-                                </td>
-                                <td>
-                                    ${dto.quantity}
-                                </td>
-                                <td>
-
-                                    ${dto.price}
-                                </td>
-                                <td>
-                                    ${dto.status}
-                                </td>
-                                <td>
-                                    ${dto.size}
-                                </td>
-                            </tr>
-                            <!--</form>-->
-                        </c:forEach>
-                        --%>
+                    <tbody>                   
                             
                             <c:forEach items="${PAGING_RESULT}" var="dto">
                                 <tr> 

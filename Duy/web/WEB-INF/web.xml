@@ -32,6 +32,10 @@
         <servlet-name>addToCartServlet</servlet-name>
         <servlet-class>swp391.controller.addToCartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deleteCartServlet</servlet-name>
+        <servlet-class>swp391.controller.deleteCartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>addToCartServlet</servlet-name>
         <url-pattern>/addToCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteCartServlet</servlet-name>
+        <url-pattern>/deleteCartServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -44,24 +44,27 @@
                         <c:set var="quantity" value="${cart[productID]}" />
                         <c:set var="productDAO" value="${ProductDAO.getProductDTO(productID)}" />
                         <c:set var="totalMoney" value="${totalMoney + quantity * productDAO.price}" />
-                    <form action="mainController" method="post">
+
                         <tr>
                             <td><c:out value="${productID}"/></td>   
                             <td><input type="number" min="0" value="${quantity}" onchange="updateTotal()"></td>
                             <td><c:out value="${discount}"/></td> 
                             <td><c:out value="${productDAO.price}"/></td>                                          
                             <td>
-                                <input type="submit" value="update" name="action">
-                                <input type="submit" value="delete" name="action">
+                                <form action="deleteCartController" method="post">
+                                    <input type="hidden" name="productID" value="${productID}">
+                                    <input type="hidden" name="quantity" value="${quantity}">
+                                    <button type="submit">Cancel Order</button>
+                                </form>
                             </td>
                         </tr>
-                    </form>
-                </c:forEach>
-                <tr>
-                    <td>Total money: <span id="totalMoney"></span></td>
-                </tr>
-            </c:otherwise>
-        </c:choose>
+
+                    </c:forEach>
+                    <tr>
+                        <td>Total money: <span id="totalMoney"></span></td>
+                    </tr>
+                </c:otherwise>
+            </c:choose>
 
         <script>
             function updateTotal() {
