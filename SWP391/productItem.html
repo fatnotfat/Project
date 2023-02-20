@@ -25,6 +25,10 @@
     <link href='https://css.gg/facebook.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
 </head>
 
 <body>
@@ -300,71 +304,287 @@
                     </div>
 
                     <div class="grid__column-4">
-                       <div class="product__item-include">
-                        <form class="product__item-info">
-                            <h1 class="product__item-info-title">Helios Watch Sun</h1>
-                            <span class="product__item-info-price">2.990.000₫</span>
-                            <div class="product__item-info-color">
-                                <label for="color">Màu</label>
-                                <select name="" id="color">
-                                    <option value="Silver Blue">Silver Blue</option>
-                                    <option value="Rose Black">Rose Black</option>
-                                </select>
-                            </div>
-                            <div class="product__item-group-sell">
-                                <div class="product__item-info-quantity">
-                                    <input type="text" placeholder="Số lượng">
-                                    <button class="product__item-add-to-cart">Add to Cart</button>
+                        <div class="product__item-include">
+                            <form class="product__item-info">
+                                <h1 class="product__item-info-title">Helios Watch Sun</h1>
+                                <span class="product__item-info-price">2.990.000₫</span>
+                                <div class="product__item-info-color">
+                                    <label for="color">Màu</label>
+                                    <select class="product__item-select" name="" id="color" >
+                                        <option value="Silver Blue">Silver Blue</option>
+                                        <option value="Rose Black">Rose Black</option>
+                                    </select>
                                 </div>
-                                <div class="product__item-buy">
-                                    <button class="product__item-buy-now">Buy Now</button>
+                                <div class="product__item-group-sell">
+                                    <div class="product__item-info-quantity">
+                                        <input type="text" placeholder="Số lượng">
+                                        <button class="product__item-add-to-cart">Add to Cart</button>
+                                    </div>
+                                    <div class="product__item-buy">
+                                        <button class="product__item-buy-now">Buy Now</button>
+                                    </div>
                                 </div>
+
+                            </form>
+
+                            <hr>
+
+                            <div class="product__item-contact-admin">
+                                <p>
+                                    Nếu sản phẩm anh/chị quan tâm hiển thị hết hàng trên website. Vui lòng INBOX trực
+                                    tiếp với
+                                    Helios để được hỗ trợ nhanh nhất.
+                                    Xin chân thành cảm ơn!
+                                </p>
                             </div>
 
-                        </form>
-                        
-                        <hr>
+                            <hr>
 
-                        <div class="product__item-contact-admin">
-                            <p>
-                                Nếu sản phẩm anh/chị quan tâm hiển thị hết hàng trên website. Vui lòng INBOX trực tiếp với
-                            Helios để được hỗ trợ nhanh nhất.
-                            Xin chân thành cảm ơn!
-                            </p>
-                        </div>
+                            <div class="product__item-info-description">
+                                <span class="product__item-info-description-describe">Mô tả:</span></br>
+                                <p>Thông số đồng hồ</p>
+                                <p>Mặt đồng hồ : <span>size 40mm</span></p>
+                                <p>Size dây: <span>22mm</span></p>
+                                <p>Chất liệu vỏ là thép không gỉ 316L mạ màu vàng hồng và màu bạc đánh xước. ( chất liệu
+                                    này là
+                                    chất liệu đa số những hãng đồng hồ lớn sử dụng ) Không bị phai màu.</p>
 
-                        <hr>
+                                <p>Dây cơ bản theo sẵn dùng dây Genuine leather. Là một thuật ngữ nói đây là da thật. Da
+                                    của
+                                    mình là da bò thật làm giống vân cá sấu.</p>
 
-                        <div class="product__item-info-description">
-                            <span class="product__item-info-description-describe">Mô tả:</span></br>
-                            <p>Thông số đồng hồ</p>
-                            <p>Mặt đồng hồ : <span>size 40mm</span></p>
-                            <p>Size dây: <span>22mm</span></p>  
-                            <p>Chất liệu vỏ là thép không gỉ 316L mạ màu vàng hồng và màu bạc đánh xước. ( chất liệu này là
-                                chất liệu đa số những hãng đồng hồ lớn sử dụng ) Không bị phai màu.</p>
+                                <p> Máy sử dụng : <span> Miyota 2115. Máy sản xuất tại NHẬT BẢN hãng Miyota</span></p>
 
-                            <p>Dây cơ bản theo sẵn dùng dây Genuine leather. Là một thuật ngữ nói đây là da thật. Da của
-                                mình là da bò thật làm giống vân cá sấu.</p>
+                                <p> Mặt kính : <span>Kính Minerals, dày 2mm</span></p>
 
-                             <p> Máy sử dụng : <span> Miyota 2115. Máy sản xuất tại NHẬT BẢN hãng Miyota</span></p> 
+                                <p> Chống nước 3 ATM : <span> 3ATM thì đây là chiếc đồng hồ có khả năng chống nước trung
+                                        bình. Ví dụ
+                                        chống nước đối với các trường hợp đi mưa, rửa tay, rửa chén hay rửa xe… Không
+                                        bơi lội, tắm giặt.</span></p>
 
-                           <p> Mặt kính : <span>Kính Minerals, dày 2mm</span></p> 
 
-                           <p> Chống nước 3 ATM : <span> 3ATM thì đây là chiếc đồng hồ có khả năng chống nước trung bình. Ví dụ
-                            chống nước đối với các trường hợp đi mưa, rửa tay, rửa chén hay rửa xe… Không bơi lội, tắm giặt.</span></p>
-
+                            </div>
 
                         </div>
-
-                       </div>
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
+
+    <!--Phần mới cập nhật từ đây  -->
+
+    <!-- Swiper -->
+    <div class="slide__show">
+        <div class="grid">
+            <div class="grid__row">
+                <div class="grid__full-width">
+                    <h1 class="slider__title">You may also like</h1>
+                    <div class="slider__include">
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <img />
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <img />
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <img />
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <img />
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <img />
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <img />
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <img />
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <img />
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <img />
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+
+                            </div>
+                            
+                            <div class="swiper-scroll">
+                                <div class="swiper-pagination"></div>
+                            </div>
+
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            freeMode: true,
+            cssMode: true,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            mousewheel: true,
+            keyboard: true,
+        });
+    </script>
+    
+    <!-- tới đây nha..... -->
 </body>
 
 </html>

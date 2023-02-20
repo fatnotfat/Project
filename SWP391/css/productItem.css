@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 header {
@@ -20,6 +21,10 @@ nav {
     /* position: fixed; */
     z-index: 20;
     animation: appear 1.2s;
+}
+
+body{
+    background-color: #000;
 }
 
 
@@ -833,7 +838,7 @@ nav {
     width: 70%;
     height: 50px;
     color: #fff;
-    border: 1px solid #000  ;
+    border: 1px solid #fff  ;
     background-color: #fff;
     color: #000;
     font-size: 1.6rem;
@@ -911,4 +916,198 @@ nav {
     color: #fff;
 
 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* silđer */
+.slide__show{
+    margin-top: 200px;
+    margin-bottom: 200px;
+}
+
+.slider__title{
+    color: #fff;
+    font-size: 3rem;
+    margin-bottom: 40px;
+}
+
+  
+.slider__include {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  height: 100%;
+  background-color: #000;
+}
+
+.swiper {
+    
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.swiper-slide img {
+}
+
+.swiper-scroll{
+    position: relative;
+    z-index: 2;
+     padding-top: 50px;
+}
+
+
+.more__item {
+    height: 100% ;
+    position: relative;
+    display: block;
+    border: 1px solid #000;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0 , 0.5);
+    transition: tranform ease-in 0.1s;
+    will-change: transform; 
+    cursor: pointer;
+}
+
+.more__item:hover{
+
+}
+
+.more__item-img {
+    padding-top: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0-KZuLx2g1yy61JbptIPHlDLeap22QPvp8A&usqp=CAU');
+    transition: background-image 900ms ease-out 100ms
+
+
+}
+
+ .more__item:hover .more__item-img{
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu-Z8VFWnKZ23vZKRlATPA-uadJhT6s7AXSANUqlfF2wDWnBJKkhntvX7l7MA9lWVtqEw&usqp=CAU');
+}
+
+
+
+
+
+
+.more__item-name {
+    font-size: 2rem;
+    font-weight: 400;
+    color: #333;
+    line-height: 1.8rem;
+    margin: 10px 10px;
+    display: block;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    text-align: start;
+}
+
+.more__item-price {
+    display: flex;
+    margin-left: 10px;
+    font-size: 2rem;
+    flex-wrap: wrap;
+    padding: 0 10px;
+    margin: 7px 0;
+}
+
+
+
+.more__item-info {   
+    display: flex;
+    justify-content: center;
+
+}
+.more__item-info .more__item-view{ 
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height:90px;
+    border: 1px solid #fff  ;
+    background-color: #000;
+    color: #fff;
+    font-size: 1.6rem;
+    letter-spacing: 0.3rem;
+   font-family: "Montserrat", sans-serif;
+   border-radius: 5px ;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 900ms ease-out 100ms, background-color 900ms ease-out 100ms;
+
+}
+.more__item:hover .more__item-view{
+    opacity: 1;
+
+}
+
+
+
+.more__item-view:hover{
+    background-color: #F8F3E9;
+    color: #000;
+    border: 1px solid #000;
+}
+
+.more__item-info .more__item-view a{
+    text-decoration: none;
+    color: #333;
+
+}
+
+
+.swiper-button-next{
+    color: #000 !important;
+}
+
+.swiper-button-prev{
+    color: #000 !important;
+
+
+
+    
+}
+
+.product__item-select{
+}
+
+
+
+.product__item-selectv option{
+    font-weight: normal;
+    display: block; 
+    white-space: nowrap;
+    min-height: 1.2em;
+    padding: 0 2px 1px;
 }
