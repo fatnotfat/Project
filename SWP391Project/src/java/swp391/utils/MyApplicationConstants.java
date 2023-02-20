@@ -119,4 +119,17 @@ public class MyApplicationConstants {
 
         public static final String ADMINSEARCHPRODUCT_PAGE = "adminSearchProductPage";
     }
+
+    public class ShippingServlet {
+
+        public static final String SHIPPING_PAGE = "shippingPage";
+        public static final String PAYMENT_PAGE = "paymentPage";
+    }
+
+    public class PaymentServlet {
+
+        public static final String PAYMENT_PAGE = "paymentPage";
+        public static final String MAIN_PAGE = "mainPage";
+    }
+
 }
