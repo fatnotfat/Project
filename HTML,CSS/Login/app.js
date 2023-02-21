@@ -83,3 +83,25 @@ menuIcon.addEventListener("click", () => {
   navBot.classList.toggle("active");
   menu.classList.toggle("active");
 });
+
+// _________________________CART-RESPONSIVE_____________________________________________________
+const cartIcon = document.querySelector('.menu-responsive-icon-tab-cart');
+const cartContentR = document.querySelector('.menu-responsive-icon-tab-cart-content');
+
+// Function to toggle the cart content
+function toggleCartContent() {
+  cartContentR.classList.toggle('menu-responsive-icon-tab-cart-content-active');
+}
+
+// Event listener to show/hide the cart content
+cartIcon.addEventListener('click', function(e) {
+  e.stopPropagation();
+  toggleCartContent();
+});
+
+// Event listener to hide the cart content when clicked outside
+document.addEventListener('click', function() {
+  if (cartContentR.classList.contains('menu-responsive-icon-tab-cart-content-active')) {
+    toggleCartContent();
+  }
+});
