@@ -27,7 +27,7 @@ body {
 }
 //_________________________________ HEADER______________________________________________
 header {
-  position: fixed;
+  //   position: fixed;
   z-index: 999;
   background-color: var(--primary-color);
 }
@@ -741,231 +741,72 @@ header {
   }
 }
 //_________________________________ HEADER______________________________________________
-
-// _________________________________________LOGIN_______________________________________
-.login .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  // ________________________________________________________________________________
-  padding-top: 100px;
+//______________________________________YOUR CART TITLE ______________________________________________________
+.your-cart .container {
+  text-align: center;
 }
-.login {
-  &-space {
-    height: 815px;
+.your-cart {
+  padding: 5rem 0;
+  &-title {
+    font-size: 40px;
+    margin-bottom: 1rem;
   }
-  // ______________________________________________________________________________________
-  &-space-mobile {
-    display: none;
-  }
-  &-heading {
-    font-size: 54px;
-    font-weight: 700;
-    border-bottom: 7px solid black;
-  }
-  &-form-container {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: center;
-    align-items: stretch;
-    justify-content: center;
-  }
-  &-form {
-    display: flex;
-    font-size: 16px;
-    flex-direction: column;
-  }
-  &-link {
-    transition: all 0.2s linear;
-    &:hover {
-      opacity: 0.6;
-    }
-  }
-  &-input {
-    &-email {
-      border: 0;
-      outline: none;
-      margin-bottom: 30px;
-      padding: 20px 25px;
-      background-color: var(--form-color);
-      line-height: 17px;
-      flex-grow: 1;
-    }
-    &-password {
-      border: 0;
-      outline: none;
-      margin-bottom: 15px;
-      padding: 20px 25px;
-      background-color: var(--form-color);
-      line-height: 17px;
-      flex-grow: 1;
-    }
-    &-checkbox input {
-      border: 0;
-      outline: none;
-      cursor: pointer;
-      width: 34px;
-      height: 34px;
-    }
-  }
-  &-option {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 45px;
-    &-checkbox {
-      display: flex;
-      flex-wrap: nowrap;
-      align-items: center;
-      position: relative;
-    }
-    &-input {
-      &-check-logo {
-        content: "";
-        position: absolute;
-        width: 30px;
-        height: 30px;
-        background-color: var(--form-color);
-        z-index: -1;
-        &::after {
-          content: "";
-          position: absolute;
-          top: 0.5rem;
-          left: 0.5rem;
-          bottom: 0.5rem;
-          right: 0.5rem;
-          background-color: #7a7a7a;
-          visibility: hidden;
-        }
-      }
-      &-checkbox {
-        width: 40px;
-        height: 30px;
-        position: relative;
-        opacity: 0;
-      }
-      &-keep {
-        padding-left: 10px;
-        font-size: 14px;
-        opacity: 0.6;
-        font-weight: 600;
-      }
-    }
-  }
-  .login-option-input-checkbox:checked ~ .login-option-input-check-logo::after {
-    visibility: visible;
-  }
-  &-function {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    &-security {
-      margin-bottom: 15px;
-    }
-    &-btn {
-      border: 1px solid black;
-      margin-bottom: 180px;
-      padding: 14px 26px;
-      background-color: transparent;
-      color: black;
-      font-size: 16px;
-      font-weight: 700;
-      transition: all 0.2s linear;
-      position: relative;
-      cursor: pointer;
-      &::after {
-        content: "";
-        position: absolute;
-        background-color: var(--button-color);
-        color: white;
-        top: 0;
-        height: 100%;
-        width: 0;
-        right: 0;
-        transition: 0.3s;
-        z-index: -1;
-      }
-      &:hover {
-        // background-color: white;
-        color: white;
-      }
-      &:hover::after {
-        left: 0;
-        width: 100%;
-        // color: white;
-        // background-color: #333333;
-        // z-index: 1;
-      }
-    }
-    &-security {
-      font-size: 14px;
-    }
-    &-register {
-      font-size: 14px;
-      font-weight: 600;
-      &-question {
-        opacity: 0.6;
-      }
-      &-hightlight {
-        text-decoration: none;
-        color: var(--font-color);
-        font-weight: 700;
-        transition: all 0.2s linear;
-        &:hover {
-          opacity: 0.6;
-        }
-      }
-    }
-  }
-  &-link {
-    text-decoration: none;
-    color: var(--font-color);
+  &-desc {
     font-size: 14px;
-    font-weight: 700;
-  }
-}
-@media screen and (max-width: 1024px) {
-  .login-heading {
-    font-size: 30px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .login-space {
-    // transform: rotate(90deg);
-    // padding: 2rem;
-    display: none;
-  }
-  .login .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: column;
-  }
-  .login-form {
-    padding-top: 5rem;
-  }
-
-  .login-function-register {
-    padding-bottom: 10rem;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .login {
-    &-heading {
-      margin-bottom: 10px;
-      border-bottom: 3px solid black;
-    }
-    &-space-mobile {
-      display: block;
+    position: relative;
+    &::after {
+      content: "";
+      width: 30px;
+      height: 3px;
+      position: absolute;
+      background-color: var(--font-color);
+      top: 30px;
+      left: 49%;
     }
   }
+  &-body {
+    &-left {
+      width: calc(100vw - 60vw);
+      &-product {
+        &-img {
+          width: 124px;
+          height: 124px;
+          display: block;
+          overflow: hidden;
+        }
+        & .container {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: center;
+          border: 1px solid black;
+        }
+        &-detail-left {
+          display: flex;
+          & .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+          }
+        }
+        &-detail-right {
+          & .container {
+            height: 126px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: space-between;
+            flex-wrap: wrap;
+          }
+        }
+      }
+    }
+  }
 }
-// _________________________________________LOGIN_______________________________________
+
+//______________________________________YOUR CART TITLE ______________________________________________________
 
 // ____________________________________________FOOTER___________________________________
 .footer .container {
