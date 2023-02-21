@@ -80,11 +80,11 @@ public class LogoutServlet extends HttpServlet {
                 CustomerDTO dto = dao.checkLogin(email, password);
                 if (dto != null) {
                     //end session
-                    session.invalidate();
                     cookie.setMaxAge(0);
                     response.addCookie(cookie);
-                }
+                }   
             }
+            session.invalidate();
         } catch (SQLException ex) {
             log("LogoutServlet_SQLException:" + ex.getMessage());
         } catch (NamingException ex) {

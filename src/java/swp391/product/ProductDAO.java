@@ -6,6 +6,8 @@
 package swp391.product;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,6 +28,12 @@ public class ProductDAO implements Serializable {
 
     public List<ProductDTO> getListProduct() {
         return listProduct;
+    }
+
+    private List<ProductDTO> listProductByFilter;
+
+    public List<ProductDTO> getListProductByFilter() {
+        return listProductByFilter;
     }
 
     public List<ProductDTO> getProducts(int start, int total)
@@ -96,34 +104,6 @@ public class ProductDAO implements Serializable {
         return this.listProduct.size();
     }
 
-//    public ArrayList<ProductDTO> getTop(int index, int page)throws 
-//            NamingException,SQLException{
-//        ArrayList<ProductDTO> list = new ArrayList<>();
-//        Connection con = null;
-//        PreparedStatement stm = null;
-//        ResultSet rs = null;
-//        try {
-//            con = DBHelper.makeConnection();
-//            if(con != null){
-//                String sql = "SELECT ProductID, Name, Description, Quantity, Price, Status, Size, CreateTime "
-//                        + "FROM Product "
-//                        + "WHERE  "
-//                        + "BETWEEN ? AND ?";
-//            }
-//        } finally {
-//            if (rs != null) {
-//                rs.close();
-//            }
-//
-//            if (stm != null) {
-//                stm.close();
-//            }
-//
-//            if (con != null) {
-//                con.close();
-//            }
-//        }
-//    }
     public List<ProductDTO> pagingAccount(int index, String searchValue, int recordsPerPage)
             throws NamingException, SQLException {
 
@@ -144,16 +124,16 @@ public class ProductDAO implements Serializable {
             stm.setInt(2, (index - 1) * recordsPerPage);
             stm.setInt(3, recordsPerPage);
             rs = stm.executeQuery();
-            
-            while(rs.next()){
-                list.add(new ProductDTO(rs.getInt("ProductID")
-                        , rs.getString("Name")
-                        , rs.getString("Description")
-                        , rs.getInt("Quantity")
-                        , rs.getFloat("Price")
-                        , rs.getBoolean("Status")
-                        , rs.getInt("Size")
-                        , rs.getDate("CreateTime")
+
+            while (rs.next()) {
+                list.add(new ProductDTO(rs.getInt("ProductID"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getInt("Quantity"),
+                        rs.getFloat("Price"),
+                        rs.getBoolean("Status"),
+                        rs.getInt("Size"),
+                        rs.getDate("CreateTime")
                 ));
             }
 
@@ -171,6 +151,122 @@ public class ProductDAO implements Serializable {
             }
         }
         return list;
+    }
+
+    public void searchByFilter(int cateID, float priceFrom, float priceTo, int size)
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select ProductID, Name, Description, Quantity, Price, Size "
+                        + "From Product "
+                        + "Where ";
+                if (cateID > 0) {
+                    sql += " CateID = ?";
+                }
+                if (priceFrom >= 0) {
+                    sql += " And Price >= ?";
+                }
+                if (priceTo != 0) {
+                    sql += " And Price <= ?";
+                }
+                if (size != 0) {
+                    sql += " And Size = ?";
+                }
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, cateID);
+                if (priceFrom >= 0 && priceTo != 0 && size != 0) {
+                    stm.setFloat(2, priceFrom);
+                    stm.setFloat(3, priceTo);
+                    stm.setInt(4, size);
+                } else if (priceFrom >= 0 && priceTo != 0) {
+                    stm.setFloat(2, priceFrom);
+                    stm.setFloat(3, priceTo);
+                } else if (priceFrom >= 0 && size != 0) {
+                    stm.setFloat(2, priceFrom);
+                    stm.setInt(3, size);
+                } else if (priceFrom >= 0) {
+                    stm.setFloat(2, priceFrom);
+                } else if (priceTo != 0 && size != 0) {
+                    stm.setFloat(2, priceTo);
+                    stm.setInt(3, size);
+                } else if (priceTo != 0) {
+                    stm.setFloat(2, priceTo);
+                } else if (size != 0) {
+                    stm.setInt(2, size);
+                }
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("ProductID");
+                    String name = rs.getString("Name");
+                    String description = rs.getString("Description");
+//                    description = URLEncoder.encode(description, "UTF-8");
+                    int quantity = rs.getInt("Quantity");
+                    float price = rs.getFloat("Price");
+                    size = rs.getInt("Size");
+                    ProductDTO dto = new ProductDTO(
+                            id, name, description, quantity, price, size);
+                    if (this.listProductByFilter == null) {
+                        this.listProductByFilter = new ArrayList<>();
+                    }
+                    this.listProductByFilter.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public ProductDTO getItemByID(String ID) 
+            throws NamingException, SQLException{
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        ProductDTO dto = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "SELECT ProductID, Name, Description, Quantity, Price, Status, Size, CreateTime "
+                        + "FROM Product "
+                        + "WHERE ProductID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, Integer.parseInt(ID));
+                rs = stm.executeQuery();
+                while(rs.next()){
+                    int id = rs.getInt("ProductID");
+                    String name = rs.getString("Name");
+                    String descr = rs.getString("Description");
+                    int quantity = rs.getInt("Quantity");
+                    float price = rs.getFloat("Price");
+                    boolean status = rs.getBoolean("Status");
+                    int size = rs.getInt("Size");
+                    Date date = rs.getDate("CreateTime");
+                    dto = new ProductDTO(id, name, descr, quantity, price, status, size, date);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return dto;
     }
 
 }

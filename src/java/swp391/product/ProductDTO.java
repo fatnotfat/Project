@@ -5,13 +5,14 @@
  */
 package swp391.product;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author nguye
  */
-public class ProductDTO {
+public class ProductDTO implements Serializable{
 
     private int id;
     private String name;
@@ -63,6 +64,15 @@ public class ProductDTO {
         this.status = status;
         this.size = size;
         this.createTime = createTime;
+    }
+
+    public ProductDTO(int id, String name, String description, int quantity, float price, int size) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.description = description;
+        this.size = size;
     }
 
     /**

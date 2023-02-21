@@ -16,6 +16,7 @@
         <title>SWP391</title>
         <link rel="stylesheet" href="style/mainPage.css">
         <link rel="stylesheet" href="style/base.css">
+        <link rel="stylesheet" href="style/grid.css">
         <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +49,7 @@
     <body>
         <div class="main">
             <header>
-                <div class="grid">
+                <div class="grid wide">
                     <div class="grid__row">
                         <div class="grid__full-width">
                             <nav>
@@ -69,13 +70,13 @@
                                                         <a href="listProduct.html" class="filter-select__link">Dây chuyền</a>
                                                     </li>
                                                     <li class="filter-select__item">
-                                                        <a href="" class="filter-select__link">Vòng tay</a>
+                                                        <a href="SearchByFilterServlet?txtProductCateID=1" class="filter-select__link">Vòng tay</a>
                                                     </li>
                                                     <li class="filter-select__item">
                                                         <a href="" class="filter-select__link">Nhẫn</a>
                                                     </li>
                                                     <li class="filter-select__item">
-                                                        <a href="" class="filter-select__link">Khuyen tay</a>
+                                                        <a href="" class="filter-select__link">Khuyen tai</a>
                                                     </li>
                                                     <li class="filter-select__item">
                                                         <a href="" class="filter-select__link">Dong ho</a>
@@ -312,7 +313,7 @@
 
             <div class="main_page">
 
-                <div class="grid">
+                <div class="grid wide">
                     <div class="grid__row">
                         <div class="grid__full-width">
 
@@ -547,7 +548,7 @@
 
 
             <footer>
-                <div class="grid">
+                <div class="grid wide">
                     <div class="grid__row">
                         <div class="grid__full-width">
 

@@ -2,6 +2,7 @@ package swp391.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -11,7 +12,7 @@ import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
-public class DBHelper {
+public class DBHelper implements Serializable{
 
     public static Connection makeConnection()
             throws NamingException, SQLException {

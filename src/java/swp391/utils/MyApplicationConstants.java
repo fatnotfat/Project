@@ -87,6 +87,12 @@ public class MyApplicationConstants {
     public class SearchServlet{
         public static final String SEARCH_TEXT_PAGE = "searchTextPage";
         public static final String SEARCH_FILTER_PAGE = "searchFilterPage";
+        public static final String SEARCH_FILTER_SERVLET="searchByFilterController";
+    }
+    
+    public class CartFeature{
+        public static final String CART_SERVLET = "addToCartController";
+        public static final String CART_PAGE = "addToCartPage";
     }
 
 }
