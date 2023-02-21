@@ -9,17 +9,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import swp391.customer.CustomerDTO;
 import swp391.ordersDetail.OrdersDetailDAO;
 
 /**
  *
  * @author Duy
  */
-public class shoppingCartServlet extends HttpServlet {
+@WebServlet(name = "processOrderServlet", urlPatterns = {"/processOrderServlet"})
+
+public class processOrderServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +39,11 @@ public class shoppingCartServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-           HttpSession session = request.getSession(false);
+            HttpSession session = request.getSession(false);
             if (session != null) {
-                String name = (String) session.getAttribute("name");
-                String email = (String) session.getAttribute("email");
+                CustomerDTO user = (CustomerDTO) session.getAttribute("USER");
+                String name = user.getName();
+                String email = user.getEmail();
                 HashMap<String, Integer> cart = (HashMap<String, Integer>) session.getAttribute("cart");
                 if (cart != null && !cart.isEmpty()) {
                     if (name == null || name.equals("")) {
@@ -60,7 +65,7 @@ public class shoppingCartServlet extends HttpServlet {
                     request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
                 }
             } else {
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("mainPage.jsp");
             }
         }
     }

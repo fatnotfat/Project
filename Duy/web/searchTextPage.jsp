@@ -18,7 +18,7 @@
             Search Value:<input type="text" name="txtSearch" value="${param.txtSearch}" />
             <input type="submit" value="Search" />
         </form>
-            
+
         <c:set var="searchValue" value="${param.txtSearch}"/>
         <c:if test="${not empty searchValue}">
             <c:set var="result" value="${requestScope.PRODUCT_RESULT}" />
@@ -37,36 +37,36 @@
                         </tr>
                     </thead>
                     <tbody>                   
-                            
-                            <c:forEach items="${PAGING_RESULT}" var="dto">
-                                <tr> 
-                                    <td>${dto.id}</td>
-                                    <td>${dto.name}</td>
-                                    <td>${dto.description}</td>
-                                    <td>${dto.quantity}</td>
-                                    <td>${dto.price}</td>
-                                    <td>${dto.status}</td>
-                                    <td>${dto.size}</td>
-                                    <td><a href="addToCartController?productId=${dto.id}">Add to cart</a></td>
-                                    
-                                </tr>
-                            </c:forEach>
+
+                        <c:forEach items="${PAGING_RESULT}" var="dto">
+                            <tr> 
+                                <td>${dto.id}</td>
+                                <td>${dto.name}</td>
+                                <td>${dto.description}</td>
+                                <td>${dto.quantity}</td>
+                                <td>${dto.price}</td>
+                                <td>${dto.status}</td>
+                                <td>${dto.size}</td>
+                                <td><button onclick="location.href = 'addToCartController?productId=${dto.id}&action=add'">Add to cart</button></td>
+                                <td><button onclick="location.href = 'addToCartController?productId=${dto.id}&action=buy'">Buy Now</button></td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </c:if>
-            
+
             <c:if test="${empty result}">
                 <h2>
                     No record is matched!!!
                 </h2>
             </c:if>
-            
+
             <div class="paging">
-                    <c:forEach begin="1" end="${END_PAGE}" var="i">
-                        <a class="${CURRENT_PAGE == i?"active":""}" href="SearchTextServlet?txtSearch=${param.txtSearch}&index=${i}">${i}</a>
-                    </c:forEach>
+                <c:forEach begin="1" end="${END_PAGE}" var="i">
+                    <a class="${CURRENT_PAGE == i?"active":""}" href="SearchTextServlet?txtSearch=${param.txtSearch}&index=${i}">${i}</a>
+                </c:forEach>
             </div>
-            
+
             <%--<c:forEach items="${PAGING_RESULT}" var="dto">--%>                
             <%--</c:forEach>--%>
         </c:if>

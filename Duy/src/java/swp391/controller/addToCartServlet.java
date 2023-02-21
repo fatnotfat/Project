@@ -36,6 +36,9 @@ public class addToCartServlet extends HttpServlet {
             //get the selected productid
             String productId = request.getParameter("productId");
             //get Session that is storing the shopping cart
+            String action = request.getParameter("action");
+            //get acction form both button "add to cart" and buy "now" when call this servlet
+
             HttpSession session = request.getSession(true);
             if (session != null) {
                 HashMap<String, Integer> cart = (HashMap<String, Integer>) session.getAttribute("cart");
@@ -47,13 +50,18 @@ public class addToCartServlet extends HttpServlet {
                     Integer tmp = cart.get(productId);
                     if (tmp == null) {
                         cart.put(productId, 1);
-                    }else{
+                    } else {
                         tmp++;
                         cart.put(productId, tmp);
                     }
                 }
                 session.setAttribute("cart", cart);
-                response.sendRedirect("searchTextPage.jsp");
+                if ("add".equals(action)) {
+                    response.sendRedirect("searchTextPage.jsp");
+                } else {
+                    response.sendRedirect("checkout.jsp");
+                }
+
             }
         }
     }

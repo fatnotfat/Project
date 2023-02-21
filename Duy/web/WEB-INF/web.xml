@@ -25,16 +25,16 @@
         <servlet-class>swp391.controller.SearchTextServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>shoppingCartServlet</servlet-name>
-        <servlet-class>swp391.controller.shoppingCartServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>addToCartServlet</servlet-name>
         <servlet-class>swp391.controller.addToCartServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>deleteCartServlet</servlet-name>
         <servlet-class>swp391.controller.deleteCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>processOrderServlet</servlet-name>
+        <servlet-class>swp391.controller.processOrderServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -45,16 +45,16 @@
         <url-pattern>/SearchTextServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>shoppingCartServlet</servlet-name>
-        <url-pattern>/shoppingCartServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>addToCartServlet</servlet-name>
         <url-pattern>/addToCartServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>deleteCartServlet</servlet-name>
         <url-pattern>/deleteCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processOrderServlet</servlet-name>
+        <url-pattern>/processOrderServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
