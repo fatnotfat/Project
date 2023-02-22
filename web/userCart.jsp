@@ -11,6 +11,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+
+
         <script>
             function updateQuantity(itemId, operation) {
                 var quantity = document.getElementById('quantity' + itemId).innerHTML;
@@ -39,36 +44,35 @@
             }
         </script>
 
-
         <script>
-            document.getElementById("removeSelectedItemsBtn").addEventListener("click", function () {
-                var selectedItems = [];
-                var checkboxes = document.getElementsByName("selectedItems");
-                for (var i = 0; i < checkboxes.length; i++) {
-                    if (checkboxes[i].checked) {
-                        selectedItems.push(checkboxes[i].value);
-                    }
-                }
-                if (selectedItems.length === 0) {
-                    alert("Please select at least one item to remove.");
-                    return;
-                }
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "RemoveItemFromCartServlet");
-                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        if (xhr.responseText === "success") {
-                            location.reload(); // or update the cart list using AJAX
+            function removeSelectedItem(itemId, callback) {
+                $.ajax({
+                    type: "POST",
+                    url: "RemoveItemFromCartServlet",
+                    data: {txtId: itemId},
+                    success: function (response) {
+                        if (response.success) {
+                            // call the callback function with the ID of the removed item
+                            callback(itemId);
+                            // update the cart UI with the updated cart data
+                            var cartData = response.cart;
+                            console.log("removeSelectedItem called with itemId = " + itemId);
+                            // ...
                         } else {
-                            alert("An error occurred while removing the selected items.");
+                            // handle error response from servlet
+                            console.log(response.message);
                         }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // handle network error
+                        console.log(errorThrown);
                     }
-                };
-                xhr.send("selectedItems=" + selectedItems.join(","));
-            });
+                });
+            }
 
         </script>
+
+
     </head>
     <body>
 
@@ -84,58 +88,64 @@
                     --%>
 
                     <!--<form id="removeItemForm" method="post" action="RemoveItemFromCartServlet">-->
-                        <table border="1">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Product ID</th>
-                                    <th>Product Name</th>
-                                    <th>Quantity</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%--  int count = 0;
-                                    for (String key : items.keySet()) {
-                                --%>
+                    <table id="cartTable" border="1">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Product ID</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%--  int count = 0;
+                                for (String key : items.keySet()) {
+                            --%>
 
-                                <c:set var="cartList" value="${sessionScope.CART.items}" />
-                                <c:set var="cartListDetail" value="${sessionScope.CART.itemDetail}" />
+                            <c:set var="cartList" value="${sessionScope.CART.items}" />
+                            <c:set var="cartListDetail" value="${sessionScope.CART.itemDetail}" />
 
-                                <c:forEach var="item" items="${cartList}" varStatus="counter">
-                                    <c:forEach var="detail" items="${cartListDetail}">
-                                        <tr>
-                                            <c:if test="${item.key eq detail.key}">
-                                                <td>
-                                                    ${counter.count}
-                                                </td>
-                                                <td>
-                                                    ${item.key}
-                                                    <input type="hidden" name="txtId" value="${item.key}" />
-                                                </td>
-                                                <td>
-                                                    ${detail.value.name}
-                                                    <input type="hidden" name="txtName" value="${detail.value.name}" />
-                                                </td>
-                                                <td>
-                                                    <button onclick="updateQuantity('${item.key}', 'minus')" id="minus_${item.key}">-</button>                             
-                                                    <span id="quantity${item.key}">${item.value}</span>
-                                                    <button onclick="updateQuantity('${item.key}', 'plus')" id="plus_${item.key}">+</button>
-                                                    <input type="hidden" name="txtQuantity" value="${item.value}" />
+                            <c:forEach var="item" items="${cartList}" varStatus="counter">
+                                <c:forEach var="detail" items="${cartListDetail}">
+                                    <tr id="row-${item.key}">
+                                        <c:if test="${item.key eq detail.key}">
+                                            <td>
+                                                ${counter.count}
+                                            </td>
+                                            <td>
+                                                ${item.key}
+                                                <input type="hidden" name="txtId" value="${item.key}" />
+                                            </td>
+                                            <td>
+                                                ${detail.value.name}
+                                                <input type="hidden" name="txtName" value="${detail.value.name}" />
+                                            </td>
+                                            <td>
+                                                <button onclick="updateQuantity('${item.key}', 'minus')" id="minus_${item.key}">-</button>                             
+                                                <span id="quantity${item.key}">${item.value}</span>
+                                                <button onclick="updateQuantity('${item.key}', 'plus')" id="plus_${item.key}">+</button>
+                                                <input type="hidden" name="txtQuantity" value="${item.value}" />
 
-                                                </td>
+                                            </td>
 
-                                                <td>
-                                                    <input type="checkbox" name="ckItem" value="${item.key}" />
-                                                </td>
-                                            </c:if>
-                                        </tr>
-                                    </c:forEach>
+                                            <td>
+                                                <button onclick="removeSelectedItem('${item.key}', function (itemId) {
+                                                            var row = document.getElementById('row-' + itemId);
+                                                            row.parentNode.removeChild(row);
+                                                        });">X</button>
+
+
+                                            </td>
+                                        </c:if>
+                                    </tr>
                                 </c:forEach>
-                            </tbody>
-                        </table>
-                        <input type="hidden" name="action" value="removeSelectedItems" />
-                        <button type="button" id="removeSelectedItemsBtn">Remove Selected Item</button>
+                            </c:forEach>
+
+                        </tbody>
+
+                    </table>
+
                     <!--</form>-->
 
                     <form action="checkOutController">
