@@ -45,7 +45,7 @@
         </script>
 
         <script>
-            function removeSelectedItem(itemId, callback) {
+            function removeSelectedItem(itemId, rowIndex, callback) {
                 $.ajax({
                     type: "POST",
                     url: "RemoveItemFromCartServlet",
@@ -53,11 +53,20 @@
                     success: function (response) {
                         if (response.success) {
                             // call the callback function with the ID of the removed item
-                            callback(itemId);
+                            callback(itemId, rowIndex);
                             // update the cart UI with the updated cart data
                             var cartData = response.cart;
                             console.log("removeSelectedItem called with itemId = " + itemId);
-                            // ...
+
+                            $("#cartTable tr").each(function () {
+                                var rowItemId = $(this).find("input[name='txtId']").val();
+                                if (rowItemId === itemId) {
+                                    $(this).remove();
+                                }
+                            });
+//                            $("#cartTable tr:gt(0)").each(function (index) {
+//                                $(this).find("#count-" + itemId).text(index + 1);
+//                            });
                         } else {
                             // handle error response from servlet
                             console.log(response.message);
@@ -91,7 +100,7 @@
                     <table id="cartTable" border="1">
                         <thead>
                             <tr>
-                                <th>No</th>
+                                
                                 <th>Product ID</th>
                                 <th>Product Name</th>
                                 <th>Quantity</th>
@@ -108,11 +117,8 @@
 
                             <c:forEach var="item" items="${cartList}" varStatus="counter">
                                 <c:forEach var="detail" items="${cartListDetail}">
-                                    <tr id="row-${item.key}">
+                                    <tr id="row-${item.key}-${counter.index}">
                                         <c:if test="${item.key eq detail.key}">
-                                            <td>
-                                                ${counter.count}
-                                            </td>
                                             <td>
                                                 ${item.key}
                                                 <input type="hidden" name="txtId" value="${item.key}" />
@@ -130,8 +136,13 @@
                                             </td>
 
                                             <td>
-                                                <button onclick="removeSelectedItem('${item.key}', function (itemId) {
+                                                <%--<button onclick="removeSelectedItem('${item.key}', function (itemId) {
                                                             var row = document.getElementById('row-' + itemId);
+                                                            row.parentNode.removeChild(row);
+                                                        });">X</button>--%>
+
+                                                <button onclick="removeSelectedItem('${item.key}', '${counter.index}', function (itemId, rowIndex) {
+                                                            var row = document.getElementById('row-' + itemId + '-' + rowIndex);
                                                             row.parentNode.removeChild(row);
                                                         });">X</button>
 
