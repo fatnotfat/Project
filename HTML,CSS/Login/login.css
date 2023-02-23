@@ -698,6 +698,9 @@ header {
   .nav-bot-responsive {
     display: block !important;
   }
+  .menu-responsive-icon-tab-cart-content .container {
+    width: 370px;
+  }
 }
 .login .container {
   display: flex;
