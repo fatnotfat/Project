@@ -43,7 +43,8 @@
 
 .category__filter {
   width: 80%;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .category__filter-include {
@@ -125,6 +126,7 @@
 /* ----------product--------------- */
 
 .product {
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 50px;
@@ -302,6 +304,12 @@
     width: 50%;
     margin: auto
   }
+  .grid__column-3{
+    width: 30%;
+  }
+  .grid__column-9{
+    width: 70%;
+  }
 
 }
 
@@ -341,6 +349,8 @@
   .grid__column-3-4{
     width: 50%;
   }
+
+  
   .category__filter-include-input{
     width: 100%;
     margin-top: 5px;
