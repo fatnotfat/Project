@@ -756,10 +756,10 @@ header {
     align-items: center;
   }
   &-left {
-     & .container {
-          display: flex;
-          flex-direction: column;
-     }
+    & .container {
+      display: flex;
+      flex-direction: column;
+    }
     &-breadcrumb {
       margin-left: 2vw;
       &-menu {
@@ -767,7 +767,7 @@ header {
         padding: 10px 16px;
         & li {
           display: inline;
-          font-size: 12px;
+          font-size: 14px;
           color: var(--font-color);
           font-weight: 600;
           opacity: 0.6;
@@ -795,24 +795,78 @@ header {
       }
     }
     &-avatar {
-     & .container {
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-     }
-     &-icon {
-          font-size: 40px;
-          padding: 10px 20px;
-     }
-     &-content{
-          &-name {
-               font-size: 20px;
-          }
-     }
+      & .container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      &-icon {
+        font-size: 30px;
+        padding: 10px 20px;
+      }
+      &-content {
+        &-name {
+          font-size: 20px;
+        }
+      }
+    }
+    &-form {
+      width: 100%;
+      &-address .container {
+        position: relative;
+        &::before {
+          background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMSIgaGVpZ2h0PSIxOSIgdmlld0JveD0iMCAwIDIxIDE5Ij48dGl0bGU+QXJ0Ym9hcmQgMTwvdGl0bGU+PGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48ZyBmaWxsPSIjMDAwIj48Zz48cGF0aCBkPSJNMCAwaDF2MTlIMFYweiIgaWQ9IlNoYXBlIiBmaWxsLW9wYWNpdHk9Ii4xNSIvPjxwYXRoIGQ9Ik0xMSA4aDEwbC01IDUtNS01eiIgZmlsbC1vcGFjaXR5PSIuNSIvPjwvZz48L2c+PC9nPjwvc3ZnPg==),
+            none;
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          width: 50px;
+          background-position: center center;
+          background-repeat: no-repeat;
+          pointer-events: none;
+        }
+      }
     }
   }
 }
 
+.field {
+  &-label {
+    font-size: 0.85714em;
+    font-weight: normal;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 0 2.93333em;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    color: #999999;
+    margin: 0.5em 0;
+    margin-top: 0.3em;
+    display: block;
+  }
+  &-input {
+    box-shadow: 0 0 0 1px #d9d9d9;
+    transition: all 0.2s ease-out;
+    background-color: white;
+    color: #333333;
+    border-radius: 4px;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1.5em 2.9em 0.94em 0.8em;
+    word-break: normal;
+    &:focus {
+      box-shadow: 0 0 0 2px #252a2b;
+    }
+  }
+}
 // _________________________SHIPPING INFO______________________________________
 
 // ____________________________________________FOOTER___________________________________
