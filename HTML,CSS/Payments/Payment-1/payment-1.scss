@@ -781,6 +781,38 @@ header {
       border-bottom: 1px solid #abafb2;
       margin-bottom: 30px;
       margin-left: 5vw;
+      &-breadcrumb {
+        margin-left: 2vw;
+        &-menu {
+          list-style: none;
+          padding: 10px 16px;
+          & li {
+            display: inline;
+            font-size: 12px;
+            color: var(--font-color);
+            font-weight: 600;
+            opacity: 0.6;
+            cursor: pointer;
+            &::before {
+              padding: 8px;
+              color: black;
+              content: "/\00a0";
+            }
+            &:first-of-type {
+              opacity: 1;
+              &::before {
+                padding: 8px;
+                color: black;
+                content: "";
+              }
+            }
+            & a {
+              color: var(--font-color);
+              text-decoration: none;
+            }
+          }
+        }
+      }
       &-product {
         &-img {
           width: 148px;
@@ -865,7 +897,7 @@ header {
       &-bot {
         & .container {
           display: flex;
-          flex-wrap: wrap;
+          flex-wrap: nowrap;
           flex-direction: row;
           justify-content: center;
           align-items: flex-start;
