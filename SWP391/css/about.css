@@ -18,12 +18,17 @@ body {
   .background img{
     position: absolute;
     width: 100%;
-    transform: translateY(30%);
+    transform: translateY(26%);
   }
 
   .background .sangtran{
-    transform: translate(0%,80%);
+    transform: translate(-34%,-10%);
   }
+
+  .background .sangtran2{
+    transform: translate(30%,-10%);
+  }
+
 
   html {
     box-sizing: border-box;
@@ -88,6 +93,7 @@ body {
 
   .row{
     display: flex;
+    flex-wrap: wrap;
     margin: auto;
   }
 
@@ -128,7 +134,7 @@ body {
     width:0px;
     height:auto;
     background:#FFF;
-    opacity:0.4;
+    opacity:0.9;
   }
   
   
@@ -136,29 +142,29 @@ body {
    /*
   雨の初期位置とアニメーション指定
   */
-  .rains span:nth-child(1){left:5%; top:-190px; animation: rain-anim 10s infinite;}
-  .rains span:nth-child(2){left:10%; top:-180px; animation: rain-anim 11s infinite;}
-  .rains span:nth-child(3){left:15%; top:-170px; animation: rain-anim 8s infinite;}
-  .rains span:nth-child(4){left:20%; top:-160px; animation: rain-anim 12s infinite;}
-  .rains span:nth-child(5){left:25%; top:-150px; animation: rain-anim 10s infinite;}
+  .rains span:nth-child(1){left:5%; top:-190px; animation: rain-anim 100s infinite;}
+  .rains span:nth-child(2){left:10%; top:-180px; animation: rain-anim 110s infinite;}
+  .rains span:nth-child(3){left:15%; top:-170px; animation: rain-anim 80s infinite;}
+  .rains span:nth-child(4){left:20%; top:-160px; animation: rain-anim 120s infinite;}
+  .rains span:nth-child(5){left:25%; top:-150px; animation: rain-anim 100s infinite;}
   
-  .rains span:nth-child(6){left:30%; top:-150px; animation: rain-anim 11s infinite;}
-  .rains span:nth-child(7){left:35%; top:-160px; animation: rain-anim 13s infinite;}
-  .rains span:nth-child(8){left:40%; top:-170px; animation: rain-anim 7s infinite;}
-  .rains span:nth-child(9){left:45%; top:-180px; animation: rain-anim 9s infinite;}
-  .rains span:nth-child(10){left:50%; top:-190px; animation: rain-anim 11s infinite;}
+  .rains span:nth-child(6){left:30%; top:-150px; animation: rain-anim 101s infinite;}
+  .rains span:nth-child(7){left:35%; top:-160px; animation: rain-anim 130s infinite;}
+  .rains span:nth-child(8){left:40%; top:-170px; animation: rain-anim 70s infinite;}
+  .rains span:nth-child(9){left:45%; top:-180px; animation: rain-anim 90s infinite;}
+  .rains span:nth-child(10){left:50%; top:-190px; animation: rain-anim 110s infinite;}
   
-  .rains span:nth-child(11){left:55%; top:-190px; animation: rain-anim 10s infinite;}
-  .rains span:nth-child(12){left:60%; top:-180px; animation: rain-anim 6s infinite;}
-  .rains span:nth-child(13){left:65%; top:-170px; animation: rain-anim 14s infinite;}
-  .rains span:nth-child(14){left:70%; top:-160px; animation: rain-anim 12s infinite;}
-  .rains span:nth-child(15){left:75%; top:-150px; animation: rain-anim 10s infinite;}
+  .rains span:nth-child(11){left:55%; top:-190px; animation: rain-anim 100s infinite;}
+  .rains span:nth-child(12){left:60%; top:-180px; animation: rain-anim 60s infinite;}
+  .rains span:nth-child(13){left:65%; top:-170px; animation: rain-anim 140s infinite;}
+  .rains span:nth-child(14){left:70%; top:-160px; animation: rain-anim 120s infinite;}
+  .rains span:nth-child(15){left:75%; top:-150px; animation: rain-anim 100s infinite;}
   
-  .rains span:nth-child(16){left:80%; top:-150px; animation: rain-anim 14s infinite;}
-  .rains span:nth-child(17){left:85%; top:-160px; animation: rain-anim 8s infinite;}
-  .rains span:nth-child(18){left:90%; top:-170px; animation: rain-anim 9s infinite;}
-  .rains span:nth-child(19){left:95%; top:-180px; animation: rain-anim 11s infinite;}
-  .rains span:nth-child(20){left:100%; top:-190px; animation: rain-anim9 13s infinite;}
+  .rains span:nth-child(16){left:80%; top:-150px; animation: rain-anim 140s infinite;}
+  .rains span:nth-child(17){left:85%; top:-160px; animation: rain-anim 80s infinite;}
+  .rains span:nth-child(18){left:90%; top:-170px; animation: rain-anim 90s infinite;}
+  .rains span:nth-child(19){left:95%; top:-180px; animation: rain-anim 110s infinite;}
+  .rains span:nth-child(20){left:100%; top:-190px; animation: rain-anim9 130s infinite;}
   
   /*アニメーションキーフレーム*/
   @keyframes rain-anim {
@@ -220,7 +226,7 @@ body {
     90% { transform: translate(50px,0px);}
     99% { transform: translate(50px,600px);}
   
-    100% { transform: translate(0px,0px);}
+    100% { transform: translate(100px,2000px);}
     
   }
 
