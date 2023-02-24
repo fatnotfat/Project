@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <img src="images/Nav-line.png" alt="" />
+                <img src="images/Nav-line.png" alt="" alt="" class="nav-line" />
 
                 <!--NAV DESKTOP - TABLET-->
 
@@ -47,8 +47,95 @@
                     <div class="container">
                         <a href="mainPage" class="menu-logo"> LOGO </a>
                         <ul class="menu">
+                            <!--                            <li class="menu-item">
+                                                            <a href="searchByFilterPage" class="menu-link menu-link-category">Categories</a>
+                                                        </li>-->
                             <li class="menu-item">
-                                <a href="searchByFilterPage" class="menu-link">Categories</a>
+                                <a href="#!" class="menu-link menu-link-category">Categories</a>
+                                <ul class="menu-link-category-tab">
+                                    <div class="container">
+                                        <li class="menu-link-category-tab-title">
+                                            <a href="SearchByFilterServlet?txtProductCateID=1" class="menu-link menu-link-bracelet"
+                                               >BRACELET</a
+                                            >
+                                            <ul class="menu-link-category-tab-list">
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-bracelet">
+                                                        1
+                                                    </a>
+                                                </li>
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-bracelet">
+                                                        2
+                                                    </a>
+                                                </li>
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-bracelet">
+                                                        3
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-link-category-tab-title">
+                                            <a href="#!" class="menu-link menu-link-ring"> RING </a>
+                                            <ul class="menu-link-category-tab-list">
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-ring"> 1 </a>
+                                                </li>
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-ring"> 2 </a>
+                                                </li>
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-ring"> 3 </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-link-category-tab-title">
+                                            <a href="#!" class="menu-link menu-link-necklace">
+                                                NECKLACE
+                                            </a>
+                                            <ul class="menu-link-category-tab-list">
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-necklace">
+                                                        1
+                                                    </a>
+                                                </li>
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-necklace">
+                                                        2
+                                                    </a>
+                                                </li>
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-necklace">
+                                                        3
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-link-category-tab-title">
+                                            <a href="#!" class="menu-link menu-link-earring">
+                                                EARRINGS
+                                            </a>
+                                            <ul class="menu-link-category-tab-list">
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-earring">
+                                                        1
+                                                    </a>
+                                                </li>
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-earring">
+                                                        2
+                                                    </a>
+                                                </li>
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-earring">
+                                                        3
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </div>
+                                </ul>
                             </li>
                             <li class="menu-item">
                                 <a href="#!" class="menu-link">About</a>
@@ -82,12 +169,12 @@
                                         </div>
                                         <div class="menu-icon-tab-search-form">
                                             <form action="searchTextController">
-                                            <input
-                                                type="text"
-                                                class="menu-icon-tab-search-input"
-                                                placeholder="Search Product..."
-                                                name="txtSearch" value="${param.txtSearch}"
-                                                />
+                                                <input
+                                                    type="text"
+                                                    class="menu-icon-tab-search-input"
+                                                    placeholder="Search Product..."
+                                                    name="txtSearch" value="${param.txtSearch}"
+                                                    />
                                             </form>
                                         </div>
                                     </div>
@@ -198,24 +285,104 @@
                 <div class="nav-bot-responsive">
                     <div class="container">
                         <div class="menu-responsive-icon">
-                            <img
-                                class="menu-responsive-icon-img"
-                                srcset="images/shopping-cart.png 2x"
-                                alt=""
-                                />
+                            <!--                            <img
+                                                            class="menu-responsive-icon-img"
+                                                            srcset="images/shopping-cart.png 2x"
+                                                            alt=""
+                                                            />-->
+                            <div class="menu-responsive-icon-tab">
+                                <button class="menu-responsive-icon-tab-cart" href="#!">
+                                    <img
+                                        class="menu-responsive-icon-img menu-responsive-icon-img-cart"
+                                        srcset="images/shopping-cart.png 2x"
+                                        alt=""
+                                        />
+                                </button>
+                                <div class="menu-responsive-icon-tab-cart-content">
+                                    <div class="container">
+                                        <div class="menu-responsive-icon-tab-cart-content-title">
+                                            <div
+                                                class="menu-responsive-icon-tab-cart-content-title-container"
+                                                >
+                                                <p
+                                                    class="menu-responsive-icon-tab-cart-content-title-desc"
+                                                    >
+                                                    Cart
+                                                </p>
+                                                <img
+                                                    srcset="images/Footer-line.png 2x"
+                                                    alt=""
+                                                    class="menu-responsive-icon-tab-cart-space"
+                                                    />
+                                            </div>
+                                        </div>
+                                        <div class="menu-responsive-icon-tab-cart-content-show">
+                                            <div
+                                                class="menu-responsive-icon-tab-cart-content-show-icon"
+                                                >
+                                                <img
+                                                    srcset="images/shopping-icon-tab.png 2x"
+                                                    alt=""
+                                                    />
+                                            </div>
+                                            <div
+                                                class="menu-responsive-icon-tab-cart-content-show-txt"
+                                                >
+                                                <p
+                                                    class="menu-responsive-icon-tab-cart-content-show-txt-desc"
+                                                    >
+                                                    There are currently no products
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <img srcset="images/Footer-line.png 2x" alt="" />
+                                        <div class="menu-responsive-icon-tab-cart-content-function">
+                                            <div
+                                                class="menu-responsive-icon-tab-cart-content-function-total"
+                                                >
+                                                <p
+                                                    class="menu-responsive-icon-tab-cart-content-function-total-txt"
+                                                    >
+                                                    TOTAL AMOUNT
+                                                </p>
+                                                <p
+                                                    class="menu-responsive-icon-tab-cart-content-function-total-price"
+                                                    >
+                                                    0₫
+                                                </p>
+                                            </div>
+                                            <div
+                                                class="menu-responsive-icon-tab-cart-content-function-method"
+                                                >
+                                                <button
+                                                    class="menu-responsive-icon-tab-cart-content-function-method-btn"
+                                                    >
+                                                    VIEW CART
+                                                </button>
+                                                <button
+                                                    class="menu-responsive-icon-tab-cart-content-function-method-btn"
+                                                    >
+                                                    PAY
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <a href="#!" class="menu-responsive-logo"> LOGO </a>
                         <div class="menu-responsive-icon">
                             <img
-                                class="menu-responsive-icon-img"
+                                class="menu-responsive-icon-img menu-responsive-icon-img-bar"
                                 srcset="images/textalign-justifycenter.png 2x"
                                 alt=""
                                 />
                         </div>
                     </div>
                 </div>
+                <img src="images/Nav-line.png" alt="" class="nav-line-bot"/>
             </header>
-            <img src="images/Nav-line.png" alt="" />
+
             <div class="login">
                 <div class="container">
                     <div class="login-heading">
@@ -292,11 +459,12 @@
                                     <a href="signUpPage" class="login-function-register-hightlight"
                                        >Register</a>
                                     <br/>
-
+                                    
+                                    <p class="login-function-register-question">Or</p>
+                                    <a class="login-link" href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/SWP391ProjectMVC/LoginGoogleHandler&response_type=code
+                                       &client_id=781842961263-gokuov74qslei1a1t44nufilc8u0d8sb.apps.googleusercontent.com&approval_prompt=force">Login with Google</a>
                                 </p>
-                                <span class="login-function-register-question">Or</span>
-                                <a class="login-link" href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/SWP391ProjectMVC/LoginGoogleHandler&response_type=code
-                                   &client_id=781842961263-gokuov74qslei1a1t44nufilc8u0d8sb.apps.googleusercontent.com&approval_prompt=force">Login with Google</a>
+                                
                             </div>                              
                         </form><br/>
                     </div>
@@ -305,29 +473,70 @@
             <img src="images/Footer-line.png" alt="" />
             <footer class="footer">
                 <div class="container">
-                    <ul class="footer-menu">
-                        <li class="footer-menu-item">
-                            <a href="#!" class="footer-menu-link">Help</a>
-                        </li>
-                        <li class="footer-menu-item">
-                            <a href="#!" class="footer-menu-link">Hotline</a>
-                        </li>
-                        <li class="footer-menu-item">
-                            <a href="#!" class="footer-menu-link">Instagram</a>
-                        </li>
-                        <li class="footer-menu-item">
-                            <a href="#!" class="footer-menu-link">Shopee</a>
-                        </li>
-                        <li class="footer-menu-item">
-                            <a href="#!" class="footer-menu-link">Lazada</a>
-                        </li>
-                        <li class="footer-menu-item">
-                            <a href="#!" class="footer-menu-link">Facebook</a>
-                        </li>
-                        <li class="footer-menu-item">
-                            <a href="#!" class="footer-menu-link">License</a>
-                        </li>
-                    </ul>
+                    <div class="footer-menu">
+                        <div class="footer-menu-connect">
+                            <h3 class="footer-menu-connect-title">CONNECT WITH US</h3>
+                            <div class="footer-menu-connect-desc">
+                                <p class="footer-menu-connect-desc-txt">
+                                    PTDK is an accessory brand founded by people who are
+                                    passionate about jewelry, love the crafts created by pure
+                                    Vietnamese hands, and want to bring the works to the world.
+                                </p>
+                                <p class="footer-menu-connect-desc-txt">
+                                    PTDK Company (Phat-Truong-Dung-Duy-Khoa)
+                                </p>
+                                <p class="footer-menu-connect-desc-txt">
+                                    Email: cubiiwork@gmail.com
+                                </p>
+                                <p class="footer-menu-connect-desc-txt">Zip code: 70000</p>
+                            </div>
+                            <div class="footer-menu-connect-icon">
+                                <span class="footer-menu-connect-icon-facebook"
+                                      ><i class="fa-brands fa-facebook-f"></i
+                                    ></span>
+                                <span class="footer-menu-connect-icon-instagram"
+                                      ><i class="fa-brands fa-instagram"></i
+                                    ></span>
+                            </div>
+                        </div>
+                        <div class="footer-menu-cus-service">
+                            <h3 class="footer-menu-cus-service-title">CUSTOMER SERVICE</h3>
+                            <div class="footer-menu-cus-service-desc">
+                                <p class="footer-menu-cus-service-desc-txt">
+                                    TERMS OF SERVICE
+                                </p>
+                                <p class="footer-menu-cus-service-desc-txt">
+                                    REFUND POLICY
+                                </p>
+                            </div>
+                        </div>
+                        <div class="footer-menu-about">
+                            <h3 class="footer-menu-about-title">ABOUT US</h3>
+                            <div class="footer-menu-about-desc">
+                                <p class="footer-menu-about-desc-txt">
+                                    STORY OF PDTK
+                                </p>
+                            </div>
+                        </div>
+                        <div class="footer-menu-care">
+                            <h3 class="footer-menu-care-title">FOR CUSTOMERS</h3>
+                            <div class="footer-menu-care-desc">
+                                <p class="footer-menu-care-desc-txt">
+                                    INSTRUCTIONS FOR STORAGE OF US PRODUCTS
+                                </p>
+                                <p class="footer-menu-care-desc-txt">
+                                    FASHION KNOWLEDGE
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    <div class="container">
+                        <p class="footer-copyright-txt">
+                            © 2023 PTDK All Rights Reserved.
+                        </p>
+                    </div>
                 </div>
             </footer>
         </div>

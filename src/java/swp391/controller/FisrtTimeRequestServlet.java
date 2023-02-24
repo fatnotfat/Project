@@ -46,7 +46,7 @@ public class FisrtTimeRequestServlet extends HttpServlet {
         String url = siteMaps.getProperty(
                 MyApplicationConstants.FirstTimeRequestServlet.MAIN_PAGE);
         try {
-            //end session before login
+//            //end session before login
             HttpSession session = request.getSession(true);
             session.invalidate();
             //Get cookies
