@@ -129,116 +129,149 @@
   
   
   /* ----------product--------------- */
+ /* ----------product--------------- */
+
+.product {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+}
+
+
+.product__item {
+  display: block;
+  margin-top: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  transition: tranform ease-in 0.1s;
+  will-change: transform;
+  cursor: pointer;
+}
+
+.product__item:hover {
+  transform: scale(1.03);
+  transition: all .5s;
+
+}
+
+.product__item:not(:hover) {
+  transform: scale(1);
+  transition: all .5s;
+
+}
+
+.product__item-img {
+ 
+  transition: background-image 900ms ease-out 100ms
+}
+
+.product__item:hover .product__item-img {
+}
+
+
+
+
+
+
+.product__item-name {
+  font-size: 2rem;
+  font-weight: 400;
+  color: #333;
+  line-height: 1.8rem;
+  margin: 10px 10px;
+  display: block;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+}
+
+.product__item-price {
+  display: flex;
+  margin-left: 10px;
+  font-size: 2rem;
+  flex-wrap: wrap;
+  padding: 0 10px;
+  margin: 7px 0;
+}
+
+
+
+.product__item-info {
+  display: flex;
+  justify-content: center;
+
+}
+
+.product__item-info .product__item-view {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 90px;
+  border: 1px solid #fff;
+  background-color: #000;
+  color: #fff;
+  font-size: 1.6rem;
+  letter-spacing: 0.3rem;
+  font-family: "Montserrat", sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 900ms ease-out 100ms, background-color 900ms ease-out 100ms;
+
+}
+
+.product__item:hover .product__item-view {
+  opacity: 1;
+
+}
+
+
+
+.product__item-view:hover {
+  background-color: #F8F3E9;
+  color: #000;
+}
+
+.product__item-info .product__item-view a {
+  text-decoration: none;
+  color: #333;
+
+}
+
+
+ .card {
+   
+}
+
+.product__item:hover .img-top{
+  display: inline;
+  opacity: 1;
+  animation: fadeIn 1s;
+}
+
+
+
+ .img-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  width: 100%;
+  opacity: 0;
+  animation: fadeOut 1s;
+
   
-  .product {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 50px;
-  }
-  
-  
-  .product__item {
-    display: block;
-    margin-top: 10px;
-    border: 1px solid #000;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
-    transition: tranform ease-in 0.1s;
-    will-change: transform;
-    cursor: pointer;
-  }
-  
-  .product__item:hover {
-    transform: translate(-2px, -2px);
-  
-  }
-  
-  .product__item-img {
-    padding-top: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0-KZuLx2g1yy61JbptIPHlDLeap22QPvp8A&usqp=CAU');
-    transition: background-image 900ms ease-out 100ms
-  }
-  
-  .product__item:hover .product__item-img {
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu-Z8VFWnKZ23vZKRlATPA-uadJhT6s7AXSANUqlfF2wDWnBJKkhntvX7l7MA9lWVtqEw&usqp=CAU');
-  }
-  
-  
-  
-  
-  
-  
-  .product__item-name {
-    font-size: 2rem;
-    font-weight: 400;
-    color: #333;
-    line-height: 1.8rem;
-    margin: 10px 10px;
-    display: block;
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    text-overflow: ellipsis;
-  }
-  
-  .product__item-price {
-    display: flex;
-    margin-left: 10px;
-    font-size: 2rem;
-    flex-wrap: wrap;
-    padding: 0 10px;
-    margin: 7px 0;
-  }
-  
-  
-  
-  .product__item-info {
-    display: flex;
-    justify-content: center;
-  
-  }
-  
-  .product__item-info .product__item-view {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 90px;
-    border: 1px solid #fff;
-    background-color: #000;
-    color: #fff;
-    font-size: 1.6rem;
-    letter-spacing: 0.3rem;
-    font-family: "Montserrat", sans-serif;
-    border-radius: 5px;
-    opacity: 0;
-    cursor: pointer;
-    transition: opacity 900ms ease-out 100ms, background-color 900ms ease-out 100ms;
-  
-  }
-  
-  .product__item:hover .product__item-view {
-    opacity: 1;
-  
-  }
-  
-  
-  
-  .product__item-view:hover {
-    background-color: #F8F3E9;
-    color: #000;
-  }
-  
-  .product__item-info .product__item-view a {
-    text-decoration: none;
-    color: #333;
-  
-  }
+}
+
+
+.img-back {
+  width: 100%;
+
+}
   
   .footer{
     background-color: #000;

@@ -946,6 +946,7 @@ body{
 
 
 
+
 /* silđer */
 .slide__show{
     margin-top: 200px;
@@ -1011,20 +1012,11 @@ body{
 }
 
 .more__item-img {
-    padding-top: 100%;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0-KZuLx2g1yy61JbptIPHlDLeap22QPvp8A&usqp=CAU');
-    transition: background-image 900ms ease-out 100ms
-
+    
 
 }
 
  .more__item:hover .more__item-img{
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu-Z8VFWnKZ23vZKRlATPA-uadJhT6s7AXSANUqlfF2wDWnBJKkhntvX7l7MA9lWVtqEw&usqp=CAU');
 }
 
 
@@ -1087,6 +1079,7 @@ body{
 
 
 
+
 .more__item-view:hover{
     background-color: #F8F3E9;
     color: #000;
@@ -1128,6 +1121,50 @@ body{
 
 
 
+.card {
+   
+}
+
+.more__item:hover .img-top{
+  display: inline;
+  opacity: 1;
+  animation: fadeIn 1s;
+}
+
+
+
+ .img-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  width: 100%;
+  opacity: 0;
+  animation: fadeOut 1s;
+
+  
+}
+
+
+.img-back {
+  width: 100%;
+
+}
+
+
+.swiper-pagination-bullet{
+    background-color: #fff !important;
+}
+
+.swiper-button-next:hover{
+    background-color: rgba(222, 218, 218, 0.94) !important;
+}
+
+.swiper-button-next{
+    border-radius: 10px !important;
+    width: 50px !important;
+    height: 100px !important;
+}
 
 
 @media screen and (max-width: 1024px) {
