@@ -812,21 +812,187 @@ header {
     }
     &-form {
       width: 100%;
+      &-address {
+        padding: 10px 0;
+      }
       &-address .container {
         position: relative;
-        &::before {
-          background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMSIgaGVpZ2h0PSIxOSIgdmlld0JveD0iMCAwIDIxIDE5Ij48dGl0bGU+QXJ0Ym9hcmQgMTwvdGl0bGU+PGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48ZyBmaWxsPSIjMDAwIj48Zz48cGF0aCBkPSJNMCAwaDF2MTlIMFYweiIgaWQ9IlNoYXBlIiBmaWxsLW9wYWNpdHk9Ii4xNSIvPjxwYXRoIGQ9Ik0xMSA4aDEwbC01IDUtNS01eiIgZmlsbC1vcGFjaXR5PSIuNSIvPjwvZz48L2c+PC9nPjwvc3ZnPg==),
-            none;
-          content: "";
-          position: absolute;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          width: 50px;
-          background-position: center center;
-          background-repeat: no-repeat;
-          pointer-events: none;
+        // &::before {
+        //   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMSIgaGVpZ2h0PSIxOSIgdmlld0JveD0iMCAwIDIxIDE5Ij48dGl0bGU+QXJ0Ym9hcmQgMTwvdGl0bGU+PGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48ZyBmaWxsPSIjMDAwIj48Zz48cGF0aCBkPSJNMCAwaDF2MTlIMFYweiIgaWQ9IlNoYXBlIiBmaWxsLW9wYWNpdHk9Ii4xNSIvPjxwYXRoIGQ9Ik0xMSA4aDEwbC01IDUtNS01eiIgZmlsbC1vcGFjaXR5PSIuNSIvPjwvZz48L2c+PC9nPjwvc3ZnPg==),
+        //     none;
+        //   content: "";
+        //   position: absolute;
+        //   right: 5px;
+        //   top: 0;
+        //   bottom: 0;
+        //   width: 50px;
+        //   background-position: center center;
+        //   background-repeat: no-repeat;
+        //   pointer-events: none;
+        // }
+      }
+      &-name {
+        padding: 10px 0;
+        & .container {
+          position: relative;
         }
+      }
+      &-phone {
+        padding: 10px 0;
+        & .container {
+          position: relative;
+        }
+      }
+      &-delivery {
+        border: 1px solid var(--form-color);
+        background-color: var(--tab-color);
+        border-radius: 1rem;
+        margin-bottom: 30px;
+        & .container {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+        }
+      }
+      &-delivery-address {
+        border-top: 1px solid var(--form-color);
+        padding: 10px 0;
+        & .container {
+          position: relative;
+        }
+        & .container > .field-label {
+          padding: 0 1em;
+        }
+      }
+      &-city {
+        padding: 10px 0;
+        & .container {
+          position: relative;
+        }
+        & .container > .field-label {
+          padding: 0 1em;
+        }
+      }
+      &-district {
+        padding: 10px 0;
+        & .container {
+          position: relative;
+        }
+        & .container > .field-label {
+          padding: 0 1em;
+        }
+      }
+      &-ward {
+        padding: 10px 0;
+        & .container {
+          position: relative;
+        }
+        & .container > .field-label {
+          padding: 0 1em;
+        }
+      }
+      &-delivery-address-select {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        border-bottom: 1px solid var(--form-color);
+      }
+    }
+    &-btn {
+      border: 1px solid black;
+      padding: 10px 20px;
+      background-color: transparent;
+      color: black;
+      font-size: 14px;
+      font-weight: 700;
+      transition: all 0.2s linear;
+      position: relative;
+      cursor: pointer;
+      &::after {
+        content: "";
+        position: absolute;
+        background-color: var(--button-color);
+        color: white;
+        top: 0;
+        height: 100%;
+        width: 0;
+        right: 0;
+        transition: 0.3s;
+        z-index: -1;
+      }
+      &:hover {
+        // background-color: white;
+        color: white;
+      }
+      &:hover::after {
+        left: 0;
+        width: 100%;
+        // color: white;
+        // background-color: #333333;
+        // z-index: 1;
+      }
+    }
+  }
+}
+
+input[type="radio"].input-radio {
+  border-radius: 50%;
+}
+
+.radio {
+  &-label {
+    display: flex !important;
+    cursor: pointer !important;
+    align-items: center;
+    padding: 1.3em;
+    width: auto;
+    &-primary {
+      font-size: 14px;
+    }
+  }
+  &-input {
+    padding-right: 0.75em;
+    white-space: nowrap;
+    & .input-radio {
+      border-radius: 50% !important; /* add !important declaration */
+      width: 18px;
+      height: 18px;
+      transition: all 0.2s ease-in-out;
+      position: relative;
+      cursor: pointer;
+      vertical-align: -4px;
+      outline: 0;
+      &::after {
+        width: 10px;
+        height: 10px;
+        margin-left: 4px;
+        margin-top: 4px;
+        background-color: #fff;
+        border-radius: 50%;
+        content: "";
+        display: block;
+        top: 50%;
+        left: 50%;
+        transition: all 0.2s ease-in-out 0.1s;
+      }
+    }
+    & .input-radio:checked {
+      box-shadow: transparent;
+      border: none;
+      &::after {
+        transform: scale(1);
+        opacity: 1;
+        width: 18px;
+        height: 18px;
+        margin-left: 0px;
+        margin-top: 0px;
+        background-color: #252a2b;
+        border-radius: 50%;
+        content: "";
+        display: block;
+        top: 50%;
+        left: 50%;
+        transition: all 0.2s ease-in-out 0.1s;
       }
     }
   }
@@ -839,7 +1005,7 @@ header {
     position: absolute;
     top: 0;
     width: 100%;
-    padding: 0 2.93333em;
+    padding: 0 2.5em;
     z-index: 1;
     pointer-events: none;
     overflow: hidden;
@@ -850,6 +1016,7 @@ header {
     margin: 0.5em 0;
     margin-top: 0.3em;
     display: block;
+    font-size: 12px;
   }
   &-input {
     box-shadow: 0 0 0 1px #d9d9d9;
@@ -862,8 +1029,17 @@ header {
     width: 100%;
     padding: 1.5em 2.9em 0.94em 0.8em;
     word-break: normal;
+    font-size: 14px;
     &:focus {
       box-shadow: 0 0 0 2px #252a2b;
+    }
+    & > .field-input-item > option {
+      position: absolute;
+      font-weight: normal;
+      display: block;
+      white-space: nowrap;
+      min-height: 1.2em;
+      padding: 10px 10px;
     }
   }
 }
