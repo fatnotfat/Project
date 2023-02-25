@@ -14,7 +14,7 @@
     </head>
     <body>
         <h1>Administrator login page</h1>
-        <form action="adminLoginController" method="POST">
+        <form action="adminLoginController" method="POST"> 
             <c:set var="errors" value="${requestScope.ADMINLOGIN_ERROR}"/>
             Username <input type="text" name="txtUsername" 
                             value="${param.txtUsername}" /><br/>

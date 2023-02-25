@@ -6,7 +6,7 @@
 package swp391.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Properties;
@@ -20,7 +20,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import swp391.ordersdetail.OrdersDetailDAO;
+import javax.servlet.http.HttpSession;
+import swp391.customer.CustomerCreateError;
+import swp391.customer.CustomerDAO;
+import swp391.customer.CustomerDTO;
 import swp391.utils.MyApplicationConstants;
 
 /**
@@ -46,21 +49,73 @@ public class ShippingServlet extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
                 MyApplicationConstants.ShippingServlet.SHIPPING_PAGE);
-        String txtOrdersDtID = request.getParameter("txtOrdersDtID");
-        int ordersDtID = Integer.parseInt(txtOrdersDtID);
         String txtShippingID = request.getParameter("chkShippingID");
-        int shippingID = Integer.parseInt(txtShippingID);
+        boolean errorFound = false;
+        CustomerCreateError errors = new CustomerCreateError();
+        HttpSession session = request.getSession();
         try {
-            OrdersDetailDAO dao = new OrdersDetailDAO();
-            boolean result = dao.updateShippingID(shippingID, ordersDtID);
-            if (result) {
-                url = siteMaps.getProperty(
-                        MyApplicationConstants.ShippingServlet.PAYMENT_PAGE);
+            if (txtShippingID == null) {
+                errors.setShippingIDLengthError("Please choose the shipping method");
+                request.setAttribute("SIGNUPFORSHIPPING_ERROR", errors);
+            } else {
+                Object emailOfSession = session.getAttribute("USER");
+                if (emailOfSession != null) {
+                    int shippingID = Integer.parseInt(txtShippingID);
+                    request.setAttribute("SHIPPING_ID", shippingID);
+                    url = siteMaps.getProperty(
+                            MyApplicationConstants.ShippingServlet.PAYMENT_PAGE);
+                } else {
+                    String firstName = request.getParameter("txtFirstName");
+                    byte[] bytes1 = firstName.getBytes(StandardCharsets.ISO_8859_1);
+                    firstName = new String(bytes1, StandardCharsets.UTF_8);
+                    String lastName = request.getParameter("txtLastName");
+                    byte[] bytes2 = lastName.getBytes(StandardCharsets.ISO_8859_1);
+                    lastName = new String(bytes2, StandardCharsets.UTF_8);
+                    String address = request.getParameter("txtAddress");
+                    String phone = request.getParameter("txtPhone");
+                    String email = request.getParameter("txtEmail");
+                    int shippingID = Integer.parseInt(txtShippingID);
+                    CustomerDAO dao = new CustomerDAO();
+                    if (firstName.trim().length() < 1) {
+                        errorFound = true;
+                        errors.setFirstNameLengthError("You can't leave this empty");
+                    }
+                    if (lastName.trim().length() < 1) {
+                        errorFound = true;
+                        errors.setLastNameLengthError("You can't leave this empty");
+                    }
+                    if (address.trim().length() < 1) {
+                        errorFound = true;
+                        errors.setAddressLengthError("You can't leave this empty");
+                    }
+                    if (phone.trim().length() < 1) {
+                        errorFound = true;
+                        errors.setPhoneLengthError("You can't leave this empty");
+                    }
+                    if (email.trim().length() < 1) {
+                        errorFound = true;
+                        errors.setEmailLengthError("You can't leave this empty");
+                    } else if (dao.checkEmail(email)) {
+                        errorFound = true;
+                        errors.setEmailIsExisted(email + " is existed!!!");
+                    }
+                    if (errorFound) {
+                        request.setAttribute("SIGNUPFORSHIPPING_ERROR", errors);
+                    } else {
+                        dao.createAccountForShipping(firstName + " " + lastName,
+                                email, phone, address);
+                        CustomerDTO result = dao.loadInformationForPayment(email);
+                        session.setAttribute("USER", result);
+                        request.setAttribute("SHIPPING_ID", shippingID);
+                        url = siteMaps.getProperty(
+                                MyApplicationConstants.ShippingServlet.PAYMENT_PAGE);
+                    }
+                }
             }
         } catch (NamingException ex) {
-            log("PaymentServlet _ Naming _ " + ex.getMessage());
+            log("ShippingServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {
-            log("PaymentServlet _ SQL _ " + ex.getMessage());
+            log("ShippingServlet _ SQL _ " + ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

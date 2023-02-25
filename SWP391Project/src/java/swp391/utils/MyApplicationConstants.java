@@ -129,7 +129,13 @@ public class MyApplicationConstants {
     public class PaymentServlet {
 
         public static final String PAYMENT_PAGE = "paymentPage";
-        public static final String MAIN_PAGE = "mainPage";
+        public static final String CHECKOUT_PAGE = "checkOutPage";
+    }
+    
+    public class LoginForCheckoutServlet {
+
+        public static final String LOGINFORCHECKOUT_PAGE = "loginForCheckoutPage";
+        public static final String SHIPPING_PAGE = "shippingPage";
     }
 
 }

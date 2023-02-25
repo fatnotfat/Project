@@ -14,6 +14,7 @@ import java.util.Date;
  */
 public class CustomerDTO implements Serializable {
 
+    private int customerID;
     private String name;
     private String password;
     private Date birthDate;
@@ -28,13 +29,8 @@ public class CustomerDTO implements Serializable {
     public CustomerDTO() {
     }
 
-    public CustomerDTO(String name, boolean role) {
-        this.name = name;
-        this.role = role;
-    }
-
-    public CustomerDTO(String name, String password, Date birthDate,
-            String email, String phone, String address, boolean role, int rankID, boolean sex, boolean typeOfLogin) {
+    public CustomerDTO(int customerID, String name, String password, Date birthDate, String email, String phone, String address, boolean role, int rankID, boolean sex, boolean typeOfLogin) {
+        this.customerID = customerID;
         this.name = name;
         this.password = password;
         this.birthDate = birthDate;
@@ -45,6 +41,39 @@ public class CustomerDTO implements Serializable {
         this.rankID = rankID;
         this.sex = sex;
         this.typeOfLogin = typeOfLogin;
+    }
+
+    public CustomerDTO(String name, String password, Date birthDate, String email, String phone, String address, boolean role, int rankID, boolean sex, boolean typeOfLogin) {
+        this.name = name;
+        this.password = password;
+        this.birthDate = birthDate;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.role = role;
+        this.rankID = rankID;
+        this.sex = sex;
+        this.typeOfLogin = typeOfLogin;
+    }
+
+    public CustomerDTO(String name, boolean role) {
+        this.name = name;
+        this.role = role;
+    }
+
+    public CustomerDTO(int customerID, String name, String email, String phone, String address) {
+        this.customerID = customerID;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    public CustomerDTO(String name, String email, String phone, String address) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
     }
 
     /**

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : adminManage
+    Document   : adminMainPage
     Created on : Feb 16, 2023, 4:17:27 PM
     Author     : Chau Nhat Truong
 --%>

@@ -23,11 +23,13 @@ public class CustomerCreateError implements Serializable {
     private String sexLengthError;
     private String confirmNotMatched;
     private String emailIsExisted;
+    private String shippingIDLengthError;
+    private String paymentIDLengthError;
 
     public CustomerCreateError() {
     }
 
-    public CustomerCreateError(String firstNameLengthError, String lastNameLengthError, String passwordLengthError, String emailLengthError, String phoneLengthError, String addressLengthError, String birthDateLengthError, String sexLengthError, String confirmNotMatched, String emailIsExisted) {
+    public CustomerCreateError(String firstNameLengthError, String lastNameLengthError, String passwordLengthError, String emailLengthError, String phoneLengthError, String addressLengthError, String birthDateLengthError, String sexLengthError, String confirmNotMatched, String emailIsExisted, String shippingIDLengthError, String paymentIDLengthError) {
         this.firstNameLengthError = firstNameLengthError;
         this.lastNameLengthError = lastNameLengthError;
         this.passwordLengthError = passwordLengthError;
@@ -38,6 +40,8 @@ public class CustomerCreateError implements Serializable {
         this.sexLengthError = sexLengthError;
         this.confirmNotMatched = confirmNotMatched;
         this.emailIsExisted = emailIsExisted;
+        this.shippingIDLengthError = shippingIDLengthError;
+        this.paymentIDLengthError = paymentIDLengthError;
     }
 
     public String getFirstNameLengthError() {
@@ -55,7 +59,6 @@ public class CustomerCreateError implements Serializable {
     public void setLastNameLengthError(String lastNameLengthError) {
         this.lastNameLengthError = lastNameLengthError;
     }
-
 
     /**
      * @return the passwordLengthError
@@ -167,6 +170,34 @@ public class CustomerCreateError implements Serializable {
      */
     public void setSexLengthError(String sexLengthError) {
         this.sexLengthError = sexLengthError;
+    }
+
+    /**
+     * @return the shippingIDLengthError
+     */
+    public String getShippingIDLengthError() {
+        return shippingIDLengthError;
+    }
+
+    /**
+     * @param shippingIDLengthError the shippingIDLengthError to set
+     */
+    public void setShippingIDLengthError(String shippingIDLengthError) {
+        this.shippingIDLengthError = shippingIDLengthError;
+    }
+
+    /**
+     * @return the paymentIDLengthError
+     */
+    public String getPaymentIDLengthError() {
+        return paymentIDLengthError;
+    }
+
+    /**
+     * @param paymentIDLengthError the paymentIDLengthError to set
+     */
+    public void setPaymentIDLengthError(String paymentIDLengthError) {
+        this.paymentIDLengthError = paymentIDLengthError;
     }
 
 }

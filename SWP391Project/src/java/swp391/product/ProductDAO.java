@@ -103,10 +103,8 @@ public class ProductDAO implements Serializable {
                     float price = rs.getInt("Price");
                     boolean status = rs.getBoolean("Status");
                     int size = rs.getInt("Size");
-                    //Create DTO instance
                     ProductDTO dto = new ProductDTO(productID,
                             name, description, quantity, price, status, size);
-                    //add to bookList
                     if (this.itemsList == null) {
                         this.itemsList = new ArrayList<>();
                     }

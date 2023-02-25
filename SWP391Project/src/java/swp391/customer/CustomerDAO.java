@@ -31,26 +31,59 @@ public class CustomerDAO implements Serializable {
         ResultSet rs = null;
         CustomerDTO result = null;
         try {
-            //connect DB
             con = DBHelper.makeConnection();
             if (con != null) {
-                //Create SQL String
                 String sql = "Select Name, Email, Phone, Address, Role "
                         + "From Customer "
                         + "Where Email = ? And Password = ?";
-                //Create statement
                 stm = con.prepareStatement(sql);
                 stm.setString(1, email);
                 stm.setString(2, password);
-                //ExecuteQuery
                 rs = stm.executeQuery();
-                //Process result
                 if (rs.next()) {
                     String name = rs.getString("Name");
-                    boolean role = rs.getBoolean("Role");
-                    result = new CustomerDTO(name, role);
+                    String phone = rs.getString("Phone");
+                    String address = rs.getString("Address");
+                    result = new CustomerDTO(name, email, phone, address);
                 }
-            }//end con is available
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    public CustomerDTO loadInformationForPayment(String email)
+            throws SQLException, NamingException {;
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        CustomerDTO result = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select CustomerID, Name, Email, Phone, Address "
+                        + "From Customer "
+                        + "Where Email = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, email);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    int customerID = rs.getInt("CustomerID");
+                    String name = rs.getString("Name");
+                    String phone = rs.getString("Phone");
+                    String address = rs.getString("Address");
+                    result = new CustomerDTO(customerID, name, email, phone, address);
+                }
+            }
         } finally {
             if (rs != null) {
                 rs.close();
@@ -77,16 +110,13 @@ public class CustomerDAO implements Serializable {
         PreparedStatement stm = null;
         boolean result = false;
         try {
-            //1. connect DB
             con = DBHelper.makeConnection();
             if (con != null) {
-                //2. Create SQL String
                 String sql = "Insert Into Customer("
                         + "Name, Password, DateOfBirth, Email, Phone, Address, Role, RankID, Sex, TypeOfLogin"
                         + ") "
                         + "Values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?"
                         + ")";
-                //3. Create statement
                 stm = con.prepareStatement(sql);
                 stm.setString(1, dto.getName());
                 stm.setString(2, dto.getPassword());
@@ -107,13 +137,46 @@ public class CustomerDAO implements Serializable {
                 stm.setInt(8, dto.getRankID());
                 stm.setBoolean(9, dto.isSex());
                 stm.setBoolean(10, dto.isTypeOfLogin());
-                //4. ExecuteQuery
                 int effectedRows = stm.executeUpdate();
-                //5. Process result
                 if (effectedRows > 0) {
                     result = true;
                 }
-            }//end con is available
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    public boolean createAccountForShipping(String name, String email,
+            String phone, String address)
+            throws SQLException, NamingException, ParseException {;
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Insert Into Customer("
+                        + "Name, Email, Phone, Address"
+                        + ") "
+                        + "Values(?, ?, ?, ?"
+                        + ")";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, name);
+                stm.setString(2, email);
+                stm.setString(3, phone);
+                stm.setString(4, address);
+                int effectedRows = stm.executeUpdate();
+                if (effectedRows > 0) {
+                    result = true;
+                }
+            }
         } finally {
             if (stm != null) {
                 stm.close();
@@ -132,23 +195,18 @@ public class CustomerDAO implements Serializable {
         ResultSet rs = null;
         boolean result = false;
         try {
-            //1. connect DB
             con = DBHelper.makeConnection();
             if (con != null) {
-                //2. Create SQL String
                 String sql = "Select Email "
                         + "From Customer "
                         + "Where Email = ?";
-                //3. Create statement
                 stm = con.prepareStatement(sql);
                 stm.setString(1, email);
-                //4. ExecuteQuery
                 rs = stm.executeQuery();
-                //5. Process result
                 if (rs.next()) {
                     return true;
                 }
-            }//end con is available
+            }
         } finally {
             if (rs != null) {
                 rs.close();
@@ -170,23 +228,18 @@ public class CustomerDAO implements Serializable {
         ResultSet rs = null;
         boolean result = false;
         try {
-            //1. connect DB
             con = DBHelper.makeConnection();
             if (con != null) {
-                //2. Create SQL String
                 String sql = "Select TypeOfLogin "
                         + "From Customer "
                         + "Where Email = ?";
-                //3. Create statement
                 stm = con.prepareStatement(sql);
                 stm.setString(1, email);
-                //4. ExecuteQuery
                 rs = stm.executeQuery();
-                //5. Process result
                 if (rs.next()) {
                     return true;
                 }
-            }//end con is available
+            }
         } finally {
             if (rs != null) {
                 rs.close();
@@ -207,19 +260,14 @@ public class CustomerDAO implements Serializable {
         PreparedStatement stm = null;
         boolean result = false;
         try {
-            //Connect DB
             con = DBHelper.makeConnection();
-            //Create SQL String
             String sql = "Update Customer "
                     + "Set Password = ? "
                     + "Where Email = ?";
-            //Create statement
             stm = con.prepareStatement(sql);
             stm.setString(1, password);
             stm.setString(2, email);
-            //Execute query
             int effectedRows = stm.executeUpdate();
-            //Process result
             if (effectedRows > 0) {
                 result = true;
             }
