@@ -8,10 +8,11 @@ package swp391.orders;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.naming.NamingException;
 import swp391.utils.DBHelper;
 
@@ -37,7 +38,7 @@ public class OrdersDAO implements Serializable {
                         + "Values("
                         + " ?, ?, ?"
                         + ")";
-                stm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                stm = con.prepareStatement(sql);
                 stm.setInt(1, customerID);
                 stm.setDate(2, date);
                 stm.setInt(3, key);
@@ -55,5 +56,45 @@ public class OrdersDAO implements Serializable {
             }
         }
         return result;
+    }
+    
+    private List<OrdersDTO> ordersList;
+
+    public List<OrdersDTO> getOrdersList() {
+        return ordersList;
+    }
+    
+    public void showOrdersID()
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select OrdersID "
+                        + "From Orders";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int ordersID = rs.getInt("OrdersID");
+                    OrdersDTO dto = new OrdersDTO(ordersID);
+                    if (this.ordersList == null) {
+                        this.ordersList = new ArrayList<>();
+                    }
+                    this.ordersList.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
     }
 }

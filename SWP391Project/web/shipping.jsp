@@ -26,7 +26,7 @@
             </c:if>
             <c:if test="${empty sessionScope.USER}">
                 <h3>
-                    Do you already have an account?<a href="loginForCheckoutPage">Login Here</a>
+                    Do you already have an account?<a href="loginPage">Login Here</a>
                 </h3>
                 First Name: <input type="text" name="txtFirstName"
                                    value="${param.txtFirstName}"/><br/>
@@ -119,7 +119,7 @@
                         </table>  
                     </c:if>
                 </c:if>
-            </c:if>
+            </c:if>     
             <input type="radio" name="chkShippingID" 
                    value="${1}" />Standard<br/>
             <c:if test="${not empty errors.shippingIDLengthError}">

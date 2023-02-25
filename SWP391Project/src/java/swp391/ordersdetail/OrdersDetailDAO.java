@@ -12,7 +12,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.naming.NamingException;
+import swp391.orders.OrdersDTO;
 import swp391.utils.DBHelper;
 
 /**
@@ -58,57 +61,38 @@ public class OrdersDetailDAO implements Serializable {
         }
         return key;
     }
+    
+    private List<OrdersDetailDTO> ordersDetailList;
 
-    public boolean updateShippingID(int shippingID, int productID)
-            throws SQLException, NamingException, ParseException {;
-        Connection con = null;
-        PreparedStatement stm = null;
-        boolean result = false;
-        try {
-            con = DBHelper.makeConnection();
-            if (con != null) {
-                String sql = "Update OrdersDetail "
-                        + "Set ShippingID = ? "
-                        + "Where productID = ?";
-                stm = con.prepareStatement(sql);
-                stm.setInt(1, shippingID);
-                stm.setInt(2, productID);
-                int effectedRows = stm.executeUpdate();
-                if (effectedRows > 0) {
-                    result = true;
-                }
-            }
-        } finally {
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-        return result;
+    public List<OrdersDetailDTO> getOrdersDetailList() {
+        return ordersDetailList;
     }
-
-    public boolean updatePaymentID(int paymentID, int ordersDtID)
-            throws SQLException, NamingException, ParseException {;
+    
+    public void showOrdersDetailID()
+            throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
-        boolean result = false;
+        ResultSet rs = null;
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Update OrdersDetail "
-                        + "Set PaymentID = ? "
-                        + "Where OrdersDtID = ?";
+                String sql = "Select Total "
+                        + "From OrdersDetail";
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, paymentID);
-                stm.setInt(2, ordersDtID);
-                int effectedRows = stm.executeUpdate();
-                if (effectedRows > 0) {
-                    result = true;
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    float total = rs.getFloat("Total");
+                    OrdersDetailDTO dto = new OrdersDetailDTO(total);
+                    if (this.ordersDetailList == null) {
+                        this.ordersDetailList = new ArrayList<>();
+                    }
+                    this.ordersDetailList.add(dto);
                 }
             }
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
             if (stm != null) {
                 stm.close();
             }
@@ -116,6 +100,5 @@ public class OrdersDetailDAO implements Serializable {
                 con.close();
             }
         }
-        return result;
     }
 }

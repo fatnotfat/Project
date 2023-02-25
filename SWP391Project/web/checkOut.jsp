@@ -16,6 +16,8 @@
         <h1>Thanks ${sessionScope.USER.name} for choosing us</h1>
         <h2>Here is the bill</h2>
         <c:set var="customerInfomation" value="${sessionScope.USER}"/>
+        
+        
         Order number: <br/>
         Name: ${customerInfomation.name}<br/>
         Address: ${customerInfomation.address}<br/>

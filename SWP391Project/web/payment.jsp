@@ -83,8 +83,6 @@
                 ${errors.paymentIDLengthError}
                 </font><br/>
             </c:if>
-            <%--<input type="hidden" name="txtCustomerID" 
-value="${customerInfomation.customerID}" />--%>
             <input type="submit" value="Pay" />
         </form>
     </body>

@@ -6,13 +6,10 @@
 package swp391.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -21,7 +18,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import swp391.customer.CustomerCreateError;
-import swp391.ordersdetail.OrdersDetailDAO;
 import swp391.utils.MyApplicationConstants;
 
 /**
@@ -48,7 +44,9 @@ public class PaymentServlet extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
                 MyApplicationConstants.PaymentServlet.PAYMENT_PAGE);
-        //Khai báo parameter của cart trên trang jsp đem xuống
+
+        //Khai báo parameter của cart trên trang paymentPage đem xuống
+        
         String txtPaymentID = request.getParameter("chkPaymentID");
         CustomerCreateError errors = new CustomerCreateError();
         try {
@@ -56,16 +54,23 @@ public class PaymentServlet extends HttpServlet {
                 errors.setPaymentIDLengthError("Please choose the payment method");
                 request.setAttribute("PAYMENT_ERROR", errors);
             } else {
-                
                 int paymentID = Integer.parseInt(txtPaymentID);
                 if (paymentID == 1) {
-                    //Add tất cả xuống DB rồi đưa lên
+                    Object shippingID = request.getAttribute("SHIPPING_ID");
+
+                    //Đã có paymentID và shippingID
+                    //Sử dụng hàm DAO có sẵn để add xuống (OrdersDetail vs Order)
+                    //Tiếp tục sử dụng DAO để get lên thông tin bill gồm có OrdersID và Total
+
                     url = siteMaps.getProperty(
                             MyApplicationConstants.PaymentServlet.CHECKOUT_PAGE);
                 } else {
+
                     //Call API PayPal then forward to checkout page
+                    
                 }
             }
+            //mở comment sau khi call DAO và thấy lỗi
 //        } catch (NamingException ex) {
 //            log("PaymentServlet _ Naming _ " + ex.getMessage());
 //        } catch (SQLException ex) {

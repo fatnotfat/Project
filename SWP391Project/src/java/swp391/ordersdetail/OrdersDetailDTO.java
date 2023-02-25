@@ -11,7 +11,8 @@ import java.io.Serializable;
  *
  * @author Chau Nhat Truong
  */
-public class OrdersDetailDTO implements Serializable{
+public class OrdersDetailDTO implements Serializable {
+
     private int productID;
     private int quantity;
     private float discount;
@@ -33,6 +34,10 @@ public class OrdersDetailDTO implements Serializable{
         this.shippingID = shippingID;
         this.total = total;
         this.status = status;
+    }
+
+    public OrdersDetailDTO(float total) {
+        this.total = total;
     }
 
     /**
@@ -146,7 +151,5 @@ public class OrdersDetailDTO implements Serializable{
     public void setStatus(Boolean status) {
         this.status = status;
     }
-    
-    
-    
+
 }

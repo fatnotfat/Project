@@ -106,7 +106,7 @@ public class ShippingServlet extends HttpServlet {
                                 email, phone, address);
                         CustomerDTO result = dao.loadInformationForPayment(email);
                         session.setAttribute("USER", result);
-                        request.setAttribute("SHIPPING_ID", shippingID);
+                        session.setAttribute("SHIPPING_ID", shippingID);
                         url = siteMaps.getProperty(
                                 MyApplicationConstants.ShippingServlet.PAYMENT_PAGE);
                     }
