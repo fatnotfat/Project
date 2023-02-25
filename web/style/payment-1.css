@@ -1068,4 +1068,32 @@ header {
 }
 
 
+#confirmation-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 150px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  z-index: 999;
+}
+
+#confirmation-box p {
+  margin-top: 20px;
+}
+
+#confirmation-box button {
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
+#confirmation-box button:last-child {
+  margin-right: 0;
+}
+
+
 /*# sourceMappingURL=payment-1.css.map */

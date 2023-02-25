@@ -52,7 +52,7 @@ import="java.sql.*"
                                 <ul class="menu-link-category-tab">
                                     <div class="container">
                                         <li class="menu-link-category-tab-title">
-                                            <a href="searchByFilterPage" class="menu-link menu-link-bracelet">BRACELET</a>
+                                            <a href="SearchByFilterServlet?txtProductCateID=1" class="menu-link menu-link-bracelet">BRACELET</a>
                                             <ul class="menu-link-category-tab-list">
                                                 <li class="menu-link-category-tab-list-item">
                                                     <a href="#!" class="menu-link menu-link-bracelet">

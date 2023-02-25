@@ -31,18 +31,29 @@
             function formatNumberWithCommas(number) {
                 var parts = number.toString().split(".");
                 parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+//                if (parts.length > 1) {
+//                    parts[1] = parts[1].substring(0, 2); // limit decimal places to 2
+//                }
                 return parts.join(".");
             }
-            
-            
+
+//            function calculateTotalPrice() {
+//                var total = 0;
+//                $('.your-cart-body-left-product-detail-right-sum').each(function () {
+//                    var price = parseFloat($(this).find('span').text().replace(',', ''));
+//                    total += price;
+//                });
+//                return total;
+//            }
+
             function updateQuantity(itemId, operation) {
 //                var quantityElement = document.getElementById('quantity' + itemId).innerHTML;
                 var quantityElement = document.getElementById('quantity' + itemId);
                 var quantity = parseInt(quantityElement.innerHTML);
                 var priceElement = document.getElementById("price-" + itemId);
                 var price = priceElement.innerHTML.replace(/[^0-9\.]+/g, "");
-                
-                
+
+
                 if (operation === 'minus') {
                     quantity--;
                     if (quantity < 1) {
@@ -59,6 +70,10 @@
                 document.getElementById('quantity' + itemId).innerHTML = quantity;
 //                priceElement.innerHTML = price.toLocaleString();
                 priceElement.innerHTML = formatNumberWithCommas(price.toFixed());
+                // update the total price
+                var totalPrice = calculateTotalPrice();
+//                alert(totalPrice);
+                $('#total-price').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
                 var xhr = new XMLHttpRequest();
                 xhr.open('POST', 'UpdateCartServlet', true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -69,14 +84,19 @@
                         if (quantityElement) {
                             quantityElement.textContent = response.quantity;
                         }
+//                        var totalPriceAllProduct = document.getElementById("total-price");
+//                        totalPriceAllProduct.innerHTML = totalPrice.text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
                     }
                 };
                 xhr.send('txtID=' + itemId + '&txtQuantity=' + quantity);
             }
         </script>
 
+
+
         <script>
             function removeSelectedItem(itemId, rowIndex, callback) {
+
                 $.ajax({
                     type: "POST",
                     url: "RemoveItemFromCartServlet",
@@ -110,9 +130,93 @@
                 });
             }
 
-        </script>
+        </script>   
+
+
+
+
         <link rel="stylesheet" href="style/reset.css" />
         <link rel="stylesheet" href="style/payment-1.css" />
+        <script>
+
+            function calculateTotalPrice() {
+                var total = 0;
+                $('.your-cart-body-left-product-detail-right-sum').each(function () {
+                    var price = parseFloat($(this).find('span').text().replace(/,/g, ''));
+//                    var price = parseFloat(priceString);
+//                    alert($(this).find('span').text().replace(/,/g, ''));
+                    total += price;
+//                    alert(total);
+                });
+                return total;
+            }
+
+//            function calculateTotalPrice() {
+//                var total = 0;
+//                $('.your-cart-body-left-product-detail-right-sum').each(function () {
+//                    var priceString = $(this).find('span').text().replace(',', '');
+//                    var price = parseFloat(priceString.replace('₫', '').trim());
+//                    total += price;
+//                });
+//                var formattedTotal = total.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+//                $('#total-price').text(formattedTotal + '₫');
+//                return total;
+//            }
+
+            function removeProduct(itemId) {
+                if (confirm("Are you sure you want to remove this item from your cart?")) {
+                    $.ajax({
+                        type: "POST",
+                        url: "RemoveItemFromCartServlet",
+                        data: {txtId: itemId},
+                        success: function (response) {
+                            if (response.success) {
+                                // update the cart UI with the updated cart data
+                                var cartData = response.cart;
+                                console.log("removeProduct called with itemId = " + itemId);
+
+                                // remove the div tag with the corresponding item id
+                                $("#product-" + itemId).remove();
+                                // update the cart size in the UI
+                                updateCartSize();
+
+                                // update the total price
+                                var totalPrice = calculateTotalPrice();
+                                $('#total-price').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
+                            } else {
+                                // handle error response from servlet
+                                console.log(response.message);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            // handle network error
+                            console.log(errorThrown);
+                        }
+                    });
+                }
+            }
+
+
+            function updateCartSize() {
+                $.ajax({
+                    type: "GET",
+                    url: "GetCartSizeServlet",
+                    success: function (response) {
+                        $("#cart-size").text(response.cartSize);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // handle error
+                    }
+                });
+            }
+
+            $(document).ready(function () {
+                var totalPrice = calculateTotalPrice();
+                $('#total-price').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
+            });
+
+
+        </script>
 
     </head>
     <body>
@@ -129,14 +233,14 @@
                 <!-- NAV DESKTOP - TABLET -->
                 <div class="nav-bot">
                     <div class="container">
-                        <a href="#!" class="menu-logo"> LOGO </a>
+                        <a href="mainPage" class="menu-logo"> LOGO </a>
                         <ul class="menu">
                             <li class="menu-item">
                                 <a href="#!" class="menu-link menu-link-category">Categories</a>
                                 <ul class="menu-link-category-tab">
                                     <div class="container">
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-bracelet"
+                                            <a href="SearchByFilterServlet?txtProductCateID=1" class="menu-link menu-link-bracelet"
                                                >BRACELET</a
                                             >
                                             <ul class="menu-link-category-tab-list">
@@ -462,213 +566,221 @@
             <!-- YOUR CART TITLE-->
             <c:if test="${not empty sessionScope}">
                 <c:set var="cart" value="${sessionScope.CART}"/>
-                <c:if test="${not empty CART}">
-                    <c:set var="items" value="${cart.items}"/>
-                    <c:set var="itemDetail" value = "${cart.itemDetail}" />
-                    <c:if test="${not empty items}">
-                        <div class="your-cart">
+                <%--<c:if test="${not empty CART}">--%>
+                <c:set var="items" value="${cart.items}"/>
+                <c:set var="itemDetail" value = "${cart.itemDetail}" />
+                <%--<c:if test="${not empty items}">--%>
+                <div class="your-cart">
+                    <div class="container">
+                        <h1 class="your-cart-title">Your Cart</h1>
+                        <p class="your-cart-desc">
+                            There is
+                            <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
+                            <c:if test="${empty sessionScope.CART.items.size()}">
+                                <c:set var="cartSize" value="${0}"/>
+                            </c:if>
+                            <span id="cart-size" class="your-cart-desc-number" style="font-weight: 700"
+                                  >${cartSize}</span
+                            >
+                            <span style="font-weight: 700">product</span> in your cart
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="your-cart-body">
+                    <div class="container">
+                        <!-- LEFT________________________________ -->
+                        <div class="your-cart-body-left-all">
                             <div class="container">
-                                <h1 class="your-cart-title">Your Cart</h1>
-                                <p class="your-cart-desc">
-                                    There is
-                                    <span class="your-cart-desc-number" style="font-weight: 700"
-                                          >${sessionScope.CART.items.size()}</span
-                                    >
-                                    <span style="font-weight: 700">product</span> in your cart
-                                </p>
-                            </div>
-                        </div>
-
-
-                        <div class="your-cart-body">
-                            <div class="container">
-                                <!-- LEFT________________________________ -->
-                                <div class="your-cart-body-left-all">
+                                <div class="your-cart-body-left">
                                     <div class="container">
-                                        <div class="your-cart-body-left">
-                                            <div class="container">
-                                                <div class="your-cart-body-left-product">
-                                                    <c:set var="cartList" value="${sessionScope.CART.items}" />
-                                                    <c:set var="cartListDetail" value="${sessionScope.CART.itemDetail}" />
+                                        <div class="your-cart-body-left-product">
+                                            <c:set var="cartList" value="${sessionScope.CART.items}" />
+                                            <c:set var="cartListDetail" value="${sessionScope.CART.itemDetail}" />
 
-                                                    <c:forEach var="item" items="${cartList}" varStatus="counter">
-                                                        <c:forEach var="detail" items="${cartListDetail}">
-                                                            <c:if test="${item.key eq detail.key}">
+                                            <c:forEach var="item" items="${cartList}" varStatus="counter">
+                                                <c:forEach var="detail" items="${cartListDetail}">
+                                                    <c:if test="${item.key eq detail.key}">
 
+                                                        <div class="container" id="product-${item.key}">
+                                                            <div class="your-cart-body-left-product-detail-left">
+                                                                <img
+                                                                    srcset="images/product-demo.png 2x"
+                                                                    alt=""
+                                                                    class="your-cart-body-left-product-img"
+                                                                    />
                                                                 <div class="container">
-                                                                    <div class="your-cart-body-left-product-detail-left">
-                                                                        <img
-                                                                            srcset="images/product-demo.png 2x"
-                                                                            alt=""
-                                                                            class="your-cart-body-left-product-img"
-                                                                            />
-                                                                        <div class="container">
-                                                                            <h1
-                                                                                class="your-cart-body-left-product-detail-left-name"
-                                                                                >
-                                                                                ${detail.value.name}
-                                                                            </h1>
-                                                                            <p
-                                                                                class="your-cart-body-left-product-detail-left-price"
-                                                                                >
-
-                                                                                <fmt:formatNumber var="price" value="${detail.value.price}" pattern="#,###"/>
-                                                                                ${price}₫
-                                                                            </p>
-                                                                            <p
-                                                                                class="your-cart-body-left-product-detail-left-size"
-                                                                                >
-                                                                                Size:${detail.value.size}
-                                                                            </p>
-                                                                            <div
-                                                                                class="your-cart-body-left-product-detail-left-count"
-                                                                                >
-                                                                                <button
-                                                                                    class="your-cart-body-left-product-detail-left-minus"
-                                                                                    onclick="updateQuantity('${item.key}', 'minus')" id="minus_${item.key}"
-                                                                                    >
-                                                                                    -
-                                                                                </button>
-                                                                                <span
-                                                                                    class="your-cart-body-left-product-detail-left-count-update"
-                                                                                    id="quantity${item.key}"
-                                                                                    >
-                                                                                    ${item.value}
-                                                                                </span>
-                                                                                <button
-                                                                                    class="your-cart-body-left-product-detail-left-plus"
-                                                                                    onclick="updateQuantity('${item.key}', 'plus')" id="plus_${item.key}"
-                                                                                    >
-                                                                                    +
-                                                                                </button>
-
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="your-cart-body-left-product-detail-right">
-                                                                        <div class="container">
-                                                                            <span
-                                                                                class="your-cart-body-left-product-detail-right-icon"
-                                                                                >
-                                                                                <i class="fa-solid fa-xmark"></i>
-                                                                            </span>
-                                                                            <p
-                                                                                class="your-cart-body-left-product-detail-right-sum"
-                                                                                >
-                                                                                
-                                                                                <fmt:formatNumber var="price" value="${detail.value.price * item.value}" pattern="#,###"/>
-                                                                                <span id="price-${item.key}">${price}</span>₫
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </c:forEach>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="your-cart-body-left-bot">
-                                            <div class="container">
-                                                <div class="your-cart-body-left-bot-note">
-                                                    <h1 class="your-cart-body-left-bot-note-title">
-                                                        Order Notes
-                                                    </h1>
-                                                    <textarea
-                                                        name="note"
-                                                        id="note"
-                                                        rows="4"
-                                                        placeholder="Notes"
-                                                        class="your-cart-body-left-bot-note-area"
-                                                        >
-                                                    </textarea>
-                                                </div>
-                                                <div class="your-cart-body-left-bot-policy">
-                                                    <div class="container">
-                                                        <h1 class="your-cart-body-left-bot-policy-title">
-                                                            Purchase Policy
-                                                        </h1>
-                                                        <ul class="your-cart-body-left-bot-policy-detail">
-                                                            <li class="your-cart-body-left-bot-policy-item">
-                                                                <span class="your-cart-body-left-bot-policy-item-icon"
-                                                                      ><i class="fa-solid fa-arrow-right"></i
-                                                                    ></span>
-                                                                Products are not exchangeable
-                                                            </li>
-                                                            <li class="your-cart-body-left-bot-policy-item">
-                                                                <span class="your-cart-body-left-bot-policy-item-icon"
-                                                                      ><i class="fa-solid fa-arrow-right"></i
-                                                                    ></span>
-                                                                Each invoice can be exchanged only once, no payment
-                                                                support.
-                                                            </li>
-                                                            <li class="your-cart-body-left-bot-policy-item">
-                                                                <span class="your-cart-body-left-bot-policy-item-icon"
-                                                                      ><i class="fa-solid fa-arrow-right"></i
-                                                                    ></span>
-                                                                Only products of equal or higher value are accepted.
-                                                            </li>
-                                                            <li class="your-cart-body-left-bot-policy-item">
-                                                                <span class="your-cart-body-left-bot-policy-item-icon"
-                                                                      ><i class="fa-solid fa-arrow-right"></i
-                                                                    ></span>
-                                                                The product has all the tags and is unused.
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- LEFT________________________________ -->
-                                <!-- RIGHT_______________________________ -->
-                                <div class="your-cart-body-right">
-                                    <div class="container">
-                                        <div class="your-cart-body-right-all">
-                                            <div class="container">
-                                                <div class="your-cart-body-right-order">
-                                                    <div class="container">
-                                                        <div class="your-cart-body-right-order-border">
-                                                            <h1 class="your-cart-body-right-order-title">
-                                                                Order Information
-                                                            </h1>
-                                                            <div class="your-cart-body-right-order-total">
-                                                                <div class="container">
-                                                                    <h2 class="your-cart-body-right-order-total-title">
-                                                                        Total:
-                                                                    </h2>
-                                                                    <h1 class="your-cart-body-right-order-total-price">
-                                                                        000,000₫
+                                                                    <h1
+                                                                        class="your-cart-body-left-product-detail-left-name"
+                                                                        >
+                                                                        ${detail.value.name}
                                                                     </h1>
+                                                                    <p
+                                                                        class="your-cart-body-left-product-detail-left-price"
+                                                                        >
+
+                                                                        <fmt:formatNumber var="price" value="${detail.value.price}" pattern="#,###"/>
+                                                                        ${price}₫
+                                                                    </p>
+                                                                    <p
+                                                                        class="your-cart-body-left-product-detail-left-size"
+                                                                        >
+                                                                        Size:${detail.value.size}
+                                                                    </p>
+                                                                    <div
+                                                                        class="your-cart-body-left-product-detail-left-count"
+                                                                        >
+                                                                        <button
+                                                                            class="your-cart-body-left-product-detail-left-minus"
+                                                                            onclick="updateQuantity('${item.key}', 'minus')" id="minus_${item.key}"
+                                                                            >
+                                                                            -
+                                                                        </button>
+                                                                        <span
+                                                                            class="your-cart-body-left-product-detail-left-count-update"
+                                                                            id="quantity${item.key}"
+                                                                            >
+                                                                            ${item.value}
+                                                                        </span>
+                                                                        <button
+                                                                            class="your-cart-body-left-product-detail-left-plus"
+                                                                            onclick="updateQuantity('${item.key}', 'plus')" id="plus_${item.key}"
+                                                                            >
+                                                                            +
+                                                                        </button>
+
+
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <p class="your-cart-body-right-order-desc">
-                                                                Shipping fee will be calculated at the checkout page.
-                                                                You can also enter the discount code at the checkout
-                                                                page.
-                                                            </p>
-                                                            <button class="your-cart-body-right-order-btn">
-                                                                PAY
-                                                            </button>
-                                                            <a href="#!" class="your-cart-body-right-order-continue">
-                                                                Continue shopping
-                                                            </a>
+                                                            <div class="your-cart-body-left-product-detail-right">
+                                                                <div class="container">
+                                                                    <span
+                                                                        class="your-cart-body-left-product-detail-right-icon "
+                                                                        onclick="removeProduct('${item.key}')"
+                                                                        >
+                                                                        <i class="fa-solid fa-xmark"></i>
+                                                                    </span>
+                                                                    <p
+                                                                        class="your-cart-body-left-product-detail-right-sum"
+                                                                        >
+
+                                                                        <fmt:formatNumber var="price" value="${detail.value.price * item.value}" pattern="#,###"/>
+                                                                        <span id="price-${item.key}">${price}</span>₫
+                                                                    </p>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <!--  -->
-                                                    </div>
-                                                </div>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="your-cart-body-left-bot">
+                                    <div class="container">
+                                        <div class="your-cart-body-left-bot-note">
+                                            <h1 class="your-cart-body-left-bot-note-title">
+                                                Order Notes
+                                            </h1>
+                                            <textarea
+                                                name="note"
+                                                id="note"
+                                                rows="4"
+                                                placeholder="Notes"
+                                                class="your-cart-body-left-bot-note-area"
+                                                >
+                                            </textarea>
+                                        </div>
+                                        <div class="your-cart-body-left-bot-policy">
+                                            <div class="container">
+                                                <h1 class="your-cart-body-left-bot-policy-title">
+                                                    Purchase Policy
+                                                </h1>
+                                                <ul class="your-cart-body-left-bot-policy-detail">
+                                                    <li class="your-cart-body-left-bot-policy-item">
+                                                        <span class="your-cart-body-left-bot-policy-item-icon"
+                                                              ><i class="fa-solid fa-arrow-right"></i
+                                                            ></span>
+                                                        Products are not exchangeable
+                                                    </li>
+                                                    <li class="your-cart-body-left-bot-policy-item">
+                                                        <span class="your-cart-body-left-bot-policy-item-icon"
+                                                              ><i class="fa-solid fa-arrow-right"></i
+                                                            ></span>
+                                                        Each invoice can be exchanged only once, no payment
+                                                        support.
+                                                    </li>
+                                                    <li class="your-cart-body-left-bot-policy-item">
+                                                        <span class="your-cart-body-left-bot-policy-item-icon"
+                                                              ><i class="fa-solid fa-arrow-right"></i
+                                                            ></span>
+                                                        Only products of equal or higher value are accepted.
+                                                    </li>
+                                                    <li class="your-cart-body-left-bot-policy-item">
+                                                        <span class="your-cart-body-left-bot-policy-item-icon"
+                                                              ><i class="fa-solid fa-arrow-right"></i
+                                                            ></span>
+                                                        The product has all the tags and is unused.
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- RIGHT_______________________________ -->
                             </div>
                         </div>
-                    </c:if>
-                </c:if>
+
+                        <!-- LEFT________________________________ -->
+                        <!-- RIGHT_______________________________ -->
+                        <div class="your-cart-body-right">
+                            <div class="container">
+                                <div class="your-cart-body-right-all">
+                                    <div class="container">
+                                        <div class="your-cart-body-right-order">
+                                            <div class="container">
+                                                <div class="your-cart-body-right-order-border">
+                                                    <h1 class="your-cart-body-right-order-title">
+                                                        Order Information
+                                                    </h1>
+                                                    <div class="your-cart-body-right-order-total">
+                                                        <div class="container">
+                                                            <h2 class="your-cart-body-right-order-total-title">
+                                                                Total:
+                                                            </h2>
+                                                            <h1 id="total-price" class="your-cart-body-right-order-total-price">
+                                                                0₫
+                                                            </h1>
+                                                        </div>
+                                                    </div>
+                                                    <p class="your-cart-body-right-order-desc">
+                                                        Shipping fee will be calculated at the checkout page.
+                                                        You can also enter the discount code at the checkout
+                                                        page.
+                                                    </p>
+                                                    <button class="your-cart-body-right-order-btn">
+                                                        PAY
+                                                    </button>
+                                                    <a href="SearchByFilterServlet?txtProductCateID=1" class="your-cart-body-right-order-continue">
+                                                        Continue shopping
+                                                    </a>
+                                                </div>
+                                                <!--  -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- RIGHT_______________________________ -->
+                    </div>
+                </div>
+                <%--</c:if>--%>
+                <%--<c:if test="${empty items}">
+                    <span>Your cart is empty! Click here to buy something!!</span>
+                </c:if>--%>
+                <%--</c:if>--%>  
             </c:if>
 
             <%--<c:if test="${empty sessionScope.CART.items}">
@@ -733,100 +845,6 @@
                     </div>
                 </div>
             </footer>
-            <c:if test="${not empty sessionScope}">
-                <c:set var="cart" value="${sessionScope.CART}"/>
-                <c:if test="${not empty CART}">
-                    <c:set var="items" value="${cart.items}"/>
-                    <c:set var="itemDetail" value = "${cart.itemDetail}" />
-                    <c:if test="${not empty items}">
-                        <h2>Your Cart include:</h2>
-                        <%--
-                            //4.show items
-                        --%>
-
-                        <!--<form id="removeItemForm" method="post" action="RemoveItemFromCartServlet">-->
-                        <table id="cartTable" border="1">
-                            <thead>
-                                <tr>
-
-                                    <th>Product ID</th>
-                                    <th>Product Name</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th>Remove</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%--  int count = 0;
-                                    for (String key : items.keySet()) {
-                                --%>
-
-                                <c:set var="cartList" value="${sessionScope.CART.items}" />
-                                <c:set var="cartListDetail" value="${sessionScope.CART.itemDetail}" />
-
-                                <c:forEach var="item" items="${cartList}" varStatus="counter">
-                                    <c:forEach var="detail" items="${cartListDetail}">
-                                        <tr id="row-${item.key}">
-                                            <c:if test="${item.key eq detail.key}">
-                                                <td>
-                                                    ${item.key}
-                                                    <input type="hidden" name="txtId" value="${item.key}" />
-                                                </td>
-                                                <td>
-                                                    ${detail.value.name}
-                                                    <input type="hidden" name="txtName" value="${detail.value.name}" />
-                                                </td>
-                                                <td>
-                                                    <button onclick="updateQuantity('${item.key}', 'minus')" id="minus_${item.key}">-</button>                             
-                                                    <span id="quantity${item.key}">${item.value}</span>
-                                                    <button onclick="updateQuantity('${item.key}', 'plus')" id="plus_${item.key}">+</button>
-                                                    <input type="hidden" name="txtQuantity" value="${item.value}" />
-
-                                                </td>
-
-                                                <td>
-                                                    <span id="price-${item.key}">${detail.value.price}</span>
-                                                </td>
-
-                                                <td>
-                                                    <%--<button onclick="removeSelectedItem('${item.key}', function (itemId) {
-                                                                var row = document.getElementById('row-' + itemId);
-                                                                row.parentNode.removeChild(row);
-                                                            });">X</button>--%>
-
-                                                    <button onclick="removeSelectedItem('${item.key}', '${counter.index}', function (itemId, rowIndex) {
-                                                                var row = document.getElementById('row-' + itemId + '-' + rowIndex);
-                                                                row.parentNode.removeChild(row);
-                                                            });">X</button>
-
-
-                                                </td>
-                                            </c:if>
-                                        </tr>
-                                    </c:forEach>
-                                </c:forEach>
-
-                            </tbody>
-
-                        </table>
-
-                        <!--</form>-->
-
-                        <form action="checkOutController">
-                            <input type="submit" value="Check out" name="btAction" />
-                        </form>
-                        <%--
-                                        return;
-                                    }//items have value
-                                }//cart has existed
-                            }//session has existed
-                        --%>
-                    </c:if>
-                </c:if>
-            </c:if>
-            <%--<c:if test="${empty sessionScope.CART.items}">
-                <h2>Cart is empty!!! You should buy something first!</h2>
-            </c:if>--%>
         </div>
         <script src="js/app.js"></script>
     </body>

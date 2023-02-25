@@ -36,7 +36,7 @@
                 <!-- NAV DESKTOP - TABLET -->
                 <div class="nav-bot">
                     <div class="container">
-                        <a href="#!" class="menu-logo"> LOGO </a>
+                        <a href="mainPage" class="menu-logo"> LOGO </a>
                         <ul class="menu">
                             <li class="menu-item">
                                 <a href="#!" class="menu-link menu-link-category">Categories</a>
