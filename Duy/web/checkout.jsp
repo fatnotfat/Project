@@ -14,26 +14,60 @@
         <title>Check out page</title>
     </head>
     <body>
-        <h1>Information of customer</h1>
-        <form action="thanhToan" method="post">
-            <table>
-                <tr>
-                    <td>Name: </td>
-                    <td><input type="text" name="name" required/></td>
-                </tr>
-                <tr>
-                    <td>Address: </td>
-                    <td><input type="text" name="address:" required/></td>
-                </tr>
-                <tr>
-                    <td>Phone Number: </td>
-                    <td><input type="text" name="phoneNumber" required/></td>
-                </tr>
-                <tr>
-                    <td>Email Address: </td>
-                    <td><input type="email" name="emailAddress" required/></td>
-                </tr>
-            </table>
+        <h1>Information for payment</h1>
+
+
+
+        <form action="payments" method="post">
+            <c:if test="${not empty sessionScope.USER}">
+                <c:set var="cusInfo" value="${sessionScope.INFOCUSTOMER_RESULT}"/>
+                
+                <c:if test="${not empty cusInfo}">
+                    
+                    <table border="1">
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                        </tr>
+                        <c:forEach var="dto" items="${cusInfo}">
+                            <tr>
+                                <td>${dto.name}</td>
+                                <td>${dto.email}</td>
+                                <td>${dto.phone}</td>
+                                <td>${dto.address}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </c:if>
+            </c:if>
+            <c:if test="${ empty sessionScope.USER}">
+                <h1>Do you already have an account?</h1>
+                <a href="login.jsp">Login Here</a>
+                <a href="ShowCustomerInforForCheckOutServlet">debug Here</a>
+                <table border="1">
+                    <tr>
+                        <td>Name : </td>
+                        <td><input type="text" name="name" required/></td>
+                    </tr>
+                    <tr>
+                        <td>Address: </td>
+                        <td><input type="text" name="address:" required/></td>
+                    </tr>
+                    <tr>
+                        <td>Phone Number: </td>
+                        <td><input type="text" name="phoneNumber" required/></td>
+                    </tr>
+                    <tr>
+                        <td>Email Address: </td>
+                        <td><input type="email" name="emailAddress" required/></td>
+                    </tr>
+                </table>
+            </c:if>
+
+
+
 
 
 

@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.naming.NamingException;
@@ -23,6 +24,48 @@ import swp391.utils.DBHelper;
  * @author Chau Nhat Truong
  */
 public class CustomerDAO implements Serializable {
+
+    private List<CustomerDTO> accountList;
+
+    public List<CustomerDTO> getAccountList() {
+        return accountList;
+    }
+
+    public CustomerDTO showCustomerInforForCheckOut(String email) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        CustomerDTO customer = null;
+
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "SELECT Name, Email, Phone, Address FROM Customer WHERE Email = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, email);
+                rs = stm.executeQuery();
+
+                if (rs.next()) {
+                    String name = rs.getString("Name");
+                    String phone = rs.getString("Phone");
+                    String address = rs.getString("Address");
+                    customer = new CustomerDTO(name, email, phone, address);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return customer;
+    }
 
     public CustomerDTO checkLogin(String email, String password)
             throws SQLException, NamingException {;
@@ -62,12 +105,6 @@ public class CustomerDAO implements Serializable {
             }
         }
         return result;
-    }
-
-    private List<CustomerDTO> accountList;
-
-    public List<CustomerDTO> getAccountList() {
-        return accountList;
     }
 
     public boolean createAccount(CustomerDTO dto)

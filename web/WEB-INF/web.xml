@@ -21,16 +21,16 @@
         <servlet-class>swp391.controller.LoginServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>java</servlet-name>
-        <servlet-class>swp391.controller.showProductAtMainPageServlet</servlet-class>
+        <servlet-name>SearchTextServlet</servlet-name>
+        <servlet-class>swp391.controller.SearchTextServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>java</servlet-name>
-        <url-pattern>/java</url-pattern>
+        <servlet-name>SearchTextServlet</servlet-name>
+        <url-pattern>/SearchTextServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

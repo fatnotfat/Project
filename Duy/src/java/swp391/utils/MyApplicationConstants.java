@@ -87,5 +87,9 @@ public class MyApplicationConstants {
         public static final String SEARCH_TEXT_PAGE = "searchTextPage";
         public static final String SEARCH_FILTER_PAGE = "searchFilterPage";
     }
+    
+    public class ShowCustomerInforForCheckOut{
+        public static final String SHOW_INFO_PAGE = "checkout";
+    }
 
 }
