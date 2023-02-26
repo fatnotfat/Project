@@ -27,6 +27,56 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
             />
 
+        <style>
+            .confirm-popup {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 100;
+            }
+
+            .confirm-popup__content {
+                background: #fff;
+                border-radius: 8px;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .confirm-popup__content p {
+                margin: 0 0 20px;
+            }
+
+            .confirm-popup__buttons {
+                display: flex;
+                justify-content: center;
+            }
+
+            .confirm-popup__button {
+                background-color: #ff4a4a;
+                border: none;
+                color: #fff;
+                padding: 10px 20px;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+                margin-right: 10px;
+            }
+
+            .confirm-popup__button:last-child {
+                margin-right: 0;
+                background-color: #0c71c3;
+            }
+
+
+
+        </style>
+
         <script>
             function formatNumberWithCommas(number) {
                 var parts = number.toString().split(".");
@@ -74,6 +124,7 @@
                 var totalPrice = calculateTotalPrice();
 //                alert(totalPrice);
                 $('#total-price').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
+                $('#total-price-header').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
                 var xhr = new XMLHttpRequest();
                 xhr.open('POST', 'UpdateCartServlet', true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -164,7 +215,18 @@
 //            }
 
             function removeProduct(itemId) {
-                if (confirm("Are you sure you want to remove this item from your cart?")) {
+//                if (confirm("Are you sure you want to remove this item from your cart?")) {
+                var confirmPopup = document.createElement('div');
+                confirmPopup.className = 'confirm-popup';
+                var confirmPopupContent = document.createElement('div');
+                confirmPopupContent.className = 'confirm-popup__content';
+                confirmPopupContent.innerHTML = '<p>Are you sure you want to remove this item from your cart?</p>';
+                var confirmButtons = document.createElement('div');
+                confirmButtons.className = 'confirm-popup__buttons';
+                var confirmButtonYes = document.createElement('button');
+                confirmButtonYes.className = 'confirm-popup__button';
+                confirmButtonYes.textContent = 'Yes';
+                confirmButtonYes.addEventListener('click', function () {
                     $.ajax({
                         type: "POST",
                         url: "RemoveItemFromCartServlet",
@@ -183,6 +245,7 @@
                                 // update the total price
                                 var totalPrice = calculateTotalPrice();
                                 $('#total-price').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
+                                $('#total-price-header').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
                             } else {
                                 // handle error response from servlet
                                 console.log(response.message);
@@ -193,8 +256,23 @@
                             console.log(errorThrown);
                         }
                     });
-                }
+                    confirmPopup.remove();
+                });
+                var confirmButtonNo = document.createElement('button');
+                confirmButtonNo.className = 'confirm-popup__button';
+                confirmButtonNo.textContent = 'No';
+                confirmButtonNo.addEventListener('click', function () {
+                    confirmPopup.remove();
+                });
+                confirmButtons.appendChild(confirmButtonYes);
+                confirmButtons.appendChild(document.createTextNode('\u00A0')); // Adds a non-breaking space between the buttons
+                confirmButtons.appendChild(confirmButtonNo);
+                confirmPopupContent.appendChild(confirmButtons);
+                confirmPopup.appendChild(confirmPopupContent);
+                document.body.appendChild(confirmPopup);
+
             }
+//            }
 
 
             function updateCartSize() {
@@ -203,6 +281,7 @@
                     url: "GetCartSizeServlet",
                     success: function (response) {
                         $("#cart-size").text(response.cartSize);
+                        $("#cart-size-header").text(response.cartSize);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         // handle error
@@ -215,7 +294,10 @@
                 $('#total-price').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
             });
 
-
+            $(document).ready(function () {
+                var totalPrice = calculateTotalPrice();
+                $('#total-price-header').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
+            });
         </script>
 
     </head>
@@ -371,24 +453,31 @@
                                 </button>
                                 <div class="menu-icon-tab-profile-content">
                                     <div class="container">
-                                        <div class="menu-icon-tab-profile-content-title">
-                                            <p class="menu-icon-tab-profile-content-title-desc">
-                                                ACCOUNT INFORMATION
-                                            </p>
-                                            <img srcset="images/Footer-line.png 2x" alt="" />
-                                        </div>
-                                        <div class="menu-icon-tab-profile-form">
-                                            <p class="menu-icon-tab-profile-form-name">NAME</p>
-                                            <a href="#!" class="menu-icon-tab-profile-form-link"
-                                               >My account</a
-                                            >
-                                            <a href="#!" class="menu-icon-tab-profile-form-link"
-                                               >Address List</a
-                                            >
-                                            <a href="#!" class="menu-icon-tab-profile-form-link"
-                                               >Log out</a
-                                            >
-                                        </div>
+                                        <c:if test="${not empty sessionScope.USER}">
+                                            <div class="menu-icon-tab-profile-content-title">
+                                                <p class="menu-icon-tab-profile-content-title-desc">
+                                                    ACCOUNT INFORMATION
+                                                </p>
+                                                <img srcset="images/Footer-line.png 2x" alt="" />
+                                            </div>
+                                            <div class="menu-icon-tab-profile-form">
+                                                <p class="menu-icon-tab-profile-form-name">${sessionScope.USER.name}</p>
+                                                <a href="userInforPage" class="menu-icon-tab-profile-form-link"
+                                                   >My account</a
+                                                >
+                                                <!--                                            <a href="#!" class="menu-icon-tab-profile-form-link"
+                                                                                               >Address List</a
+                                                                                            >-->
+                                                <a href="logoutController" class="menu-icon-tab-profile-form-link"
+                                                   >Log out</a
+                                                >
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${empty sessionScope.USER}">
+                                            <p style="font-size: 15px; margin: 5px 0">YOU ARE NOT ALREADY LOGGED, PLEASE LOGIN FIRST!!</p><br/>
+                                            <c:set var="URL" value="userCart.jsp" scope="session"/>
+                                            <a style="font-size: 15px; text-decoration: none; font-weight: bold; color: black" href="loginPage">Login here </a>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
@@ -423,8 +512,17 @@
                                                     />
                                             </div>
                                             <div class="menu-icon-tab-cart-content-show-txt">
+                                                <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
+                                                <c:if test="${empty sessionScope.CART.items.size()}">
+                                                    <c:set var="cartSize" value="${0}"/>
+                                                </c:if>
                                                 <p class="menu-icon-tab-cart-content-show-txt-desc">
-                                                    There are currently no products
+                                                    <c:if test="${cartSize eq 0}">
+                                                        There are no currently products.
+                                                    </c:if>
+                                                    <c:if test="${cartSize ne 0}">
+                                                        There are <span id="cart-size-header" style="font-weight: bold">${cartSize}</span> products
+                                                    </c:if>
                                                 </p>
                                             </div>
                                         </div>
@@ -436,7 +534,7 @@
                                                     >
                                                     TOTAL AMOUNT
                                                 </p>
-                                                <p
+                                                <p  id="total-price-header"
                                                     class="menu-icon-tab-cart-content-function-total-price"
                                                     >
                                                     0₫
@@ -579,10 +677,21 @@
                             <c:if test="${empty sessionScope.CART.items.size()}">
                                 <c:set var="cartSize" value="${0}"/>
                             </c:if>
-                            <span id="cart-size" class="your-cart-desc-number" style="font-weight: 700"
+     
+                            
+                            <c:if test="${cartSize eq 0 or cartSize eq 1}">
+                                <span id="cart-size" class="your-cart-desc-number" style="font-weight: 700"
                                   >${cartSize}</span
                             >
                             <span style="font-weight: 700">product</span> in your cart
+                            </c:if>
+                            
+                            <c:if test="${cartSize ne 0 and cartSize ne 1}">
+                                <span id="cart-size" class="your-cart-desc-number" style="font-weight: 700"
+                                  >${cartSize}</span
+                            >
+                            <span style="font-weight: 700">products</span> in your cart
+                            </c:if>
                         </p>
                     </div>
                 </div>

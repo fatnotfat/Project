@@ -79,16 +79,29 @@ public class LoginServlet extends HttpServlet {
                     request.setAttribute("LOGIN_ERROR", errors);
                     //transfer to inform users
                 } else {
-                    url = siteMaps.getProperty(
-                            MyApplicationConstants.LoginServlet.MAIN_PAGE);
-                        HttpSession session = request.getSession();
+                    HttpSession session = request.getSession();
+                    String url2 = (String) session.getAttribute("URL");
+                    if (url2 == null) {
+                        url = siteMaps.getProperty(
+                                MyApplicationConstants.LoginServlet.MAIN_PAGE);
                         session.setAttribute("USER", result);
-                    if (checkLogged != null) {
-                        email = URLEncoder.encode(email, "UTF-8");
-                        Cookie cookie = new Cookie(email, password);
-                        cookie.setMaxAge(60 * 3);
-                        response.addCookie(cookie);
-                    }//check if user want to logged for next access
+                        if (checkLogged != null) {
+                            email = URLEncoder.encode(email, "UTF-8");
+                            Cookie cookie = new Cookie(email, password);
+                            cookie.setMaxAge(60 * 3);
+                            response.addCookie(cookie);
+                        }//check if user want to logged for next access
+                    } else {
+                        url = url2;
+                        session.setAttribute("USER", result);
+                        if (checkLogged != null) {
+                            email = URLEncoder.encode(email, "UTF-8");
+                            Cookie cookie = new Cookie(email, password);
+                            cookie.setMaxAge(60 * 3);
+                            response.addCookie(cookie);
+                        }//check if user want to logged for next access
+                    }
+
                 }
             }//end user is existed
         } catch (NamingException ex) {

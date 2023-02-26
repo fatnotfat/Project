@@ -191,24 +191,30 @@
                                 </button>
                                 <div class="menu-icon-tab-profile-content">
                                     <div class="container">
-                                        <div class="menu-icon-tab-profile-content-title">
-                                            <p class="menu-icon-tab-profile-content-title-desc">
-                                                ACCOUNT INFORMATION
-                                            </p>
-                                            <img srcset="images/Footer-line.png 2x" alt="" />
-                                        </div>
-                                        <div class="menu-icon-tab-profile-form">
-                                            <p class="menu-icon-tab-profile-form-name">NAME</p>
-                                            <a href="#!" class="menu-icon-tab-profile-form-link"
-                                               >My account</a
-                                            >
-                                            <a href="#!" class="menu-icon-tab-profile-form-link"
-                                               >Address List</a
-                                            >
-                                            <a href="#!" class="menu-icon-tab-profile-form-link"
-                                               >Log out</a
-                                            >
-                                        </div>
+                                        <c:if test="${not empty sessionScope.USER}">
+                                            <div class="menu-icon-tab-profile-content-title">
+                                                <p class="menu-icon-tab-profile-content-title-desc">
+                                                    ACCOUNT INFORMATION
+                                                </p>
+                                                <img srcset="images/Footer-line.png 2x" alt="" />
+                                            </div>
+                                            <div class="menu-icon-tab-profile-form">
+                                                <p class="menu-icon-tab-profile-form-name">NAME</p>
+                                                <a href="#!" class="menu-icon-tab-profile-form-link"
+                                                   >My account</a
+                                                >
+                                                <!--                                            <a href="#!" class="menu-icon-tab-profile-form-link"
+                                                                                               >Address List</a
+                                                                                            >-->
+                                                <a href="#!" class="menu-icon-tab-profile-form-link"
+                                                   >Log out</a
+                                                >
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${empty sessionScope.USER}">
+                                            <p style="font-size: 15px; margin: 5px 0">YOU ARE NOT ALREADY LOGGED, PLEASE LOGIN FIRST!!</p><br/>
+                                            <a style="font-size: 15px; text-decoration: none; font-weight: bold" href="loginPage">Login here </a>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>

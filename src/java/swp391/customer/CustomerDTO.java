@@ -13,7 +13,8 @@ import java.util.Date;
  * @author Chau Nhat Truong
  */
 public class CustomerDTO implements Serializable {
-
+    
+    private int customerID;
     private String name;
     private String password;
     private Date birthDate;
@@ -31,6 +32,18 @@ public class CustomerDTO implements Serializable {
     public CustomerDTO(String name) {
         this.name = name;
     }
+
+    public CustomerDTO(int customerID, String name, Date birthDate, String email, String phone, String address, int rankID, boolean sex) {
+        this.customerID = customerID;
+        this.name = name;
+        this.birthDate = birthDate;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.rankID = rankID;
+        this.sex = sex;
+    }
+    
     
     public CustomerDTO(String name, String password, Date birthDate,
             String email, String phone, String address, boolean role, int rankID, boolean sex, boolean typeOfLogin) {
@@ -44,6 +57,14 @@ public class CustomerDTO implements Serializable {
         this.rankID = rankID;
         this.sex = sex;
         this.typeOfLogin = typeOfLogin;
+    }
+    
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
     /**

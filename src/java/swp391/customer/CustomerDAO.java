@@ -35,7 +35,7 @@ public class CustomerDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 //Create SQL String
-                String sql = "Select Name, Email, Phone, Address "
+                String sql = "Select CustomerID, Name, Email, Phone, Address, RankID, Sex, DateOfBirth "
                         + "From Customer "
                         + "Where Email = ? And Password = ? And TypeOfLogin = 0";
                 //Create statement
@@ -47,7 +47,13 @@ public class CustomerDAO implements Serializable {
                 //Process result
                 if (rs.next()) {
                     String name = rs.getString("Name");
-                    result = new CustomerDTO(name);
+                    int id = rs.getInt("CustomerID");
+                    String phone = rs.getString("Phone");
+                    String address = rs.getString("Address");
+                    int rankID = rs.getInt("RankID");
+                    boolean sex = rs.getBoolean("Sex");
+                    Date dob = rs.getDate("DateOfBirth");
+                    result = new CustomerDTO(id, name, dob, email, phone, address, rankID, sex);
                 }
             }//end con is available
         } finally {

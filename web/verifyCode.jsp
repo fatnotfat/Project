@@ -183,24 +183,27 @@
                                 </button>
                                 <div class="menu-icon-tab-profile-content">
                                     <div class="container">
-                                        <div class="menu-icon-tab-profile-content-title">
-                                            <p class="menu-icon-tab-profile-content-title-desc">
-                                                ACCOUNT INFORMATION
-                                            </p>
-                                            <img srcset="images/Footer-line.png 2x" alt="" />
-                                        </div>
-                                        <div class="menu-icon-tab-profile-form">
-                                            <p class="menu-icon-tab-profile-form-name">NAME</p>
-                                            <a href="#!" class="menu-icon-tab-profile-form-link"
-                                               >My account</a
-                                            >
-                                            <a href="#!" class="menu-icon-tab-profile-form-link"
-                                               >Address List</a
-                                            >
-                                            <a href="#!" class="menu-icon-tab-profile-form-link"
-                                               >Log out</a
-                                            >
-                                        </div>
+                                        <!--                                        <div class="menu-icon-tab-profile-content-title">
+                                                                                    <p class="menu-icon-tab-profile-content-title-desc">
+                                                                                        ACCOUNT INFORMATION
+                                                                                    </p>
+                                                                                    <img srcset="images/Footer-line.png 2x" alt="" />
+                                                                                </div>
+                                                                                <div class="menu-icon-tab-profile-form">
+                                                                                    <p class="menu-icon-tab-profile-form-name">NAME</p>
+                                                                                    <a href="#!" class="menu-icon-tab-profile-form-link"
+                                                                                       >My account</a
+                                                                                    >
+                                                                                    <a href="#!" class="menu-icon-tab-profile-form-link"
+                                                                                       >Address List</a
+                                                                                    >
+                                                                                    <a href="#!" class="menu-icon-tab-profile-form-link"
+                                                                                       >Log out</a
+                                                                                    >
+                                                                                </div>-->
+                                        <p style="font-size: 15px; margin: 5px 0">YOU ARE NOT ALREADY LOGGED, PLEASE LOGIN FIRST!!</p><br/>
+                                        <c:set var="URL" value="userCart.jsp" scope="session"/>
+                                        <a style="font-size: 15px; text-decoration: none; font-weight: bold; color: black" href="loginPage">Login here </a>
                                     </div>
                                 </div>
                             </div>
