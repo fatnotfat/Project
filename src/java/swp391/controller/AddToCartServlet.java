@@ -8,6 +8,11 @@ package swp391.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Properties;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -18,7 +23,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import swp391.cart.CartDAO;
 import swp391.cart.CartObject;
+import swp391.customer.CustomerDTO;
 import swp391.utils.MyApplicationConstants;
 
 /**
@@ -50,6 +57,7 @@ public class AddToCartServlet extends HttpServlet {
             HttpSession session = request.getSession();
             //2. Customer take a cart
             CartObject cart = (CartObject) session.getAttribute("CART");
+            CartDAO dao = new CartDAO();
             if (cart == null) {
                 cart = new CartObject();
             }
@@ -58,7 +66,19 @@ public class AddToCartServlet extends HttpServlet {
 //            String quantity = request.getParameter("txtQuantity");
             //4. Customer drop items into cart
             cart.addItemToCart(id);
+            CustomerDTO cusDTO = (CustomerDTO) request.getAttribute("USER");
+            if (cusDTO != null) {
+                int cusID = cusDTO.getCustomerID();
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                String formattedDate = myDateObj.format(myFormatObj);
+                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                Date date = formatter.parse(formattedDate);
+                dao.insertCart(cusID, Integer.parseInt(id), cart.getBoughtProduct(id).getQuantity(),date);
+            }
             session.setAttribute("CART", cart);
+        } catch (ParseException ex) {
+            log("AddToCartServlet _ Parse _ " + ex.getMessage());
         } catch (NamingException ex) {
             log("AddToCartServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {

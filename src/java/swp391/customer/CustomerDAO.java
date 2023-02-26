@@ -25,7 +25,7 @@ import swp391.utils.DBHelper;
 public class CustomerDAO implements Serializable {
 
     public CustomerDTO checkLogin(String email, String password)
-            throws SQLException, NamingException {;
+            throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -35,7 +35,7 @@ public class CustomerDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 //Create SQL String
-                String sql = "Select CustomerID, Name, Email, Phone, Address, RankID, Sex, DateOfBirth "
+                String sql = "Select CustomerID, Name, Email, Phone, Address, RankID, Sex, DateOfBirth"
                         + "From Customer "
                         + "Where Email = ? And Password = ? And TypeOfLogin = 0";
                 //Create statement

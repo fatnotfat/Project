@@ -22,6 +22,7 @@ public class ProductDTO implements Serializable{
     private boolean status;
     private int size;
     private Date createTime;
+    private String avatar;
 
     public ProductDTO() {
     }
@@ -45,7 +46,7 @@ public class ProductDTO implements Serializable{
         this.price = price;
     }
 
-    public ProductDTO(int id, String name, String description, int quantity, float price, boolean status, int size, Date createTime) {
+    public ProductDTO(int id, String name, String description, int quantity, float price, boolean status, int size, Date createTime,String avatar) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -54,6 +55,7 @@ public class ProductDTO implements Serializable{
         this.status = status;
         this.size = size;
         this.createTime = createTime;
+        this.avatar = avatar;
     }
 
     public ProductDTO(String name, String description, int quantity, float price, boolean status, int size, Date createTime) {
@@ -66,13 +68,14 @@ public class ProductDTO implements Serializable{
         this.createTime = createTime;
     }
 
-    public ProductDTO(int id, String name, String description, int quantity, float price, int size) {
+    public ProductDTO(int id, String name, String description, int quantity, float price, int size, String avatar) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.description = description;
         this.size = size;
+        this.avatar = avatar;
     }
 
     /**
@@ -181,4 +184,16 @@ public class ProductDTO implements Serializable{
         this.id = id;
     }
 
+    /**
+     * @return the avatar
+     */
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+    
+    
 }

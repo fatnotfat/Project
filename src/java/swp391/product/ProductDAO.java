@@ -63,7 +63,7 @@ public class ProductDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "SELECT ProductID, Name, Description, Quantity, Price, Status, Size, CreateTime "
+                String sql = "SELECT ProductID, Name, Description, Quantity, Price, Status, Size, CreateTime, Avatar "
                         + "FROM Product "
                         + "WHERE Name LIKE ? ";
 
@@ -79,8 +79,8 @@ public class ProductDAO implements Serializable {
                     boolean status = rs.getBoolean("Status");
                     int size = rs.getInt("Size");
                     Date date = rs.getDate("CreateTime");
-
-                    ProductDTO dto = new ProductDTO(id, name, descr, quantity, price, status, size, date);
+                    String avatar = rs.getString("Avatar");
+                    ProductDTO dto = new ProductDTO(id, name, descr, quantity, price, status, size, date, avatar);
 
                     if (this.listProduct == null) {
                         this.listProduct = new ArrayList<>();
@@ -114,7 +114,7 @@ public class ProductDAO implements Serializable {
 
         try {
             con = DBHelper.makeConnection();
-            String sql = "SELECT ProductID, Name, Description, Quantity, Price, Status, Size, CreateTime "
+            String sql = "SELECT ProductID, Name, Description, Quantity, Price, Status, Size, CreateTime, Avatar "
                     + "FROM Product\n"
                     + "WHERE Name LIKE ? "
                     + "ORDER BY ProductID\n"
@@ -133,7 +133,8 @@ public class ProductDAO implements Serializable {
                         rs.getFloat("Price"),
                         rs.getBoolean("Status"),
                         rs.getInt("Size"),
-                        rs.getDate("CreateTime")
+                        rs.getDate("CreateTime"),
+                        rs.getString("Avatar")
                 ));
             }
 
@@ -161,7 +162,7 @@ public class ProductDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select ProductID, Name, Description, Quantity, Price, Size "
+                String sql = "Select ProductID, Name, Description, Quantity, Price, Size, Avatar "
                         + "From Product "
                         + "Where ";
                 if (cateID > 0) {
@@ -207,8 +208,9 @@ public class ProductDAO implements Serializable {
                     int quantity = rs.getInt("Quantity");
                     float price = rs.getFloat("Price");
                     size = rs.getInt("Size");
+                    String avatar = rs.getString("Avatar");
                     ProductDTO dto = new ProductDTO(
-                            id, name, description, quantity, price, size);
+                            id, name, description, quantity, price, size, avatar);
                     if (this.listProductByFilter == null) {
                         this.listProductByFilter = new ArrayList<>();
                     }
@@ -237,7 +239,7 @@ public class ProductDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "SELECT ProductID, Name, Description, Quantity, Price, Status, Size, CreateTime "
+                String sql = "SELECT ProductID, Name, Description, Quantity, Price, Status, Size, CreateTime, Avatar "
                         + "FROM Product "
                         + "WHERE ProductID = ?";
                 stm = con.prepareStatement(sql);
@@ -252,7 +254,8 @@ public class ProductDAO implements Serializable {
                     boolean status = rs.getBoolean("Status");
                     int size = rs.getInt("Size");
                     Date date = rs.getDate("CreateTime");
-                    dto = new ProductDTO(id, name, descr, quantity, price, status, size, date);
+                    String avatar = rs.getString("Avatar");
+                    dto = new ProductDTO(id, name, descr, quantity, price, status, size, date, avatar);
                 }
             }
         } finally {

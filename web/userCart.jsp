@@ -125,6 +125,7 @@
 //                alert(totalPrice);
                 $('#total-price').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
                 $('#total-price-header').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
+                $('#total-price-mobile').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
                 var xhr = new XMLHttpRequest();
                 xhr.open('POST', 'UpdateCartServlet', true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -246,6 +247,7 @@
                                 var totalPrice = calculateTotalPrice();
                                 $('#total-price').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
                                 $('#total-price-header').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
+                                $('#total-price-mobile').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
                             } else {
                                 // handle error response from servlet
                                 console.log(response.message);
@@ -297,6 +299,10 @@
             $(document).ready(function () {
                 var totalPrice = calculateTotalPrice();
                 $('#total-price-header').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
+            });
+            $(document).ready(function () {
+                var totalPrice = calculateTotalPrice();
+                $('#total-price-mobile').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
             });
         </script>
 
@@ -515,6 +521,7 @@
                                                 <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
                                                 <c:if test="${empty sessionScope.CART.items.size()}">
                                                     <c:set var="cartSize" value="${0}"/>
+                                                    <c:set var="CART_PRICE" value="${calculateTotalPrice()}" scope="session"/>
                                                 </c:if>
                                                 <p class="menu-icon-tab-cart-content-show-txt-desc">
                                                     <c:if test="${cartSize eq 0}">
@@ -606,10 +613,19 @@
                                             <div
                                                 class="menu-responsive-icon-tab-cart-content-show-txt"
                                                 >
+                                                <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
+                                                <c:if test="${empty sessionScope.CART.items.size()}">
+                                                    <c:set var="cartSize" value="${0}"/>
+                                                </c:if>
                                                 <p
                                                     class="menu-responsive-icon-tab-cart-content-show-txt-desc"
                                                     >
-                                                    There are currently no products
+                                                    <c:if test="${cartSize eq 0}">
+                                                        There are no currently products.
+                                                    </c:if>
+                                                    <c:if test="${cartSize ne 0}">
+                                                        There are <span id="cart-size-header" style="font-weight: bold">${cartSize}</span> products
+                                                    </c:if>
                                                 </p>
                                             </div>
                                         </div>
@@ -623,7 +639,7 @@
                                                     >
                                                     TOTAL AMOUNT
                                                 </p>
-                                                <p
+                                                <p  id="total-price-mobile"
                                                     class="menu-responsive-icon-tab-cart-content-function-total-price"
                                                     >
                                                     0₫

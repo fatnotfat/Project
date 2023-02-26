@@ -36,7 +36,6 @@ public class CartObject implements Serializable{
 
     
     
-    
     public void addItemToCart(String id) throws NamingException, SQLException{
         
         ProductDAO dao = new ProductDAO();
