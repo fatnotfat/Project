@@ -937,15 +937,20 @@ header {
     & .container {
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: stretch;
     }
     &-product {
+      padding: 30px 0;
+      border-bottom: 1px solid var(--form-color);
       & .container {
         display: flex;
         flex-direction: row;
       }
       &-logo {
-        width: inherit;
-        height: inherit;
+        width: 124px;
+        height: 124px;
         border-radius: 8px;
         background: #fff;
         position: relative;
@@ -983,10 +988,10 @@ header {
           position: relative;
           overflow: hidden;
           border-radius: 8px;
+          display: block;
           &-pic {
-            // position: absolute;
-            width: inherit;
-            height: inherit;
+            width: 124px;
+            height: 124px;
             top: 0;
             left: 0;
             right: 0;
@@ -1030,7 +1035,70 @@ header {
           }
         }
       }
+      &-fee {
+        border-bottom: 1px solid var(--form-color);
+        & .container {
+          display: flex;
+          flex-direction: row;
+          font-size: 16px;
+          padding: 10px 10px;
+        }
+        &-name {
+          & .container {
+            display: flex;
+            flex-direction: column;
+          }
+          &-provisional {
+            padding-bottom: 10px;
+          }
+        }
+        &-price {
+          & .container {
+            display: flex;
+            flex-direction: column;
+          }
+          &-provisional {
+            padding-bottom: 10px;
+          }
+        }
+      }
+      &-total {
+        & .container {
+          display: flex;
+          flex-direction: row;
+          font-size: 16px;
+          padding: 20px 10px;
+        }
+        &-name {
+          & .container {
+            display: flex;
+            flex-direction: column;
+          }
+          &-title {
+            padding-bottom: 10px;
+            font-size: 20px;
+          }
+        }
+        &-price {
+          & .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+          }
+          &-number {
+            font-size: 20px;
+            font-weight: 600;
+          }
+          &-country {
+            padding-right: 5px;
+          }
+        }
+      }
     }
+  }
+  &-space {
+   height: 1080px;
   }
 }
 
@@ -1047,6 +1115,7 @@ input[type="radio"].input-radio {
     width: auto;
     &-primary {
       font-size: 14px;
+      padding-top: 1.5px;
     }
   }
   &-input {

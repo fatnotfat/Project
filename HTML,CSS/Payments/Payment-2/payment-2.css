@@ -866,14 +866,21 @@ header {
 .shipping-info-right .container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+.shipping-info-right-product {
+  padding: 30px 0;
+  border-bottom: 1px solid var(--form-color);
 }
 .shipping-info-right-product .container {
   display: flex;
   flex-direction: row;
 }
 .shipping-info-right-product-logo {
-  width: inherit;
-  height: inherit;
+  width: 124px;
+  height: 124px;
   border-radius: 8px;
   background: #fff;
   position: relative;
@@ -912,10 +919,11 @@ header {
   position: relative;
   overflow: hidden;
   border-radius: 8px;
+  display: block;
 }
 .shipping-info-right-product-logo-img-pic {
-  width: inherit;
-  height: inherit;
+  width: 124px;
+  height: 124px;
   top: 0;
   left: 0;
   right: 0;
@@ -951,6 +959,59 @@ header {
   font-size: 18px;
   font-weight: 700;
 }
+.shipping-info-right-product-fee {
+  border-bottom: 1px solid var(--form-color);
+}
+.shipping-info-right-product-fee .container {
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  padding: 10px 10px;
+}
+.shipping-info-right-product-fee-name .container {
+  display: flex;
+  flex-direction: column;
+}
+.shipping-info-right-product-fee-name-provisional {
+  padding-bottom: 10px;
+}
+.shipping-info-right-product-fee-price .container {
+  display: flex;
+  flex-direction: column;
+}
+.shipping-info-right-product-fee-price-provisional {
+  padding-bottom: 10px;
+}
+.shipping-info-right-product-total .container {
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  padding: 20px 10px;
+}
+.shipping-info-right-product-total-name .container {
+  display: flex;
+  flex-direction: column;
+}
+.shipping-info-right-product-total-name-title {
+  padding-bottom: 10px;
+  font-size: 20px;
+}
+.shipping-info-right-product-total-price .container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.shipping-info-right-product-total-price-number {
+  font-size: 20px;
+  font-weight: 600;
+}
+.shipping-info-right-product-total-price-country {
+  padding-right: 5px;
+}
+.shipping-info-space {
+  height: 1080px;
+}
 
 input[type=radio].input-radio {
   border-radius: 50%;
@@ -965,6 +1026,7 @@ input[type=radio].input-radio {
 }
 .radio-label-primary {
   font-size: 14px;
+  padding-top: 1.5px;
 }
 .radio-input {
   padding-right: 0.75em;
