@@ -7,14 +7,18 @@ package swp391.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.HashMap;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import swp391.cart.CartDAO;
 import swp391.cart.CartObject;
+import swp391.customer.CustomerDTO;
 
 /**
  *
@@ -66,18 +70,32 @@ public class UpdateCartServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         CartObject cartItems = (CartObject) session.getAttribute("CART");
-        
+        CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("USER");
         String itemId = request.getParameter("txtID");
         int quantity = Integer.parseInt(request.getParameter("txtQuantity"));
-        
         cartItems.getItems().put(itemId, quantity);
-        
-        // Update session attribute
-        session.setAttribute("CART", cartItems);
-        System.out.println(cartItems.getItems().get(itemId));
-        // Send response with success message
-        response.setContentType("text/plain");
-        response.getWriter().write("Item quantity updated successfully");
+        try {
+            CartDAO dao = new CartDAO();
+            if (cusDTO != null) {
+                if (dao.checkProduct(cusDTO.getCustomerID(), Integer.parseInt(itemId))) {
+                    dao.updateCart(cusDTO.getCustomerID(), Integer.parseInt(itemId), quantity);
+                }
+            }
+        } catch (NamingException ex) {
+            log("UpdateCartServlet _ Naming _ " + ex.getMessage());
+        } catch (NumberFormatException ex) {
+            log("UpdateCartServlet _ NumberFormat _ " + ex.getMessage());
+        } catch (SQLException ex) {
+            log("UpdateCartServlet _ SQL _ " + ex.getMessage());
+        } finally {
+// Update session attribute
+            session.setAttribute("CART", cartItems);
+            System.out.println(cartItems.getItems().get(itemId));
+            // Send response with success message
+            response.setContentType("text/plain");
+            response.getWriter().write("Item quantity updated successfully");
+        }
+
     }
 
     /**

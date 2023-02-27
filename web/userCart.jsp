@@ -439,11 +439,14 @@
                                             <img srcset="images/Footer-line.png 2x" alt="" />
                                         </div>
                                         <div class="menu-icon-tab-search-form">
-                                            <input
-                                                type="text"
-                                                class="menu-icon-tab-search-input"
-                                                placeholder="Search Product..."
-                                                />
+                                            <form action="searchTextController">
+                                                <input
+                                                    type="text"
+                                                    class="menu-icon-tab-search-input"
+                                                    placeholder="Search Product..."
+                                                    name="txtSearch" value="${param.txtSearch}"
+                                                    />
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -548,11 +551,13 @@
                                                 </p>
                                             </div>
                                             <div class="menu-icon-tab-cart-content-function-method">
-                                                <button
-                                                    class="menu-icon-tab-cart-content-function-method-btn"
-                                                    >
-                                                    VIEW CART
-                                                </button>
+                                                <form action="addToCartPage" method="POST">
+                                                    <button
+                                                        class="menu-icon-tab-cart-content-function-method-btn"
+                                                        >
+                                                        VIEW CART
+                                                    </button> 
+                                                </form>
                                                 <button
                                                     class="menu-icon-tab-cart-content-function-method-btn"
                                                     >
@@ -648,11 +653,13 @@
                                             <div
                                                 class="menu-responsive-icon-tab-cart-content-function-method"
                                                 >
-                                                <button
-                                                    class="menu-responsive-icon-tab-cart-content-function-method-btn"
-                                                    >
-                                                    VIEW CART
-                                                </button>
+                                                <form action="addToCartPage" method="POST">
+                                                    <button
+                                                        class="menu-responsive-icon-tab-cart-content-function-method-btn"
+                                                        >
+                                                        VIEW CART
+                                                    </button>
+                                                </form>
                                                 <button
                                                     class="menu-responsive-icon-tab-cart-content-function-method-btn"
                                                     >
@@ -693,20 +700,20 @@
                             <c:if test="${empty sessionScope.CART.items.size()}">
                                 <c:set var="cartSize" value="${0}"/>
                             </c:if>
-     
-                            
+
+
                             <c:if test="${cartSize eq 0 or cartSize eq 1}">
                                 <span id="cart-size" class="your-cart-desc-number" style="font-weight: 700"
-                                  >${cartSize}</span
-                            >
-                            <span style="font-weight: 700">product</span> in your cart
+                                      >${cartSize}</span
+                                >
+                                <span style="font-weight: 700">product</span> in your cart
                             </c:if>
-                            
+
                             <c:if test="${cartSize ne 0 and cartSize ne 1}">
                                 <span id="cart-size" class="your-cart-desc-number" style="font-weight: 700"
-                                  >${cartSize}</span
-                            >
-                            <span style="font-weight: 700">products</span> in your cart
+                                      >${cartSize}</span
+                                >
+                                <span style="font-weight: 700">products</span> in your cart
                             </c:if>
                         </p>
                     </div>

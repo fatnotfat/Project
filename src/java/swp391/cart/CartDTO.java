@@ -30,6 +30,13 @@ public class CartDTO implements Serializable{
         this.createTime = createTime;
     }
 
+    public CartDTO(int productID, int quantity) {
+        this.productID = productID;
+        this.quantity = quantity;
+    }
+    
+    
+
     /**
      * @return the id
      */

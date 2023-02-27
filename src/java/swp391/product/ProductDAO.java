@@ -65,7 +65,7 @@ public class ProductDAO implements Serializable {
             if (con != null) {
                 String sql = "SELECT ProductID, Name, Description, Quantity, Price, Status, Size, CreateTime, Avatar "
                         + "FROM Product "
-                        + "WHERE Name LIKE ? ";
+                        + "WHERE Name LIKE ? AND Status =1";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + searchValue + "%");
@@ -166,16 +166,16 @@ public class ProductDAO implements Serializable {
                         + "From Product "
                         + "Where ";
                 if (cateID > 0) {
-                    sql += " CateID = ?";
+                    sql += " CateID = ? AND Status = 1";
                 }
                 if (priceFrom >= 0) {
-                    sql += " And Price >= ?";
+                    sql += " And Price >= ? AND Status = 1";
                 }
                 if (priceTo != 0) {
-                    sql += " And Price <= ?";
+                    sql += " And Price <= ? AND Status =1";
                 }
                 if (size != 0) {
-                    sql += " And Size = ?";
+                    sql += " And Size = ? AND Status = 1";
                 }
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, cateID);

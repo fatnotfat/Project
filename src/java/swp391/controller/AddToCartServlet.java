@@ -66,15 +66,19 @@ public class AddToCartServlet extends HttpServlet {
 //            String quantity = request.getParameter("txtQuantity");
             //4. Customer drop items into cart
             cart.addItemToCart(id);
-            CustomerDTO cusDTO = (CustomerDTO) request.getAttribute("USER");
+            CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("USER");
             if (cusDTO != null) {
                 int cusID = cusDTO.getCustomerID();
-                LocalDateTime myDateObj = LocalDateTime.now();
-                DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-                String formattedDate = myDateObj.format(myFormatObj);
-                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-                Date date = formatter.parse(formattedDate);
-                dao.insertCart(cusID, Integer.parseInt(id), cart.getBoughtProduct(id).getQuantity(),date);
+                if (dao.checkProduct(cusID, Integer.parseInt(id))) {
+                    dao.updateCart(cusID, Integer.parseInt(id), cart.getItems().get(id));
+                } else {
+                    LocalDateTime myDateObj = LocalDateTime.now();
+                    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                    String formattedDate = myDateObj.format(myFormatObj);
+                    SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                    Date date = formatter.parse(formattedDate);
+                    dao.insertCart(cusID, Integer.parseInt(id), cart.getItems().get(id), date);
+                }
             }
             session.setAttribute("CART", cart);
         } catch (ParseException ex) {

@@ -35,10 +35,10 @@ public class CustomerDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 //Create SQL String
-                String sql = "Select CustomerID, Name, Email, Phone, Address, RankID, Sex, DateOfBirth"
+                String sql = "Select CustomerID, Name, Email, Phone, Address, RankID, Sex, DateOfBirth "
                         + "From Customer "
-                        + "Where Email = ? And Password = ? And TypeOfLogin = 0";
-                //Create statement
+                        + "Where email = ? And Password = ? And TypeOfLogin = 0";
+
                 stm = con.prepareStatement(sql);
                 stm.setString(1, email);
                 stm.setString(2, password);
