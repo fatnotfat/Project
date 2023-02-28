@@ -713,6 +713,28 @@ header {
 .shipping-info-left .container {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: center;
+}
+.shipping-info-left-form-delivery-home {
+  background-color: var(--tab-color);
+  box-shadow: 0 0 0 1px #d9d9d9;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: baseline;
+}
+.shipping-info-left-form-delivery-home > .radio-label > .radio-label-primary {
+  font-weight: 600;
+  opacity: 0.6;
+}
+.shipping-info-left-form-delivery-home-price-number {
+  font-size: 14px;
+  font-weight: 600;
 }
 .shipping-info-left-breadcrumb {
   margin-left: 2vw;
@@ -746,92 +768,9 @@ header {
   color: var(--font-color);
   text-decoration: none;
 }
-.shipping-info-left-avatar .container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.shipping-info-left-avatar-icon {
-  font-size: 30px;
-  padding: 10px 20px;
-}
-.shipping-info-left-avatar-content-name {
+.shipping-info-left-title-txt {
   font-size: 20px;
-}
-.shipping-info-left-form {
-  width: 100%;
-}
-.shipping-info-left-form-address {
-  padding: 10px 0;
-}
-.shipping-info-left-form-address .container {
-  position: relative;
-}
-.shipping-info-left-form-name {
-  padding: 10px 0;
-}
-.shipping-info-left-form-name .container {
-  position: relative;
-}
-.shipping-info-left-form-phone {
-  padding: 10px 0;
-}
-.shipping-info-left-form-phone .container {
-  position: relative;
-}
-.shipping-info-left-form-delivery {
-  border: 1px solid var(--form-color);
-  background-color: var(--tab-color);
-  border-radius: 1rem;
-  margin-bottom: 30px;
-}
-.shipping-info-left-form-delivery .container {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-.shipping-info-left-form-delivery-address {
-  border-top: 1px solid var(--form-color);
-  padding: 10px 0;
-}
-.shipping-info-left-form-delivery-address .container {
-  position: relative;
-}
-.shipping-info-left-form-delivery-address .container > .field-label {
-  padding: 0 1em;
-}
-.shipping-info-left-form-city {
-  padding: 10px 0;
-}
-.shipping-info-left-form-city .container {
-  position: relative;
-}
-.shipping-info-left-form-city .container > .field-label {
-  padding: 0 1em;
-}
-.shipping-info-left-form-district {
-  padding: 10px 0;
-}
-.shipping-info-left-form-district .container {
-  position: relative;
-}
-.shipping-info-left-form-district .container > .field-label {
-  padding: 0 1em;
-}
-.shipping-info-left-form-ward {
-  padding: 10px 0;
-}
-.shipping-info-left-form-ward .container {
-  position: relative;
-}
-.shipping-info-left-form-ward .container > .field-label {
-  padding: 0 1em;
-}
-.shipping-info-left-form-delivery-address-select {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: stretch;
-  border-bottom: 1px solid var(--form-color);
+  padding: 20px 0;
 }
 .shipping-info-left-btn {
   border: 1px solid black;
@@ -862,6 +801,75 @@ header {
 .shipping-info-left-btn:hover::after {
   left: 0;
   width: 100%;
+}
+.shipping-info-left-payment {
+  margin: 10px 0;
+}
+.shipping-info-left-payment-all {
+  box-shadow: 0 0 0 1px #d9d9d9;
+  border-radius: 4px;
+  background: #fff;
+  color: #737373;
+  overflow: hidden;
+}
+.shipping-info-left-payment-title-txt {
+  font-size: 20px;
+  padding: 20px 0;
+}
+.shipping-info-left-payment-field-input {
+  background-color: var(--tab-color);
+  padding: 10px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: baseline;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+.shipping-info-left-payment-field-input > .radio-label > .radio-label-primary {
+  font-weight: 600;
+  opacity: 0.6;
+}
+.shipping-info-left-payment-field-other-input {
+  background-color: var(--tab-color);
+  padding: 10px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: baseline;
+  margin-bottom: 0;
+  border-bottom: none;
+  border-top: 1px solid #d9d9d9;
+}
+.shipping-info-left-payment-field-other-input > .radio-label > .radio-label-primary {
+  font-weight: 600;
+  opacity: 0.6;
+}
+.shipping-info-left-payment-content-cod {
+  text-align: center;
+  font-size: 12px;
+  white-space: pre-line;
+  padding: 1.5em;
+  border-top: 1px solid #d9d9d9;
+  background-color: #fafafa;
+  line-height: 18.2px;
+  font-weight: 600;
+  display: none;
+}
+.shipping-info-left-payment-content-other {
+  text-align: center;
+  font-size: 12px;
+  white-space: pre-line;
+  padding: 1.5em;
+  border-top: 1px solid #d9d9d9;
+  background-color: #fafafa;
+  line-height: 18.2px;
+  font-weight: 600;
+  display: none;
 }
 .shipping-info-right .container {
   display: flex;
@@ -1015,6 +1023,14 @@ header {
 
 input[type=radio].input-radio {
   border-radius: 50%;
+}
+
+.main-img {
+  margin-right: 10px;
+  display: flex;
+  align-self: center;
+  width: 40px;
+  height: 40px;
 }
 
 .radio-label {
