@@ -114,6 +114,7 @@
 
 // ________________________________
 // Define the API endpoint URLs
+// Define the API endpoint URLs
 const provincesEndpoint = "https://provinces.open-api.vn/api/p";
 const districtsEndpoint = "https://provinces.open-api.vn/api/d?province_id=";
 const wardsEndpoint = "https://provinces.open-api.vn/api/w?district_id=";
@@ -181,5 +182,62 @@ districtSelect.addEventListener("change", function () {
     });
 });
 
-   
-   
+
+
+
+// const storedCity = document.getElementById("stored-city");
+// const storedDistrict = document.getElementById("stored-district");
+// const storedWard = document.getElementById("stored-ward");
+
+// function getProvinces() {
+//   return fetch("https://provinces.open-api.vn/api/?depth=2")
+//     .then(response => response.json())
+//     .then(data => {
+//       const provinces = data.filter(item => item.type === "tinh");
+//       storedCity.innerHTML = `<option value="null" data-code="null" value="null">Choose Province / city</option>` + 
+//                               provinces.map(item => `<option data-code="${item.code}" value="${item.id}">${item.name}</option>`).join("");
+//     });
+// }
+
+// function getDistricts(cityId) {
+//   return fetch(`https://provinces.open-api.vn/api/?depth=2&parent=${cityId}`)
+//     .then(response => response.json())
+//     .then(data => {
+//       const districts = data.filter(item => item.type === "huyen");
+//       storedDistrict.innerHTML = `<option value="">Choose District</option>` + 
+//                                   districts.map(item => `<option data-code="${item.code}" value="${item.id}">${item.name}</option>`).join("");
+//     });
+// }
+
+// function getWards(districtId) {
+//   return fetch(`https://provinces.open-api.vn/api/?depth=2&parent=${districtId}`)
+//     .then(response => response.json())
+//     .then(data => {
+//       const wards = data.filter(item => item.type === "xa");
+//       storedWard.innerHTML = `<option value="">Choose Ward</option>` + 
+//                                 wards.map(item => `<option data-code="${item.code}" value="${item.id}">${item.name}</option>`).join("");
+//     });
+// }
+
+// getProvinces();
+
+// storedCity.addEventListener("change", () => {
+//   const selectedCity = storedCity.options[storedCity.selectedIndex];
+//   const cityId = selectedCity.value;
+//   if (cityId) {
+//     getDistricts(cityId);
+//   } else {
+//     storedDistrict.innerHTML = "<option value=''>Choose District</option>";
+//     storedWard.innerHTML = "<option value=''>Choose Ward</option>";
+//   }
+// });
+
+// storedDistrict.addEventListener("change", () => {
+//   const selectedDistrict = storedDistrict.options[storedDistrict.selectedIndex];
+//   const districtId = selectedDistrict.value;
+//   if (districtId) {
+//     getWards(districtId);
+//   } else {
+//     storedWard.innerHTML = "<option value=''>Choose Ward</option>";
+//   }
+// });
