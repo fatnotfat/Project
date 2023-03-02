@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProductItem</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/productItem.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Aboreto&family=Montserrat:ital,wght@0,400;1,500&family=Raleway:wght@700&family=Roboto+Condensed:wght@300;400&family=Rubik:wght@300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Montserrat&family=Noto+Serif+JP:wght@600;700&family=Signika:wght@300&family=Ubuntu:wght@700&family=Unbounded:wght@600&family=Varela+Round&family=Work+Sans:ital,wght@1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="myProjects/webProject/icofont/css/icofont.min.css">
+    <link href='https://css.gg/facebook.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+    <!-- animation library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+</head>
+
+<body>
+    <header>
+        <div class="grid">
+            <div class="grid__row">
+                <div class="grid__column-10">
+                    <nav>
+                        <div class="nav_left">
+                            <h2><a href="">LUXURY</a></h2>
+                        </div>
+                        <ul class="nav_center">
+                            <li>
+                                <div class="category__filter-include-type">
+                                    <div class="filter-select">
+                                        <p class="filter-select__label">
+                                            Categories
+                                        </p>
+
+                                        <ul class="filter-select__list">
+                                            <li class="filter-select__item">
+                                                <a href="listProduct.html" class="filter-select__link">Dây chuyền</a>
+                                            </li>
+                                            <li class="filter-select__item">
+                                                <a href="" class="filter-select__link">Vòng tay</a>
+                                            </li>
+                                            <li class="filter-select__item">
+                                                <a href="" class="filter-select__link">Nhẫn</a>
+                                            </li>
+                                            <li class="filter-select__item">
+                                                <a href="" class="filter-select__link">Khuyen tay</a>
+                                            </li>
+                                            <li class="filter-select__item">
+                                                <a href="" class="filter-select__link">Dong ho</a>
+                                            </li>
+                                            <li class="filter-select__item">
+                                                <a href="" class="filter-select__link">Mat kinh</a>
+                                            </li>
+                                            <li class="filter-select__item">
+                                                <a href="" class="filter-select__link">Nhẫn</a>
+                                            </li>
+                                            <li class="filter-select__item">
+                                                <a href="" class="filter-select__link">Nhẫn</a>
+                                            </li>
+                                            <li class="filter-select__item">
+                                                <a href="" class="filter-select__link">Nhẫn</a>
+                                            </li>
+                                            <li class="filter-select__item">
+                                                <a href="" class="filter-select__link">Nhẫn</a>
+                                            </li>
+                                            <li class="filter-select__item">
+                                                <a href="" class="filter-select__link">Nhẫn</a>
+                                            </li>
+                                            <li class="filter-select__item">
+                                                <a href="" class="filter-select__link">Nhẫn</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+                                <a href="#">
+                                    About
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Shop
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Contact
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul class="nav_right">
+                            <li>
+                                <div class="search__bar-container">
+                                    <div class="search__box">
+                                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M11.5 21.5C16.7467 21.5 21 17.2467 21 12C21 6.75329 16.7467 2.5 11.5 2.5C6.25329 2.5 2 6.75329 2 12C2 17.2467 6.25329 21.5 11.5 21.5Z"
+                                                stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M22 22.5L20 20.5" stroke="#292D32" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                        <form name="search" class="search__box-form">
+                                            <input type="text" class="search__box-form-input" name="txt"
+                                                onmouseout="this.value = ''; this.blur();">
+                                            <button type="search">Seach</button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+                                <!-- cart shopping -->
+                                <div class="cart__shopping">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M1.66663 1.66669H3.11663C4.01663 1.66669 4.72496 2.44169 4.64996 3.33335L3.95829 11.6333C3.84163 12.9917 4.91662 14.1583 6.28329 14.1583H15.1583C16.3583 14.1583 17.4083 13.175 17.5 11.9834L17.95 5.73336C18.05 4.35002 17 3.22502 15.6083 3.22502H4.84997"
+                                            stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path
+                                            d="M13.5417 18.3333C14.117 18.3333 14.5833 17.867 14.5833 17.2917C14.5833 16.7164 14.117 16.25 13.5417 16.25C12.9664 16.25 12.5 16.7164 12.5 17.2917C12.5 17.867 12.9664 18.3333 13.5417 18.3333Z"
+                                            stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path
+                                            d="M6.87504 18.3333C7.45034 18.3333 7.91671 17.867 7.91671 17.2917C7.91671 16.7164 7.45034 16.25 6.87504 16.25C6.29974 16.25 5.83337 16.7164 5.83337 17.2917C5.83337 17.867 6.29974 18.3333 6.87504 18.3333Z"
+                                            stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M7.5 6.66669H17.5" stroke="#292D32" stroke-width="1.5"
+                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+
+                                    <span class="cart__shopping-notice">
+                                        1
+                                    </span>
+
+                                    <!-- No product in your's cart  bỏ class cart__shopping-list--no-cart nên nó ko hiện "Chưa có sản phẩm"  -->
+                                    <div class="cart__shopping-list">
+                                        <img src="assets/image/no-cart.png" alt=""
+                                            class="cart__shopping-list--no-cart-img">
+                                        <span class="cart__shopping-list--no-cart-message">
+                                            Chưa có sản phẩm trong giỏ hàng
+                                        </span>
+
+                                        <h4 class="cart__shopping-heading">Sản phẩm đã thêm vào giỏ hàng</h4>
+                                        <!-- Product in your's cart  -->
+                                        <ul class="cart__shopping-list-item">
+                                            <li class="cart__shopping-item">
+                                                <img src="assets/image/duck-light.jpg" alt=""
+                                                    class="cart__shopping-img">
+                                                <div class="cart__shopping-item-info">
+                                                    <div class="cart__shopping-item-head">
+                                                        <h5 class="cart__shopping-item-name">
+                                                            Chú vịt vui vẻ hehehehehehe
+                                                        </h5>
+
+                                                        <div class="cart__shoping-item-price-wrap">
+                                                            <span class="cart__shopping-item-price">1.000.000đ</span>
+                                                            <span class="cart__shopping-item-multiply">x</span>
+                                                            <span class="cart__shopping-item-quantity">10</span>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="cart__shopping-item-body">
+                                                        <span class="cart__shopping-item-description">
+                                                            Loại sản phẩm: vàng
+                                                        </span>
+
+                                                        <span class="cart__shopping-item-remove">
+                                                            Xóa
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+
+                                        </ul>
+
+                                        <button class="cart__shopping-view-cart btn__view-cart">
+                                            Xem giỏ hàng
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+                                <!-- User -->
+                                <div class="user__shopping">
+                                    <!-- No account  -->
+                                    <!-- <div class="user__shopping user__shopping--no-account ">
+                                    <div class="user__shopping-icon">
+                                        <span class="material-symbols-outlined">
+                                            Account_circle
+                                        </span>
+                                    </div>
+                                    <ul class="user__shopping--no-account-list">
+                                        <li class="user__shopping--no-account-list-item">
+                                            <a href="" class="user__shopping--no-account-link">Đăng kí</a>
+                                        </li>
+                                        <li class="user__shopping--no-account-list-item">
+                                            <a href="" class="user__shopping--no-account-link">Đăng nhập</a>
+                                        </li>
+                                    </ul>
+                                </div> -->
+
+                                    <!-- Login success -->
+                                    <div class="user__shopping user__shopping--login-success ">
+                                        <div class="user__shopping-icon">
+                                            <span class="material-symbols-outlined">
+                                                Account_circle
+                                            </span>
+                                        </div>
+                                        <ul class="user__shopping--login-success-list">
+                                            <li class="user__shopping--login-success-list-item">
+                                                <a href="" class="user__shopping--login-success-link">Truong Dinh Dang
+                                                    Khoa</a>
+                                            </li>
+                                            <li class="user__shopping--login-success-list-item">
+                                                <a href="" class="user__shopping--login-success-link">Log Out</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </li>
+                        </ul>
+
+                        <!-- Nav responsive -->
+                        <div class="nav_bars-cart">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M1.66663 1.66669H3.11663C4.01663 1.66669 4.72496 2.44169 4.64996 3.33335L3.95829 11.6333C3.84163 12.9917 4.91662 14.1583 6.28329 14.1583H15.1583C16.3583 14.1583 17.4083 13.175 17.5 11.9834L17.95 5.73336C18.05 4.35002 17 3.22502 15.6083 3.22502H4.84997"
+                                    stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M13.5417 18.3333C14.117 18.3333 14.5833 17.867 14.5833 17.2917C14.5833 16.7164 14.117 16.25 13.5417 16.25C12.9664 16.25 12.5 16.7164 12.5 17.2917C12.5 17.867 12.9664 18.3333 13.5417 18.3333Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M6.87504 18.3333C7.45034 18.3333 7.91671 17.867 7.91671 17.2917C7.91671 16.7164 7.45034 16.25 6.87504 16.25C6.29974 16.25 5.83337 16.7164 5.83337 17.2917C5.83337 17.867 6.29974 18.3333 6.87504 18.3333Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M7.5 6.66669H17.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="nav_bars-brand">
+                            <h2>LUXURY</h2>
+                        </div>
+                        <div class="nav_bars-btn">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 3.75H17.5" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M10 7.91669H17.5" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M2.5 12.0833H17.5" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M2.5 16.25H17.5" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+
+                        </div>
+
+                    </nav>
+                </div>
+
+            </div>
+
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="grid__full-width">
+            <div class="grid__row">
+                <div class="product__item">
+                    <div class="grid__column-8">
+                        <div class="product__item-img">
+                            <img src="assets/image/331131002_877885213442462_5128773086041927233_n.png" alt="">
+                            <div class="product__item-img-group-2">
+                                <img src="assets/image/slide1.jpg" alt="">
+                                <img src="assets/image/slide3.jpg" alt="">
+                                <img src="assets/image/silde2.jpg" alt="">
+                                <img src="assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="grid__column-4">
+                        <div class="product__item-include">
+                            <form class="product__item-info">
+                                <h4 class="product__item-info-title">Helios Watch  </h4>
+                                <span class="product__item-info-price">2.990.000₫</span>
+                                <div class="product__item-info-color">
+                                    <label for="color"><p>Màu</p></label>
+                                    <select class="product__item-select" name="" id="color" >
+                                        <option value="Silver Blue">Silver Blue</option>
+                                        <option value="Rose Black">Rose Black</option>
+                                    </select>
+                                </div>
+                                <div class="product__item-group-sell">
+                                    <div class="product__item-info-quantity">
+                                        <input type="text" placeholder="Số lượng">
+                                        <button class="product__item-add-to-cart">Add to Cart</button>
+                                    </div>
+                                    <div class="product__item-buy">
+                                        <button class="product__item-buy-now">Buy Now</button>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                            <hr>
+
+                            <div class="product__item-contact-admin">
+                                <p>
+                                    Nếu sản phẩm anh/chị quan tâm hiển thị hết hàng trên website. Vui lòng INBOX trực
+                                    tiếp với
+                                    Helios để được hỗ trợ nhanh nhất.
+                                    Xin chân thành cảm ơn!
+                                </p>
+                            </div>
+
+                            <hr>
+
+                            <div class="product__item-info-description">
+                                <span class="product__item-info-description-describe">Mô tả:</span></br>
+                                <p>Thông số đồng hồ</p>
+                                <p>Mặt đồng hồ : <span>size 40mm</span></p>
+                                <p>Size dây: <span>22mm</span></p>
+                                <p>Chất liệu vỏ là thép không gỉ 316L mạ màu vàng hồng và màu bạc đánh xước. ( chất liệu
+                                    này là
+                                    chất liệu đa số những hãng đồng hồ lớn sử dụng ) Không bị phai màu.</p>
+
+                                <p>Dây cơ bản theo sẵn dùng dây Genuine leather. Là một thuật ngữ nói đây là da thật. Da
+                                    của
+                                    mình là da bò thật làm giống vân cá sấu.</p>
+
+                                <p> Máy sử dụng : <span> Miyota 2115. Máy sản xuất tại NHẬT BẢN hãng Miyota</span></p>
+
+                                <p> Mặt kính : <span>Kính Minerals, dày 2mm</span></p>
+
+                                <p> Chống nước 3 ATM : <span> 3ATM thì đây là chiếc đồng hồ có khả năng chống nước trung
+                                        bình. Ví dụ
+                                        chống nước đối với các trường hợp đi mưa, rửa tay, rửa chén hay rửa xe… Không
+                                        bơi lội, tắm giặt.</span></p>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Phần mới cập nhật từ đây  -->
+
+    <!-- Swiper -->
+    <div class="slide__show">
+        <div class="grid">
+            <div class="grid__row">
+                <div class="grid__full-width">
+                    <h1 class="slider__title">You may also like</h1>
+                    <div class="slider__include">
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <div class="card">
+                                                <img class="img-back" src="/assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
+                                                <img src="/assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
+                                            </div>
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+                                
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <div class="card">
+                                                <img class="img-back" src="/assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
+                                                <img src="/assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
+                                            </div>
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <div class="card">
+                                                <img class="img-back" src="/assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
+                                                <img src="/assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
+                                            </div>
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <div class="card">
+                                                <img class="img-back" src="/assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
+                                                <img src="/assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
+                                            </div>
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <div class="card">
+                                                <img class="img-back" src="/assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
+                                                <img src="/assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
+                                            </div>
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <div class="card">
+                                                <img class="img-back" src="/assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
+                                                <img src="/assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
+                                            </div>
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <div class="card">
+                                                <img class="img-back" src="/assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
+                                                <img src="/assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
+                                            </div>
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <a class="more__item">
+                                        <div class="more__item-img">
+                                            <div class="card">
+                                                <img class="img-back" src="/assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
+                                                <img src="/assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
+                                            </div>
+                                        </div>
+                                        <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
+                                            0000C000582 </div>
+                                        <div class="more__item-price">
+                                            Giá:<span>7.954.000đ</span>
+                                        </div>
+                                        <div class="more__item-info">
+
+                                            <button class="more__item-view">Xem Ngay</button>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                            
+                            <div class="swiper-scroll">
+                                <div class="swiper-pagination"></div>
+                            </div>
+
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            freeMode: true,
+            cssMode: true,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            mousewheel: true,
+            keyboard: true,
+        });
+    </script>
+    
+    <!-- tới đây nha..... -->
+</body>
+
+</html>
