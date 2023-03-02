@@ -233,6 +233,9 @@ const wardsEndpoint = "https://provinces.open-api.vn/api/w?district_id=";
 const citySelect = document.getElementById("stored-city");
 const districtSelect = document.getElementById("stored-district");
 const wardSelect = document.getElementById("stored-ward");
+const citySearchInput = document.getElementById("city-search");
+const districtSearchInput = document.getElementById("district-search");
+const wardSearchInput = document.getElementById("ward-search");
 
 // Load the list of provinces
 fetch(provincesEndpoint)
@@ -292,7 +295,48 @@ districtSelect.addEventListener("change", function () {
     });
 });
 
+// Add event listeners to the search input fields
+citySearchInput.addEventListener("input", function () {
+  const searchValue = this.value.toLowerCase();
+  const options = citySelect.options;
+  
+  for (let i = 0; i < options.length; i++) {
+    const optionText = options[i].text.toLowerCase();
+    if (optionText.includes(searchValue)) {
+      options[i].style.display = "block";
+    } else {
+      options[i].style.display = "none";
+    }
+  }
+});
 
+districtSearchInput.addEventListener("input", function () {
+  const searchValue = this.value.toLowerCase();
+  const options = districtSelect.options;
+  
+  for (let i = 0; i < options.length; i++) {
+    const optionText = options[i].text.toLowerCase();
+    if (optionText.includes(searchValue)) {
+      options[i].style.display = "block";
+    } else {
+      options[i].style.display = "none";
+    }
+  }
+});
+
+wardSearchInput.addEventListener("input", function () {
+  const searchValue = this.value.toLowerCase();
+  const options = wardSelect.options;
+  
+  for (let i = 0; i < options.length; i++) {
+    const optionText = options[i].text.toLowerCase();
+    if (optionText.includes(searchValue)) {
+      options[i].style.display = "block";
+    } else {
+      options[i].style.display = "none";
+    }
+  }
+});
 
 
 // const storedCity = document.getElementById("stored-city");
@@ -351,3 +395,4 @@ districtSelect.addEventListener("change", function () {
 //     storedWard.innerHTML = "<option value=''>Choose Ward</option>";
 //   }
 // });
+

@@ -530,7 +530,7 @@ body {
               font-weight: 600;
             }
             &-address,
-            &-orders {
+            &-orders, &-acc {
               text-decoration: none;
               color: var(--font-color);
               transition: all 0.2s linear;

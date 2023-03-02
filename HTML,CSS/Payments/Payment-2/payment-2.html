@@ -467,10 +467,12 @@
                       <!-- CITY -->
                       <div class="shipping-info-left-form-city">
                         <div class="container">
-                          <label class="field-label" for="stored-city"
+                          <!-- <label class="field-label" for="stored-city"
                             >Province / City</label
-                          >
-                          <select class="field-input" id="stored-city">
+                            > -->
+                            <input type="text" class="city-search" id="city-search" placeholder="Search for Province/city...">
+                            <select class="field-input" id="stored-city">
+                              
                             <option
                               class="field-input-item"
                               data-code=""
@@ -576,9 +578,7 @@
                       <!-- DISTRICT -->
                       <div class="shipping-info-left-form-district">
                         <div class="container">
-                          <label class="field-label" for="stored-district"
-                            >District</label
-                          >
+                          <input type="text" class="district-search" id="district-search" placeholder="Search for district...">
                           <select class="field-input" id="stored-district">
                             <option
                               class="field-input-item"
@@ -594,9 +594,7 @@
                       <!-- WARD -->
                       <div class="shipping-info-left-form-ward">
                         <div class="container">
-                          <label class="field-label" for="stored-ward"
-                            >Wards</label
-                          >
+                          <input type="text" class="form-control ward-search" id="ward-search" placeholder="Search for ward...">
                           <select class="field-input" id="stored-ward">
                             <option
                               class="field-input-item"

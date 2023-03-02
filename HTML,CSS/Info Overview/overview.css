@@ -503,12 +503,12 @@ body {
 .overview-right-account-info-option-item-name, .overview-right-account-info-option-item-mail, .overview-right-account-info-option-item-country {
   font-weight: 600;
 }
-.overview-right-account-info-option-item-address, .overview-right-account-info-option-item-orders {
+.overview-right-account-info-option-item-address, .overview-right-account-info-option-item-orders, .overview-right-account-info-option-item-acc {
   text-decoration: none;
   color: var(--font-color);
   transition: all 0.2s linear;
 }
-.overview-right-account-info-option-item-address:hover, .overview-right-account-info-option-item-orders:hover {
+.overview-right-account-info-option-item-address:hover, .overview-right-account-info-option-item-orders:hover, .overview-right-account-info-option-item-acc:hover {
   opacity: 0.6;
 }
 .overview-right-latest-order-title {
