@@ -18,5 +18,6 @@
         <a href="adminNewBrandPage">New brand</a><br/>
         <a href="adminNewProductPage">New product</a><br/>
         <a href="adminSearchProductPage">Update product</a><br/>
+        <a href="adminSearchOrdersController">View Orders</a><br/>
     </body>
 </html>

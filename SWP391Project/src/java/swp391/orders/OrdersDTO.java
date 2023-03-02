@@ -29,6 +29,12 @@ public class OrdersDTO implements Serializable {
         this.ordersDtID = ordersDtID;
     }
 
+    public OrdersDTO(int ordersID, int customerID, Date dateOrders) {
+        this.ordersID = ordersID;
+        this.customerID = customerID;
+        this.dateOrders = dateOrders;
+    }
+
     public OrdersDTO(int ordersID) {
         this.ordersID = ordersID;
     }

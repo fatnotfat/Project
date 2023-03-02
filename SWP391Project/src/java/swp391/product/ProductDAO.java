@@ -221,7 +221,6 @@ public class ProductDAO implements Serializable {
                     + "Set Name = ?, Description = ?, Quantity = ?, Price = ?, "
                     + "Status = ?, Size = ? "
                     + "Where ProductID = ?";
-            //3. Create statement
             stm = con.prepareStatement(sql);
             stm.setString(1, name);
             stm.setString(2, description);
