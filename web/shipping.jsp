@@ -18,7 +18,8 @@
         <c:set var = "errors" value="${requestScope.SIGNUPFORSHIPPING_ERROR}"/>
         <form action="shippingController" method="POST">
             <c:if test="${not empty sessionScope.USER}">
-                <c:set var="customerInfomation" value="${sessionScope.USER}"/>
+                <c:set var="customerInfomation" value="${sessionScope.USER}"/>               
+                <input type="hidden" name="txtCustomerID" value="${customerInfomation.customerID}" />
                 Name: ${customerInfomation.name}<br/>
                 Address: ${customerInfomation.address}<br/>
                 Phone Number: ${customerInfomation.phone}<br/>

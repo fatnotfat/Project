@@ -40,10 +40,10 @@ public class AddToCartServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ServletContext context = this.getServletContext();
-        Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
-        String url = siteMaps.getProperty(
-                MyApplicationConstants.SearchServlet.SEARCH_FILTER_PAGE);
+//        ServletContext context = this.getServletContext();
+//        Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
+//        String url = siteMaps.getProperty(
+//                MyApplicationConstants.SearchServlet.SEARCH_FILTER_PAGE);
 
         try {
             //1. Cust go to cart place

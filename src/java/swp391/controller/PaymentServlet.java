@@ -7,10 +7,15 @@ package swp391.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,14 +23,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
+import swp391.cart.CartObject;
 import swp391.customer.CustomerCreateError;
+import swp391.orders.OrdersDAO;
+import swp391.ordersdetail.OrdersDetailDAO;
 import swp391.utils.MyApplicationConstants;
 
 /**
  *
  * @author Duy
  */
-@WebServlet(name = "paymentServlet", urlPatterns = {"/paymentServlet"})
+@WebServlet(name = "PaymentServlet", urlPatterns = {"/PaymentServlet"})
 public class PaymentServlet extends HttpServlet {
 
     /**
@@ -38,7 +47,7 @@ public class PaymentServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException, ParseException, SQLException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
@@ -46,33 +55,49 @@ public class PaymentServlet extends HttpServlet {
                 MyApplicationConstants.PaymentServlet.PAYMENT_PAGE);
 
         //Khai báo parameter của cart trên trang paymentPage đem xuống
-         
-        String txtPaymentID = request.getParameter("chkPaymentID");
-        String txtId = request.getParameter("txtId");
-        String txtQuantity = request.getParameter("txtQuantity");
-        String txtName = request.getParameter("txtName");
-        String txtPrice = request.getParameter("txtPrice");
-        
+        String txtPaymentID = request.getParameter("chkPaymentID");       
+        String txtDiscount = "0";
+        String txtStatus = "0";        
+        String txtShippingID = request.getParameter("txtShippingID");
+        String txtCustomerID = request.getParameter("txtCustomerID");
+
         CustomerCreateError errors = new CustomerCreateError();
         try {
+
             if (txtPaymentID == null) {
                 errors.setPaymentIDLengthError("Please choose the payment method");
                 request.setAttribute("PAYMENT_ERROR", errors);
             } else {
+                CartObject cart = (CartObject) request.getSession().getAttribute("CART");
                 int paymentID = Integer.parseInt(txtPaymentID);
                 if (paymentID == 1) {
-                    Object shippingID = request.getAttribute("SHIPPING_ID");
+
+
+                    int customerID = Integer.parseInt(txtCustomerID);
+                    int shippingID = Integer.parseInt(txtShippingID);
+
+                    float discount = Float.parseFloat(txtDiscount);
+                    int status = Integer.parseInt(txtStatus);
+
+                    OrdersDetailDAO ordersDetailDAO = new OrdersDetailDAO();
+//                    int ordersDetailID = ordersDetailDAO.addToOrdersDetail(productID, quantity, discount, price, paymentID, shippingID, total, status);
+                    //int ordersDetailID = ordersDetailDAO.addToOrdersDetail(cart, discount, paymentID, shippingID, status);
+                    List<Integer> orderDetails = ordersDetailDAO.addToOrdersDetail(cart, discount, paymentID, shippingID, status);
+
+                    OrdersDAO ordersDAO = new OrdersDAO();
+
+                    for (Integer orderDetail : orderDetails) {
+                        ordersDAO.addToOrders(customerID, orderDetail);
+                    }
 
                     //Đã có paymentID và shippingID
                     //Sử dụng hàm DAO có sẵn để add xuống (OrdersDetail vs Order)
                     //Tiếp tục sử dụng DAO để get lên thông tin bill gồm có OrdersID và Total
-
                     url = siteMaps.getProperty(
                             MyApplicationConstants.PaymentServlet.CHECKOUT_PAGE);
                 } else {
 
                     //Call API PayPal then forward to checkout page
-                    
                 }
             }
             //mở comment sau khi call DAO và thấy lỗi
@@ -102,6 +127,10 @@ public class PaymentServlet extends HttpServlet {
             processRequest(request, response);
         } catch (ParseException ex) {
             Logger.getLogger(PaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(PaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(PaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -119,6 +148,10 @@ public class PaymentServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
+            Logger.getLogger(PaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(PaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
             Logger.getLogger(PaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

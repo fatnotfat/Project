@@ -16,6 +16,7 @@
         <h2>Information</h2>
         <form action="paymentController" method="POST">
             <c:set var="customerInfomation" value="${sessionScope.USER}"/>
+            <input type="hidden" name="txtCustomerID" value="${customerInfomation.customerID}" />
             Name: ${customerInfomation.name}<br/>
             Address: ${customerInfomation.address}<br/>
             Phone Number: ${customerInfomation.phone}<br/>
@@ -73,6 +74,9 @@
                 </c:if>
             </c:if>
             <c:set var = "errors" value="${requestScope.PAYMENT_ERROR}"/>
+            <c:set var = "shippingID" value="${requestScope.SHIPPING_ID}"/>
+            
+            <input type="hidden" name="txtShippingID" value="${shippingID}" />
             <h2>Payment methods</h2>
             <input type="radio" name="chkPaymentID" 
                    value="${1}" />COD (Cash On Delivery)<br/>

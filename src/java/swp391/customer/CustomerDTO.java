@@ -54,13 +54,7 @@ public class CustomerDTO implements Serializable {
         this.phone = phone;
         this.address = address;
     }
-    public CustomerDTO( String name, String email, String phone, String address) {
-        
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-    }
+    
 
     /**
      * @return the name
@@ -194,6 +188,20 @@ public class CustomerDTO implements Serializable {
 
     public void setTypeOfLogin(boolean typeOfLogin) {
         this.typeOfLogin = typeOfLogin;
+    }
+
+    /**
+     * @return the customerID
+     */
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    /**
+     * @param customerID the customerID to set
+     */
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
 }
