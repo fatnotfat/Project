@@ -15,8 +15,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     />
     <link rel="stylesheet" href="./reset.css" />
-    <link rel="stylesheet" href="./overview.css" />
-    <title>Overview</title>
+    <link rel="stylesheet" href="./order-list.css" />
+    <title>Order List</title>
   </head>
   <body>
     <div class="wrapper">
@@ -265,10 +265,10 @@
           <div class="container">
             <div class="menu-responsive-icon">
               <!-- <img
-                class="menu-responsive-icon-img"
-                srcset="./../images/shopping-cart.png 2x"
-                alt=""
-              /> -->
+                  class="menu-responsive-icon-img"
+                  srcset="./../images/shopping-cart.png 2x"
+                  alt=""
+                /> -->
               <div class="menu-responsive-icon-tab">
                 <button class="menu-responsive-icon-tab-cart" href="#!">
                   <img
@@ -365,63 +365,278 @@
       <img src="./../images/Nav-line.png" alt="" />
       <div class="overview">
         <div class="container">
-          <div class="overview-left">
-            <h1 class="overview-left-title">ACCOUNT</h1>
-            <ul class="overview-left-list">
-               <li class="overview-left-item--circle">
-                   <a href="#!" class="overview-left-item-link">Account infomation</a> 
-               </li>
-               <li class="overview-left-item--circle">
-                   <a href="#!" class="overview-left-item-link">Log out</a> 
-               </li>
-            </ul>
-          </div>
-          <!-- ____________________________________________________ -->
-          <img class="overview-space" srcset="./../images/Login-line.png 2x" alt="" />
-          <div class="overview-right">
-            <div class="overview-right-account-info">
-              <h1 class="overview-right-account-info-title">ACCOUNT INFORMATION</h1>
-              <img srcset="./../images/Overview-line.png 2x" alt="">
-              <ul class="overview-right-account-info-option">
-               <li class="overview-right-account-info-option-item">
-                    <p class="overview-right-account-info-option-item-name">NAME</p>
-               </li>
-               <li class="overview-right-account-info-option-item">
-                    <p class="overview-right-account-info-option-item-mail">name@gmail.com</p>
-               </li>
-               <!-- <li class="overview-right-account-info-option-item">
-                    <a href="#!" class="overview-right-account-info-option-item-address">View address</a>
-               </li> -->
-               <li class="overview-right-account-info-option-item">
-                    <a href="#!" class="overview-right-account-info-option-item-orders">View list of order</a>
-               </li>
-               <li class="overview-right-account-info-option-item">
-                    <a href="#!" class="overview-right-account-info-option-item-acc">Change infomation</a>
-               </li>
+          <!-- <div class="overview-left">
+              <h1 class="overview-left-title">ACCOUNT</h1>
+              <ul class="overview-left-list">
+                 <li class="overview-left-item--circle">
+                     <a href="#!" class="overview-left-item-link">Account infomation</a> 
+                 </li>
+                 <li class="overview-left-item--circle">
+                     <a href="#!" class="overview-left-item-link">Log out</a> 
+                 </li>
               </ul>
-            </div>
+            </div> -->
+          <!-- ____________________________________________________ -->
+          <!-- <img class="overview-space" srcset="./../images/Login-line.png 2x" alt="" /> -->
+          <div class="overview-right">
+            <!-- <div class="overview-right-account-info">
+              <h1 class="overview-right-account-info-title">
+                ACCOUNT INFORMATION
+              </h1>
+              <img srcset="./../images/Overview-line.png 2x" alt="" />
+              <ul class="overview-right-account-info-option">
+                <li class="overview-right-account-info-option-item">
+                  <p class="overview-right-account-info-option-item-name">
+                    NAME
+                  </p>
+                </li>
+                <li class="overview-right-account-info-option-item">
+                  <p class="overview-right-account-info-option-item-mail">
+                    name@gmail.com
+                  </p>
+                </li>
+                <li class="overview-right-account-info-option-item">
+                  <a
+                    href="#!"
+                    class="overview-right-account-info-option-item-orders"
+                    >View list of order</a
+                  >
+                </li>
+                <li class="overview-right-account-info-option-item">
+                  <a
+                    href="#!"
+                    class="overview-right-account-info-option-item-acc"
+                    >Change infomation</a
+                  >
+                </li>
+              </ul>
+            </div> -->
             <div class="overview-right-latest-order">
-              <div class="overview-right-latest-order-title">LATEST ORDER
-                   <img srcset="./../images/Overview-line.png 2x" alt="">
+              <div class="overview-right-latest-order-title">
+                ORDER LIST
+                <img srcset="./../images/Overview-line.png 2x" alt="" />
               </div>
               <div class="overview-right-latest-order-table">
-               <div class="overview-right-latest-order-table-title">
-                    <ul class="overview-right-latest-order-table-title-list">
-                         <li class="overview-right-latest-order-table-title-list-item">Code</li>
-                         <li class="overview-right-latest-order-table-title-list-item">Booking date</li>
-                         <li class="overview-right-latest-order-table-title-list-item">Into money</li>
-                         <li class="overview-right-latest-order-table-title-list-item">Status</li>
-                         <li class="overview-right-latest-order-table-title-list-item">Transport</li>
-                    </ul>
-                   <img srcset="./../images/Overview-line.png 2x" alt="">
-                   <ul class="overview-right-latest-order-table-desc-list">
-                         <li class="overview-right-latest-order-table-desc-list-item">000000</li>
-                         <li class="overview-right-latest-order-table-desc-list-item">mm/dd/yyyyy</li>
-                         <li class="overview-right-latest-order-table-desc-list-item">000,000 vnđ</li>
-                         <li class="overview-right-latest-order-table-desc-list-item">Finished</li>
-                         <li class="overview-right-latest-order-table-desc-list-item">Delivered</li>
-                    </ul>
-               </div>
+                <div class="overview-right-latest-order-table-title">
+                  <ul class="overview-right-latest-order-table-title-list">
+                    <li
+                      class="overview-right-latest-order-table-title-list-item"
+                    >
+                      Code
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-title-list-item"
+                    >
+                      Booking date
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-title-list-item"
+                    >
+                      Into money
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-title-list-item"
+                    >
+                      Status
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-title-list-item"
+                    >
+                      Transport
+                    </li>
+                  </ul>
+                  <img srcset="./../images/Overview-line.png 2x" alt="" />
+                  <div class="order">
+                     <!-- ORDER -->
+                  <div class="overview-right-latest-order-table-between">
+                     <img srcset="./../images/Overview-line.png 2x" alt="" />
+                  <ul class="overview-right-latest-order-table-desc-list">
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      000000
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      mm/dd/yyyyy
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      000,000 vnđ
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      Finished
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      Delivered
+                    </li>
+                  </ul>
+                  </div>
+                  <!-- ORDER -->
+                  <div class="overview-right-latest-order-table-between">
+                     <img srcset="./../images/Overview-line.png 2x" alt="" />
+                  <ul class="overview-right-latest-order-table-desc-list">
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      000000
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      mm/dd/yyyyy
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      000,000 vnđ
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      Finished
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      Delivered
+                    </li>
+                  </ul>
+                  </div>
+                  <!-- ORDER -->
+                  <div class="overview-right-latest-order-table-between">
+                     <img srcset="./../images/Overview-line.png 2x" alt="" />
+                  <ul class="overview-right-latest-order-table-desc-list">
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      000000
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      mm/dd/yyyyy
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      000,000 vnđ
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      Finished
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      Delivered
+                    </li>
+                  </ul>
+                  </div>
+                  <!-- ORDER -->
+                  <div class="overview-right-latest-order-table-between">
+                     <img srcset="./../images/Overview-line.png 2x" alt="" />
+                  <ul class="overview-right-latest-order-table-desc-list">
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      000000
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      mm/dd/yyyyy
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      000,000 vnđ
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      Finished
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      Delivered
+                    </li>
+                  </ul>
+                  </div>
+                  <!-- ORDER -->
+                  <div class="overview-right-latest-order-table-between">
+                     <img srcset="./../images/Overview-line.png 2x" alt="" />
+                  <ul class="overview-right-latest-order-table-desc-list">
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      000000
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      mm/dd/yyyyy
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      000,000 vnđ
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      Finished
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      Delivered
+                    </li>
+                  </ul>
+                  </div>
+                  <!-- ORDER -->
+                  <div class="overview-right-latest-order-table-between">
+                     <img srcset="./../images/Overview-line.png 2x" alt="" />
+                  <ul class="overview-right-latest-order-table-desc-list">
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      000000
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      mm/dd/yyyyy
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      000,000 vnđ
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      Finished
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      Delivered
+                    </li>
+                  </ul>
+                  </div>
+                  </div>
+                 
+                 
+                </div>
               </div>
             </div>
           </div>
@@ -459,20 +674,14 @@
             <div class="footer-menu-cus-service">
               <h3 class="footer-menu-cus-service-title">CUSTOMER SERVICE</h3>
               <div class="footer-menu-cus-service-desc">
-                <p class="footer-menu-cus-service-desc-txt">
-                  TERMS OF SERVICE
-                </p>
-                <p class="footer-menu-cus-service-desc-txt">
-                  REFUND POLICY
-                </p>
+                <p class="footer-menu-cus-service-desc-txt">TERMS OF SERVICE</p>
+                <p class="footer-menu-cus-service-desc-txt">REFUND POLICY</p>
               </div>
             </div>
             <div class="footer-menu-about">
               <h3 class="footer-menu-about-title">ABOUT US</h3>
               <div class="footer-menu-about-desc">
-                <p class="footer-menu-about-desc-txt">
-                  STORY OF PDTK
-                </p>
+                <p class="footer-menu-about-desc-txt">STORY OF PDTK</p>
               </div>
             </div>
             <div class="footer-menu-care">
@@ -481,18 +690,14 @@
                 <p class="footer-menu-care-desc-txt">
                   INSTRUCTIONS FOR STORAGE OF US PRODUCTS
                 </p>
-                <p class="footer-menu-care-desc-txt">
-                  FASHION KNOWLEDGE
-                </p>
+                <p class="footer-menu-care-desc-txt">FASHION KNOWLEDGE</p>
               </div>
             </div>
           </div>
         </div>
         <div class="footer-copyright">
           <div class="container">
-            <p class="footer-copyright-txt">
-              © 2023 PTDK All Rights Reserved.
-            </p>
+            <p class="footer-copyright-txt">© 2023 PTDK All Rights Reserved.</p>
           </div>
         </div>
       </footer>

@@ -708,6 +708,7 @@ header {
   justify-content: space-evenly;
   flex-direction: row;
   padding-top: 20rem;
+  padding-bottom: 10rem;
 }
 
 .overview-space {
@@ -781,6 +782,7 @@ header {
   opacity: 0.6;
 }
 .overview-right-latest-order-title {
+  text-align: center;
   font-weight: 700;
   font-size: 40px;
   padding-bottom: 2rem;
@@ -788,6 +790,15 @@ header {
 .overview-right-latest-order-table {
   padding: 40px 0;
   border: 1px solid black;
+}
+.overview-right-latest-order-table-between {
+  padding-top: 20px;
+}
+.overview-right-latest-order-table-between:nth-child(1) {
+  padding: 0;
+}
+.overview-right-latest-order-table-between:nth-child(1) img {
+  display: none;
 }
 .overview-right-latest-order-table-title-list {
   display: flex;
@@ -797,7 +808,7 @@ header {
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
-  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 .overview-right-latest-order-table-title-list-item {
   font-size: 14px;
@@ -815,6 +826,23 @@ header {
 }
 .overview-right-latest-order-table-desc-list-item {
   font-size: 14px;
+}
+
+.order {
+  height: 270px;
+  overflow-y: scroll;
+}
+.order::-webkit-scrollbar {
+  width: 5px;
+}
+.order::-webkit-scrollbar-track {
+  background-color: inherit;
+}
+.order::-webkit-scrollbar-thumb {
+  background-color: var(--button-color);
+}
+.order::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
 }
 
 @media screen and (max-width: 1024px) {
@@ -862,7 +890,7 @@ header {
   .overview .container {
     display: flex;
     flex-direction: column;
-    padding-top: 5rem;
+    padding-top: 10rem;
   }
   .overview-space {
     display: none;
@@ -1027,4 +1055,4 @@ header {
   font-size: 14px;
 }
 
-/*# sourceMappingURL=overview.css.map */
+/*# sourceMappingURL=order-list.css.map */
