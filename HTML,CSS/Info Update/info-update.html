@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Info Update(SWP391)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,8 +16,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     />
     <link rel="stylesheet" href="./reset.css" />
-    <link rel="stylesheet" href="./register.css" />
-    <title>Register(SWP391)</title>
+    <link rel="stylesheet" href="./info-update.css" />
   </head>
   <body>
     <div class="wrapper">
@@ -265,10 +265,10 @@
           <div class="container">
             <div class="menu-responsive-icon">
               <!-- <img
-                class="menu-responsive-icon-img"
-                srcset="./../images/shopping-cart.png 2x"
-                alt=""
-              /> -->
+                       class="menu-responsive-icon-img"
+                       srcset="./../images/shopping-cart.png 2x"
+                       alt=""
+                     /> -->
               <div class="menu-responsive-icon-tab">
                 <button class="menu-responsive-icon-tab-cart" href="#!">
                   <img
@@ -363,121 +363,122 @@
         <img src="./../images/Nav-line.png" alt="" class="nav-line-bot" />
       </header>
       <img src="./../images/Nav-line.png" alt="" />
-      <div class="register">
+      <div class="update">
         <div class="container">
-          <div class="register-heading">
-            <h1>Register</h1>
+          <div class="update-heading">
+            <h1>
+              Update <br />
+              Account
+            </h1>
           </div>
           <img
-            class="register-space"
+            class="update-space"
             srcset="./../images/Login-line.png 2x"
             alt=""
           />
           <img
-            class="register-space-mobile"
-            srcset="./../images/register-line-mobile.png 2x"
+            class="update-space-mobile"
+            srcset="./../images/update-line-mobile.png 2x"
             alt=""
           />
           <form action="">
-            <div class="register-form-container">
-              <div class="register-form">
-                <div class="register-form-control">
+            <div class="update-form-container">
+              <div class="update-form">
+                <div class="update-form-control">
                   <input
                     type="text"
                     id="first-name"
-                    class="register-input-first-name"
+                    class="update-input-first-name"
                     placeholder="First name"
                   />
                   <small></small>
                 </div>
                 <!--  -->
-                <div class="register-form-control">
+                <div class="update-form-control">
                   <input
                     type="text"
                     id="last-name"
-                    class="register-input-last-name"
+                    class="update-input-last-name"
                     placeholder="Last name"
                   />
                   <small></small>
                 </div>
                 <!--  -->
-                <div class="register-form-gender">
-                  <div class="register-form-radio">
+                <div class="update-form-gender">
+                  <div class="update-form-radio">
                     <input
                       type="radio"
-                      class="register-form-input-radio"
+                      class="update-form-input-radio"
                       id="gender-male"
                       name="gender-check"
                       value="male"
                     />
-                    <span class="register-form-input-check-logo"></span>
-                    <label for="gender-male" class="register-form-input-male"
+                    <span class="update-form-input-check-logo"></span>
+                    <label for="gender-male" class="update-form-input-male"
                       >Male</label
                     >
                     <small></small>
                   </div>
                   <!--  -->
-                  <div class="register-form-radio">
+                  <div class="update-form-radio">
                     <input
                       type="radio"
-                      class="register-form-input-radio"
+                      class="update-form-input-radio"
                       id="gender-female"
                       name="gender-check"
                       value="female"
                     />
-                    <span class="register-form-input-check-logo"></span>
-                    <label
-                      for="gender-female"
-                      class="register-form-input-female"
+                    <span class="update-form-input-check-logo"></span>
+                    <label for="gender-female" class="update-form-input-female"
                       >Female</label
                     >
                     <small></small>
                   </div>
                   <!--  -->
                 </div>
-                <div class="register-form-control">
+                <div class="update-form-control">
                   <input
                     type="date"
                     id="date"
-                    class="register-input-date"
+                    class="update-input-date"
                     placeholder="mm/dd/yyyy"
                   />
                   <small></small>
                 </div>
                 <!--  -->
-                <div class="register-form-control">
+                <div class="update-form-control">
                   <input
-                    type="email"
-                    id="email"
-                    class="register-input-email"
-                    placeholder="Email"
+                    type="text"
+                    id="phone"
+                    class="update-input-phone"
+                    placeholder="Phone number"
                   />
                   <small></small>
                 </div>
                 <!--  -->
-                <div class="register-form-control">
+                <div class="update-form-control">
                   <input
                     type="password"
                     id="password"
-                    class="register-input-password"
+                    class="update-input-password"
                     placeholder="Password"
                   />
                   <small></small>
                 </div>
                 <!--  -->
-                <div class="register-form-control">
+                <div class="update-form-control">
                   <input
                     type="password"
                     id="confirm-password"
-                    class="register-input-confirm-password"
+                    class="update-input-confirm-password"
                     placeholder="Confirm Password"
                   />
                   <small></small>
                 </div>
                 <!--  -->
               </div>
-              <div class="register-function">
-                <p class="register-function-security">
+              <div class="update-function">
+                <p class="update-function-security">
                   This site is protected by reCAPTCHA and the Google
                   <a href="https://policies.google.com/terms">Privacy Policy</a>
                   and
@@ -486,13 +487,11 @@
                   >
                   apply.
                 </p>
-                <button class="register-function-btn">REGISTER</button>
-                <p class="register-function-register">
-                  <span class="register-function-register-question">
-                    Already have an account?
-                  </span>
-                  <a href="#!" class="register-function-register-hightlight"
-                    >Login</a
+                <button class="update-function-btn">CONFIRM</button>
+                <p class="update-function-update">
+                  <a href="#!" class="update-function-update-hightlight"
+                    ><i class="fa-solid fa-arrow-left-long"></i> Back to Account
+                    Infomation Page</a
                   >
                 </p>
               </div>

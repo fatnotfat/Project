@@ -117,7 +117,7 @@ var lastName = document.querySelector("#last-name");
 // var male = document.querySelector('#gender-male')
 // var female = document.querySelector('#gender-female')
 var date = document.querySelector("#date");
-var email = document.querySelector("#email");
+var phone = document.querySelector("#phone");
 var password = document.querySelector("#password");
 var confirmPassword = document.querySelector("#confirm-password");
 var form = document.querySelector("form");
@@ -153,20 +153,20 @@ function checkEmptyError(listInput) {
   return isEmptyError;
 }
 // Ham kiem tra email
-function checkEmail(input) {
-  const regexEmail =
-    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+function checkPhone(input) {
+  const regexPhone =
+    /^(0|84)(2(0[3-9]|1[0-6|8|9]|2[0-2|5-9]|3[2-9]|4[0-9]|5[1|2|4-9]|6[0-3|9]|7[0-7]|8[0-9]|9[0-4|6|7|9])|3[2-9]|5[5|6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])([0-9]{7})$/i;
   input.value = input.value.trim();
 
-  let isEmailError = !regexEmail.test(input.value);
+  let isPhoneError = !regexPhone.test(input.value);
 
-  if (regexEmail.test(input.value)) {
+  if (regexPhone.test(input.value)) {
     showSuccess(input);
   } else {
-    showError(input, "Email Invalid!");
+    showError(input, "Phone Invalid!");
   }
 
-  return isEmailError;
+  return isPhoneError;
 }
 // Ham kiem tra do dai ki tu
 function checkLengthError(input, min, max) {
@@ -220,11 +220,11 @@ form.addEventListener("submit", function (e) {
     firstName,
     lastName,
     date,
-    email,
+    phone,
     password,
     confirmPassword,
   ]);
-  let isEmailError = checkEmail(email);
+  let isPhoneError = checkPhone(phone);
   let isFirstNameLengthError = checkLengthError(firstName, 3, 10);
   let isLastnameLengthError = checkLengthError(lastName, 3, 10);
   let isPasswordLengthError = checkLengthError(password, 3, 10);
@@ -232,7 +232,7 @@ form.addEventListener("submit", function (e) {
   let isEmptyGender = checkEmptyGender();
   if (
     isEmptyError ||
-    isEmailError ||
+    isPhoneError ||
     isPasswordLengthError ||
     isMatchError ||
     isFirstNameLengthError ||

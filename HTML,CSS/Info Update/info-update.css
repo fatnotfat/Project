@@ -703,28 +703,28 @@ header {
     width: 370px;
   }
 }
-.register .container {
+.update .container {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
-.register {
+.update {
   padding-top: 10vh;
 }
-.register-space {
+.update-space {
   height: 1100px;
 }
-.register-space-mobile {
+.update-space-mobile {
   display: none;
 }
-.register-heading {
-  font-size: 54px;
+.update-heading {
+  font-size: 30px;
   font-weight: 700;
   border-bottom: 7px solid black;
 }
-.register-form-container {
+.update-form-container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -732,27 +732,27 @@ header {
   align-items: stretch;
   justify-content: center;
 }
-.register-form {
+.update-form {
   display: flex;
   font-size: 16px;
   flex-direction: column;
 }
-.register-form-control {
+.update-form-control {
   margin-bottom: 30px;
 }
-.register-form-control > small {
+.update-form-control > small {
   color: var(--error-color);
 }
-.register-form-radio {
+.update-form-radio {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
   position: relative;
 }
-.register-form-radio .error small {
+.update-form-radio .error small {
   color: var(--error-color);
 }
-.register-form-input-check-logo {
+.update-form-input-check-logo {
   content: "";
   position: absolute;
   width: 30px;
@@ -761,7 +761,7 @@ header {
   border-radius: 50%;
   z-index: -1;
 }
-.register-form-input-check-logo::after {
+.update-form-input-check-logo::after {
   content: "";
   position: absolute;
   top: 0.5rem;
@@ -772,26 +772,26 @@ header {
   border-radius: 50%;
   visibility: hidden;
 }
-.register-form-input-radio {
+.update-form-input-radio {
   width: 40px;
   position: relative;
   opacity: 0;
 }
-.register-form-gender {
+.update-form-gender {
   display: flex;
   flex-direction: row;
   margin-bottom: 30px;
 }
-.register-form-input-male {
+.update-form-input-male {
   padding-right: 10px;
   line-height: 17px;
   font-weight: 600;
 }
-.register-form-input-female {
+.update-form-input-female {
   line-height: 17px;
   font-weight: 600;
 }
-.register-input-first-name {
+.update-input-first-name {
   width: 100%;
   border: 0;
   outline: none;
@@ -800,7 +800,7 @@ header {
   line-height: 17px;
   flex-grow: 1;
 }
-.register-input-last-name {
+.update-input-last-name {
   width: 100%;
   border: 0;
   outline: none;
@@ -809,7 +809,7 @@ header {
   line-height: 17px;
   flex-grow: 1;
 }
-.register-input-date {
+.update-input-date {
   width: 100%;
   border: 0;
   outline: none;
@@ -818,7 +818,7 @@ header {
   line-height: 17px;
   flex-grow: 1;
 }
-.register-input-email {
+.update-input-phone {
   width: 100%;
   border: 0;
   outline: none;
@@ -827,7 +827,7 @@ header {
   line-height: 17px;
   flex-grow: 1;
 }
-.register-input-password {
+.update-input-password {
   width: 100%;
   border: 0;
   outline: none;
@@ -836,7 +836,7 @@ header {
   line-height: 17px;
   flex-grow: 1;
 }
-.register-input-confirm-password {
+.update-input-confirm-password {
   width: 100%;
   border: 0;
   outline: none;
@@ -845,16 +845,16 @@ header {
   line-height: 17px;
   flex-grow: 1;
 }
-.register-function {
+.update-function {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
-.register-function-security {
+.update-function-security {
   margin-bottom: 15px;
 }
-.register-function-btn {
+.update-function-btn {
   border: 1px solid black;
   margin-bottom: 180px;
   padding: 14px 26px;
@@ -866,7 +866,7 @@ header {
   position: relative;
   cursor: pointer;
 }
-.register-function-btn::after {
+.update-function-btn::after {
   content: "";
   position: absolute;
   background-color: var(--button-color);
@@ -878,62 +878,62 @@ header {
   transition: 0.3s;
   z-index: -1;
 }
-.register-function-btn:hover {
+.update-function-btn:hover {
   color: white;
 }
-.register-function-btn:hover::after {
+.update-function-btn:hover::after {
   left: 0;
   width: 100%;
 }
-.register-function-security {
+.update-function-security {
   font-size: 14px;
 }
-.register-function-register {
+.update-function-update {
   font-size: 14px;
   font-weight: 600;
 }
-.register-function-register-question {
+.update-function-update-question {
   opacity: 0.6;
 }
-.register-function-register-hightlight {
+.update-function-update-hightlight {
   text-decoration: none;
   color: var(--font-color);
   font-weight: 700;
   transition: all 0.2s linear;
 }
-.register-function-register-hightlight:hover {
+.update-function-update-hightlight:hover {
   opacity: 0.6;
 }
-.register-link {
+.update-link {
   text-decoration: none;
   color: var(--font-color);
   font-size: 14px;
   font-weight: 700;
 }
 
-.register-form-input-radio:checked ~ .register-form-input-check-logo::after {
+.update-form-input-radio:checked ~ .update-form-input-check-logo::after {
   visibility: visible;
 }
 
 @media screen and (max-width: 1024px) {
-  .register-heading {
+  .update-heading {
     font-size: 30px;
   }
 }
 @media screen and (max-width: 768px) {
-  .register-space {
+  .update-space {
     display: none;
   }
-  .register .container {
+  .update .container {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
   }
-  .register-form {
+  .update-form {
     padding-top: 5rem;
   }
-  .register {
+  .update {
     padding-top: 20vh;
     padding-left: 15px;
   }
@@ -1055,4 +1055,4 @@ header {
   font-size: 14px;
 }
 
-/*# sourceMappingURL=register.css.map */
+/*# sourceMappingURL=info-update.css.map */
