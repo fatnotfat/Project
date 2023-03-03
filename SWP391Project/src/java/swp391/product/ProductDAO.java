@@ -180,9 +180,9 @@ public class ProductDAO implements Serializable {
             if (con != null) {
                 String sql = "Insert Into Product("
                         + "Name, Description, Quantity, Price, Status, Size, "
-                        + "CreateTime, CateID, BrandID "
+                        + "CreateTime, CateID, BrandID"
                         + ") "
-                        + "Values(?, ?, ?, ?, 1, ?, ?, ?, ? "
+                        + "Values(?, ?, ?, ?, 1, ?, ?, ?, ?"
                         + ")";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, dto.getName());

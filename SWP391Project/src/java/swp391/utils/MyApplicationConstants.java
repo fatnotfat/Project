@@ -86,12 +86,6 @@ public class MyApplicationConstants {
 
     }
 
-    public class AdminLoginServlet {
-
-        public static final String ADMIN_PAGE = "adminPage";
-        public static final String ADMINMAIN_PAGE = "adminMainPage";
-    }
-
     public class AdminNewBrandServlet {
 
         public static final String ADMINNEWBRAND_PAGE = "adminNewBrandPage";
@@ -107,7 +101,7 @@ public class MyApplicationConstants {
     public class AdminNewProductServlet {
 
         public static final String ADMINNEWPRODUCT_PAGE = "adminNewProductPage";
-        public static final String ADMINMAIN_PAGE = "adminMainPage";
+        public static final String ADMIN_PAGE = "adminPage";
     }
 
     public class AdminSearchProductServlet {
@@ -131,7 +125,7 @@ public class MyApplicationConstants {
         public static final String PAYMENT_PAGE = "paymentPage";
         public static final String CHECKOUT_PAGE = "checkOutPage";
     }
-    
+
     public class LoginForCheckoutServlet {
 
         public static final String LOGINFORCHECKOUT_PAGE = "loginForCheckoutPage";

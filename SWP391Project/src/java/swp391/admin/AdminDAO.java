@@ -19,40 +19,40 @@ import swp391.utils.DBHelper;
  */
 public class AdminDAO implements Serializable {
 
-    public AdminDTO checkLogin(String username, String password)
-            throws SQLException, NamingException {;
-        Connection con = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        AdminDTO result = null;
-        try {
-            con = DBHelper.makeConnection();
-            if (con != null) {
-                String sql = "Select Username, Name "
-                        + "From Manager "
-                        + "Where Username = ? And Password = ?";
-                stm = con.prepareStatement(sql);
-                stm.setString(1, username);
-                stm.setString(2, password);
-                rs = stm.executeQuery();
-                if (rs.next()) {
-                    String name = rs.getString("Name");
-                    result = new AdminDTO(name);
-                }
-            }
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-        return result;
-    }
+//    public AdminDTO checkLogin(String username, String password)
+//            throws SQLException, NamingException {;
+//        Connection con = null;
+//        PreparedStatement stm = null;
+//        ResultSet rs = null;
+//        AdminDTO result = null;
+//        try {
+//            con = DBHelper.makeConnection();
+//            if (con != null) {
+//                String sql = "Select Username, Name "
+//                        + "From Manager "
+//                        + "Where Username = ? And Password = ?";
+//                stm = con.prepareStatement(sql);
+//                stm.setString(1, username);
+//                stm.setString(2, password);
+//                rs = stm.executeQuery();
+//                if (rs.next()) {
+//                    String name = rs.getString("Name");
+//                    result = new AdminDTO(name);
+//                }
+//            }
+//        } finally {
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (stm != null) {
+//                stm.close();
+//            }
+//            if (con != null) {
+//                con.close();
+//            }
+//        }
+//        return result;
+//    }
 
     public boolean deleteAccount(String username)
             throws SQLException, NamingException {;
@@ -62,7 +62,6 @@ public class AdminDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                //2. Create SQL String
                 String sql = "Delete From Manager "
                         + "Where username = ?";
                 stm = con.prepareStatement(sql);

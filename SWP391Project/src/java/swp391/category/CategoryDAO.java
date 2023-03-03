@@ -8,7 +8,10 @@ package swp391.category;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.naming.NamingException;
 import swp391.utils.DBHelper;
 
@@ -48,6 +51,47 @@ public class CategoryDAO implements Serializable {
             }
         }
         return result;
+    }
+
+    private List<CategoryDTO> categorysList;
+
+    public List<CategoryDTO> getCategorysList() {
+        return categorysList;
+    }
+
+    public void showCategory()
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select CateID, Name "
+                        + "From Category";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int categoryID = rs.getInt("CateID");
+                    String name = rs.getString("Name");
+                    CategoryDTO dto = new CategoryDTO(categoryID, name);
+                    if (this.categorysList == null) {
+                        this.categorysList = new ArrayList<>();
+                    }
+                    this.categorysList.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
     }
 
 //    public boolean updateCartegory(int categoryID, String name,

@@ -6,7 +6,6 @@
 package swp391.brand;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  *
@@ -14,15 +13,27 @@ import java.util.Date;
  */
 public class BrandDTO implements Serializable {
 
+    private int brandID;
     private String name;
     private String description;
 
     public BrandDTO() {
     }
 
+    public BrandDTO(int brandID, String name, String description) {
+        this.brandID = brandID;
+        this.name = name;
+        this.description = description;
+    }
+
     public BrandDTO(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public BrandDTO(int brandID, String name) {
+        this.brandID = brandID;
+        this.name = name;
     }
 
     /**
@@ -51,5 +62,19 @@ public class BrandDTO implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * @return the brandID
+     */
+    public int getBrandID() {
+        return brandID;
+    }
+
+    /**
+     * @param brandID the brandID to set
+     */
+    public void setBrandID(int brandID) {
+        this.brandID = brandID;
     }
 }

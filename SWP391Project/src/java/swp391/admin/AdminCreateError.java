@@ -16,6 +16,9 @@ public class AdminCreateError implements Serializable {
     private String usernameLengthError;
     private String passwordLengthError;
     private String nameLengthError;
+    private String quantityError;
+    private String priceError;
+    private String sizeError;
     private String confirmNotMatched;
     private String descriptionLengthError;
 
@@ -29,9 +32,7 @@ public class AdminCreateError implements Serializable {
         this.confirmNotMatched = confirmNotMatched;
         this.descriptionLengthError = descriptionLengthError;
     }
-
     
-
     /**
      * @return the usernameLengthError
      */
@@ -100,6 +101,48 @@ public class AdminCreateError implements Serializable {
      */
     public void setDescriptionLengthError(String descriptionLengthError) {
         this.descriptionLengthError = descriptionLengthError;
+    }
+
+    /**
+     * @return the quantityError
+     */
+    public String getQuantityError() {
+        return quantityError;
+    }
+
+    /**
+     * @param quantityError the quantityError to set
+     */
+    public void setQuantityError(String quantityError) {
+        this.quantityError = quantityError;
+    }
+
+    /**
+     * @return the priceError
+     */
+    public String getPriceError() {
+        return priceError;
+    }
+
+    /**
+     * @param priceError the priceError to set
+     */
+    public void setPriceError(String priceError) {
+        this.priceError = priceError;
+    }
+
+    /**
+     * @return the sizeError
+     */
+    public String getSizeError() {
+        return sizeError;
+    }
+
+    /**
+     * @param sizeError the sizeError to set
+     */
+    public void setSizeError(String sizeError) {
+        this.sizeError = sizeError;
     }
 
 }

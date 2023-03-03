@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 public class CategoryDTO implements Serializable {
 
+    private int categoryID;
     private String name;
     private String description;
     private boolean status;
@@ -20,10 +21,16 @@ public class CategoryDTO implements Serializable {
     public CategoryDTO() {
     }
 
-    public CategoryDTO(String name, String description, boolean status) {
+    public CategoryDTO(int categoryID, String name, String description, boolean status) {
+        this.categoryID = categoryID;
         this.name = name;
         this.description = description;
         this.status = status;
+    }
+
+    public CategoryDTO(int categoryID, String name) {
+        this.categoryID = categoryID;
+        this.name = name;
     }
 
     public CategoryDTO(String name, String description) {
@@ -71,6 +78,20 @@ public class CategoryDTO implements Serializable {
      */
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    /**
+     * @return the categoryID
+     */
+    public int getCategoryID() {
+        return categoryID;
+    }
+
+    /**
+     * @param categoryID the categoryID to set
+     */
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
     }
 
 }

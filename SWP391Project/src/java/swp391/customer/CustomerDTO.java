@@ -69,11 +69,12 @@ public class CustomerDTO implements Serializable {
         this.address = address;
     }
 
-    public CustomerDTO(String name, String email, String phone, String address) {
+    public CustomerDTO(String name, String email, String phone, String address, boolean role) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.role = role;
     }
 
     /**

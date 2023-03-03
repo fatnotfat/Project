@@ -6,8 +6,8 @@
 package swp391.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import swp391.admin.AdminCreateError;
+import swp391.brand.BrandDAO;
+import swp391.brand.BrandDTO;
 import swp391.category.CategoryDAO;
 import swp391.category.CategoryDTO;
 import swp391.product.ProductDAO;
@@ -49,37 +51,70 @@ public class AdminNewProductServlet extends HttpServlet {
                 MyApplicationConstants.AdminNewProductServlet.ADMINNEWPRODUCT_PAGE);
         String name = request.getParameter("txtName");
         String description = request.getParameter("txtDescription");
-        String txtQuantity = request.getParameter("txtQuantity");
-        int quantity = Integer.parseInt(txtQuantity);
-        String txtPrice = request.getParameter("txtPrice");
-        float price = Float.parseFloat(txtPrice);
-        String txtSize = request.getParameter("txtSize");
-        int size = Integer.parseInt(txtSize);
-        String txtCategoryID = request.getParameter("txtCategoryID");
-        int categoryID = Integer.parseInt(txtCategoryID);
-        String txtBrandID = request.getParameter("txtBrandID");
-        int brandID = Integer.parseInt(txtBrandID);
         boolean errorFound = false;
         AdminCreateError errors = new AdminCreateError();
         try {
-            if (name.trim().length() < 1) {
-                errorFound = true;
-                errors.setNameLengthError("You can't leave this empty");
-            }
-            if (description.trim().length() < 1) {
-                errorFound = true;
-                errors.setDescriptionLengthError("You can't leave this empty");
-            }
-            if (errorFound) {
-                request.setAttribute("ADMINNEWPRODUCT_ERROR", errors);
+            if (name == null && description == null) {
+                CategoryDAO categoryDao = new CategoryDAO();
+                categoryDao.showCategory();
+                List<CategoryDTO> categoryResult = categoryDao.getCategorysList();
+                request.setAttribute("CATEGORY_RESULT", categoryResult);
+                BrandDAO brandDao = new BrandDAO();
+                brandDao.showBrand();
+                List<BrandDTO> brandResult = brandDao.getBrandsList();
+                request.setAttribute("BRAND_RESULT", brandResult);
+                url = siteMaps.getProperty(
+                        MyApplicationConstants.AdminNewProductServlet.ADMINNEWPRODUCT_PAGE);
             } else {
-                ProductDAO dao = new ProductDAO();
-                ProductDTO dto = new ProductDTO(name, description, quantity,
-                        price, size, categoryID, brandID);
-                boolean result = dao.createProduct(dto);
-                if (result) {
-                    url = siteMaps.getProperty(
-                            MyApplicationConstants.AdminNewProductServlet.ADMINMAIN_PAGE);
+                String txtQuantity = request.getParameter("txtQuantity");
+                int quantity = Integer.parseInt(txtQuantity);
+                String txtPrice = request.getParameter("txtPrice");
+                float price = Float.parseFloat(txtPrice);
+                String txtSize = request.getParameter("txtSize");
+                int size = Integer.parseInt(txtSize);
+                String cboCategory = request.getParameter("cboCategory");
+                int categoryID = Integer.parseInt(cboCategory);
+                String cboBrand = request.getParameter("cboBrand");
+                int brandID = Integer.parseInt(cboBrand);
+                if (name.trim().length() < 1) {
+                    errorFound = true;
+                    errors.setNameLengthError("You can't leave this empty");
+                }
+                if (description.trim().length() < 1) {
+                    errorFound = true;
+                    errors.setDescriptionLengthError("You can't leave this empty");
+                }
+                if (quantity < 0) {
+                    errorFound = true;
+                    errors.setQuantityError("You can't put this less than 0");
+                }
+                if (price < 0) {
+                    errorFound = true;
+                    errors.setPriceError("You can't put this less than 0");
+                }
+                if (size < 0) {
+                    errorFound = true;
+                    errors.setSizeError("You can't put this less than 0");
+                }
+                if (errorFound) {
+                    request.setAttribute("ADMINNEWPRODUCT_ERROR", errors);
+                    CategoryDAO categoryDao = new CategoryDAO();
+                    categoryDao.showCategory();
+                    List<CategoryDTO> categoryResult = categoryDao.getCategorysList();
+                    request.setAttribute("CATEGORY_RESULT", categoryResult);
+                    BrandDAO brandDao = new BrandDAO();
+                    brandDao.showBrand();
+                    List<BrandDTO> brandResult = brandDao.getBrandsList();
+                    request.setAttribute("BRAND_RESULT", brandResult);
+                } else {
+                    ProductDAO dao = new ProductDAO();
+                    ProductDTO dto = new ProductDTO(name, description, quantity,
+                            price, size, categoryID, brandID);
+                    boolean result = dao.createProduct(dto);
+                    if (result) {
+                        url = siteMaps.getProperty(
+                                MyApplicationConstants.AdminNewProductServlet.ADMIN_PAGE);
+                    }
                 }
             }
         } catch (NamingException ex) {

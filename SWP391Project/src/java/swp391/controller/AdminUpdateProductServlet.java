@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import swp391.admin.AdminCreateError;
 import swp391.product.ProductDAO;
-import swp391.product.ProductDTO;
 import swp391.utils.MyApplicationConstants;
 
 /**

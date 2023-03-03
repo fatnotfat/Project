@@ -44,7 +44,8 @@ public class CustomerDAO implements Serializable {
                     String name = rs.getString("Name");
                     String phone = rs.getString("Phone");
                     String address = rs.getString("Address");
-                    result = new CustomerDTO(name, email, phone, address);
+                    boolean role = rs.getBoolean("Role");
+                    result = new CustomerDTO(name, email, phone, address, role);
                 }
             }
         } finally {

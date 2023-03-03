@@ -11,7 +11,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.naming.NamingException;
 import swp391.utils.DBHelper;
 
@@ -54,6 +55,47 @@ public class BrandDAO implements Serializable {
             }
         }
         return result;
+    }
+
+    private List<BrandDTO> brandsList;
+
+    public List<BrandDTO> getBrandsList() {
+        return brandsList;
+    }
+
+    public void showBrand()
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select BrandID, Name "
+                        + "From Brand";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int brandID = rs.getInt("BrandID");
+                    String name = rs.getString("Name");
+                    BrandDTO dto = new BrandDTO(brandID, name);
+                    if (this.brandsList == null) {
+                        this.brandsList = new ArrayList<>();
+                    }
+                    this.brandsList.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
     }
 
 //    public boolean updateBrand(int brandID, String name, String description)
