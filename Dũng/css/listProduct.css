@@ -865,14 +865,14 @@ header {
 }
 
 .product__item:hover {
-  transform: scale(1.03);
-  transition: all .5s;
+  /* transform: scale(1.01); */
+  transition: all 0.2s;
 
 }
 
 .product__item:not(:hover) {
   transform: scale(1);
-  transition: all .5s;
+  transition: all 0.2s;
 
 }
 
@@ -946,8 +946,9 @@ header {
 
 
 .product__item-view:hover {
-  background-color: #F8F3E9;
-  color: #000;
+  border: 1px solid black;
+  background-color: #333;
+  color: #fff;
 }
 
 .product__item-info .product__item-view a {
