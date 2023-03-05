@@ -8,8 +8,10 @@ package swp391.controller;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +20,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import swp391.cart.CartDAO;
+import swp391.cart.CartDTO;
+import swp391.cart.CartObject;
 import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
+import swp391.product.ProductDAO;
+import swp391.product.ProductDTO;
 import swp391.utils.MyApplicationConstants;
 
 /**
@@ -45,13 +52,16 @@ public class FisrtTimeRequestServlet extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
                 MyApplicationConstants.FirstTimeRequestServlet.MAIN_PAGE);
+
         try {
 //            //end session before login
             HttpSession session = request.getSession(true);
             session.invalidate();
+            session = request.getSession(true);
             //Get cookies
             Cookie[] cookies = request.getCookies();
             //Read last cookies
+            ProductDAO productDao = new ProductDAO();
             if (cookies != null) {
 //                Cookie lastCookies = cookies[cookies.length - 1];
                 for (Cookie cookie : cookies) {
@@ -60,6 +70,9 @@ public class FisrtTimeRequestServlet extends HttpServlet {
                     String password = cookie.getValue();
                     //Call DAO to checkLogin
                     CustomerDAO dao = new CustomerDAO();
+                    CartDAO cartDao = new CartDAO();
+                    CartObject cartObject = new CartObject();
+
                     CustomerDTO result = dao.checkLogin(email, password);
 
                     //Process
@@ -68,16 +81,29 @@ public class FisrtTimeRequestServlet extends HttpServlet {
 //                                MyApplicationConstants.FirstTimeRequestServlet.MAIN_PAGE);
                         session = request.getSession(true);
                         session.setAttribute("USER", result);
+                        List<CartDTO> list = cartDao.getCart(result.getCustomerID());
+                        if (list != null) {
+                            cartObject.insertToCartUser(list);
+                        }
+                        session.setAttribute("CART", cartObject);
                         break;
                     }//end user has existed
+
                 }
             }//end cookies has existed
+
+            List<ProductDTO> productList = productDao.getNewestProduct();
+            session.setAttribute("NEWEST_PRODUCT", productList);
+            List<ProductDTO> productList2 = productDao.getSecondNewestProduct();
+            session.setAttribute("SECOND_NEWEST_PRODUCT", productList2);
         } catch (SQLException ex) {
             log("FirstTimeRequestServlet _ SQL _ " + ex.getMessage());
         } catch (NamingException ex) {
             log("FirstTimeRequestServlet _ Naming _ " + ex.getMessage());
         } finally {
-            response.sendRedirect(url);
+
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
             //cái nào cũng được vì trình duyệt hỗ trợ hàm lưu cookie nên send Redirect 
         }
     }

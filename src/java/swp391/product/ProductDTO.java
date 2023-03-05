@@ -18,7 +18,7 @@ public class ProductDTO implements Serializable{
     private String name;
     private String description;
     private int quantity;
-    private float price;
+    private double price;
     private boolean status;
     private int size;
     private Date createTime;
@@ -33,20 +33,29 @@ public class ProductDTO implements Serializable{
         this.description = description;
     }
 
-    public ProductDTO(int id, String name, float price, String description) {
+    public ProductDTO(int id, String name, double price, String description) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
     }
     
-    public ProductDTO(int id, String name, float price) {
+    public ProductDTO(int id, String name, double price, String description, int size, String avatar) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.size = size;
+        this.avatar = avatar;
+    }
+    
+    public ProductDTO(int id, String name, double price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public ProductDTO(int id, String name, String description, int quantity, float price, boolean status, int size, Date createTime,String avatar) {
+    public ProductDTO(int id, String name, String description, int quantity, double price, boolean status, int size, Date createTime,String avatar) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -58,7 +67,7 @@ public class ProductDTO implements Serializable{
         this.avatar = avatar;
     }
 
-    public ProductDTO(String name, String description, int quantity, float price, boolean status, int size, Date createTime) {
+    public ProductDTO(String name, String description, int quantity, double price, boolean status, int size, Date createTime) {
         this.name = name;
         this.description = description;
         this.quantity = quantity;
@@ -68,7 +77,7 @@ public class ProductDTO implements Serializable{
         this.createTime = createTime;
     }
 
-    public ProductDTO(int id, String name, String description, int quantity, float price, int size, String avatar) {
+    public ProductDTO(int id, String name, String description, int quantity, double price, int size, String avatar) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -123,14 +132,14 @@ public class ProductDTO implements Serializable{
     /**
      * @return the price
      */
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
     /**
      * @param price the price to set
      */
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

@@ -4,8 +4,13 @@
     Author     : nguye
 --%>
 
+<%@page import="swp391.cart.CartObject"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="swp391.product.ProductDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,429 +19,556 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>SWP391</title>
+        <link rel="stylesheet" href="style/reset.css">
         <link rel="stylesheet" href="style/mainPage.css">
         <link rel="stylesheet" href="style/base.css">
-        <link rel="stylesheet" href="style/grid.css">
         <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link
-            href="https://fonts.googleapis.com/css2?family=Aboreto&family=Montserrat:ital,wght@0,400;1,500&family=Raleway:wght@700&family=Roboto+Condensed:wght@300;400&family=Rubik:wght@300&display=swap"
-            rel="stylesheet">
-        <link rel="stylesheet"
-              href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Montserrat&family=Noto+Serif+JP:wght@600;700&family=Signika:wght@300&family=Ubuntu:wght@700&family=Unbounded:wght@600&family=Varela+Round&family=Work+Sans:ital,wght@1,600&display=swap"
-            rel="stylesheet">
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap"
+            rel="stylesheet"
+            />
         <link rel="stylesheet" href="myProjects/webProject/icofont/css/icofont.min.css">
         <link href='https://css.gg/facebook.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
               integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
 
         <!-- animation libary -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-            />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+        <!-- Responsive library -->
+        <link rel="stylesheet" href="style/grid.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        
+        
     </head>
-
     <body>
-        <div class="main">
-            <header>
-                <div class="grid wide">
-                    <div class="grid__row">
-                        <div class="grid__full-width">
-                            <nav>
-                                <div class="nav_left">
-                                    <h2><a href="">LUXURY</a></h2>
-                                </div>
-                                <ul class="nav_center">
-                                    <li>
-
-                                        <div class="category__filter-include-type">
-                                            <div class="filter-select">
-                                                <p class="filter-select__label">
-                                                    Categories
-                                                </p>
-
-                                                <ul class="filter-select__list">
-                                                    <li class="filter-select__item">
-                                                        <a href="listProduct.html" class="filter-select__link">Dây chuyền</a>
-                                                    </li>
-                                                    <li class="filter-select__item">
-                                                        <a href="SearchByFilterServlet?txtProductCateID=1" class="filter-select__link">Vòng tay</a>
-                                                    </li>
-                                                    <li class="filter-select__item">
-                                                        <a href="" class="filter-select__link">Nhẫn</a>
-                                                    </li>
-                                                    <li class="filter-select__item">
-                                                        <a href="" class="filter-select__link">Khuyen tai</a>
-                                                    </li>
-                                                    <li class="filter-select__item">
-                                                        <a href="" class="filter-select__link">Dong ho</a>
-                                                    </li>
-                                                    <li class="filter-select__item">
-                                                        <a href="" class="filter-select__link">Mat kinh</a>
-                                                    </li>
-                                                    <li class="filter-select__item">
-                                                        <a href="" class="filter-select__link">Nhẫn</a>
-                                                    </li>
-                                                    <li class="filter-select__item">
-                                                        <a href="" class="filter-select__link">Nhẫn</a>
-                                                    </li>
-                                                    <li class="filter-select__item">
-                                                        <a href="" class="filter-select__link">Nhẫn</a>
-                                                    </li>
-                                                    <li class="filter-select__item">
-                                                        <a href="" class="filter-select__link">Nhẫn</a>
-                                                    </li>
-                                                    <li class="filter-select__item">
-                                                        <a href="" class="filter-select__link">Nhẫn</a>
-                                                    </li>
-                                                    <li class="filter-select__item">
-                                                        <a href="" class="filter-select__link">Nhẫn</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            About
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            Shop
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            Contact
-                                        </a>
-                                    </li>
+        <div class="wrapper">
+            <header class="header">
+                <div class="nav-top">
+                    <div class="container">
+                        <div class="shipping">
+                            <p class="shipping-text">Free shipping with recept from 200$</p>
+                        </div>
+                    </div>
+                </div>
+                <img src="assets/image/Nav-line.png" alt="" class="nav-line" />
+                <!-- NAV DESKTOP - TABLET -->
+                <div class="nav-bot">
+                    <div class="container">
+                        <a href="mainPage" class="menu-logo"> LOGO </a>
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <a href="#!" class="menu-link menu-link-category">Categories</a>
+                                <ul class="menu-link-category-tab">
+                                    <div class="container">
+                                        <li class="menu-link-category-tab-title">
+                                            <a href="SearchByFilterServlet?txtProductCateID=1" class="menu-link menu-link-bracelet"
+                                               >BRACELET</a
+                                            >
+                                            <ul class="menu-link-category-tab-list">
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-bracelet">
+                                                        1
+                                                    </a>
+                                                </li>
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-bracelet">
+                                                        2
+                                                    </a>
+                                                </li>
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-bracelet">
+                                                        3
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-link-category-tab-title">
+                                            <a href="SearchByFilterServlet?txtProductCateID=2" class="menu-link menu-link-ring"> RING </a>
+                                            <ul class="menu-link-category-tab-list">
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-ring"> 1 </a>
+                                                </li>
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-ring"> 2 </a>
+                                                </li>
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-ring"> 3 </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-link-category-tab-title">
+                                            <a href="SearchByFilterServlet?txtProductCateID=3" class="menu-link menu-link-necklace">
+                                                NECKLACE
+                                            </a>
+                                            <ul class="menu-link-category-tab-list">
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-necklace">
+                                                        1
+                                                    </a>
+                                                </li>
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-necklace">
+                                                        2
+                                                    </a>
+                                                </li>
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-necklace">
+                                                        3
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-link-category-tab-title">
+                                            <a href="SearchByFilterServlet?txtProductCateID=4" class="menu-link menu-link-earring">
+                                                EARRINGS
+                                            </a>
+                                            <ul class="menu-link-category-tab-list">
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-earring">
+                                                        1
+                                                    </a>
+                                                </li>
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-earring">
+                                                        2
+                                                    </a>
+                                                </li>
+                                                <li class="menu-link-category-tab-list-item">
+                                                    <a href="#!" class="menu-link menu-link-earring">
+                                                        3
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </div>
                                 </ul>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#!" class="menu-link">About</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#!" class="menu-link">Shop</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#!" class="menu-link">Contact</a>
+                            </li>
+                        </ul>
+                        <div class="menu-icon">
+                            <!-- SEARCH -->
+                            <div class="menu-icon-tab">
+                                <button class="menu-icon-tab-search" href="#!">
+                                    <img
+                                        class="menu-icon-img"
+                                        srcset="assets/image/search-normal.png 2x"
+                                        alt=""
+                                        />
+                                </button>
+                                <div class="menu-icon-tab-search-content">
+                                    <div class="container">
+                                        <div class="menu-icon-tab-search-content-title">
+                                            <p class="menu-icon-tab-search-content-title-desc">
+                                                SEARCH
+                                            </p>
+                                            <img srcset="assets/image/Footer-line.png 2x" alt="" />
+                                        </div>
+                                        <div class="menu-icon-tab-search-form">
+                                            <form action="searchTextController">
+                                                <input
+                                                    type="text"
+                                                    id="search-button"
+                                                    class="menu-icon-tab-search-input"
+                                                    placeholder="Search Product..."
+                                                    name="txtSearch" value="${param.txtSearch}"
+                                                    />
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- PROFILE -->
+                            <div class="menu-icon-tab">
+                                <button class="menu-icon-tab-profile" href="#!">
+                                    <img
+                                        class="menu-icon-img"
+                                        srcset="assets/image/profile-circle.png 2x"
+                                        alt=""
+                                        />
+                                </button>
+                                <div class="menu-icon-tab-profile-content">
+                                    <div class="container">
 
-                                <ul class="nav_right">
-                                    <li>
-                                        <div class="search__bar-container">
-                                            <div class="search__box">
-                                                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M11.5 21.5C16.7467 21.5 21 17.2467 21 12C21 6.75329 16.7467 2.5 11.5 2.5C6.25329 2.5 2 6.75329 2 12C2 17.2467 6.25329 21.5 11.5 21.5Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M22 22.5L20 20.5" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                                <form action="searchTextController" class="search__box-form">
-                                                    <input type="text" class="search__box-form-input"
-                                                           onmouseout="this.value = ''; this.blur();"
-                                                           name="txtSearch" value="${param.txtSearch}"
-                                                           >
-                                                    <button type="search">Search</button>
-                                                </form>
+                                        <c:if test="${not empty sessionScope.USER}">
+                                            <div class="menu-icon-tab-profile-content-title">
+                                                <p class="menu-icon-tab-profile-content-title-desc">
+                                                    ACCOUNT INFORMATION
+                                                </p>
+                                                <img srcset="images/Footer-line.png 2x" alt="" />
+                                            </div>
+                                            <div class="menu-icon-tab-profile-form">
+                                                <p class="menu-icon-tab-profile-form-name">${sessionScope.USER.name}</p>
+                                                <a href="userInforPage" class="menu-icon-tab-profile-form-link"
+                                                   >My account</a
+                                                >
+                                                <!--                                            <a href="#!" class="menu-icon-tab-profile-form-link"
+                                                                                               >Address List</a
+                                                                                            >-->
+                                                <a href="logoutController" class="menu-icon-tab-profile-form-link"
+                                                   >Log out</a
+                                                >
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${empty sessionScope.USER}">
+                                            <p style="font-size: 15px; margin: 5px 0">YOU ARE NOT ALREADY LOGGED, PLEASE LOGIN FIRST!!</p><br/>
+                                            <%--<c:set var="URL" value="userCart.jsp" scope="session"/>--%>
+                                            <a style="font-size: 15px; text-decoration: none; font-weight: bold; color: black" href="loginPage">Login here </a>
+                                        </c:if>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- CART -->
+                            <div class="menu-icon-tab">
+                                <button class="menu-icon-tab-cart" href="#!">
+                                    <img
+                                        class="menu-icon-img"
+                                        srcset="assets/image/shopping-cart.png 2x"
+                                        alt=""
+                                        />
+                                </button>
+                                <div class="menu-icon-tab-cart-content">
+                                    <div class="container">
+                                        <div class="menu-icon-tab-cart-content-title">
+                                            <div class="menu-icon-tab-cart-content-title-container">
+                                                <p class="menu-icon-tab-cart-content-title-desc">
+                                                    Cart
+                                                </p>
+                                                <img
+                                                    srcset="assets/image/Footer-line.png 2x"
+                                                    alt=""
+                                                    class="menu-icon-tab-cart-space"
+                                                    />
                                             </div>
                                         </div>
+                                        <div class="menu-icon-tab-cart-content-show">
+                                            <div class="menu-icon-tab-cart-content-show-icon">
+                                                <img
+                                                    srcset="assets/image/shopping-icon-tab.png 2x"
+                                                    alt=""
+                                                    />
+                                            </div>
+                                            <div class="menu-icon-tab-cart-content-show-txt">
+                                                <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
+                                                <c:if test="${empty sessionScope.CART.items.size()}">
+                                                    <c:set var="cartSize" value="${0}"/>
+                                                </c:if>
+                                                <p
+                                                    class="menu-responsive-icon-tab-cart-content-show-txt-desc"
+                                                    >
+                                                    <c:if test="${cartSize eq 0}">
+                                                        There are no currently products.
+                                                    </c:if>
+                                                    <c:if test="${cartSize ne 0}">
+                                                        There are <span id="cart-size-header" style="font-weight: bold">${cartSize}</span> products
+                                                    </c:if>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <img srcset="assets/image/Footer-line.png 2x" alt="" />
+                                        <c:set var="listCart" value="${sessionScope.CART}"/>
+                                        <c:set var="totalPrice" value="${0}"/>
 
-                                    </li>
-                                    <li>
-                                        <!-- cart shopping -->
-                                        <div class="cart__shopping"> 
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M1.66663 1.66669H3.11663C4.01663 1.66669 4.72496 2.44169 4.64996 3.33335L3.95829 11.6333C3.84163 12.9917 4.91662 14.1583 6.28329 14.1583H15.1583C16.3583 14.1583 17.4083 13.175 17.5 11.9834L17.95 5.73336C18.05 4.35002 17 3.22502 15.6083 3.22502H4.84997"
-                                                stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                            <path
-                                                d="M13.5417 18.3333C14.117 18.3333 14.5833 17.867 14.5833 17.2917C14.5833 16.7164 14.117 16.25 13.5417 16.25C12.9664 16.25 12.5 16.7164 12.5 17.2917C12.5 17.867 12.9664 18.3333 13.5417 18.3333Z"
-                                                stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                            <path
-                                                d="M6.87504 18.3333C7.45034 18.3333 7.91671 17.867 7.91671 17.2917C7.91671 16.7164 7.45034 16.25 6.87504 16.25C6.29974 16.25 5.83337 16.7164 5.83337 17.2917C5.83337 17.867 6.29974 18.3333 6.87504 18.3333Z"
-                                                stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M7.5 6.66669H17.5" stroke="#292D32" stroke-width="1.5"
-                                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-
-                                            <span class="cart__shopping-notice">
-                                                1
-                                            </span>
-
-                                            <!-- No product in your's cart  bỏ class cart__shopping-list--no-cart nên nó ko hiện "Chưa có sản phẩm"  -->
-                                            <div class="cart__shopping-list">
-                                                <img src="assets/image/no-cart.png" alt="" class="cart__shopping-list--no-cart-img">
-                                                <span class="cart__shopping-list--no-cart-message">
-                                                    Chưa có sản phẩm trong giỏ hàng
-                                                </span>
-
-                                                <h4 class="cart__shopping-heading">Sản phẩm đã thêm vào giỏ hàng</h4>
-                                                <!-- Product in your's cart  -->
-                                                <ul class="cart__shopping-list-item">
-                                                    <li class="cart__shopping-item">
-                                                        <img src="assets/image/duck-light.jpg" alt="" class="cart__shopping-img">
-                                                        <div class="cart__shopping-item-info">
-                                                            <div class="cart__shopping-item-head">
-                                                                <h5 class="cart__shopping-item-name">
-                                                                    Chú vịt vui vẻ hehehehehehe
-                                                                </h5>
-
-                                                                <div class="cart__shoping-item-price-wrap">
-                                                                    <span class="cart__shopping-item-price">1.000.000đ</span>
-                                                                    <span class="cart__shopping-item-multiply">x</span>
-                                                                    <span class="cart__shopping-item-quantity">10</span>
-                                                                </div>
-
-                                                            </div>
-
-                                                            <div class="cart__shopping-item-body">
-                                                                <span class="cart__shopping-item-description">
-                                                                    Loại sản phẩm: vàng
-                                                                </span>
-
-                                                                <span class="cart__shopping-item-remove">
-                                                                    Xóa
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-
-
-                                                </ul>
-
-                                                <button class="cart__shopping-view-cart btn__view-cart">
-                                                    Xem giỏ hàng
+                                        <c:forEach var="item" items="${sessionScope.CART.items}">
+                                            <c:forEach var="detail" items="${sessionScope.CART.itemDetail}">
+                                                <c:if test="${item.key eq detail.key}">
+                                                    <c:set var="totalPrice" value="${totalPrice + (item.value * detail.value.price)}"/>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:forEach>
+                                        <div class="menu-icon-tab-cart-content-function">
+                                            <div class="menu-icon-tab-cart-content-function-total">
+                                                <p
+                                                    class="menu-icon-tab-cart-content-function-total-txt"
+                                                    >
+                                                    TOTAL AMOUNT
+                                                </p>
+                                                <p
+                                                    class="menu-icon-tab-cart-content-function-total-price"
+                                                       id="totalPrice"
+                                                    >
+                                                    <fmt:formatNumber var="price" value="${totalPrice}" pattern="#,###"/>
+                                                    ${price}₫
+                                                </p>
+                                            </div>
+                                            <div class="menu-icon-tab-cart-content-function-method">
+                                                <form action="addToCartPage" method="POST">
+                                                    <button
+                                                        class="menu-icon-tab-cart-content-function-method-btn"
+                                                        >
+                                                        VIEW CART
+                                                    </button>
+                                                </form>
+                                                <button
+                                                    class="menu-icon-tab-cart-content-function-method-btn"
+                                                    >
+                                                    PAY
                                                 </button>
                                             </div>
                                         </div>
-
-                                    </li>
-                                    <li>
-                                        <!-- User -->
-                                        <div class="user__shopping">
-                                            <!-- No account  -->
-                                            <!-- <div class="user__shopping user__shopping--no-account ">
-                                                <div class="user__shopping-icon">
-                                                    <span class="material-symbols-outlined">
-                                                        Account_circle
-                                                    </span>
-                                                </div>
-                                                <ul class="user__shopping--no-account-list">
-                                                    <li class="user__shopping--no-account-list-item">
-                                                        <a href="" class="user__shopping--no-account-link">Đăng kí</a>
-                                                    </li>
-                                                    <li class="user__shopping--no-account-list-item">
-                                                        <a href="" class="user__shopping--no-account-link">Đăng nhập</a>
-                                                    </li>
-                                                </ul>
-                                            </div> -->
-
-                                            <!-- Login success -->
-                                            <div class="user__shopping user__shopping--login-success ">
-                                                <div class="user__shopping-icon">
-                                                    <span class="material-symbols-outlined">
-                                                        Account_circle
-                                                    </span>
-                                                </div>
-                                                <ul class="user__shopping--login-success-list">
-                                                    <c:set var="user" value="${sessionScope.USER}"/>
-                                                    <c:if test="${not empty user}">
-                                                        <li class="user__shopping--login-success-list-item">
-                                                            <a href="" class="user__shopping--login-success-link">${user.name}</a>
-                                                        </li>
-                                                        <li class="user__shopping--login-success-list-item">
-                                                            <a href="logoutController" class="user__shopping--login-success-link">Log Out</a>
-                                                        </li>
-                                                    </c:if>
-                                                    <c:if test="${empty user}">
-                                                        <li class="user__shopping--login-success-list-item">
-                                                            <a href="loginPage" class="user__shopping--login-success-link">Login</a>
-                                                        </li>
-                                                    </c:if>
-                                                </ul>
-                                            </div>
-
-                                        </div>
-                                    </li>
-                                </ul>
-
-                                <!-- Nav responsive -->
-                                <div class="nav_bars-cart">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M1.66663 1.66669H3.11663C4.01663 1.66669 4.72496 2.44169 4.64996 3.33335L3.95829 11.6333C3.84163 12.9917 4.91662 14.1583 6.28329 14.1583H15.1583C16.3583 14.1583 17.4083 13.175 17.5 11.9834L17.95 5.73336C18.05 4.35002 17 3.22502 15.6083 3.22502H4.84997"
-                                        stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M13.5417 18.3333C14.117 18.3333 14.5833 17.867 14.5833 17.2917C14.5833 16.7164 14.117 16.25 13.5417 16.25C12.9664 16.25 12.5 16.7164 12.5 17.2917C12.5 17.867 12.9664 18.3333 13.5417 18.3333Z"
-                                        stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M6.87504 18.3333C7.45034 18.3333 7.91671 17.867 7.91671 17.2917C7.91671 16.7164 7.45034 16.25 6.87504 16.25C6.29974 16.25 5.83337 16.7164 5.83337 17.2917C5.83337 17.867 6.29974 18.3333 6.87504 18.3333Z"
-                                        stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M7.5 6.66669H17.5" stroke="#292D32" stroke-width="1.5"
-                                          stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
+                                    </div>
                                 </div>
-                                <div class="nav_bars-brand">
-                                    <h2>LUXURY</h2>
-                                </div>
-                                <div class="nav_bars-btn">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10 3.75H17.5" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
-                                          stroke-linejoin="round" />
-                                    <path d="M10 7.91669H17.5" stroke="#292D32" stroke-width="1.5"
-                                          stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M2.5 12.0833H17.5" stroke="#292D32" stroke-width="1.5"
-                                          stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M2.5 16.25H17.5" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
-                                          stroke-linejoin="round" />
-                                    </svg>
-
-                                </div>
-
-                            </nav>
+                            </div>
                         </div>
-
                     </div>
-
                 </div>
+                <!-- NAV MOBILE -->
+                <div class="nav-bot-responsive">
+                    <div class="container">
+                        <div class="menu-responsive-icon">
+                            <!-- <img
+                              class="menu-responsive-icon-img"
+                              srcset="./assets/image/shopping-cart.png 2x"
+                              alt=""
+                            /> -->
+                            <div class="menu-responsive-icon-tab">
+                                <button class="menu-responsive-icon-tab-cart" href="#!">
+                                    <img
+                                        class="menu-responsive-icon-img menu-responsive-icon-img-cart"
+                                        srcset="assets/image/shopping-cart.png 2x"
+                                        alt=""
+                                        />
+                                </button>
+                                <div class="menu-responsive-icon-tab-cart-content">
+                                    <div class="container">
+                                        <div class="menu-responsive-icon-tab-cart-content-title">
+                                            <div
+                                                class="menu-responsive-icon-tab-cart-content-title-container"
+                                                >
+                                                <p
+                                                    class="menu-responsive-icon-tab-cart-content-title-desc"
+                                                    >
+                                                    Cart
+                                                </p>
+                                                <img
+                                                    srcset="assets/image/Footer-line.png 2x"
+                                                    alt=""
+                                                    class="menu-responsive-icon-tab-cart-space"
+                                                    />
+                                            </div>
+                                        </div>
+                                        <div class="menu-responsive-icon-tab-cart-content-show">
+                                            <div
+                                                class="menu-responsive-icon-tab-cart-content-show-icon"
+                                                >
+                                                <img
+                                                    srcset="assets/image/shopping-icon-tab.png 2x"
+                                                    alt=""
+                                                    />
+                                            </div>
+                                            <div
+                                                class="menu-responsive-icon-tab-cart-content-show-txt"
+                                                >
+                                                <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
+                                                <c:if test="${empty sessionScope.CART.items.size()}">
+                                                    <c:set var="cartSize" value="${0}"/>
+                                                </c:if>
+                                                <p
+                                                    class="menu-responsive-icon-tab-cart-content-show-txt-desc"
+                                                    >
+                                                    <c:if test="${cartSize eq 0}">
+                                                        There are no currently products.
+                                                    </c:if>
+                                                    <c:if test="${cartSize ne 0}">
+                                                        There are <span id="cart-size-header" style="font-weight: bold">${cartSize}</span> products
+                                                    </c:if>
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                        <img srcset="assets/image/Footer-line.png 2x" alt="" />
+                                        <div class="menu-responsive-icon-tab-cart-content-function">
+                                            <div
+                                                class="menu-responsive-icon-tab-cart-content-function-total"
+                                                >
+                                                <p
+                                                    class="menu-responsive-icon-tab-cart-content-function-total-txt"
+                                                    >
+                                                    TOTAL AMOUNT
+                                                </p>
+                                                <p
+                                                    class="menu-responsive-icon-tab-cart-content-function-total-price"
+                                                 
+                                                    >
+                                                    <fmt:formatNumber var="price" value="${totalPrice}" pattern="#,###" />
+                                                    ${price}₫
+                                                </p>
+                                            </div>
+                                            <div
+                                                class="menu-responsive-icon-tab-cart-content-function-method"
+                                                >
+                                                <button
+                                                    class="menu-responsive-icon-tab-cart-content-function-method-btn"
+                                                    >
+                                                    VIEW CART
+                                                </button>
+                                                <button
+                                                    class="menu-responsive-icon-tab-cart-content-function-method-btn"
+                                                    >
+                                                    PAY
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#!" class="menu-responsive-logo"> LOGO </a>
+                        <div class="menu-responsive-icon">
+                            <img
+                                class="menu-responsive-icon-img menu-responsive-icon-img-bar"
+                                srcset="assets/image/textalign-justifycenter.png 2x"
+                                alt=""
+                                />
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+                <img src="assets/image/Nav-line.png" alt="" class="nav-line-bot" />
             </header>
 
             <div class="main_page">
 
-                <div class="grid wide">
+                <div class="grid wide ">
                     <div class="grid__row">
+
                         <div class="grid__full-width">
 
                             <div class="product">
-                                <div class="product_firstline">
-                                    <div class="first-ring">
-                                        <img src="assets/image/Group.jpg" alt="cat">
-                                        <h1 class="first-title">Jewelery tells a freat story</h1>
-                                        <ul class="first-content">
-                                            <li>
-                                                <h2>
-                                                    Gold
-                                                </h2>
-                                                <p>
-                                                    Her previson acuteness had two why intention
-                                                </p>
-                                            </li>
-                                            <li>
-                                                <h2>
-                                                    Sliver
-                                                </h2>
-                                                <p>
-                                                    Her previson acuteness had two why intention
-                                                </p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="second-ring">
-                                        <p class="second-title">Our Story</p>
-                                        <p class="second-content">
-                                            Lorem ipsum dolor sit amet consectetur. Sollicitudin morbi
-                                            molestie at amet praesent tortor. Maecenas non tempus at
-                                            consequat ac est varius. Tortor aliquet nulia consequat risus.
-                                        </p>
-                                        <img src="assets/image/2 1.jpg" alt="humuhumu">
+                                <div class="row">
+
+                                    <div class="product_firstline">
+                                        <div class="first-ring">
+                                            <img  src="assets/image/Group-removebg-preview.png" alt="cat">
+                                            <h1 class="first-title">Jewelery tells a freat story</h1>
+                                            <ul class="first-content">
+                                                <li>
+                                                    <h2>
+                                                        Gold
+                                                    </h2>
+                                                    <p>
+                                                        Her previson acuteness had two why intention
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <h2>
+                                                        Sliver
+                                                    </h2>
+                                                    <p>
+                                                        Her previson acuteness had two why intention
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="second-ring">
+                                            <p class="second-title">Our Story</p>
+                                            <p class="second-content">
+                                                Lorem ipsum dolor sit amet consectetur. Sollicitudin morbi
+                                                molestie at amet praesent tortor. Maecenas non tempus at
+                                                consequat ac est varius. Tortor aliquet nulia consequat risus.
+                                            </p>
+                                            <img src="assets/image/2_1-removebg-preview.png" alt="humuhumu">
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="product_secondline">
-                                    <img class="product_secondline-img" src="assets/image/Group (1).jpg" alt="">
+                                    <c:set var="newestProduct" value="${sessionScope.NEWEST_PRODUCT.get(0)}"/>
+
+                                    <img class="product_secondline-img" src="assets/image/${newestProduct.avatar}" alt="">
 
                                     <div class="product-info">
                                         <div class="product-content-1">
-                                            <h4>Gold Woven Chain Bracelet In Black</h4>
+                                            <h4>${newestProduct.name}</h4>
                                             <p>
-                                                Lorem ipsum dolor sit amet consectetur.
-                                                Sollicitudin morbi molestie at amet praesent tortor. Maecenas non tempus at
-                                                consequat ac est
-                                                varius. Tortor aliquet nulla consequat risus.
+                                                ${newestProduct.description}
                                             </p>
                                         </div>
-
+                                        <!--<form action="addToCartController" method="POST">-->
                                         <div class="product-size-1">
                                             <h4>Size</h4>
                                             <ul class="product-size-list">
-                                                <li>
-                                                    <input type="checkbox" id="check_1" name="check_1" value="check_1">
-                                                    <label for="check_1">S</label>
 
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="check_2" name="check_2" value="check_2">
-                                                    <label for="check_2">M</label>
+                                                <c:set var="counter" value="${0}"/>
+                                                <c:forEach var="product" items="${sessionScope.NEWEST_PRODUCT}">
+                                                    <li>
+                                                        <c:set var="counter" value="${counter + 1}"/>
+                                                        <input type="checkbox" id="check_${counter}" 
+                                                               name="check_${counter}" value="check_${counter}"
+                                                               class="my-checkbox"
+                                                               >
 
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="check_3" name="check_3" value="check_3">
-                                                    <label for="check_3">L</label>
-
-                                                </li>
+                                                        <label for="check_${counter}">${product.size}</label>
+                                                        <input type="hidden" name="txtProductID${counter}" value="${product.id}" />
+                                                        <input type="hidden" name="txtProductSize${counter}" value="${product.size}" />
+                                                        <input type="hidden" name="txtProductPrice${counter}" value="${product.price}" />
+                                                    </li>
+                                                </c:forEach>
                                             </ul>
 
                                         </div>
+                                        <div class="product-buy-1">
+                                            <button id="addToCartButton">Add To Cart</button>
+                                            <fmt:formatNumber var="price" value="${newestProduct.price}" pattern="#,##0.###################"/>
+                                            <p>${price}đ</p>
+                                        </div>
 
-                                        <form class="product-buy-1" action="#">
-                                            <button>Add To Cart</button>
-                                            <p>26.339.000 đ</p>
-                                        </form>
+                                        <!--</form>-->
                                     </div>
 
                                 </div>
 
                                 <div class="product_thirdline">
-
+                                    <c:set var="newestProduct2" value="${sessionScope.SECOND_NEWEST_PRODUCT.get(0)}"/>
                                     <div class="product-info">
                                         <div class="product-content-2">
-                                            <h4>Gold Black Coral Ring</h4>
+                                            <h4>${newestProduct2.name}</h4>
                                             <p>
-                                                Lorem ipsum dolor sit amet consectetur.
-                                                Sollicitudin morbi molestie at amet praesent tortor. Maecenas non tempus at
-                                                consequat ac est
-                                                varius. Tortor aliquet nulla consequat risus.
+                                                ${newestProduct2.description}
                                             </p>
                                         </div>
 
+                                        <!--<form action="addToCartController" method="POST">-->
                                         <div class="product-size-2">
                                             <h4>Size</h4>
+
                                             <ul class="product-size-list">
-                                                <li>
-                                                    <input type="checkbox" id="check_4" name="check_4" value="check_4">
-                                                    <label for="check_4">S</label>
-
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="check_5" name="check_5" value="check_5">
-                                                    <label for="check_5">M</label>
-
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="check_6" name="check_6" value="check_6">
-                                                    <label for="check_6">L</label>
-
-                                                </li>
+                                                <c:set var="list" value="${sessionScope.SECOND_NEWEST_PRODUCT}"/>
+                                                <c:set var="counter" value="${3}"/>
+                                                <c:forEach var="product2" items="${list}">
+                                                    <c:set var="counter" value="${counter + 1}"/>
+                                                    <li>
+                                                        <input type="checkbox" id="check_${counter}" name="check_${counter}" value="check_${counter}">
+                                                        <label for="check_${counter}">${product2.size}</label>
+                                                        <input type="hidden" name="txtProductID${counter}" value="${product2.id}" />
+                                                        <input type="hidden" name="txtProductSize${counter}" value="${product2.size}" />
+                                                        <input type="hidden" name="txtProductPrice${counter}" value="${product2.price}" />
+                                                    </li>
+                                                </c:forEach>
                                             </ul>
 
                                         </div>
 
-                                        <form class="product-buy-2" action="#">
-                                            <button>Add To Cart</button>
-                                            <p>13.339.000 đ</p>
-                                        </form>
+                                        <div class="product-buy-2">
+                                            <button id="addToCartButton2">Add To Cart</button>
+                                            <fmt:formatNumber var="price2" value="${newestProduct2.price}" pattern="#,##0.###################"/>
+                                            <p>${price2} đ</p>
+                                        </div>
+                                        <!--</form>-->
                                     </div>
-                                    <img class="product_thirdline-img" src="assets/image/Vector.jpg" alt="">
+                                    <img class="product_thirdline-img" src="assets/image/${newestProduct2.avatar}" alt="">
 
                                 </div>
                             </div>
@@ -547,92 +679,78 @@
 
 
 
-            <footer>
-                <div class="grid wide">
-                    <div class="grid__row">
-                        <div class="grid__full-width">
-
-                            <div class="footer_img">
-
-                                <img src="assets/image/085d08df32a3613b9ae7aa77b0671cf5.jpg" alt="">
-
-                                <img src="assets/image/51928e06b34442f9b768f9ebef5a0b1d.jpg" alt="">
-
-                                <img src="assets/image/6d070b8f2391f0aaa0e3f16d7819182e.jpg" alt="">
-
-                                <img src="assets/image/d2e6c5dbb612c6f3ff5db767efe1cc37.jpg" alt="">
+            <img src="assets/image/Footer-line.png" alt="" />
+            <footer class="footer">
+                <div class="container">
+                    <div class="footer-menu">
+                        <div class="footer-menu-connect">
+                            <h3 class="footer-menu-connect-title">CONNECT WITH US</h3>
+                            <div class="footer-menu-connect-desc">
+                                <p class="footer-menu-connect-desc-txt">
+                                    PTDK is an accessory brand founded by people who are
+                                    passionate about jewelry, love the crafts created by pure
+                                    Vietnamese hands, and want to bring the works to the world.
+                                </p>
+                                <p class="footer-menu-connect-desc-txt">
+                                    PTDK Company (Phat-Truong-Dung-Duy-Khoa)
+                                </p>
+                                <p class="footer-menu-connect-desc-txt">
+                                    Email: cubiiwork@gmail.com
+                                </p>
+                                <p class="footer-menu-connect-desc-txt">Zip code: 70000</p>
                             </div>
-
-                            <div class="footer_content">
-                                <div class="footer_contact">
-                                    <h2>LUXURY</h2>
-                                    <p>+0801234567</p>
-                                    <p>Địa chỉ: Quận___Thành Phố HCM </p>
-                                    <ul>
-                                        <li>
-                                            <a href=""><i class="fab fa-facebook-square"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href=""><i class="fab fa-instagram"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href=""><i class="fab fa-twitter-square"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href=""><i class="fab fa-linkedin"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="footer_about">
-                                    <h3>About</h3>
-                                    <ul>
-                                        <li><a href="">Our company</a></li>
-                                        <li><a href="">Our products</a></li>
-                                        <li><a href="">Lastest Blogs</a></li>
-                                        <li><a href="">Why us</a></li>
-                                    </ul>
-                                </div>
-
-                                <div class="footer_support">
-                                    <h3>Support</h3>
-                                    <ul>
-                                        <li><a href="">Term & conditions</a></li>
-                                        <li><a href="">Privacy police</a></li>
-                                        <li><a href="">Call support</a></li>
-                                        <li><a href="">FAQ</a></li>
-                                    </ul>
-                                </div>
-
-                                <div class="footer_subscribe">
-                                    <h3>Subscribe Newsletter</h3>
-                                    <p>New Customer Get OFF 50%...</p>
-                                    <form class="footer_form" action="#">
-                                        <input type="email" placeholder="Enter your email">
-                                        <button>Send</button>
-                                    </form>
-                                </div>
-                                <!-- Footer responsive -->
-                                <div class="footer_mobile">
-                                    <ul class="footer_list">
-                                        <li>Help</li>
-                                        <li>Hotline</li>
-                                        <li>Instagram</li>
-                                        <li>Shoppe</li>
-                                        <li>Lazada</li>
-                                        <li>Facebook</li>
-                                        <li>License</li>
-                                    </ul>
-                                </div>
+                            <div class="footer-menu-connect-icon">
+                                <span class="footer-menu-connect-icon-facebook"
+                                      ><i class="fa-brands fa-facebook-f"></i
+                                    ></span>
+                                <span class="footer-menu-connect-icon-instagram"
+                                      ><i class="fa-brands fa-instagram"></i
+                                    ></span>
+                            </div>
+                        </div>
+                        <div class="footer-menu-cus-service">
+                            <h3 class="footer-menu-cus-service-title">CUSTOMER SERVICE</h3>
+                            <div class="footer-menu-cus-service-desc">
+                                <p class="footer-menu-cus-service-desc-txt">
+                                    TERMS OF SERVICE
+                                </p>
+                                <p class="footer-menu-cus-service-desc-txt">
+                                    REFUND POLICY
+                                </p>
+                            </div>
+                        </div>
+                        <div class="footer-menu-about">
+                            <h3 class="footer-menu-about-title">ABOUT US</h3>
+                            <div class="footer-menu-about-desc">
+                                <p class="footer-menu-about-desc-txt">
+                                    STORY OF PDTK
+                                </p>
+                            </div>
+                        </div>
+                        <div class="footer-menu-care">
+                            <h3 class="footer-menu-care-title">FOR CUSTOMERS</h3>
+                            <div class="footer-menu-care-desc">
+                                <p class="footer-menu-care-desc-txt">
+                                    INSTRUCTIONS FOR STORAGE OF US PRODUCTS
+                                </p>
+                                <p class="footer-menu-care-desc-txt">
+                                    FASHION KNOWLEDGE
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <div class="footer-copyright">
+                    <div class="container">
+                        <p class="footer-copyright-txt">
+                            © 2023 PTDK All Rights Reserved.
+                        </p>
+                    </div>
+                </div>
             </footer>
         </div>
     </body>
-
+    <script src="js/app.js"></script>
     <script src="js/mainPage.js"></script>
-
+    <script src="js/cart.js"></script>
 </html>

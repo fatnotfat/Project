@@ -94,5 +94,11 @@ public class MyApplicationConstants {
         public static final String CART_SERVLET = "addToCartController";
         public static final String CART_PAGE = "addToCartPage";
     }
+    
+    
+    public class ProductFeature{
+        public static final String PRODUCT_SERVLET = "viewProductController";
+        public static final String PRODUCT_PAGE = "viewProductPage";
+    }
 
 }

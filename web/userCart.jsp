@@ -72,240 +72,10 @@
                 margin-right: 0;
                 background-color: #0c71c3;
             }
-
-
-
         </style>
-
-        <script>
-            function formatNumberWithCommas(number) {
-                var parts = number.toString().split(".");
-                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-//                if (parts.length > 1) {
-//                    parts[1] = parts[1].substring(0, 2); // limit decimal places to 2
-//                }
-                return parts.join(".");
-            }
-
-//            function calculateTotalPrice() {
-//                var total = 0;
-//                $('.your-cart-body-left-product-detail-right-sum').each(function () {
-//                    var price = parseFloat($(this).find('span').text().replace(',', ''));
-//                    total += price;
-//                });
-//                return total;
-//            }
-
-            function updateQuantity(itemId, operation) {
-//                var quantityElement = document.getElementById('quantity' + itemId).innerHTML;
-                var quantityElement = document.getElementById('quantity' + itemId);
-                var quantity = parseInt(quantityElement.innerHTML);
-                var priceElement = document.getElementById("price-" + itemId);
-                var price = priceElement.innerHTML.replace(/[^0-9\.]+/g, "");
-
-
-                if (operation === 'minus') {
-                    quantity--;
-                    if (quantity < 1) {
-                        quantity = 1;
-                        price = price / (quantity + 1) * 2;
-                    } else {
-                        price = price / (quantity + 1) * quantity;
-                    }
-                } else {
-                    quantity++;
-                    price = price / (quantity - 1) * quantity;
-                }
-
-                document.getElementById('quantity' + itemId).innerHTML = quantity;
-//                priceElement.innerHTML = price.toLocaleString();
-                priceElement.innerHTML = formatNumberWithCommas(price.toFixed());
-                // update the total price
-                var totalPrice = calculateTotalPrice();
-//                alert(totalPrice);
-                $('#total-price').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
-                $('#total-price-header').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
-                $('#total-price-mobile').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'UpdateCartServlet', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                        var response = JSON.parse(xhr.responseText);
-                        var quantityElement = document.querySelector("#quantity" + itemId);
-                        if (quantityElement) {
-                            quantityElement.textContent = response.quantity;
-                        }
-//                        var totalPriceAllProduct = document.getElementById("total-price");
-//                        totalPriceAllProduct.innerHTML = totalPrice.text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
-                    }
-                };
-                xhr.send('txtID=' + itemId + '&txtQuantity=' + quantity);
-            }
-        </script>
-
-
-
-        <script>
-            function removeSelectedItem(itemId, rowIndex, callback) {
-
-                $.ajax({
-                    type: "POST",
-                    url: "RemoveItemFromCartServlet",
-                    data: {txtId: itemId},
-                    success: function (response) {
-                        if (response.success) {
-                            // call the callback function with the ID of the removed item
-                            callback(itemId, rowIndex);
-                            // update the cart UI with the updated cart data
-                            var cartData = response.cart;
-                            console.log("removeSelectedItem called with itemId = " + itemId);
-
-                            $("#cartTable tr").each(function () {
-                                var rowItemId = $(this).find("input[name='txtId']").val();
-                                if (rowItemId === itemId) {
-                                    $(this).remove();
-                                }
-                            });
-//                            $("#cartTable tr:gt(0)").each(function (index) {
-//                                $(this).find("#count-" + itemId).text(index + 1);
-//                            });
-                        } else {
-                            // handle error response from servlet
-                            console.log(response.message);
-                        }
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        // handle network error
-                        console.log(errorThrown);
-                    }
-                });
-            }
-
-        </script>   
-
-
-
-
+        <script src="js/cart.min.min.js"></script>
         <link rel="stylesheet" href="style/reset.css" />
         <link rel="stylesheet" href="style/payment-1.css" />
-        <script>
-
-            function calculateTotalPrice() {
-                var total = 0;
-                $('.your-cart-body-left-product-detail-right-sum').each(function () {
-                    var price = parseFloat($(this).find('span').text().replace(/,/g, ''));
-//                    var price = parseFloat(priceString);
-//                    alert($(this).find('span').text().replace(/,/g, ''));
-                    total += price;
-//                    alert(total);
-                });
-                return total;
-            }
-
-//            function calculateTotalPrice() {
-//                var total = 0;
-//                $('.your-cart-body-left-product-detail-right-sum').each(function () {
-//                    var priceString = $(this).find('span').text().replace(',', '');
-//                    var price = parseFloat(priceString.replace('₫', '').trim());
-//                    total += price;
-//                });
-//                var formattedTotal = total.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
-//                $('#total-price').text(formattedTotal + '₫');
-//                return total;
-//            }
-
-            function removeProduct(itemId) {
-//                if (confirm("Are you sure you want to remove this item from your cart?")) {
-                var confirmPopup = document.createElement('div');
-                confirmPopup.className = 'confirm-popup';
-                var confirmPopupContent = document.createElement('div');
-                confirmPopupContent.className = 'confirm-popup__content';
-                confirmPopupContent.innerHTML = '<p>Are you sure you want to remove this item from your cart?</p>';
-                var confirmButtons = document.createElement('div');
-                confirmButtons.className = 'confirm-popup__buttons';
-                var confirmButtonYes = document.createElement('button');
-                confirmButtonYes.className = 'confirm-popup__button';
-                confirmButtonYes.textContent = 'Yes';
-                confirmButtonYes.addEventListener('click', function () {
-                    $.ajax({
-                        type: "POST",
-                        url: "RemoveItemFromCartServlet",
-                        data: {txtId: itemId},
-                        success: function (response) {
-                            if (response.success) {
-                                // update the cart UI with the updated cart data
-                                var cartData = response.cart;
-                                console.log("removeProduct called with itemId = " + itemId);
-
-                                // remove the div tag with the corresponding item id
-                                $("#product-" + itemId).remove();
-                                // update the cart size in the UI
-                                updateCartSize();
-
-                                // update the total price
-                                var totalPrice = calculateTotalPrice();
-                                $('#total-price').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
-                                $('#total-price-header').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
-                                $('#total-price-mobile').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
-                            } else {
-                                // handle error response from servlet
-                                console.log(response.message);
-                            }
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            // handle network error
-                            console.log(errorThrown);
-                        }
-                    });
-                    confirmPopup.remove();
-                });
-                var confirmButtonNo = document.createElement('button');
-                confirmButtonNo.className = 'confirm-popup__button';
-                confirmButtonNo.textContent = 'No';
-                confirmButtonNo.addEventListener('click', function () {
-                    confirmPopup.remove();
-                });
-                confirmButtons.appendChild(confirmButtonYes);
-                confirmButtons.appendChild(document.createTextNode('\u00A0')); // Adds a non-breaking space between the buttons
-                confirmButtons.appendChild(confirmButtonNo);
-                confirmPopupContent.appendChild(confirmButtons);
-                confirmPopup.appendChild(confirmPopupContent);
-                document.body.appendChild(confirmPopup);
-
-            }
-//            }
-
-
-            function updateCartSize() {
-                $.ajax({
-                    type: "GET",
-                    url: "GetCartSizeServlet",
-                    success: function (response) {
-                        $("#cart-size").text(response.cartSize);
-                        $("#cart-size-header").text(response.cartSize);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        // handle error
-                    }
-                });
-            }
-
-            $(document).ready(function () {
-                var totalPrice = calculateTotalPrice();
-                $('#total-price').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
-            });
-
-            $(document).ready(function () {
-                var totalPrice = calculateTotalPrice();
-                $('#total-price-header').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
-            });
-            $(document).ready(function () {
-                var totalPrice = calculateTotalPrice();
-                $('#total-price-mobile').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
-            });
-        </script>
-
     </head>
     <body>
         <div class="wrapper">
@@ -350,7 +120,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-ring"> RING </a>
+                                            <a href="SearchByFilterServlet?txtProductCateID=2" class="menu-link menu-link-ring"> RING </a>
                                             <ul class="menu-link-category-tab-list">
                                                 <li class="menu-link-category-tab-list-item">
                                                     <a href="#!" class="menu-link menu-link-ring"> 1 </a>
@@ -364,7 +134,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-necklace">
+                                            <a href="SearchByFilterServlet?txtProductCateID=3" class="menu-link menu-link-necklace">
                                                 NECKLACE
                                             </a>
                                             <ul class="menu-link-category-tab-list">
@@ -386,7 +156,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-earring">
+                                            <a href="SearchByFilterServlet?txtProductCateID=4" class="menu-link menu-link-earring">
                                                 EARRINGS
                                             </a>
                                             <ul class="menu-link-category-tab-list">
@@ -524,7 +294,7 @@
                                                 <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
                                                 <c:if test="${empty sessionScope.CART.items.size()}">
                                                     <c:set var="cartSize" value="${0}"/>
-                                                    <c:set var="CART_PRICE" value="${calculateTotalPrice()}" scope="session"/>
+                                                    <%--<c:set var="CART_PRICE" value="${calculateTotalPrice()}" scope="session"/>--%>
                                                 </c:if>
                                                 <p class="menu-icon-tab-cart-content-show-txt-desc">
                                                     <c:if test="${cartSize eq 0}">
@@ -671,7 +441,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#!" class="menu-responsive-logo"> LOGO </a>
+                        <a href="mainPage" class="menu-responsive-logo"> LOGO </a>
                         <div class="menu-responsive-icon">
                             <img
                                 class="menu-responsive-icon-img menu-responsive-icon-img-bar"
@@ -765,7 +535,8 @@
                                                                         >
                                                                         <button
                                                                             class="your-cart-body-left-product-detail-left-minus"
-                                                                            onclick="updateQuantity('${item.key}', 'minus')" id="minus_${item.key}"
+                                                                            
+                                                                            id="minus_${item.key}"
                                                                             >
                                                                             -
                                                                         </button>
@@ -777,7 +548,8 @@
                                                                         </span>
                                                                         <button
                                                                             class="your-cart-body-left-product-detail-left-plus"
-                                                                            onclick="updateQuantity('${item.key}', 'plus')" id="plus_${item.key}"
+                                                                            
+                                                                            id="plus_${item.key}"
                                                                             >
                                                                             +
                                                                         </button>
@@ -789,17 +561,16 @@
                                                             <div class="your-cart-body-left-product-detail-right">
                                                                 <div class="container">
                                                                     <span
-                                                                        class="your-cart-body-left-product-detail-right-icon "
-                                                                        onclick="removeProduct('${item.key}')"
+                                                                        class="your-cart-body-left-product-detail-right-icon" 
+                                                                        id="${item.key}"
                                                                         >
                                                                         <i class="fa-solid fa-xmark"></i>
                                                                     </span>
                                                                     <p
                                                                         class="your-cart-body-left-product-detail-right-sum"
                                                                         >
-
                                                                         <fmt:formatNumber var="price" value="${detail.value.price * item.value}" pattern="#,###"/>
-                                                                        <span id="price-${item.key}">${price}</span>₫
+                                                                        <span class="product-price" id="price-${item.key}">${price}</span>₫
                                                                     </p>
                                                                 </div>
                                                             </div>

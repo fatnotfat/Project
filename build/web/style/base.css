@@ -28,7 +28,7 @@ html{
 .grid__row{
     display: flex;
     flex-wrap: wrap;
-    
+    width: 100%;
 }
 
 
@@ -51,6 +51,8 @@ html{
     padding-left: 10px;
     padding-right: 10px;
     width: 33%;
+    padding-bottom: 20px;
+
 }
 
 .grid__column-10{

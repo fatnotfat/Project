@@ -1,10 +1,10 @@
 const app = {
-    start: function(){
+    start: function () {
         this.handleEventFunction();
     },
 
-    handleEventFunction: function(){
-        
+    handleEventFunction: function () {
+
         const imgProduct1 = document.querySelector('.product_secondline-img');
         const contentProduct1 = document.querySelector('.product-content-1');
         const sizeProduct1 = document.querySelector('.product-size-1');
@@ -25,21 +25,21 @@ const app = {
         const contentTrendInfo = document.querySelector('.content-trend-info');
 
 
-        
-        
-        
+
+
+
         window.addEventListener("scroll", () => {
             console.log(window.pageYOffset)
-            
-            if(window.pageYOffset > 500){
+
+            if (window.pageYOffset > 500) {
                 imgProduct1.classList.add('active');
                 contentProduct1.classList.add('active');
                 sizeProduct1.classList.add('active');
                 buyProduct1.classList.add('active');
-                
+
             }
-            
-            if(window.pageYOffset > 1250){
+
+            if (window.pageYOffset > 1250) {
                 sizeProduct2.classList.add('active');
                 buyProduct2.classList.add('active');
                 imgProduct2.classList.add('active');
@@ -47,26 +47,26 @@ const app = {
 
             }
 
-            if(window.pageYOffset > 1800){
-               outStadingContentTitleFirst.classList.add('active');
-               frameImageFirst.classList.add('active')
-               contentComfortTitle.classList.add('active')
-               contentComfortInfo.classList.add('active')
+            if (window.pageYOffset > 1800) {
+                outStadingContentTitleFirst.classList.add('active');
+                frameImageFirst.classList.add('active')
+                contentComfortTitle.classList.add('active')
+                contentComfortInfo.classList.add('active')
             }
 
-            if(window.pageYOffset > 2500){
-                console.log( frameImageSecond)
-               outStadingContentTitleSecond.classList.add('active');
-               frameImageSecond.classList.add('active')
-               contentGoldInfo.classList.add('active')
+            if (window.pageYOffset > 2500) {
+                console.log(frameImageSecond)
+                outStadingContentTitleSecond.classList.add('active');
+                frameImageSecond.classList.add('active')
+                contentGoldInfo.classList.add('active')
             }
 
-            if(window.pageYOffset > 3200){
-                console.log( outStadingContentTitleFirst)
-               outStadingContentTitleThird.classList.add('active');
-               frameImageThird.classList.add('active')
-               contentTrendInfo.classList.add('active')
-                
+            if (window.pageYOffset > 3200) {
+                console.log(outStadingContentTitleFirst)
+                outStadingContentTitleThird.classList.add('active');
+                frameImageThird.classList.add('active')
+                contentTrendInfo.classList.add('active')
+
             }
 
         })
@@ -76,3 +76,8 @@ const app = {
 
 
 app.start();
+
+
+
+
+

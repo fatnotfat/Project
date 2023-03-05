@@ -75,7 +75,7 @@ public class ProductDAO implements Serializable {
                     String name = rs.getString("Name");
                     String descr = rs.getString("Description");
                     int quantity = rs.getInt("Quantity");
-                    float price = rs.getFloat("Price");
+                    double price = rs.getDouble("Price");
                     boolean status = rs.getBoolean("Status");
                     int size = rs.getInt("Size");
                     Date date = rs.getDate("CreateTime");
@@ -130,7 +130,7 @@ public class ProductDAO implements Serializable {
                         rs.getString("Name"),
                         rs.getString("Description"),
                         rs.getInt("Quantity"),
-                        rs.getFloat("Price"),
+                        rs.getDouble("Price"),
                         rs.getBoolean("Status"),
                         rs.getInt("Size"),
                         rs.getDate("CreateTime"),
@@ -154,7 +154,7 @@ public class ProductDAO implements Serializable {
         return list;
     }
 
-    public void searchByFilter(int cateID, float priceFrom, float priceTo, int size)
+    public void searchByFilter(int cateID, double priceFrom, double priceTo, int size)
             throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -180,22 +180,22 @@ public class ProductDAO implements Serializable {
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, cateID);
                 if (priceFrom >= 0 && priceTo != 0 && size != 0) {
-                    stm.setFloat(2, priceFrom);
-                    stm.setFloat(3, priceTo);
+                    stm.setDouble(2, priceFrom);
+                    stm.setDouble(3, priceTo);
                     stm.setInt(4, size);
                 } else if (priceFrom >= 0 && priceTo != 0) {
-                    stm.setFloat(2, priceFrom);
-                    stm.setFloat(3, priceTo);
+                    stm.setDouble(2, priceFrom);
+                    stm.setDouble(3, priceTo);
                 } else if (priceFrom >= 0 && size != 0) {
-                    stm.setFloat(2, priceFrom);
+                    stm.setDouble(2, priceFrom);
                     stm.setInt(3, size);
                 } else if (priceFrom >= 0) {
-                    stm.setFloat(2, priceFrom);
+                    stm.setDouble(2, priceFrom);
                 } else if (priceTo != 0 && size != 0) {
-                    stm.setFloat(2, priceTo);
+                    stm.setDouble(2, priceTo);
                     stm.setInt(3, size);
                 } else if (priceTo != 0) {
-                    stm.setFloat(2, priceTo);
+                    stm.setDouble(2, priceTo);
                 } else if (size != 0) {
                     stm.setInt(2, size);
                 }
@@ -206,7 +206,7 @@ public class ProductDAO implements Serializable {
                     String description = rs.getString("Description");
 //                    description = URLEncoder.encode(description, "UTF-8");
                     int quantity = rs.getInt("Quantity");
-                    float price = rs.getFloat("Price");
+                    double price = rs.getDouble("Price");
                     size = rs.getInt("Size");
                     String avatar = rs.getString("Avatar");
                     ProductDTO dto = new ProductDTO(
@@ -230,8 +230,8 @@ public class ProductDAO implements Serializable {
         }
     }
 
-    public ProductDTO getItemByID(String ID) 
-            throws NamingException, SQLException{
+    public ProductDTO getItemByID(String ID)
+            throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -245,12 +245,12 @@ public class ProductDAO implements Serializable {
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, Integer.parseInt(ID));
                 rs = stm.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
                     int id = rs.getInt("ProductID");
                     String name = rs.getString("Name");
                     String descr = rs.getString("Description");
                     int quantity = rs.getInt("Quantity");
-                    float price = rs.getFloat("Price");
+                    double price = rs.getDouble("Price");
                     boolean status = rs.getBoolean("Status");
                     int size = rs.getInt("Size");
                     Date date = rs.getDate("CreateTime");
@@ -272,4 +272,105 @@ public class ProductDAO implements Serializable {
         return dto;
     }
 
+    public List<ProductDTO> getNewestProduct()
+            throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        ProductDTO dto = null;
+        List<ProductDTO> list = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+
+                String sql = "select ProductID, Name, Description, Price, Size, Avatar \n"
+                        + "from Product \n"
+                        + "where Name LIKE (select Name from Product where ProductID = (select max(ProductID) from Product))";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("ProductID");
+                    String name = rs.getString("Name");
+                    String descr = rs.getString("Description");
+//                    int quantity = rs.getInt("Quantity");
+                    double price = rs.getDouble("Price");
+//                    boolean status = rs.getBoolean("Status");
+                    int size = rs.getInt("Size");
+//                    Date date = rs.getDate("CreateTime");
+                    String avatar = rs.getString("Avatar");
+                    dto = new ProductDTO(id, name, price, descr, size, avatar);
+
+                    if (list == null) {
+                        list = new ArrayList<>();
+                    }
+                    list.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return list;
+    }
+
+    public List<ProductDTO> getSecondNewestProduct()
+            throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        ProductDTO dto = null;
+        List<ProductDTO> list = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+
+                String sql = "SELECT ProductID, Name, Description, Price, Size, Avatar \n"
+                        + "FROM Product \n"
+                        + "WHERE Name = (\n"
+                        + "SELECT TOP 1 Name\n"
+                        + "FROM Product\n"
+                        + "WHERE ProductID < (SELECT MAX(ProductID) FROM Product) \n"
+                        + "AND Name not like (select Name from Product where ProductID = (SELECT MAX(ProductID) FROM Product))\n"
+                        + "ORDER BY ProductID DESC\n"
+                        + ")";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("ProductID");
+                    String name = rs.getString("Name");
+                    String descr = rs.getString("Description");
+//                    int quantity = rs.getInt("Quantity");
+                    double price = rs.getDouble("Price");
+//                    boolean status = rs.getBoolean("Status");
+                    int size = rs.getInt("Size");
+//                    Date date = rs.getDate("CreateTime");
+                    String avatar = rs.getString("Avatar");
+                    dto = new ProductDTO(id, name, price, descr, size, avatar);
+
+                    if (list == null) {
+                        list = new ArrayList<>();
+                    }
+                    list.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return list;
+    }
 }

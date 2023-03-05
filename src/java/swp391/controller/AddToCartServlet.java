@@ -62,7 +62,7 @@ public class AddToCartServlet extends HttpServlet {
                 cart = new CartObject();
             }
             //3. Customer takes item
-            String id = request.getParameter("txtID");
+            String id = request.getParameter("txtProductID");
 //            String quantity = request.getParameter("txtQuantity");
             //4. Customer drop items into cart
             cart.addItemToCart(id);

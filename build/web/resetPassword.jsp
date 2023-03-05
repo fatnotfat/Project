@@ -154,11 +154,14 @@
                                             <img srcset="images/Footer-line.png 2x" alt="" />
                                         </div>
                                         <div class="menu-icon-tab-search-form">
-                                            <input
-                                                type="text"
-                                                class="menu-icon-tab-search-input"
-                                                placeholder="Search Product..."
-                                                />
+                                            <form action="searchTextController">
+                                                <input
+                                                    type="text"
+                                                    class="menu-icon-tab-search-input"
+                                                    placeholder="Search Product..."
+                                                    name="txtSearch" value="${param.txtSearch}"
+                                                    />
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

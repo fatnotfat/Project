@@ -61,19 +61,19 @@ public class SearchTextServlet extends HttpServlet {
                 request.setAttribute("PRODUCT_RESULT", list);
 
                 //paging 
-                int recordsPerPage = 5;
-                int endPage = 0;
-                endPage = size / recordsPerPage;
-                if (size % recordsPerPage != 0) {
-                    endPage++;
-                }
-
-                List<ProductDTO> pagingList = dao.pagingAccount(index, searchValue, recordsPerPage);
-                request.setAttribute("PAGING_RESULT", pagingList);
-                request.setAttribute("END_PAGE", endPage);
-                request.setAttribute("CURRENT_PAGE", index);
-//                
-                List<ProductDTO> list2 = dao.pagingAccount(index, searchValue, recordsPerPage);
+//                int recordsPerPage = 5;
+//                int endPage = 0;
+//                endPage = size / recordsPerPage;
+//                if (size % recordsPerPage != 0) {
+//                    endPage++;
+//                }
+//
+//                List<ProductDTO> pagingList = dao.pagingAccount(index, searchValue, recordsPerPage);
+//                request.setAttribute("PAGING_RESULT", pagingList);
+//                request.setAttribute("END_PAGE", endPage);
+//                request.setAttribute("CURRENT_PAGE", index);
+////                
+//                List<ProductDTO> list2 = dao.pagingAccount(index, searchValue, recordsPerPage);
                 String json = new Gson().toJson(list);
 
 // Set the content type and write the JSON to the response

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -19,9 +20,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import swp391.cart.CartDAO;
+import swp391.cart.CartDTO;
+import swp391.cart.CartObject;
 import swp391.login.LoginError;
 import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
+import swp391.product.ProductDAO;
+import swp391.product.ProductDTO;
 import swp391.utils.MyApplicationConstants;
 
 /**
@@ -69,7 +75,10 @@ public class LoginServlet extends HttpServlet {
                 //Call Model/DAO ==> new object & call method of that object
                 CustomerDAO dao = new CustomerDAO();
 //            boolean result = dao.checkLogin(email, password);
+                CartDAO cartDao = new CartDAO();
+                CartObject cartObject = new CartObject();
                 CustomerDTO result = dao.checkLogin(email, password);
+                ProductDAO productDao = new ProductDAO();
                 if (result == null) {
                     errorFound = true;
                     errors.setLoginFail("Incorrect email or password");
@@ -85,19 +94,45 @@ public class LoginServlet extends HttpServlet {
                         url = siteMaps.getProperty(
                                 MyApplicationConstants.LoginServlet.MAIN_PAGE);
                         session.setAttribute("USER", result);
+//                        String sessionid = session.getId();
+//                        session.setAttribute("USER_SESSION_ID", sessionid);
+                        List<CartDTO> list = cartDao.getCart(result.getCustomerID());
+                        if (list != null) {
+                            cartObject.insertToCartUser(list);
+                        }
+                        session.setAttribute("CART", cartObject);
+
+                        //get newest product
+                        List<ProductDTO> productList = productDao.getNewestProduct();
+                        session.setAttribute("NEWEST_PRODUCT", productList);
+                        List<ProductDTO> productList2 = productDao.getSecondNewestProduct();
+                        session.setAttribute("SECOND_NEWEST_PRODUCT", productList2);
+
                         if (checkLogged != null) {
                             email = URLEncoder.encode(email, "UTF-8");
                             Cookie cookie = new Cookie(email, password);
-                            cookie.setMaxAge(60 * 3);
+                            cookie.setMaxAge(60 * 99999);
                             response.addCookie(cookie);
                         }//check if user want to logged for next access
                     } else {
                         url = url2;
                         session.setAttribute("USER", result);
+                        List<CartDTO> list = cartDao.getCart(result.getCustomerID());
+                        if (list != null) {
+                            cartObject.insertToCartUser(list);
+                        }
+                        session.setAttribute("CART", cartObject);
+
+                        //get newest product
+                        List<ProductDTO> productList = productDao.getNewestProduct();
+                        session.setAttribute("NEWEST_PRODUCT", productList);
+                        List<ProductDTO> productList2 = productDao.getSecondNewestProduct();
+                        session.setAttribute("SECOND_NEWEST_PRODUCT", productList2);
+
                         if (checkLogged != null) {
                             email = URLEncoder.encode(email, "UTF-8");
                             Cookie cookie = new Cookie(email, password);
-                            cookie.setMaxAge(60 * 3);
+                            cookie.setMaxAge(60 * 99999);
                             response.addCookie(cookie);
                         }//check if user want to logged for next access
                     }
