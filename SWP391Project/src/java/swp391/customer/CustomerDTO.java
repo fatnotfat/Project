@@ -211,4 +211,18 @@ public class CustomerDTO implements Serializable {
         this.typeOfLogin = typeOfLogin;
     }
 
+    /**
+     * @return the customerID
+     */
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    /**
+     * @param customerID the customerID to set
+     */
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
+
 }

@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.naming.NamingException;
@@ -105,6 +106,45 @@ public class CustomerDAO implements Serializable {
         return accountList;
     }
 
+    public void showCustomer()
+            throws SQLException, NamingException {;
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select CustomerID, Name, Email, Phone, Address "
+                        + "From Customer";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int customerID = rs.getInt("CustomerID");
+                    String name = rs.getString("Name");
+                    String email = rs.getString("Email");
+                    String phone = rs.getString("Phone");
+                    String address = rs.getString("Address");
+                    CustomerDTO dto
+                            = new CustomerDTO(customerID, name, email, phone, address);
+                    if (this.accountList == null) {
+                        this.accountList = new ArrayList<>();
+                    }
+                    this.accountList.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
     public boolean createAccount(CustomerDTO dto)
             throws SQLException, NamingException, ParseException {;
         Connection con = null;
@@ -142,6 +182,82 @@ public class CustomerDAO implements Serializable {
                 if (effectedRows > 0) {
                     result = true;
                 }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    public boolean adminCreateAccount(CustomerDTO dto)
+            throws SQLException, NamingException, ParseException {;
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Insert Into Customer("
+                        + "Name, Password, DateOfBirth, Email, Phone, Address, Role, RankID, Sex, TypeOfLogin"
+                        + ") "
+                        + "Values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?"
+                        + ")";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, dto.getName());
+                stm.setString(2, dto.getPassword());
+                if (dto.getBirthDate() != null) {
+                    java.sql.Date sqlDate = new java.sql.Date(dto.getBirthDate().getTime());
+                    stm.setDate(3, sqlDate);
+                } else {
+                    String date = "1-1-1999";
+                    DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+                    Date defaultDate = df.parse(date);
+                    java.sql.Date sqlDate = new java.sql.Date(defaultDate.getTime());
+                    stm.setDate(3, sqlDate);
+                }
+                stm.setString(4, dto.getEmail());
+                stm.setString(5, dto.getPhone());
+                stm.setString(6, dto.getAddress());
+                stm.setBoolean(7, dto.isRole());
+                stm.setInt(8, dto.getRankID());
+                stm.setBoolean(9, dto.isSex());
+                stm.setBoolean(10, dto.isTypeOfLogin());
+                int effectedRows = stm.executeUpdate();
+                if (effectedRows > 0) {
+                    result = true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    public boolean adminDeleteAccount(String email)
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+        try {
+            con = DBHelper.makeConnection();
+            String sql = "Update Customer "
+                    + "Set TypeOfLogin = 2 "
+                    + "Where Email = ?";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, email);
+            int effectedRows = stm.executeUpdate();
+            if (effectedRows > 0) {
+                result = true;
             }
         } finally {
             if (stm != null) {
@@ -282,5 +398,6 @@ public class CustomerDAO implements Serializable {
         }
         return result;
     }
-
+    
+    
 }

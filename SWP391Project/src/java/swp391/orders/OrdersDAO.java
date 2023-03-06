@@ -101,58 +101,44 @@ public class OrdersDAO implements Serializable {
             }
         }
     }
-    
-//    public void searchOrdersByFilter(float priceFrom, float priceTo, int size)
-//            throws SQLException, NamingException {
-//        Connection con = null;
-//        PreparedStatement stm = null;
-//        ResultSet rs = null;
-//        try {
-//            con = DBHelper.makeConnection();
-//            if (con != null) {
-//                String sql = "Select Name, Description, Quantity, Price, Size "
-//                        + "From Product "
-//                        + "Where ";
-//
-//                if (priceFrom >= 0) {
-//                    sql += " Price >= ?";
-//                }
-//                if (priceTo != 0) {
-//                    sql += " And Price <= ?";
-//                }
-//                if (size != 0) {
-//                    sql += " And Size = ?";
-//                }
-//                stm = con.prepareStatement(sql);
-//                stm.setFloat(1, priceFrom);
-//                stm.setFloat(2, priceTo);
-//                stm.setInt(3, size);
-//                rs = stm.executeQuery();
-//                while (rs.next()) {
-//                    String name = rs.getString("Name");
-//                    String description = rs.getString("Description");
-//                    int quantity = rs.getInt("Quantity");
-//                    float price = rs.getFloat("Price");
-//                    size = rs.getInt("Size");
-//                    ProductDTO dto = new ProductDTO(
-//                            name, description, price, quantity, size);
-//                    if (this.itemsList == null) {
-//                        this.itemsList = new ArrayList<>();
-//                    }
-//                    this.itemsList.add(dto);
-//                }
-//            }
-//        } finally {
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (stm != null) {
-//                stm.close();
-//            }
-//            if (con != null) {
-//                con.close();
-//            }
-//        }
-//    }
-    
+
+    public void searchOrdersByDate(Date dateFrom, Date dateTo)
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select OrdersID, CustomerID, DateOrders "
+                        + "From Orders "
+                        + "Where DateOrders Between ? And ? ";
+                stm = con.prepareStatement(sql);
+                stm.setDate(1, dateFrom);
+                stm.setDate(2, dateTo);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int ordersId = rs.getInt("OrdersID");
+                    int customerID = rs.getInt("CustomerID");
+                    Date dateOrders = rs.getDate("DateOrders");
+                    OrdersDTO dto = new OrdersDTO(ordersId, customerID, dateOrders);
+                    if (this.ordersList == null) {
+                        this.ordersList = new ArrayList<>();
+                    }
+                    this.ordersList.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
 }

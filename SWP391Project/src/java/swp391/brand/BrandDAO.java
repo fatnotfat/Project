@@ -71,14 +71,15 @@ public class BrandDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select BrandID, Name "
+                String sql = "Select BrandID, Name, Description "
                         + "From Brand";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int brandID = rs.getInt("BrandID");
                     String name = rs.getString("Name");
-                    BrandDTO dto = new BrandDTO(brandID, name);
+                    String description = rs.getString("Description");
+                    BrandDTO dto = new BrandDTO(brandID, name, description);
                     if (this.brandsList == null) {
                         this.brandsList = new ArrayList<>();
                     }

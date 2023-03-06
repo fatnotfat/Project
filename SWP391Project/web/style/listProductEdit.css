@@ -1,0 +1,226 @@
+.icon-edit svg{
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+
+}
+
+.icon-delete svg{
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+
+}
+
+.form__include-delete.active{
+    display: block;
+    display: flex;
+    z-index: 20;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.form__include-delete{
+    display: none;
+}
+.d-flex .flex-column{
+    position: relative;
+}
+
+.form-delete{
+    margin: auto;
+    width: 30%;
+    height: 150px;
+    background-color: #ccc;
+
+}
+
+.close-tab {
+    width: 24px;    
+}
+.close-tab svg{
+    display: block;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+
+.delete-title{
+    margin: 10px auto;
+    width: 80%;
+    font-size: 15px;
+    position: relative;
+    text-align: center;
+}
+
+.delete-title p{
+    color: #333;
+    width: auto ;
+}
+
+.button__delete-include{
+    margin: auto;
+    display: flex;
+        width: 80%;
+    font-size: 30px;
+}
+
+.button__delete-yes{
+    margin: auto;
+    font-size: 20px;
+    width: 100px;
+}
+.button__delete-yes:hover{
+   background-color: bisque;
+}
+
+.button__delete-no{
+    margin: auto;
+    font-size: 20px;
+    width: 100px;
+}
+
+.button__delete-no:hover{
+   background-color: bisque;
+    
+
+}
+
+
+.form__include-update{
+    display: none;
+}
+
+.form__include-update.active{
+
+    display: flex;
+    z-index: 20;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    top: 0; 
+}
+
+.form-update{
+
+  margin: auto;
+    width: 50%;
+    height: auto;
+    background-color: #F6E1C3;
+}
+
+.form__message.invalid{
+color: red;
+}
+
+.form__group input{
+    width: 100%;
+}
+.update-content{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 70%;
+    margin: auto;
+}
+
+.update-content h3{
+    color: #333;
+    text-align: center;
+}
+
+.button__group{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: right;
+}
+
+.button-update{
+    width: 100px;
+    height: 30px;
+}
+
+.button-update:hover{
+    background-color:#a39786 ;
+}
+
+
+
+
+
+/* create  product css */
+
+.form__create{
+    display: none;
+}
+
+.form__create.active{
+    display: flex;
+    z-index: 22;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    top: 0; 
+}
+
+.form-create{
+    border-radius: 5px;
+  margin: auto;
+    width: 50%;
+    height: auto;
+    background-color: #F6E1C3;
+}
+
+.form__message.invalid{
+color: red;
+font-style: italic;
+
+}
+
+.form__group input{
+    width: 100%;
+}
+
+.form__group{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.create-content{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 70%;
+    margin: auto;
+}
+
+.create-content h3{
+    color: #333;
+    text-align: center;
+}
+
+.button__group{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: right;
+}
+
+.button-create{
+    width: 100px;
+    height: 30px;
+}
+
+.button-create:hover{
+    background-color: #a39786;
+}
+
+.button__form-create-product{
+    margin-bottom: 30px;
+}

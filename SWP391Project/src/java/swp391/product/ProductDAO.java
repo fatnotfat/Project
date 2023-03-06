@@ -91,7 +91,7 @@ public class ProductDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Select ProductID, Name, "
-                        + "Description, Quantity, Price, Status, Size "
+                        + "Description, Quantity, Price, Size "
                         + "From Product";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
@@ -101,10 +101,9 @@ public class ProductDAO implements Serializable {
                     String description = rs.getString("Description");
                     int quantity = rs.getInt("Quantity");
                     float price = rs.getInt("Price");
-                    boolean status = rs.getBoolean("Status");
                     int size = rs.getInt("Size");
                     ProductDTO dto = new ProductDTO(productID,
-                            name, description, quantity, price, status, size);
+                            name, description, quantity, price, size);
                     if (this.itemsList == null) {
                         this.itemsList = new ArrayList<>();
                     }
@@ -273,4 +272,52 @@ public class ProductDAO implements Serializable {
         }
         return result;
     }
+//    
+//    public void getTop10ItemsInMonthYear(String month, String year) throws NamingException, SQLException {
+//        Connection con = null;
+//        PreparedStatement stm = null;
+//        ResultSet rs = null;
+//        try {
+//            // 1. Connect to the database
+//            con = DBHelpers.getConnection();
+//            if (con != null) {
+//                // 2. Create SQL query
+//                String sql = "SELECT TOP 10 ProductID, SUM(Quantity) AS Quantity, ord.OrderID "
+//                        + "FROM [OrderDetail] ord "
+//                        + "INNER JOIN [Order] orn ON ord.OrderID = orn.OrderID  "
+//                        + "WHERE  MONTH([Date]) = ? AND YEAR([Date]) = ?  "
+//                        + "GROUP BY ProductID, ord.OrderID "
+//                        + "ORDER BY Quantity DESC";
+//                // 3. Create prepared statement
+//                stm = con.prepareStatement(sql);
+//                stm.setString(1, month);
+//                stm.setString(2, year);
+//                // 4. Execute query
+//                rs = stm.executeQuery();
+//                // 5. Process results
+//                while (rs.next()) {
+//                    ProdcutDTO product = new ProdcutDTO();
+//                    int pro = rs.getInt("ProductID");
+//                    int quan = rs.getInt("Quantity");
+//                    //6. Add the product to the list
+//                    product = new ProdcutDTO(pro, quan);
+//
+//                    if (this.listdto == null) {
+//                        this.listdto = new ArrayList<>();
+//                    }
+//                    this.listdto.add(product);
+//                }
+//            } // end if con is available
+//        } finally {
+//            // 6. Close connections
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (stm != null) {
+//                stm.close();
+//            }
+//            if (con != null) {
+//                con.close();
+//            }
+//        }
 }

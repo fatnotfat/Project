@@ -51,11 +51,11 @@ public class SignUpServlet extends HttpServlet {
         String firstName = request.getParameter("txtFirstName");
         byte[] bytes1 = firstName.getBytes(StandardCharsets.ISO_8859_1);
         firstName = new String(bytes1, StandardCharsets.UTF_8);
-        
+
         String lastName = request.getParameter("txtLastName");
         byte[] bytes2 = lastName.getBytes(StandardCharsets.ISO_8859_1);
         lastName = new String(bytes2, StandardCharsets.UTF_8);
-        
+
         String password = request.getParameter("txtPassword");
         String email = request.getParameter("txtEmail");
         String birthDateTxt = request.getParameter("txtBirthDate");
@@ -73,7 +73,7 @@ public class SignUpServlet extends HttpServlet {
                 errorFound = true;
                 errors.setLastNameLengthError("You can't leave this empty");
             }
-            
+
             if (password.trim().length() < 1) {
                 errorFound = true;
                 errors.setPasswordLengthError("You can't leave this empty");
@@ -107,7 +107,7 @@ public class SignUpServlet extends HttpServlet {
                 }
                 CustomerDTO dto
                         = new CustomerDTO(firstName + " " + lastName, password, birthDate, email,
-                                 "none", "none", false, 1, sex, false);
+                                "none", "none", false, 1, sex, false);
                 boolean result = dao.createAccount(dto);
                 if (result) {
                     url = siteMaps.getProperty(

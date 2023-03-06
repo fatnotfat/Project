@@ -132,4 +132,33 @@ public class MyApplicationConstants {
         public static final String SHIPPING_PAGE = "shippingPage";
     }
 
+    public class AdminNewAccountServlet {
+
+        public static final String ADMINNEWACCOUNT_PAGE = "adminNewAccountPage";
+        public static final String ADMIN_PAGE = "adminPage";
+    }
+
+    public class AdminAccountListServlet {
+
+        public static final String ADMINACCOUNTLIST_PAGE = "adminAccountListPage";
+        public static final String ADMIN_PAGE = "adminPage";
+    }
+
+    public class AdminBrandListServlet {
+
+        public static final String ADMINBRANDLIST_PAGE = "adminBrandListPage";
+        public static final String ADMIN_PAGE = "adminPage";
+    }
+
+    public class AdminCategoryListServlet {
+
+        public static final String ADMINCATEGORYLIST_PAGE = "adminCategoryListPage";
+        public static final String ADMIN_PAGE = "adminPage";
+    }
+
+    public class AdminProductListServlet {
+
+        public static final String ADMINPRODUCTLIST_PAGE = "adminProductListPage";
+        public static final String ADMIN_PAGE = "adminPage";
+    }
 }

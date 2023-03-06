@@ -28,6 +28,12 @@ public class CategoryDTO implements Serializable {
         this.status = status;
     }
 
+    public CategoryDTO(int categoryID, String name, String description) {
+        this.categoryID = categoryID;
+        this.name = name;
+        this.description = description;
+    }
+
     public CategoryDTO(int categoryID, String name) {
         this.categoryID = categoryID;
         this.name = name;

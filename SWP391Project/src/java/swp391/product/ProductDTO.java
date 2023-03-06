@@ -40,7 +40,6 @@ public class ProductDTO implements Serializable {
         this.FeBkID = FeBkID;
     }
 
-    
     public ProductDTO(String name, String description, int quantity, float price, int size, int CateID, int BrandID) {
         this.name = name;
         this.description = description;
@@ -49,6 +48,15 @@ public class ProductDTO implements Serializable {
         this.size = size;
         this.CateID = CateID;
         this.BrandID = BrandID;
+    }
+
+    public ProductDTO(int productID, String name, String description, int quantity, float price, int size) {
+        this.productID = productID;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.size = size;
     }
 
     public ProductDTO(int productID, String name, String description, int quantity, float price, boolean status, int size) {
@@ -60,7 +68,7 @@ public class ProductDTO implements Serializable {
         this.status = status;
         this.size = size;
     }
-    
+
     public ProductDTO(String name, String description, float price, int quantity, int size) {
         this.name = name;
         this.description = description;
@@ -68,8 +76,6 @@ public class ProductDTO implements Serializable {
         this.quantity = quantity;
         this.size = size;
     }
-    
-    
 
     /**
      * @return the name

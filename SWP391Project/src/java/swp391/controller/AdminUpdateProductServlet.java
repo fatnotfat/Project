@@ -55,7 +55,7 @@ public class AdminUpdateProductServlet extends HttpServlet {
         float price = Float.parseFloat(txtPrice);
         String txtStatus = request.getParameter("chkStatus");
         boolean status = false;
-        if(txtStatus != null){
+        if (txtStatus != null) {
             status = true;
         }
         String txtSize = request.getParameter("txtSize");
@@ -65,16 +65,28 @@ public class AdminUpdateProductServlet extends HttpServlet {
         try {
             if (name.trim().length() < 1) {
                 errorFound = true;
-                errors.setNameLengthError("You can't leave this empty");
+                errors.setNameLengthError("You can't leave name empty");
             }
             if (description.trim().length() < 1) {
                 errorFound = true;
-                errors.setDescriptionLengthError("You can't leave this empty");
+                errors.setDescriptionLengthError("You can't leave description empty");
+            }
+            if (quantity < 0) {
+                errorFound = true;
+                errors.setQuantityError("You can't put quantity less than 0");
+            }
+            if (price < 0) {
+                errorFound = true;
+                errors.setPriceError("You can't put price less than 0");
+            }
+            if (size < 0) {
+                errorFound = true;
+                errors.setSizeError("You can't put size less than 0");
             }
             if (errorFound) {
                 request.setAttribute("UPDATE_ERROR", errors);
                 url = "AdminSearchProductServlet"
-                            + "?txtSearchValue=" + searchValue;
+                        + "?txtSearchValue=" + searchValue;
             } else {
                 ProductDAO dao = new ProductDAO();
                 boolean result = dao.updateProduct(productID, name, description,
