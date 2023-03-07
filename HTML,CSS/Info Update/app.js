@@ -118,6 +118,7 @@ var lastName = document.querySelector("#last-name");
 // var female = document.querySelector('#gender-female')
 var date = document.querySelector("#date");
 var phone = document.querySelector("#phone");
+var address = document.querySelector('#address')
 var password = document.querySelector("#password");
 var confirmPassword = document.querySelector("#confirm-password");
 var form = document.querySelector("form");
@@ -221,6 +222,7 @@ form.addEventListener("submit", function (e) {
     lastName,
     date,
     phone,
+    address,
     password,
     confirmPassword,
   ]);

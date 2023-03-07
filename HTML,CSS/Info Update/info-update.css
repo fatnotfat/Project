@@ -827,6 +827,15 @@ header {
   line-height: 17px;
   flex-grow: 1;
 }
+.update-input-address {
+  width: 100%;
+  border: 0;
+  outline: none;
+  padding: 20px 25px;
+  background-color: var(--form-color);
+  line-height: 17px;
+  flex-grow: 1;
+}
 .update-input-password {
   width: 100%;
   border: 0;

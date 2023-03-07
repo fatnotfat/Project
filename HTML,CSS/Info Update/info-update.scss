@@ -878,6 +878,16 @@
          line-height: 17px;
          flex-grow: 1;
        }
+       &-address {
+        width: 100%;
+        border: 0;
+        outline: none;
+        // margin-bottom: 30px;
+        padding: 20px 25px;
+        background-color: var(--form-color);
+        line-height: 17px;
+        flex-grow: 1;
+      }
        &-password {
          width: 100%;
          border: 0;
