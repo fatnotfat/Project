@@ -561,7 +561,7 @@
 
         <!-- Chỗ này hiện ra khi mà add a new Category -->
         <div class="form__create">
-            <form action="" class="form-create" id="form-create"  >
+            <form action="adminNewCategoryController" class="form-create" id="form-create" method="POST">
                 <div class="close-tab" onclick="showCreateCategory()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <path
@@ -573,12 +573,12 @@
                     <h3>Add a new Category to the Store </h3>
 
                     <div class="form__group">
-                        Name: <input id="name" name="name" type="text" class="name-create" >
+                        Name: <input id="name" name="txtName" type="text" class="name-create" >
                         <span class="form__message"></span>
                     </div>
 
                     <div class="form__group">
-                        Description: <input id="description" name="description" type="text" class="description-create" >
+                        Description: <input id="description" name="txtDescription" type="text" class="description-create" >
                         <span class="form__message"></span>
                     </div>
 

@@ -430,6 +430,7 @@
                                                             <td>${dto.brandID}</td>
                                                             <td>${dto.name}</td>
                                                             <td>${dto.description}</td>
+
                                                             <td class="icon-edit" onclick="showEdit()">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                                                 <path
@@ -442,6 +443,7 @@
                                                                 <path
                                                                     d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
                                                                 </svg>
+
                                                             </td>
                                                         </tr>
                                                     </c:forEach>
@@ -507,7 +509,8 @@
         <!-- Chỗ này hiện ra khi mà click Delete (Update) -->
 
         <div class="form__include-delete">
-            <form action="" class="form-delete">
+            <form action="adminDeleteBrandController" class="form-delete" method="POST">
+                <c:set var="result" value="${requestScope.BRAND_RESULT}"/>
                 <div class="close-tab" onclick="showDelete()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <path
@@ -521,6 +524,7 @@
 
                     <div class="button__delete-include">
                         <button class="button__delete-yes">Yes</button>
+                        <input type="hidden" name="txtBrandID" value="${result.brandID}" />
                         <button class="button__delete-no">No</button>
                     </div>
                 </div>
@@ -563,24 +567,22 @@
 
         <!-- Chỗ này hiện ra khi mà add a new brand -->
         <div class="form__create">
-            <form action="" class="form-create" id="form-create"  >
+            <form action="adminNewBrandController" class="form-create" id="form-create" method="POST">
                 <div class="close-tab" onclick="showCreateBrand()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <path
                         d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
                     </svg>
                 </div>
-
                 <div class="create-content">
                     <h3>Add a new Brand to the Store </h3>
-
                     <div class="form__group">
-                        Name: <input id="name" name="name" type="text" class="name-create" >
+                        Name: <input id="name" name="txtName" type="text" class="name-create" >
                         <span class="form__message"></span>
                     </div>
 
                     <div class="form__group">
-                        Description: <input id="description" name="description" type="text" class="description-create" >
+                        Description: <input id="description" name="txtDescription" type="text" class="description-create" >
                         <span class="form__message"></span>
                     </div>
 
@@ -590,7 +592,6 @@
                 </div>
             </form>
         </div>
-
 
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>

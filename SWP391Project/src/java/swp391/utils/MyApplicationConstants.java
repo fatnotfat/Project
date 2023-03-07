@@ -88,19 +88,19 @@ public class MyApplicationConstants {
 
     public class AdminNewBrandServlet {
 
-        public static final String ADMINNEWBRAND_PAGE = "adminNewBrandPage";
-        public static final String ADMINMAIN_PAGE = "adminMainPage";
+        public static final String ADMINBRANDLIST_PAGE = "adminBrandListController";
+        public static final String ADMIN_PAGE = "adminPage";
     }
 
     public class AdminNewCategoryServlet {
 
-        public static final String ADMINNEWCATEGORY_PAGE = "adminNewCategoryPage";
-        public static final String ADMINMAIN_PAGE = "adminMainPage";
+        public static final String ADMINCATEGORYLIST_PAGE = "adminCategoryListController";
+        public static final String ADMIN_PAGE = "adminPage";
     }
 
     public class AdminNewProductServlet {
 
-        public static final String ADMINNEWPRODUCT_PAGE = "adminNewProductPage";
+        public static final String ADMINPRODUCTLIST_PAGE = "adminProductListController";
         public static final String ADMIN_PAGE = "adminPage";
     }
 
@@ -159,6 +159,11 @@ public class MyApplicationConstants {
     public class AdminProductListServlet {
 
         public static final String ADMINPRODUCTLIST_PAGE = "adminProductListPage";
+        public static final String ADMIN_PAGE = "adminPage";
+    }
+    public class AdminDeleteBrandServlet {
+
+        public static final String ADMINBRANDLIST_PAGE = "adminBrandListPage";
         public static final String ADMIN_PAGE = "adminPage";
     }
 }

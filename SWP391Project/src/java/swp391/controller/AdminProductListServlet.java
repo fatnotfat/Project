@@ -17,6 +17,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import swp391.brand.BrandDAO;
+import swp391.brand.BrandDTO;
+import swp391.category.CategoryDAO;
+import swp391.category.CategoryDTO;
 import swp391.product.ProductDAO;
 import swp391.product.ProductDTO;
 import swp391.utils.MyApplicationConstants;
@@ -43,12 +47,20 @@ public class AdminProductListServlet extends HttpServlet {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
-                MyApplicationConstants.AdminAccountListServlet.ADMINACCOUNTLIST_PAGE);
+                MyApplicationConstants.AdminProductListServlet.ADMINPRODUCTLIST_PAGE);
         try {
             ProductDAO dao = new ProductDAO();
             dao.showProduct();
             List<ProductDTO> result = dao.getItemsList();
             request.setAttribute("PRODUCT_RESULT", result);
+            CategoryDAO categoryDao = new CategoryDAO();
+            categoryDao.showCategory();
+            List<CategoryDTO> categoryResult = categoryDao.getCategorysList();
+            request.setAttribute("CATEGORY_RESULT", categoryResult);
+            BrandDAO brandDao = new BrandDAO();
+            brandDao.showBrand();
+            List<BrandDTO> brandResult = brandDao.getBrandsList();
+            request.setAttribute("BRAND_RESULT", brandResult);
             url = siteMaps.getProperty(
                     MyApplicationConstants.AdminProductListServlet.ADMINPRODUCTLIST_PAGE);
         } catch (NamingException ex) {

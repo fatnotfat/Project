@@ -153,7 +153,7 @@ Validator.isRequired = function (selector, message) {
     }
 }
 
-Validator   .isNumber = function (selector, message) {
+Validator.isNumber = function (selector, message) {
     return {
         selector: selector,
         test: function (value) {
@@ -162,6 +162,17 @@ Validator   .isNumber = function (selector, message) {
         }
     }
 }
+
+Validator.isPositive = function (selector, message) {
+    return {
+        selector: selector,
+        test: function (value) {
+            var regex =  /^(?!(?:0|0\.0|0\.00)$)[+]?\d+(\.\d|\.\d[0-9])?$/;
+            return regex.test(value) ? undefined : message || "Vui lòng nhập số dương nhé!!"
+        }
+    }
+}
+
 
 
 
@@ -330,7 +341,15 @@ Validator2.isNumber = function (selector, message) {
 }
 
 
-
+Validator2.isPositive = function (selector, message) {
+    return {
+        selector: selector,
+        test: function (value) {
+            var regex =  /^(?!(?:0|0\.0|0\.00)$)[+]?\d+(\.\d|\.\d[0-9])?$/;
+            return regex.test(value) ? undefined : message || "Vui lòng nhập số dương nhé!!"
+        }
+    }
+}
 
 
 

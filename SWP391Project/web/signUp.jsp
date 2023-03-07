@@ -83,25 +83,25 @@ import="java.sql.*"
                         <h1>Register</h1>
                     </div>
                     <img src="images/Login-line.png" alt="" />
-                    
-                        <div class="register-form-container">
-                            <form action="signUpController" method="POST">
+
+                    <div class="register-form-container">
+                        <form action="signUpController" method="POST">
                             <div class="register-form">
-                                
+
                                 <c:set var = "errors" value="${requestScope.SIGNUP_ERROR}"/>
                                 <input type="text" name="txtFirstName"
-                                                   class="register-input-first-name"
-                                                   placeholder="First name"
-                                                   value="" /><br/>
+                                       class="register-input-first-name"
+                                       placeholder="First name"
+                                       value="" /><br/>
                                 <c:if test="${not empty errors.firstNameLengthError}">
                                     <font color="red">
                                     ${errors.firstNameLengthError}
                                     </font><br/>
                                 </c:if>
                                 <input type="text" name="txtLastName"
-                                                  class="register-input-last-name"
-                                                  placeholder="Last name"
-                                                  value="" /><br/>
+                                       class="register-input-last-name"
+                                       placeholder="Last name"
+                                       value="" /><br/>
                                 <c:if test="${not empty errors.lastNameLengthError}">
                                     <font color="red">
                                     ${errors.lastNameLengthError}
@@ -109,7 +109,7 @@ import="java.sql.*"
                                 </c:if>
 
                                 <div class="register-form-gender">
-                                <br/>
+                                    <br/>
                                     <div class="register-form-radio">
                                         <input type="radio" name="txtSex"
                                                class="register-form-input-radio"
@@ -129,9 +129,9 @@ import="java.sql.*"
                                     </div>
                                 </div>
                                 <input type="date" name="txtBirthDate"
-                                                class="register-input-date"
-                                                placeholder="mm/dd/yyyy"
-                                                value="${param.txtBirthDate}" /><br/>
+                                       class="register-input-date"
+                                       placeholder="mm/dd/yyyy"
+                                       value="${param.txtBirthDate}" /><br/>
                                 <c:if test="${not empty errors.birthDateLengthError}">
                                     <font color="red">
                                     ${errors.birthDateLengthError}
@@ -139,9 +139,9 @@ import="java.sql.*"
                                 </c:if>
 
                                 <input type="text" name="txtEmail"
-                                              class="register-input-email"
-                                              placeholder="Email"
-                                              value="${param.txtEmail}" /><br/>
+                                       class="register-input-email"
+                                       placeholder="Email"
+                                       value="${param.txtEmail}" /><br/>
                                 <c:if test="${not empty errors.emailLengthError}">
                                     <font color="red">
                                     ${errors.emailLengthError}
@@ -154,24 +154,24 @@ import="java.sql.*"
                                 </c:if>
 
                                 <input type="password" name="txtPassword"
-                                                 class="register-input-password"
-                                                 placeholder="Password"
-                                                 value="" /> (e.g, 6 - 30 chars)<br/>
+                                       class="register-input-password"
+                                       placeholder="Password"
+                                       value="" /> (e.g, 6 - 30 chars)<br/>
                                 <c:if test="${not empty errors.passwordLengthError}">
                                     <font color="red">
                                     ${errors.passwordLengthError}
                                     </font><br/>
                                 </c:if>
                                 <input type="password" name="txtConfirm"
-                                                class="register-input-confirm-password"
-                                                placeholder="Confirm Password"
-                                                value="" /><br/>
+                                       class="register-input-confirm-password"
+                                       placeholder="Confirm Password"
+                                       value="" /><br/>
                                 <c:if test="${not empty errors.confirmNotMatched}">
                                     <font color="red">
                                     ${errors.confirmNotMatched}
                                     </font><br/>
                                 </c:if>
-                                    
+
                             </div>
                             <div class="register-function">
                                 <p class="register-function-security">
@@ -192,9 +192,8 @@ import="java.sql.*"
                                     </span> <a href="loginPage" class="register-function-register-hightlight" >Login</a> here<br/>
                                 </p>
                             </div>
-                            </form>
-                        </div>
-                    
+                        </form>
+                    </div>
                 </div>
             </div>
             <img src="images/Footer-line.png" alt="" />

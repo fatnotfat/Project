@@ -22,7 +22,7 @@
         <title>PDDTK- Dashboard</title>
 
         <!-- Link customize -->
-        <link rel="stylesheet" href="css/styleCustomize.css">
+        <link rel="stylesheet" href="style/styleCustomize.css">
 
         <!-- Custom fonts for this template-->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -363,9 +363,11 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nguyễn Tiến Phát</span>
-                                    <img class="img-profile rounded-circle"
-                                         src="https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/334095979_1611204769341531_5193060445120695864_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=cw79_IXEh3IAX9NXbqC&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfC8_nZh_2-ePeA4Tb4zxjeehgPHnNIQUsFxEd1mGGDLww&oe=6406C088">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                        Nguyễn Tiến Phát
+                                    </span>
+<!--                                    <img class="img-profile rounded-circle"
+                                         src="https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/334095979_1611204769341531_5193060445120695864_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=cw79_IXEh3IAX9NXbqC&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfC8_nZh_2-ePeA4Tb4zxjeehgPHnNIQUsFxEd1mGGDLww&oe=6406C088">-->
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -533,9 +535,10 @@
                                     </div>
                                     <!-- Card Body -->
                                     <div class="card-body">
-                                        <div class="chart-area">
+<!--                                        <div class="chart-area">
                                             <canvas id="myAreaChart"></canvas>
-                                        </div>
+                                            //
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>

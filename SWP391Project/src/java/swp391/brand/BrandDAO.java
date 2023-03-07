@@ -99,33 +99,61 @@ public class BrandDAO implements Serializable {
         }
     }
 
-//    public boolean updateBrand(int brandID, String name, String description)
-//            throws SQLException, NamingException {
-//        Connection con = null;
-//        PreparedStatement stm = null;
-//        boolean result = false;
-//        try {
-//            con = DBHelper.makeConnection();
-//            String sql = "Update Brand "
-//                    + "Set Name = ?, Description = ? "
-//                    + "Where BrandID = ?";
-//            //3. Create statement
-//            stm = con.prepareStatement(sql);
-//            stm.setString(1, name);
-//            stm.setString(2, description);
-//            stm.setInt(3, brandID);
-//            int effectedRows = stm.executeUpdate();
-//            if (effectedRows > 0) {
-//                result = true;
-//            }
-//        } finally {
-//            if (stm != null) {
-//                stm.close();
-//            }
-//            if (con != null) {
-//                con.close();
-//            }
-//        }
-//        return result;
-//    }
+    public boolean updateBrand(int brandID, String name, String description)
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+        try {
+            con = DBHelper.makeConnection();
+            String sql = "Update Brand "
+                    + "Set Name = ?, Description = ? "
+                    + "Where BrandID = ?";
+            //3. Create statement
+            stm = con.prepareStatement(sql);
+            stm.setString(1, name);
+            stm.setString(2, description);
+            stm.setInt(3, brandID);
+            int effectedRows = stm.executeUpdate();
+            if (effectedRows > 0) {
+                result = true;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    public boolean deleteBrand(int brandID)
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+        try {
+            con = DBHelper.makeConnection();
+            String sql = "Update Brand "
+                    + "Set Status = 0 "
+                    + "Where BrandID = ?";
+            //3. Create statement
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, brandID);
+            int effectedRows = stm.executeUpdate();
+            if (effectedRows > 0) {
+                result = true;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
 }

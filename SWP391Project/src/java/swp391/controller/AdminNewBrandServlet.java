@@ -6,6 +6,7 @@
 package swp391.controller;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.Properties;
 import javax.naming.NamingException;
@@ -43,31 +44,35 @@ public class AdminNewBrandServlet extends HttpServlet {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
-                MyApplicationConstants.AdminNewBrandServlet.ADMINNEWBRAND_PAGE);
+                MyApplicationConstants.AdminNewBrandServlet.ADMINBRANDLIST_PAGE);
         String name = request.getParameter("txtName");
         String description = request.getParameter("txtDescription");
-        boolean errorFound = false;
-        AdminCreateError errors = new AdminCreateError();
+        byte[] bytes1 = name.getBytes(StandardCharsets.ISO_8859_1);
+        name = new String(bytes1, StandardCharsets.UTF_8);
+        byte[] bytes2 = description.getBytes(StandardCharsets.ISO_8859_1);
+        description = new String(bytes2, StandardCharsets.UTF_8);
+//        boolean errorFound = false;
+//        AdminCreateError errors = new AdminCreateError();
         try {
-            if (name.trim().length() < 1) {
-                errorFound = true;
-                errors.setNameLengthError("You can't leave this empty");
+//            if (name.trim().length() < 1) {
+//                errorFound = true;
+//                errors.setNameLengthError("You can't leave this empty");
+//            }
+//            if (description.trim().length() < 1) {
+//                errorFound = true;
+//                errors.setDescriptionLengthError("You can't leave this empty");
+//            }
+//            if (errorFound) {
+//                request.setAttribute("ADMINNEWBRAND_ERROR", errors);
+//            } else {
+            BrandDAO dao = new BrandDAO();
+            BrandDTO dto = new BrandDTO(name, description);
+            boolean result = dao.createBrand(dto);
+            if (result) {
+                url = siteMaps.getProperty(
+                        MyApplicationConstants.AdminNewBrandServlet.ADMINBRANDLIST_PAGE);
             }
-            if (description.trim().length() < 1) {
-                errorFound = true;
-                errors.setDescriptionLengthError("You can't leave this empty");
-            }
-            if (errorFound) {
-                request.setAttribute("ADMINNEWBRAND_ERROR", errors);
-            } else {
-                BrandDAO dao = new BrandDAO();
-                BrandDTO dto = new BrandDTO(name, description);
-                boolean result = dao.createBrand(dto);
-                if (result) {
-                    url = siteMaps.getProperty(
-                            MyApplicationConstants.AdminNewBrandServlet.ADMINMAIN_PAGE);
-                }
-            }
+//            }
         } catch (NamingException ex) {
             log("AdminNewBrandServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {

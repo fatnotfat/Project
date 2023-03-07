@@ -527,7 +527,7 @@
 
         <!-- Chỗ này hiện ra khi mà click Edit (Update) -->
         <div class="form__include-update">
-            <form action="" class="form-update" id="form-update"  >
+            <form action="adminNewProductController" class="form-update" id="form-update" method="POST" >
                 <div class="close-tab" onclick="showEdit()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <path
@@ -537,26 +537,25 @@
 
                 <div class="update-content">
                     <h3>Update Product</h3>
-
                     <div class="form__group">
-                        Name: <input id="name" name="name" type="text" class="name-update" >
+                        Name: <input id="name" name="txtName" type="text" class="name-update" >
                         <span class="form__message"></span>
                     </div>
 
                     <div class="form__group">
-                        Description: <input id="description" name="description" type="text" class="description-update" >
-                        <span class="form__message"></span>
-                    </div>
-
-                    <div class="form__group">
-
-                        Quantity: <input id="quantity" name="quantity" type="text" class="quantity-update" >
+                        Description: <input id="description" name="txtDescription" type="text" class="description-update" >
                         <span class="form__message"></span>
                     </div>
 
                     <div class="form__group">
 
-                        Price: <input id="price" name="price" type="text" class="price-update">
+                        Quantity: <input id="quantity" name="txtQuantity" type="number" class="quantity-update" >
+                        <span class="form__message"></span>
+                    </div>
+
+                    <div class="form__group">
+
+                        Price: <input id="price" name="txtPrice" type="number" class="price-update">
                         <span class="form__message"></span>
                     </div>
 
@@ -597,8 +596,6 @@
                         </select>
                         <span class="form__message"></span>
                     </div>
-
-
                     <div class="button__group">
                         <button type="submit" class="button-update">Update</button>
                     </div>
@@ -611,7 +608,7 @@
         <!-- Chỗ này hiện ra khi mà add a new product á  -->
 
         <div class="form__create">
-            <form action="" class="form-create" id="form-create"  >
+            <form action="adminNewProductController" class="form-create" id="form-create"  >
                 <div class="close-tab" onclick="showCreateProduct()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <path
@@ -621,68 +618,52 @@
 
                 <div class="create-content">
                     <h3>Add a new Product to the Store </h3>
-
                     <div class="form__group">
-                        Name: <input id="name" name="name" type="text" class="name-create" >
+                        Name: <input id="name" name="txtName" type="text" class="name-create" >
                         <span class="form__message"></span>
                     </div>
-
                     <div class="form__group">
-                        Description: <input id="description" name="description" type="text" class="description-create" >
+                        Description: <input id="description" name="txtDescription" type="text" class="description-create" >
                         <span class="form__message"></span>
                     </div>
-
                     <div class="form__group">
-
-                        Quantity: <input id="quantity" name="quantity" type="text" class="quantity-create" >
+                        Quantity: <input id="quantity" name="txtQuantity" type="number" class="quantity-create" >
                         <span class="form__message"></span>
                     </div>
-
                     <div class="form__group">
-
-                        Price: <input id="price" name="price" type="text" class="price-create">
+                        Price: <input id="price" name="txtPrice" type="text" class="price-create">
                         <span class="form__message"></span>
                     </div>
-
                     <div class="form__group">
-
-                        <!-- CategoryID: <input id="category" name="category" type="text" class="category-create">
-                        <span class="form__message"></span> -->
-                        Category: <select name="category" id="category" class="category-create" >
-                            <option value="">Nhẫn</option>
-                            <option value="">Vòng tay</option>
-                            <option value="">Khuyên tay</option>
-                            <option value="">Dây chuyền</option>
-                        </select>
-                        <span class="form__message"></span>
-
-                    </div>
-
-                    <div class="form__group">
-
-                        <!-- BrandID: <input id="brand" name="brand" type="text" class="brand-create">
-                        <span class="form__message"></span> -->
-                        Brand: <select name="brand" id="brand" class="brand-create" >
-                            <option value="">Helious</option>
-                            <option value="">PNJ</option>
-                            <option value="">TH-Truemilk</option>
-                            <option value="">Milo</option>
+                        <c:set var="categoryResults" value="${requestScope.CATEGORY_RESULT}"/>
+                        Category: <select name="cboCategory" id="category" class="category-create" >
+                            <c:forEach var="dto1" items="${categoryResults}">
+                                <option value="${dto1.categoryID}">${dto1.categoryID}-${dto1.name}</option>
+                            </c:forEach>
                         </select>
                         <span class="form__message"></span>
                     </div>
-
                     <div class="form__group">
-
-                        Size: <select name="size" id="size" class="size-create" >
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
+                        <c:set var="brandResults" value="${requestScope.BRAND_RESULT}"/>
+                        Brand: <select name="cboBrand" id="brand" class="brand-create" >
+                            <c:forEach var="dto2" items="${brandResults}">
+                                <option value="${dto2.brandID}">${dto2.brandID}-${dto2.name}</option>
+                            </c:forEach>
                         </select>
                         <span class="form__message"></span>
                     </div>
-
-
+                    <div class="form__group">
+                        Size: <input name="txtSize" type="number" id="size" class="size-create" >
+                        <span class="form__message"></span>
+                    </div>
+                    <c:set var="error" value="${requestScope.ADMINNEWPRODUCT_ERROR}"/>
+                    <c:if test="${not empty error.sizeError}">
+                        <font color="red">
+                        <h3>
+                            ${error.sizeError}
+                        </h3>
+                        </font>
+                    </c:if>
                     <div class="button__group">
                         <button type="submit" class="button-create">Add</button>
                     </div>
@@ -720,6 +701,8 @@
                             Validator.isNumber('#quantity'),
                             Validator.isRequired('#price'),
                             Validator.isNumber('#price'),
+                            Validator.isRequired('#size'),
+                            Validator.isPositive('#size'),
                         ],
                         onsubmit: function (data) {
                             console.log(data)
@@ -735,6 +718,8 @@
                             Validator2.isNumber('#quantity'),
                             Validator2.isRequired('#price'),
                             Validator2.isNumber('#price'),
+                            Validator2.isRequired('#size'),
+                            Validator2.isPositive('#size'),
                         ],
                         onsubmit: function (data) {
                             console.log(data)
