@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +25,8 @@ import javax.servlet.http.HttpSession;
 import swp391.customer.CustomerCreateError;
 import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
+import swp391.shippingmethod.ShippingMethodDAO;
+import swp391.shippingmethod.ShippingMethodDTO;
 import swp391.utils.MyApplicationConstants;
 
 /**
@@ -49,7 +52,8 @@ public class ShippingServlet extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
                 MyApplicationConstants.ShippingServlet.SHIPPING_PAGE);
-        String txtShippingID = request.getParameter("chkShippingID");
+        String txtShippingID = request.getParameter("location");
+        String txtTypeOfShippingInfo = request.getParameter("defaultOrNewShippingInfor");
         boolean errorFound = false;
         CustomerCreateError errors = new CustomerCreateError();
         HttpSession session = request.getSession();
@@ -62,9 +66,15 @@ public class ShippingServlet extends HttpServlet {
                 if (emailOfSession != null) {
                     int shippingID = Integer.parseInt(txtShippingID);
                     request.setAttribute("SHIPPING_ID", shippingID);
+                    
+                    ShippingMethodDAO shippingDAO = new ShippingMethodDAO();
+                    ArrayList<ShippingMethodDTO> shippingList = shippingDAO.getListShippingMethodGPT();
+                    session.setAttribute("SHIPPINGMETHOD_LIST", shippingList);
+                    
                     url = siteMaps.getProperty(
                             MyApplicationConstants.ShippingServlet.PAYMENT_PAGE);
                 } else {
+                    
                     String firstName = request.getParameter("txtFirstName");
                     byte[] bytes1 = firstName.getBytes(StandardCharsets.ISO_8859_1);
                     firstName = new String(bytes1, StandardCharsets.UTF_8);
@@ -76,25 +86,26 @@ public class ShippingServlet extends HttpServlet {
                     String email = request.getParameter("txtEmail");
                     int shippingID = Integer.parseInt(txtShippingID);
                     CustomerDAO dao = new CustomerDAO();
+                    
                     if (firstName.trim().length() < 1) {
                         errorFound = true;
-                        errors.setFirstNameLengthError("You can't leave this empty");
+                        errors.setFirstNameLengthError("You can't leave first name empty");
                     }
                     if (lastName.trim().length() < 1) {
                         errorFound = true;
-                        errors.setLastNameLengthError("You can't leave this empty");
+                        errors.setLastNameLengthError("You can't leave last name empty");
                     }
                     if (address.trim().length() < 1) {
                         errorFound = true;
-                        errors.setAddressLengthError("You can't leave this empty");
+                        errors.setAddressLengthError("You can't leave address empty");
                     }
                     if (phone.trim().length() < 1) {
                         errorFound = true;
-                        errors.setPhoneLengthError("You can't leave this empty");
+                        errors.setPhoneLengthError("You can't leave phone empty");
                     }
                     if (email.trim().length() < 1) {
                         errorFound = true;
-                        errors.setEmailLengthError("You can't leave this empty");
+                        errors.setEmailLengthError("You can't leave email address empty");
                     } else if (dao.checkEmail(email)) {
                         errorFound = true;
                         errors.setEmailIsExisted(email + " is existed!!!");
@@ -106,6 +117,13 @@ public class ShippingServlet extends HttpServlet {
                                 email, phone, address);
                         CustomerDTO result = dao.loadInformationForPayment(email);
                         session.setAttribute("USER", result);
+
+                        ShippingMethodDAO shippingDAO = new ShippingMethodDAO();
+//                        ShippingMethodDTO shippingList = shipningDAO.getListShippingMethod();
+//                        session.setAttribute("SHIPPINGMETHOD_LIST", shippingList);
+                        ArrayList<ShippingMethodDTO> shippingList = shippingDAO.getListShippingMethodGPT();
+                        session.setAttribute("SHIPPINGMETHOD_LIST", shippingList);
+
                         session.setAttribute("SHIPPING_ID", shippingID);
                         url = siteMaps.getProperty(
                                 MyApplicationConstants.ShippingServlet.PAYMENT_PAGE);

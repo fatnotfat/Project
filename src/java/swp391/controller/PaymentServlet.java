@@ -55,27 +55,23 @@ public class PaymentServlet extends HttpServlet {
                 MyApplicationConstants.PaymentServlet.PAYMENT_PAGE);
 
         //Khai báo parameter của cart trên trang paymentPage đem xuống
-        String txtPaymentID = request.getParameter("chkPaymentID");       
+        String txtPaymentID = request.getParameter("method");       
         String txtDiscount = "0";
         String txtStatus = "0";        
-        String txtShippingID = request.getParameter("txtShippingID");
+        String txtShippingID = request.getParameter("location");
         String txtCustomerID = request.getParameter("txtCustomerID");
 
         CustomerCreateError errors = new CustomerCreateError();
         try {
-
             if (txtPaymentID == null) {
                 errors.setPaymentIDLengthError("Please choose the payment method");
                 request.setAttribute("PAYMENT_ERROR", errors);
             } else {
                 CartObject cart = (CartObject) request.getSession().getAttribute("CART");
                 int paymentID = Integer.parseInt(txtPaymentID);
-                if (paymentID == 1) {
-
-
+                if (paymentID == 1 || paymentID == 2) {
                     int customerID = Integer.parseInt(txtCustomerID);
                     int shippingID = Integer.parseInt(txtShippingID);
-
                     float discount = Float.parseFloat(txtDiscount);
                     int status = Integer.parseInt(txtStatus);
 
@@ -89,10 +85,6 @@ public class PaymentServlet extends HttpServlet {
                     for (Integer orderDetail : orderDetails) {
                         ordersDAO.addToOrders(customerID, orderDetail);
                     }
-
-                    //Đã có paymentID và shippingID
-                    //Sử dụng hàm DAO có sẵn để add xuống (OrdersDetail vs Order)
-                    //Tiếp tục sử dụng DAO để get lên thông tin bill gồm có OrdersID và Total
                     url = siteMaps.getProperty(
                             MyApplicationConstants.PaymentServlet.CHECKOUT_PAGE);
                 } else {
@@ -100,11 +92,10 @@ public class PaymentServlet extends HttpServlet {
                     //Call API PayPal then forward to checkout page
                 }
             }
-            //mở comment sau khi call DAO và thấy lỗi
-//        } catch (NamingException ex) {
-//            log("PaymentServlet _ Naming _ " + ex.getMessage());
-//        } catch (SQLException ex) {
-//            log("PaymentServlet _ SQL _ " + ex.getMessage());
+        } catch (NamingException ex) {
+            log("PaymentServlet _ Naming _ " + ex.getMessage());
+        } catch (SQLException ex) {
+            log("PaymentServlet _ SQL _ " + ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

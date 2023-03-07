@@ -1,4 +1,3 @@
-
 // ______________________________________ICON____________________________________________
 // Get references to the search tab and its content
 const searchTab = document.querySelector(".menu-icon-tab-search");
@@ -105,117 +104,22 @@ document.addEventListener('click', function() {
     toggleCartContent();
   }
 });
-//_______________API CALL___________________
-// Define the API endpoint URLs
-const provincesEndpoint = "https://provinces.open-api.vn/api/p";
-const districtsEndpoint = "https://provinces.open-api.vn/api/d?province_id=";
-const wardsEndpoint = "https://provinces.open-api.vn/api/w?district_id=";
+// ________________________________CART RESPONSIVE______________________________
 
-// Get the select fields
-const citySelect = document.getElementById("stored-city");
-const districtSelect = document.getElementById("stored-district");
-const wardSelect = document.getElementById("stored-ward");
-const citySearchInput = document.getElementById("city-search");
-const districtSearchInput = document.getElementById("district-search");
-const wardSearchInput = document.getElementById("ward-search");
+// ____________________________________PAY METHODS__________________________________
+// Get references to the relevant elements
+const codRadio = document.querySelector('.shipping-info-left-payment-field-input input[type="radio"]');
+const otherRadio = document.querySelector('.shipping-info-left-payment-field-other-input input[type="radio"]');
+const codDiv = document.querySelector('.shipping-info-left-payment-content-cod');
+const otherDiv = document.querySelector('.shipping-info-left-payment-content-other');
 
-// Load the list of provinces
-fetch(provincesEndpoint)
-  .then(response => response.json())
-  .then(provinces => {
-    // Populate the city select field with the list of provinces
-    provinces.forEach(province => {
-      const option = document.createElement("option");
-      option.text = province.name;
-      option.value = province.id;
-      citySelect.add(option);
-    });
-  });
-
-// Add an event listener to the city select field
-citySelect.addEventListener("change", function () {
-  // Clear the district and ward select fields
-  districtSelect.innerHTML = '<option value="">Select District</option>';
-  wardSelect.innerHTML = '<option value="">Select Ward</option>';
-
-  // Get the selected city/town
-  const selectedCityId = this.value;
-
-  // Load the list of districts for the selected city/town
-  fetch(districtsEndpoint + selectedCityId)
-    .then(response => response.json())
-    .then(districts => {
-      // Populate the district select field with the list of districts
-      districts.forEach(district => {
-        const option = document.createElement("option");
-        option.text = district.name;
-        option.value = district.id;
-        districtSelect.add(option);
-      });
-    });
+// Add event listeners to the radio buttons
+codRadio.addEventListener('click', function() {
+  codDiv.style.display = 'block';
+  otherDiv.style.display = 'none';
 });
 
-// Add an event listener to the district select field
-districtSelect.addEventListener("change", function () {
-  // Clear the ward select field
-  wardSelect.innerHTML = '<option value="">-- Select Ward --</option>';
-
-  // Get the selected district
-  const selectedDistrictId = this.value;
-
-  // Load the list of wards for the selected district
-  fetch(wardsEndpoint + selectedDistrictId)
-    .then(response => response.json())
-    .then(wards => {
-      // Populate the ward select field with the list of wards
-      wards.forEach(ward => {
-        const option = document.createElement("option");
-        option.text = ward.name;
-        option.value = ward.id;
-        wardSelect.add(option);
-      });
-    });
-});
-
-// Add event listeners to the search input fields
-citySearchInput.addEventListener("input", function () {
-  const searchValue = this.value.toLowerCase();
-  const options = citySelect.options;
-  
-  for (let i = 0; i < options.length; i++) {
-    const optionText = options[i].text.toLowerCase();
-    if (optionText.includes(searchValue)) {
-      options[i].style.display = "block";
-    } else {
-      options[i].style.display = "none";
-    }
-  }
-});
-
-districtSearchInput.addEventListener("input", function () {
-  const searchValue = this.value.toLowerCase();
-  const options = districtSelect.options;
-  
-  for (let i = 0; i < options.length; i++) {
-    const optionText = options[i].text.toLowerCase();
-    if (optionText.includes(searchValue)) {
-      options[i].style.display = "block";
-    } else {
-      options[i].style.display = "none";
-    }
-  }
-});
-
-wardSearchInput.addEventListener("input", function () {
-  const searchValue = this.value.toLowerCase();
-  const options = wardSelect.options;
-  
-  for (let i = 0; i < options.length; i++) {
-    const optionText = options[i].text.toLowerCase();
-    if (optionText.includes(searchValue)) {
-      options[i].style.display = "block";
-    } else {
-      options[i].style.display = "none";
-    }
-  }
+otherRadio.addEventListener('click', function() {
+  codDiv.style.display = 'none';
+  otherDiv.style.display = 'block';
 });
