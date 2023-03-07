@@ -245,3 +245,72 @@ form.addEventListener("submit", function (e) {
     //logic, call API, gọi service, .....
   }
 });
+// API CALL________________________________________________________________
+// Get the select fields
+const provinceSelect = document.getElementById('stored-city');
+const districtSelect = document.getElementById('stored-district');
+const wardSelect = document.getElementById('stored-ward');
+
+const getProvince = async () => {
+const data = await fetch('https://provinces.open-api.vn/api/p').then(response => response.json());
+data.forEach(province => {
+const option = document.createElement('option');
+option.value = province.code;
+option.text = province.name;
+option.setAttribute('data-name', `${province.name}`);
+option.setAttribute('name', 'txtCity'); // Add name attribute
+provinceSelect.appendChild(option);
+});
+};
+
+const getDistrict = async (key) => {
+const data = await fetch('https://provinces.open-api.vn/api/d').then(response => response.json());
+const districts = data.filter(district => district.province_code == key);
+districtSelect.innerHTML = '<option value="" disabled selected>Select District</option>';
+districts.forEach(district => {
+const option = document.createElement('option');
+option.value = district.code;
+option.text = district.name;
+option.setAttribute('data-name', `${district.name}`);
+option.setAttribute('name', 'txtDistrict'); // Add name attribute
+districtSelect.appendChild(option);
+});
+wardSelect.innerHTML = '<option value="" disabled selected>Select Ward</option>';
+};
+
+const getWard = async (key) => {
+const data = await fetch('https://provinces.open-api.vn/api/w').then(response => response.json());
+const wards = data.filter(ward => ward.district_code == key);
+wardSelect.innerHTML = '<option value="" disabled selected>Select Ward</option>';
+wards.forEach(ward => {
+const option = document.createElement('option');
+option.value = ward.code;
+option.text = ward.name;
+option.setAttribute('data-name', `${ward.name}`);
+option.setAttribute('name', 'txtWard'); // Add name attribute
+wardSelect.appendChild(option);
+});
+};
+
+
+
+provinceSelect.addEventListener('change', (event) => {
+  const selectedProvinceName = event.target.value;
+  if (selectedProvinceName) {
+    getDistrict(selectedProvinceName);
+  } else {
+    districtSelect.innerHTML = '<option value="" disabled selected>Select District</option>';
+    wardSelect.innerHTML = '<option value="" disabled selected>Select Ward</option>';
+  }
+});
+
+districtSelect.addEventListener('change', (event) => {
+  const selectedDistrictName = event.target.value;
+  if (selectedDistrictName) {
+    getWard(selectedDistrictName);
+  } else {
+    wardSelect.innerHTML = '<option value="" disabled selected>Select Ward</option>';
+  }
+});
+
+getProvince();

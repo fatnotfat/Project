@@ -223,121 +223,76 @@ document.addEventListener('click', function() {
 // _________________________________API CALL_______________________________________
 
 // ________________________________
-// Define the API endpoint URLs
-// Define the API endpoint URLs
-const provincesEndpoint = "https://provinces.open-api.vn/api/p";
-const districtsEndpoint = "https://provinces.open-api.vn/api/d?province_id=";
-const wardsEndpoint = "https://provinces.open-api.vn/api/w?district_id=";
+
 
 // Get the select fields
-const citySelect = document.getElementById("stored-city");
-const districtSelect = document.getElementById("stored-district");
-const wardSelect = document.getElementById("stored-ward");
-const citySearchInput = document.getElementById("city-search");
-const districtSearchInput = document.getElementById("district-search");
-const wardSearchInput = document.getElementById("ward-search");
+const provinceSelect = document.getElementById('stored-city');
+const districtSelect = document.getElementById('stored-district');
+const wardSelect = document.getElementById('stored-ward');
 
-// Load the list of provinces
-fetch(provincesEndpoint)
-  .then(response => response.json())
-  .then(provinces => {
-    // Populate the city select field with the list of provinces
-    provinces.forEach(province => {
-      const option = document.createElement("option");
-      option.text = province.name;
-      option.value = province.id;
-      citySelect.add(option);
-    });
-  });
-
-// Add an event listener to the city select field
-citySelect.addEventListener("change", function () {
-  // Clear the district and ward select fields
-  districtSelect.innerHTML = '<option value="">Select District</option>';
-  wardSelect.innerHTML = '<option value="">Select Ward</option>';
-
-  // Get the selected city/town
-  const selectedCityId = this.value;
-
-  // Load the list of districts for the selected city/town
-  fetch(districtsEndpoint + selectedCityId)
-    .then(response => response.json())
-    .then(districts => {
-      // Populate the district select field with the list of districts
-      districts.forEach(district => {
-        const option = document.createElement("option");
-        option.text = district.name;
-        option.value = district.id;
-        districtSelect.add(option);
-      });
-    });
+const getProvince = async () => {
+const data = await fetch('https://provinces.open-api.vn/api/p').then(response => response.json());
+data.forEach(province => {
+const option = document.createElement('option');
+option.value = province.code;
+option.text = province.name;
+option.setAttribute('data-name', `${province.name}`);
+option.setAttribute('name', 'txtCity'); // Add name attribute
+provinceSelect.appendChild(option);
 });
+};
 
-// Add an event listener to the district select field
-districtSelect.addEventListener("change", function () {
-  // Clear the ward select field
-  wardSelect.innerHTML = '<option value="">-- Select Ward --</option>';
-
-  // Get the selected district
-  const selectedDistrictId = this.value;
-
-  // Load the list of wards for the selected district
-  fetch(wardsEndpoint + selectedDistrictId)
-    .then(response => response.json())
-    .then(wards => {
-      // Populate the ward select field with the list of wards
-      wards.forEach(ward => {
-        const option = document.createElement("option");
-        option.text = ward.name;
-        option.value = ward.id;
-        wardSelect.add(option);
-      });
-    });
+const getDistrict = async (key) => {
+const data = await fetch('https://provinces.open-api.vn/api/d').then(response => response.json());
+const districts = data.filter(district => district.province_code == key);
+districtSelect.innerHTML = '<option value="" disabled selected>Select District</option>';
+districts.forEach(district => {
+const option = document.createElement('option');
+option.value = district.code;
+option.text = district.name;
+option.setAttribute('data-name', `${district.name}`);
+option.setAttribute('name', 'txtDistrict'); // Add name attribute
+districtSelect.appendChild(option);
 });
+wardSelect.innerHTML = '<option value="" disabled selected>Select Ward</option>';
+};
 
-// Add event listeners to the search input fields
-citySearchInput.addEventListener("input", function () {
-  const searchValue = this.value.toLowerCase();
-  const options = citySelect.options;
-  
-  for (let i = 0; i < options.length; i++) {
-    const optionText = options[i].text.toLowerCase();
-    if (optionText.includes(searchValue)) {
-      options[i].style.display = "block";
-    } else {
-      options[i].style.display = "none";
-    }
+const getWard = async (key) => {
+const data = await fetch('https://provinces.open-api.vn/api/w').then(response => response.json());
+const wards = data.filter(ward => ward.district_code == key);
+wardSelect.innerHTML = '<option value="" disabled selected>Select Ward</option>';
+wards.forEach(ward => {
+const option = document.createElement('option');
+option.value = ward.code;
+option.text = ward.name;
+option.setAttribute('data-name', `${ward.name}`);
+option.setAttribute('name', 'txtWard'); // Add name attribute
+wardSelect.appendChild(option);
+});
+};
+
+
+
+provinceSelect.addEventListener('change', (event) => {
+  const selectedProvinceName = event.target.value;
+  if (selectedProvinceName) {
+    getDistrict(selectedProvinceName);
+  } else {
+    districtSelect.innerHTML = '<option value="" disabled selected>Select District</option>';
+    wardSelect.innerHTML = '<option value="" disabled selected>Select Ward</option>';
   }
 });
 
-districtSearchInput.addEventListener("input", function () {
-  const searchValue = this.value.toLowerCase();
-  const options = districtSelect.options;
-  
-  for (let i = 0; i < options.length; i++) {
-    const optionText = options[i].text.toLowerCase();
-    if (optionText.includes(searchValue)) {
-      options[i].style.display = "block";
-    } else {
-      options[i].style.display = "none";
-    }
+districtSelect.addEventListener('change', (event) => {
+  const selectedDistrictName = event.target.value;
+  if (selectedDistrictName) {
+    getWard(selectedDistrictName);
+  } else {
+    wardSelect.innerHTML = '<option value="" disabled selected>Select Ward</option>';
   }
 });
 
-wardSearchInput.addEventListener("input", function () {
-  const searchValue = this.value.toLowerCase();
-  const options = wardSelect.options;
-  
-  for (let i = 0; i < options.length; i++) {
-    const optionText = options[i].text.toLowerCase();
-    if (optionText.includes(searchValue)) {
-      options[i].style.display = "block";
-    } else {
-      options[i].style.display = "none";
-    }
-  }
-});
-
+getProvince();
 
 // const storedCity = document.getElementById("stored-city");
 // const storedDistrict = document.getElementById("stored-district");
