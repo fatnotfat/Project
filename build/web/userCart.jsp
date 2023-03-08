@@ -73,7 +73,7 @@
                 background-color: #0c71c3;
             }
         </style>
-        <script src="js/cart.min.min.js"></script>
+        <script src="js/cart.js"></script>
         <link rel="stylesheet" href="style/reset.css" />
         <link rel="stylesheet" href="style/payment-1.css" />
     </head>
@@ -253,9 +253,13 @@
                                             </div>
                                         </c:if>
                                         <c:if test="${empty sessionScope.USER}">
-                                            <p style="font-size: 15px; margin: 5px 0">YOU ARE NOT ALREADY LOGGED, PLEASE LOGIN FIRST!!</p><br/>
-                                            <c:set var="URL" value="userCart.jsp" scope="session"/>
-                                            <a style="font-size: 15px; text-decoration: none; font-weight: bold; color: black" href="loginPage">Login here </a>
+                                            <p style="font-size: 15px; margin: 5px 0">You are not already logged <span style="color: red">PLEASE LOGIN FIRST!!</span></p><br/>
+                                            <%--<c:set var="URL" value="userCart.jsp" scope="session"/>--%>
+                                            <form action="loginPage" method="GET">
+                                                <button class="menu-icon-tab-cart-content-function-method-btn">
+                                                    <a style="font-size: 15px; text-decoration: none; font-weight: bold; color: inherit" href="loginPage">LOGIN</a>
+                                                </button>
+                                            </form>
                                         </c:if>
                                     </div>
                                 </div>
@@ -292,21 +296,35 @@
                                             </div>
                                             <div class="menu-icon-tab-cart-content-show-txt">
                                                 <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
+                                                <c:set var="totalQuantity" value="${0}" />
+                                                <c:forEach var="quantity" items="${sessionScope.CART.items.values()}">
+                                                    <c:set var="totalQuantity" value="${totalQuantity + quantity}" />
+                                                </c:forEach>
+
                                                 <c:if test="${empty sessionScope.CART.items.size()}">
-                                                    <c:set var="cartSize" value="${0}"/>
-                                                    <%--<c:set var="CART_PRICE" value="${calculateTotalPrice()}" scope="session"/>--%>
+                                                    <c:set var="totalQuantity" value="${0}"/>
                                                 </c:if>
                                                 <p class="menu-icon-tab-cart-content-show-txt-desc">
                                                     <c:if test="${cartSize eq 0}">
                                                         There are no currently products.
                                                     </c:if>
                                                     <c:if test="${cartSize ne 0}">
-                                                        There are <span id="cart-size-header" style="font-weight: bold">${cartSize}</span> products
+                                                        There are <span id="cart-size-header" style="font-weight: bold">${totalQuantity}</span> products
                                                     </c:if>
                                                 </p>
                                             </div>
                                         </div>
                                         <img srcset="images/Footer-line.png 2x" alt="" />
+                                        <c:set var="listCart" value="${sessionScope.CART}"/>
+                                        <c:set var="totalPrice" value="${0}"/>
+
+                                        <c:forEach var="item" items="${sessionScope.CART.items}">
+                                            <c:forEach var="detail" items="${sessionScope.CART.itemDetail}">
+                                                <c:if test="${item.key eq detail.key}">
+                                                    <c:set var="totalPrice" value="${totalPrice + (item.value * detail.value.price)}"/>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:forEach>
                                         <div class="menu-icon-tab-cart-content-function">
                                             <div class="menu-icon-tab-cart-content-function-total">
                                                 <p
@@ -317,7 +335,8 @@
                                                 <p  id="total-price-header"
                                                     class="menu-icon-tab-cart-content-function-total-price"
                                                     >
-                                                    0₫
+                                                    <fmt:formatNumber var="price" value="${totalPrice}" pattern="#,###"/>
+                                                    ${price}₫   
                                                 </p>
                                             </div>
                                             <div class="menu-icon-tab-cart-content-function-method">
@@ -389,8 +408,13 @@
                                                 class="menu-responsive-icon-tab-cart-content-show-txt"
                                                 >
                                                 <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
+                                                <c:set var="totalQuantity" value="${0}" />
+                                                <c:forEach var="quantity" items="${sessionScope.CART.items.values()}">
+                                                    <c:set var="totalQuantity" value="${totalQuantity + quantity}" />
+                                                </c:forEach>
+
                                                 <c:if test="${empty sessionScope.CART.items.size()}">
-                                                    <c:set var="cartSize" value="${0}"/>
+                                                    <c:set var="totalQuantity" value="${0}"/>
                                                 </c:if>
                                                 <p
                                                     class="menu-responsive-icon-tab-cart-content-show-txt-desc"
@@ -399,7 +423,7 @@
                                                         There are no currently products.
                                                     </c:if>
                                                     <c:if test="${cartSize ne 0}">
-                                                        There are <span id="cart-size-header" style="font-weight: bold">${cartSize}</span> products
+                                                        There are <span id="cart-size-header" style="font-weight: bold">${totalQuantity}</span> products
                                                     </c:if>
                                                 </p>
                                             </div>
@@ -471,17 +495,20 @@
                                 <c:set var="cartSize" value="${0}"/>
                             </c:if>
 
-
-                            <c:if test="${cartSize eq 0 or cartSize eq 1}">
+                            <c:set var="totalQuantity" value="${0}" />
+                            <c:forEach var="quantity" items="${sessionScope.CART.items.values()}">
+                                <c:set var="totalQuantity" value="${totalQuantity + quantity}" />
+                            </c:forEach>
+                            <c:if test="${totalQuantity eq 0 or totalQuantity eq 1}">
                                 <span id="cart-size" class="your-cart-desc-number" style="font-weight: 700"
-                                      >${cartSize}</span
+                                      >${totalQuantity}</span
                                 >
                                 <span style="font-weight: 700">product</span> in your cart
                             </c:if>
 
-                            <c:if test="${cartSize ne 0 and cartSize ne 1}">
+                            <c:if test="${totalQuantity ne 0 and totalQuantity ne 1}">
                                 <span id="cart-size" class="your-cart-desc-number" style="font-weight: 700"
-                                      >${cartSize}</span
+                                      >${totalQuantity}</span
                                 >
                                 <span style="font-weight: 700">products</span> in your cart
                             </c:if>
@@ -535,7 +562,7 @@
                                                                         >
                                                                         <button
                                                                             class="your-cart-body-left-product-detail-left-minus"
-                                                                            
+
                                                                             id="minus_${item.key}"
                                                                             >
                                                                             -
@@ -548,7 +575,7 @@
                                                                         </span>
                                                                         <button
                                                                             class="your-cart-body-left-product-detail-left-plus"
-                                                                            
+
                                                                             id="plus_${item.key}"
                                                                             >
                                                                             +

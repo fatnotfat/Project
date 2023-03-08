@@ -6,8 +6,9 @@
 package swp391.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.Properties;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,6 +16,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import swp391.product.ProductDAO;
+import swp391.product.ProductDTO;
 import swp391.utils.MyApplicationConstants;
 
 /**
@@ -41,8 +45,19 @@ public class ViewProductServlet extends HttpServlet {
         String url = siteMaps.getProperty(
                 MyApplicationConstants.ProductFeature.PRODUCT_PAGE);
         try {
-            
-        }finally{
+            String id = request.getParameter("txtProductID");
+            if (id != null) {
+                ProductDAO dao = new ProductDAO();
+                ProductDTO dto = dao.getItemByID(id);
+                HttpSession session = request.getSession();
+                session.setAttribute("ITEM_DETAIL", dto);
+            }
+
+        } catch (NamingException ex) {
+            log("NumberFormatException :" + ex.getMessage());
+        } catch (SQLException ex) {
+
+        } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }

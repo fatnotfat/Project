@@ -712,7 +712,7 @@ header {
 
 .footer-menu {
   display: flex;
-  flex-wrap: wrap;
+  /*flex-wrap: wrap;*/
   justify-content: space-around;
   align-items: flex-start;
 }
@@ -819,7 +819,11 @@ header {
 .footer-copyright-txt {
   font-size: 14px;
 }
-
+@media screen and (max-width:1024px ){
+    .footer-menu {
+        flex-wrap: wrap;
+    }
+}
 
 /* FOOTER_______________________________________________________________________ */
 /* header {

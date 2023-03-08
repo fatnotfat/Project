@@ -77,7 +77,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-ring"> RING </a>
+                                            <a href="SearchByFilterServlet?txtProductCateID=2" class="menu-link menu-link-ring"> RING </a>
                                             <ul class="menu-link-category-tab-list">
                                                 <li class="menu-link-category-tab-list-item">
                                                     <a href="#!" class="menu-link menu-link-ring"> 1 </a>
@@ -91,7 +91,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-necklace">
+                                            <a href="SearchByFilterServlet?txtProductCateID=3" class="menu-link menu-link-necklace">
                                                 NECKLACE
                                             </a>
                                             <ul class="menu-link-category-tab-list">
@@ -113,7 +113,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-earring">
+                                            <a href="SearchByFilterServlet?txtProductCateID=4" class="menu-link menu-link-earring">
                                                 EARRINGS
                                             </a>
                                             <ul class="menu-link-category-tab-list">
@@ -200,20 +200,25 @@
                                             </div>
                                             <div class="menu-icon-tab-profile-form">
                                                 <p class="menu-icon-tab-profile-form-name">NAME</p>
-                                                <a href="#!" class="menu-icon-tab-profile-form-link"
+                                                <a href="userInforPage" class="menu-icon-tab-profile-form-link"
                                                    >My account</a
                                                 >
                                                 <!--                                            <a href="#!" class="menu-icon-tab-profile-form-link"
                                                                                                >Address List</a
                                                                                             >-->
-                                                <a href="#!" class="menu-icon-tab-profile-form-link"
+                                                <a href="logoutController" class="menu-icon-tab-profile-form-link"
                                                    >Log out</a
                                                 >
                                             </div>
                                         </c:if>
                                         <c:if test="${empty sessionScope.USER}">
-                                            <p style="font-size: 15px; margin: 5px 0">YOU ARE NOT ALREADY LOGGED, PLEASE LOGIN FIRST!!</p><br/>
-                                            <a style="font-size: 15px; text-decoration: none; font-weight: bold" href="loginPage">Login here </a>
+                                            <p style="font-size: 15px; margin: 5px 0">You are not already logged <span style="color: red">PLEASE LOGIN FIRST!!</span></p><br/>
+                                            <%--<c:set var="URL" value="userCart.jsp" scope="session"/>--%>
+                                            <form action="loginPage" method="GET">
+                                                <button class="menu-icon-tab-cart-content-function-method-btn">
+                                                    <a style="font-size: 15px; text-decoration: none; font-weight: bold; color: inherit" href="loginPage">LOGIN</a>
+                                                </button>
+                                            </form>
                                         </c:if>
                                     </div>
                                 </div>
@@ -269,11 +274,13 @@
                                                 </p>
                                             </div>
                                             <div class="menu-icon-tab-cart-content-function-method">
-                                                <button
-                                                    class="menu-icon-tab-cart-content-function-method-btn"
-                                                    >
-                                                    VIEW CART
-                                                </button>
+                                                <form action="addToCartPage" method="POST">
+                                                    <button
+                                                        class="menu-icon-tab-cart-content-function-method-btn"
+                                                        >
+                                                        VIEW CART
+                                                    </button>
+                                                </form>
                                                 <button
                                                     class="menu-icon-tab-cart-content-function-method-btn"
                                                     >
@@ -360,11 +367,13 @@
                                             <div
                                                 class="menu-responsive-icon-tab-cart-content-function-method"
                                                 >
-                                                <button
-                                                    class="menu-responsive-icon-tab-cart-content-function-method-btn"
-                                                    >
-                                                    VIEW CART
-                                                </button>
+                                                <form action="addToCartPage" method="POST">
+                                                    <button
+                                                        class="menu-responsive-icon-tab-cart-content-function-method-btn"
+                                                        >
+                                                        VIEW CART
+                                                    </button>
+                                                </form>
                                                 <button
                                                     class="menu-responsive-icon-tab-cart-content-function-method-btn"
                                                     >
@@ -376,7 +385,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#!" class="menu-responsive-logo"> LOGO </a>
+                        <a href="mainPage" class="menu-responsive-logo"> LOGO </a>
                         <div class="menu-responsive-icon">
                             <img
                                 class="menu-responsive-icon-img menu-responsive-icon-img-bar"
@@ -457,6 +466,10 @@
                                     apply.
                                 </p>
                                 <!--<input class="login-function-btn" type="submit" value="Login" name="btAction" />-->
+                                <c:set var="emailExisted" value="${requestScope.EMAIL_EXIST}" />
+                                <c:if test="${not empty emailExisted}">
+                                    <p style="color: red; font-size: 20px; margin-bottom: 20px">${emailExisted}</p>
+                                </c:if>
                                 <button class="login-function-btn" type="submit">Login</button>
                                 <p class="login-function-register">
                                     <span class="login-function-register-question">
@@ -465,12 +478,12 @@
                                     <a href="signUpPage" class="login-function-register-hightlight"
                                        >Register</a>
                                     <br/>
-                                    
-                                    <p class="login-function-register-question">Or</p>
-                                    <a class="login-link" href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/SWP391ProjectMVC/LoginGoogleHandler&response_type=code
-                                       &client_id=781842961263-gokuov74qslei1a1t44nufilc8u0d8sb.apps.googleusercontent.com&approval_prompt=force">Login with Google</a>
+
+                                <p class="login-function-register-question">Or</p>
+                                <a class="login-link" href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/SWP391ProjectMVC/LoginGoogleHandler&response_type=code
+                                   &client_id=781842961263-gokuov74qslei1a1t44nufilc8u0d8sb.apps.googleusercontent.com&approval_prompt=force">Login with Google</a>
                                 </p>
-                                
+
                             </div>                              
                         </form><br/>
                     </div>

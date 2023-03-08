@@ -100,5 +100,12 @@ public class MyApplicationConstants {
         public static final String PRODUCT_SERVLET = "viewProductController";
         public static final String PRODUCT_PAGE = "viewProductPage";
     }
+    
+    
+    public class AccountFeature{
+        public static final String ACCOUNT_SERVLET = "updateAccountController";
+        public static final String ACCOUNT_UPDATE_PAGE = "updateInforPage";
+        public static final String ACCOUNT_INFOR_PAGE = "userInforPage";
+    }
 
 }

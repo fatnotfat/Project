@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -66,7 +68,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-ring">
+                                            <a href="SearchByFilterServlet?txtProductCateID=2" class="menu-link menu-link-ring">
                                                 RING 
                                             </a>
                                             <ul class="menu-link-category-tab-list">
@@ -88,7 +90,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-necklace">
+                                            <a href="SearchByFilterServlet?txtProductCateID=3" class="menu-link menu-link-necklace">
                                                 NECKLACE 
                                             </a>
                                             <ul class="menu-link-category-tab-list">
@@ -110,7 +112,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-earring">
+                                            <a href="SearchByFilterServlet?txtProductCateID=4" class="menu-link menu-link-earring">
                                                 EARRINGS 
                                             </a>
                                             <ul class="menu-link-category-tab-list">
@@ -207,8 +209,13 @@
                                             </div>
                                         </c:if>
                                         <c:if test="${empty sessionScope.USER}">
-                                            <p style="font-size: 15px; margin: 5px 0">YOU ARE NOT ALREADY LOGGED, PLEASE LOGIN FIRST!!</p><br/>
-                                            <a style="font-size: 15px; text-decoration: none; font-weight: bold" href="loginPage">Login here </a>
+                                            <p style="font-size: 15px; margin: 5px 0">You are not already logged <span style="color: red">PLEASE LOGIN FIRST!!</span></p><br/>
+                                            <%--<c:set var="URL" value="userCart.jsp" scope="session"/>--%>
+                                            <form action="loginPage" method="GET">
+                                                <button class="menu-icon-tab-cart-content-function-method-btn">
+                                                    <a style="font-size: 15px; text-decoration: none; font-weight: bold; color: inherit" href="loginPage">LOGIN</a>
+                                                </button>
+                                            </form>
                                         </c:if>
                                     </div>
                                 </div>
@@ -244,12 +251,32 @@
                                                     />
                                             </div>
                                             <div class="menu-icon-tab-cart-content-show-txt">
+                                                <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
+                                                <c:if test="${empty sessionScope.CART.items.size()}">
+                                                    <c:set var="cartSize" value="${0}"/>
+                                                    <%--<c:set var="CART_PRICE" value="${calculateTotalPrice()}" scope="session"/>--%>
+                                                </c:if>
                                                 <p class="menu-icon-tab-cart-content-show-txt-desc">
-                                                    There are currently no products
+                                                    <c:if test="${cartSize eq 0}">
+                                                        There are no currently products.
+                                                    </c:if>
+                                                    <c:if test="${cartSize ne 0}">
+                                                        There are <span id="cart-size-header" style="font-weight: bold">${cartSize}</span> products
+                                                    </c:if>
                                                 </p>
                                             </div>
                                         </div>
                                         <img srcset="images/Footer-line.png 2x" alt="" />
+                                        <c:set var="listCart" value="${sessionScope.CART}"/>
+                                        <c:set var="totalPrice" value="${0}"/>
+
+                                        <c:forEach var="item" items="${sessionScope.CART.items}">
+                                            <c:forEach var="detail" items="${sessionScope.CART.itemDetail}">
+                                                <c:if test="${item.key eq detail.key}">
+                                                    <c:set var="totalPrice" value="${totalPrice + (item.value * detail.value.price)}"/>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:forEach>
                                         <div class="menu-icon-tab-cart-content-function">
                                             <div class="menu-icon-tab-cart-content-function-total">
                                                 <p
@@ -260,7 +287,8 @@
                                                 <p
                                                     class="menu-icon-tab-cart-content-function-total-price"
                                                     >
-                                                    0₫
+                                                    <fmt:formatNumber var="price" value="${totalPrice}" pattern="#,###"/>
+                                                    ${price}₫
                                                 </p>
                                             </div>
                                             <div class="menu-icon-tab-cart-content-function-method">
@@ -292,7 +320,7 @@
                                 alt=""
                                 />
                         </div>
-                        <a href="#!" class="menu-responsive-logo"> LOGO </a>
+                        <a href="mainPage" class="menu-responsive-logo"> LOGO </a>
                         <div class="menu-responsive-icon">
                             <img
                                 class="menu-responsive-icon-img"
@@ -306,7 +334,7 @@
             </header>
             <img src="images/Nav-line.png" alt="" />
 
-
+            <img src="images/Nav-line.png" alt="" />
 
             <div class="overview">
                 <div class="container">
@@ -334,10 +362,50 @@
                                 <img srcset="images/Overview-line.png 2x" alt="">
                                 <ul class="overview-right-account-info-option">
                                     <li class="overview-right-account-info-option-item">
-                                        <p class="overview-right-account-info-option-item-name">${sessionScope.USER.name}</p>
+                                        <p class="overview-right-account-info-option-item-name">Name: ${sessionScope.USER.name}</p>
                                     </li>
                                     <li class="overview-right-account-info-option-item">
-                                        <p class="overview-right-account-info-option-item-mail">${sessionScope.USER.email}</p>
+                                        <p class="overview-right-account-info-option-item-mail">Email: ${sessionScope.USER.email}</p>
+                                    </li>
+                                    <c:set var="birthDate" value="${sessionScope.USER.birthDate}"/>
+                                    <c:if test="${empty birthDate}">
+                                        <c:set var="birthDate" value="01-01-1999"/>
+                                        <fmt:parseDate var="birthDate" value="${birthDate}" pattern="dd-MM-yyyy" />
+                                    </c:if>
+                                    <li class="overview-right-account-info-option-item">
+                                        <fmt:formatDate var="date" value="${birthDate}" pattern="dd-MM-yyyy" />
+                                        <p class="overview-right-account-info-option-item-mail">Birthday: ${date}</p>
+                                    </li>
+                                    <li class="overview-right-account-info-option-item">
+                                        <c:if test="${sessionScope.USER.sex eq true}">
+                                            <p class="overview-right-account-info-option-item-mail">Sex: Male</p>
+                                        </c:if>
+                                        <c:if test="${sessionScope.USER.sex eq false}">
+                                            <p class="overview-right-account-info-option-item-mail">Sex: Female</p>
+                                        </c:if>
+                                    </li>
+                                    <li class="overview-right-account-info-option-item">
+                                        <p class="overview-right-account-info-option-item-mail">Phone: ${sessionScope.USER.phone}</p>
+                                    </li>
+                                    <li class="overview-right-account-info-option-item">
+                                        <p class="overview-right-account-info-option-item-mail">Address: ${sessionScope.USER.address}</p>
+                                    </li>
+                                    <li class="overview-right-account-info-option-item">
+                                        <c:if test="${sessionScope.USER.rankID eq 1}">
+                                            <p class="overview-right-account-info-option-item-mail">Rank: None</p>
+                                        </c:if>
+                                        <c:if test="${sessionScope.USER.rankID eq 2}">
+                                            <p class="overview-right-account-info-option-item-mail">Rank: Bronze</p>
+                                        </c:if>
+                                        <c:if test="${sessionScope.USER.rankID eq 3}">
+                                            <p class="overview-right-account-info-option-item-mail">Rank: Silver</p>
+                                        </c:if>
+                                        <c:if test="${sessionScope.USER.rankID eq 4}">
+                                            <p class="overview-right-account-info-option-item-mail">Rank: Gold</p>
+                                        </c:if>
+                                        <c:if test="${sessionScope.USER.rankID eq 5}">
+                                            <p class="overview-right-account-info-option-item-mail">Rank: Diamond</p>
+                                        </c:if>
                                     </li>
                                     <!--                                <li class="overview-right-account-info-option-item">
                                                                         <p href="#!" class="overview-right-account-info-option-item-country">Country</p>
@@ -348,8 +416,18 @@
                                     <li class="overview-right-account-info-option-item">
                                         <a href="#!" class="overview-right-account-info-option-item-orders">View list of order</a>
                                     </li>
+                                    <li class="overview-right-account-info-option-item">
+                                        <a href="updateInforPage" class="overview-right-account-info-option-item-orders">Update self-information</a>
+                                    </li>
                                 </ul>
+                                <c:set var="noti" value="${requestScope.SUCCESS_UPDATE_NOTI}"/>
+                                <c:if test="${not empty noti}">
+                                    <p style="color: red; font-size: 18px;">${noti}</p>
+                                </c:if>
                             </div>
+
+
+
                             <div class="overview-right-latest-order">
                                 <div class="overview-right-latest-order-title">LATEST ORDER
                                     <img srcset="images/Overview-line.png 2x" alt="">

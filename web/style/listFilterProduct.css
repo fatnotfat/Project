@@ -997,125 +997,128 @@ header {
 /* FOOTER________________________________________________________________________- */
 
 .footer .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 60px;
 }
 
 .footer-menu {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
+  display: flex;
+  /*flex-wrap: wrap;*/
+  justify-content: space-around;
+  align-items: flex-start;
 }
 .footer-menu-connect {
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 .footer-menu-connect-title {
-    font-size: 20px;
-    padding-bottom: 20px;
+  font-size: 20px;
+  padding-bottom: 20px;
 }
 .footer-menu-connect-desc {
-    width: 400px;
-    font-size: 14px;
-    padding-bottom: 40px;
+  width: 400px;
+  font-size: 14px;
+  padding-bottom: 40px;
 }
 .footer-menu-connect-desc-txt {
-    padding: 10px 0;
+  padding: 10px 0;
 }
 .footer-menu-connect-icon {
-    font-size: 24px;
+  font-size: 24px;
 }
 .footer-menu-connect-icon-instagram {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 .footer-menu-cus-service {
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 .footer-menu-cus-service-title {
-    font-size: 20px;
-    padding-bottom: 20px;
+  font-size: 20px;
+  padding-bottom: 20px;
 }
 .footer-menu-cus-service-desc {
-    width: 400px;
-    font-size: 14px;
-    padding-bottom: 40px;
+  width: 400px;
+  font-size: 14px;
+  padding-bottom: 40px;
 }
 .footer-menu-cus-service-desc-txt {
-    padding: 10px 0;
+  padding: 10px 0;
 }
 .footer-menu-cus-service-icon {
-    font-size: 20px;
+  font-size: 20px;
 }
 .footer-menu-cus-service-icon-instagram {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 .footer-menu-about {
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 .footer-menu-about-title {
-    font-size: 20px;
-    padding-bottom: 20px;
+  font-size: 20px;
+  padding-bottom: 20px;
 }
 .footer-menu-about-desc {
-    width: 400px;
-    font-size: 14px;
-    padding-bottom: 40px;
+  width: 400px;
+  font-size: 14px;
+  padding-bottom: 40px;
 }
 .footer-menu-about-desc-txt {
-    padding: 10px 0;
+  padding: 10px 0;
 }
 .footer-menu-about-icon {
-    font-size: 20px;
+  font-size: 20px;
 }
 .footer-menu-about-icon-instagram {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 .footer-menu-care {
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 .footer-menu-care-title {
-    font-size: 20px;
-    padding-bottom: 20px;
+  font-size: 20px;
+  padding-bottom: 20px;
 }
 .footer-menu-care-desc {
-    width: 400px;
-    font-size: 14px;
-    padding-bottom: 40px;
+  width: 400px;
+  font-size: 14px;
+  padding-bottom: 40px;
 }
 .footer-menu-care-desc-txt {
-    padding: 10px 0;
+  padding: 10px 0;
 }
 .footer-menu-care-icon {
-    font-size: 20px;
+  font-size: 20px;
 }
 .footer-menu-care-icon-instagram {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 .footer-copyright-txt {
-    font-size: 14px;
+  font-size: 14px;
+}
+@media screen and (max-width:1024px ){
+    .footer-menu {
+        flex-wrap: wrap;
+    }
 }
 
-
 /* FOOTER_______________________________________________________________________ */
-
 
 
 @keyframes FadeInOut {

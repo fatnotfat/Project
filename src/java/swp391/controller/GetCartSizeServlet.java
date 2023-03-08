@@ -38,7 +38,10 @@ public class GetCartSizeServlet extends HttpServlet {
         CartObject cart = (CartObject) session.getAttribute("CART");
         int cartSize = 0;
         if (cart != null) {
-            cartSize = cart.getItems().size();
+            for (int quantity : cart.getItems().values()) {
+                cartSize += quantity;
+            }
+//            cartSize = cart.getItems().size();
         }
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

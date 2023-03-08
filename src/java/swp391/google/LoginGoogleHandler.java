@@ -8,20 +8,25 @@ package swp391.google;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Properties;
 import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.fluent.Form;
+import swp391.cart.CartDAO;
+import swp391.cart.CartDTO;
+import swp391.cart.CartObject;
 import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
 import swp391.utils.MyApplicationConstants;
@@ -61,6 +66,7 @@ public class LoginGoogleHandler extends HttpServlet {
                 CustomerDAO dao = new CustomerDAO();
                 if (!dao.checkEmail(email)) {
                     //TH1: Check trc neu chua ton tai email thi tu dang ky tai khoan
+
                     CustomerDTO dto
                             = new CustomerDTO(name, "none", null, email,
                                     "none", "none", false, 1, false, true);
@@ -68,22 +74,44 @@ public class LoginGoogleHandler extends HttpServlet {
                     if (result) {
                         url = siteMaps.getProperty(
                                 MyApplicationConstants.ShowMainPageServlet.MAIN_PAGE);
+                        HttpSession session = request.getSession();
+                        session.setAttribute("USER", dto);
                     }
-                } else {
-                    //TH2: Check trc neu nhu tai khoan da ton tai thi dang nhap thang vao main page
-                    url = siteMaps.getProperty(
-                            MyApplicationConstants.ShowMainPageServlet.MAIN_PAGE);
+                } else if (dao.checkEmail(email)) {
+                    //TH2: Check trc neu nhu email da ton tai, thi:
+                    if (dao.checkEmailAlreadyRegister(email) != null) {
+                        //Check xem dang nhap binh thuong hay dang nhap bang google
+                        //Neu nhu email nay da dang ki va hinh thuc dang nhap bang google thi vao thang main page
+                        url = siteMaps.getProperty(
+                                MyApplicationConstants.ShowMainPageServlet.MAIN_PAGE);
+                        HttpSession session = request.getSession();
+                        session.setAttribute("USER", dao.checkEmailAlreadyRegister(email));
+                        CartDAO cartDao = new CartDAO();
+                        CartObject cartObject = new CartObject();
+                        CustomerDTO result = dao.checkEmailAlreadyRegister(email);
+                        List<CartDTO> list = cartDao.getCart(result.getCustomerID());
+                        if (list != null) {
+                            cartObject.insertToCartUser(list);
+                        }
+                        session.setAttribute("CART", cartObject);
+                    } else {
+                        //neu nhu dang nhap binh thuong thi khong cho dang nhap
+                        url = siteMaps.getProperty(
+                                MyApplicationConstants.LoginServlet.LOGIN_PAGE);
+                        HttpSession session = request.getSession();
+                        request.setAttribute("EMAIL_EXIST", "Email was existed!!");
+                    }
                 }
-            }catch(ParseException ex){
+            } catch (ParseException ex) {
                 log("LoginGoogle _ Parse _ " + ex.getMessage());
-            }catch (SQLException ex) {
+            } catch (SQLException ex) {
                 log("LoginGoogle _ SQL _ " + ex.getMessage());
             } catch (NamingException ex) {
                 log("LoginGoogle _ Naming _ " + ex.getMessage());
             } finally {
-//                    RequestDispatcher rd = request.getRequestDispatcher(url);
-//                    rd.forward(request, response);
-                response.sendRedirect(url);
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
+//                response.sendRedirect(url);
             }
         }
     }
@@ -103,7 +131,7 @@ public class LoginGoogleHandler extends HttpServlet {
         return accessToken;
     }
 
-    public static UserGoogleDTO getUserInfo(final String accessToken) 
+    public static UserGoogleDTO getUserInfo(final String accessToken)
             throws ClientProtocolException, IOException {
         String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
         String response = Request.Get(link).execute().returnContent().asString();

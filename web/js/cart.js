@@ -42,6 +42,7 @@ function updateQuantity(itemId, operation) {
     $('#total-price').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
     $('#total-price-header').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
     $('#total-price-mobile').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
+    updateCartSize();
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'UpdateCartServlet', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -57,7 +58,8 @@ function updateQuantity(itemId, operation) {
         }
     };
     xhr.send('txtID=' + itemId + '&txtQuantity=' + quantity);
-}
+};
+
 
 $(document).ready(function () {
     const buttons = document.querySelectorAll('.your-cart-body-left-product-detail-left-plus');
@@ -211,7 +213,7 @@ function updateCartSize() {
             // handle error
         }
     });
-}
+};
 
 $(document).ready(function () {
     // Code that runs on page load
@@ -322,38 +324,31 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    document.getElementById("add-to-cart-btn").addEventListener("click", function (event) {
+        event.preventDefault();
+        alert('hi');
+        const itemId = document.getElementById("product-id").value;
+        alert(itemId);
+        // make the AJAX call with the itemId
+        $.ajax({
+            type: "POST",
+            url: "addToCartController",
+            data: {txtProductID: itemId},
+            success: function (response) {
+                // handle success response from servlet
+                alert('Add successfully !!');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                // handle error response from servlet
+            }
+        });
+    });
+});
 
-//function handleCheckboxClick(event) {
-//    // Get all checkboxes with the class name "my-checkbox"
-//    const checkboxes = document.getElementsByClassName("my-checkbox");
-//
-//    // Uncheck all checkboxes except for the one that was clicked
-//    checkboxes.forEach((checkbox) => {
-//        if (checkbox !== event.target) {
-//            checkbox.checked = false;
-//        }
-//    });
-//}
-//$(document).ready(function () {
-//// Attach the event listener to all checkboxes with the class name "my-checkbox"
-//    const checkboxes = document.getElementsByClassName("my-checkbox");
-//    for (let i = 0; i < checkboxes.length; i++) {
-//        checkboxes[i].addEventListener("click", handleCheckboxClick);
-//    }
-//});
 
 
 
-//$(document).ready(function () {
-//
-//
-//
-//
-//    const addToCartBtn = document.getElementById("addToCartButton");
-//    const addToCartBtn2 = document.getElementById("addToCartButton2");
-//    addToCartBtn.addEventListener("click", updateTotalPrice);
-//    addToCartBtn2.addEventListener("click", updateTotalPrice);
-//});
 
 
 

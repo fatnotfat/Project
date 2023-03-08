@@ -33,7 +33,7 @@ public class CustomerDTO implements Serializable {
         this.name = name;
     }
 
-    public CustomerDTO(int customerID, String name, Date birthDate, String email, String phone, String address, int rankID, boolean sex) {
+    public CustomerDTO(int customerID, String name, Date birthDate, String email, String phone, String address, int rankID, boolean sex, boolean typeOfLogin) {
         this.customerID = customerID;
         this.name = name;
         this.birthDate = birthDate;
@@ -42,6 +42,7 @@ public class CustomerDTO implements Serializable {
         this.address = address;
         this.rankID = rankID;
         this.sex = sex;
+        this.typeOfLogin = typeOfLogin;
     }
     
     
@@ -58,6 +59,21 @@ public class CustomerDTO implements Serializable {
         this.sex = sex;
         this.typeOfLogin = typeOfLogin;
     }
+    
+    
+    public CustomerDTO(String name, Date birthDate,
+            String email, String phone, String address, boolean role, int rankID, boolean sex, boolean typeOfLogin) {
+        this.name = name;
+        this.birthDate = birthDate;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.role = role;
+        this.rankID = rankID;
+        this.sex = sex;
+        this.typeOfLogin = typeOfLogin;
+    }
+    
     
     public int getCustomerID() {
         return customerID;

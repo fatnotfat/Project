@@ -81,6 +81,7 @@ public class AddToCartServlet extends HttpServlet {
                 }
             }
             session.setAttribute("CART", cart);
+//          
         } catch (ParseException ex) {
             log("AddToCartServlet _ Parse _ " + ex.getMessage());
         } catch (NamingException ex) {

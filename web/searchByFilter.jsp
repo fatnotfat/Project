@@ -126,8 +126,9 @@
                                     + '</div>'
                                     + '<div class="product__item-info">'
                                     + '<form action="viewProductController" method="POST" class="form__product-item-view">'
+                                    + '<input type="hidden" name="txtProductID" value="'+JSON.stringify(data[i].id)+'" />'
                                     + '<button class="product__item-view">View more</button>'
-                                    + '</form>'  
+                                    + '</form>'
                                     + '</div>'
 //                                    + '<a href="#" onclick="addToCart('
 //                                    + JSON.stringify(data[i].id)
@@ -142,23 +143,23 @@
             });
         </script>
 
-<!--        <script>
-            function addToCart(itemId) {
-                event.preventDefault();
-                $.ajax({
-                    type: "POST",
-                    url: "addToCartController",
-                    data: {txtID: itemId},
-                    success: function (response) {
-                        // handle success response from servlet
-                        alert('Add successfully !!');
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        // handle error response from servlet
+        <!--        <script>
+                    function addToCart(itemId) {
+                        event.preventDefault();
+                        $.ajax({
+                            type: "POST",
+                            url: "addToCartController",
+                            data: {txtID: itemId},
+                            success: function (response) {
+                                // handle success response from servlet
+                                alert('Add successfully !!');
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                // handle error response from servlet
+                            }
+                        });
                     }
-                });
-            }
-        </script>-->
+                </script>-->
 
     </head>
     <body>
@@ -171,6 +172,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <img src="images/Nav-line.png" alt="" class="nav-line" />
                 <!-- NAV DESKTOP - TABLET -->
                 <div class="nav-bot">
@@ -339,9 +341,13 @@
                                             </div>
                                         </c:if>
                                         <c:if test="${empty sessionScope.USER}">
-                                            <p style="font-size: 15px; margin: 5px 0">YOU ARE NOT ALREADY LOGGED, PLEASE LOGIN FIRST!!</p><br/>
+                                            <p style="font-size: 15px; margin: 5px 0">You are not already logged <span style="color: red">PLEASE LOGIN FIRST!!</span></p><br/>
                                             <%--<c:set var="URL" value="userCart.jsp" scope="session"/>--%>
-                                            <a style="font-size: 15px; text-decoration: none; font-weight: bold; color: black" href="loginPage">Login here </a>
+                                            <form action="loginPage" method="GET">
+                                                <button class="menu-icon-tab-cart-content-function-method-btn">
+                                                    <a style="font-size: 15px; text-decoration: none; font-weight: bold; color: inherit" href="loginPage">LOGIN</a>
+                                                </button>
+                                            </form>
                                         </c:if>
                                     </div>
                                 </div>
@@ -512,11 +518,13 @@
                                             <div
                                                 class="menu-responsive-icon-tab-cart-content-function-method"
                                                 >
-                                                <button
-                                                    class="menu-responsive-icon-tab-cart-content-function-method-btn"
-                                                    >
-                                                    VIEW CART
-                                                </button>
+                                                <form action="addToCartPage" method="POST">
+                                                    <button
+                                                        class="menu-responsive-icon-tab-cart-content-function-method-btn"
+                                                        >
+                                                        VIEW CART
+                                                    </button>
+                                                </form>
                                                 <button
                                                     class="menu-responsive-icon-tab-cart-content-function-method-btn"
                                                     >

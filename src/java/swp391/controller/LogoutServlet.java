@@ -7,11 +7,9 @@ package swp391.controller;
 
 import java.io.IOException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -23,6 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
+import swp391.product.ProductDAO;
+import swp391.product.ProductDTO;
 import swp391.utils.MyApplicationConstants;
 
 /**
@@ -85,6 +85,12 @@ public class LogoutServlet extends HttpServlet {
                 }   
             }
             session.invalidate();
+            session = request.getSession(true);
+            ProductDAO productDao = new ProductDAO();
+            List<ProductDTO> productList = productDao.getNewestProduct();
+            session.setAttribute("NEWEST_PRODUCT", productList);
+            List<ProductDTO> productList2 = productDao.getSecondNewestProduct();
+            session.setAttribute("SECOND_NEWEST_PRODUCT", productList2);
         } catch (SQLException ex) {
             log("LogoutServlet_SQLException:" + ex.getMessage());
         } catch (NamingException ex) {

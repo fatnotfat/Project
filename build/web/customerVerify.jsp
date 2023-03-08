@@ -67,7 +67,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-ring">
+                                            <a href="SearchByFilterServlet?txtProductCateID=2" class="menu-link menu-link-ring">
                                                 RING 
                                             </a>
                                             <ul class="menu-link-category-tab-list">
@@ -89,7 +89,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-necklace">
+                                            <a href="SearchByFilterServlet?txtProductCateID=3" class="menu-link menu-link-necklace">
                                                 NECKLACE 
                                             </a>
                                             <ul class="menu-link-category-tab-list">
@@ -111,7 +111,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-earring">
+                                            <a href="SearchByFilterServlet?txtProductCateID=4" class="menu-link menu-link-earring">
                                                 EARRINGS 
                                             </a>
                                             <ul class="menu-link-category-tab-list">
@@ -164,11 +164,15 @@
                                             <img srcset="images/Footer-line.png 2x" alt="" />
                                         </div>
                                         <div class="menu-icon-tab-search-form">
-                                            <input
-                                                type="text"
-                                                class="menu-icon-tab-search-input"
-                                                placeholder="Search Product..."
-                                                />
+                                            <form action="searchTextController">
+                                                <input
+                                                    type="text"
+                                                    id="search-button"
+                                                    class="menu-icon-tab-search-input"
+                                                    placeholder="Search Product..."
+                                                    name="txtSearch" value="${param.txtSearch}"
+                                                    />
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -184,27 +188,37 @@
                                 </button>
                                 <div class="menu-icon-tab-profile-content">
                                     <div class="container">
-                                        <!--                                        <div class="menu-icon-tab-profile-content-title">
-                                                                                    <p class="menu-icon-tab-profile-content-title-desc">
-                                                                                        ACCOUNT INFORMATION
-                                                                                    </p>
-                                                                                    <img srcset="images/Footer-line.png 2x" alt="" />
-                                                                                </div>
-                                                                                <div class="menu-icon-tab-profile-form">
-                                                                                    <p class="menu-icon-tab-profile-form-name">NAME</p>
-                                                                                    <a href="#!" class="menu-icon-tab-profile-form-link"
-                                                                                       >My account</a
-                                                                                    >
-                                                                                    <a href="#!" class="menu-icon-tab-profile-form-link"
-                                                                                       >Address List</a
-                                                                                    >
-                                                                                    <a href="#!" class="menu-icon-tab-profile-form-link"
-                                                                                       >Log out</a
-                                                                                    >
-                                                                                </div>-->
-                                        <p style="font-size: 15px; margin: 5px 0">YOU ARE NOT ALREADY LOGGED, PLEASE LOGIN FIRST!!</p><br/>
-                                        <c:set var="URL" value="userCart.jsp" scope="session"/>
-                                        <a style="font-size: 15px; text-decoration: none; font-weight: bold; color: black" href="loginPage">Login here </a>
+
+                                        <c:if test="${not empty sessionScope.USER}">
+                                            <div class="menu-icon-tab-profile-content-title">
+                                                <p class="menu-icon-tab-profile-content-title-desc">
+                                                    ACCOUNT INFORMATION
+                                                </p>
+                                                <img srcset="images/Footer-line.png 2x" alt="" />
+                                            </div>
+                                            <div class="menu-icon-tab-profile-form">
+                                                <p class="menu-icon-tab-profile-form-name">${sessionScope.USER.name}</p>
+                                                <a href="userInforPage" class="menu-icon-tab-profile-form-link"
+                                                   >My account</a
+                                                >
+                                                <!--                                            <a href="#!" class="menu-icon-tab-profile-form-link"
+                                                                                               >Address List</a
+                                                                                            >-->
+                                                <a href="logoutController" class="menu-icon-tab-profile-form-link"
+                                                   >Log out</a
+                                                >
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${empty sessionScope.USER}">
+                                            <p style="font-size: 15px; margin: 5px 0">You are not already logged <span style="color: red">PLEASE LOGIN FIRST!!</span></p><br/>
+                                            <%--<c:set var="URL" value="userCart.jsp" scope="session"/>--%>
+                                            <form action="loginPage" method="GET">
+                                                <button class="menu-icon-tab-cart-content-function-method-btn">
+                                                    <a style="font-size: 15px; text-decoration: none; font-weight: bold; color: inherit" href="loginPage">LOGIN</a>
+                                                </button>
+                                            </form>
+                                        </c:if>
+
                                     </div>
                                 </div>
                             </div>
@@ -259,11 +273,13 @@
                                                 </p>
                                             </div>
                                             <div class="menu-icon-tab-cart-content-function-method">
-                                                <button
-                                                    class="menu-icon-tab-cart-content-function-method-btn"
-                                                    >
-                                                    VIEW CART
-                                                </button>
+                                                <form action="addToCartPage" method="POST">
+                                                    <button
+                                                        class="menu-icon-tab-cart-content-function-method-btn"
+                                                        >
+                                                        VIEW CART
+                                                    </button> 
+                                                </form>
                                                 <button
                                                     class="menu-icon-tab-cart-content-function-method-btn"
                                                     >
@@ -287,7 +303,7 @@
                                 alt=""
                                 />
                         </div>
-                        <a href="#!" class="menu-responsive-logo"> LOGO </a>
+                        <a href="mainPage" class="menu-responsive-logo"> LOGO </a>
                         <div class="menu-responsive-icon">
                             <img
                                 class="menu-responsive-icon-img"

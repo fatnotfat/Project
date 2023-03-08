@@ -753,6 +753,7 @@ body {
 .nav-bot-responsive {
   display: none;
 }
+/* FOOTER________________________________________________________________________- */
 
 .footer .container {
   display: flex;
@@ -763,7 +764,7 @@ body {
 
 .footer-menu {
   display: flex;
-  flex-wrap: wrap;
+  /*flex-wrap: wrap;*/
   justify-content: space-around;
   align-items: flex-start;
 }
@@ -841,16 +842,6 @@ body {
 }
 .footer-menu-about-icon-instagram {
   padding-left: 20px;
-}
-.footer-menu-care {
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-.footer-menu-care-title {
-  font-size: 20px;
   padding-bottom: 20px;
 }
 .footer-menu-care-desc {
@@ -861,6 +852,16 @@ body {
 .footer-menu-care-desc-txt {
   padding: 10px 0;
 }
+.footer-menu-care {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.footer-menu-care-title {
+  font-size: 20px;
+}
 .footer-menu-care-icon {
   font-size: 20px;
 }
@@ -870,5 +871,11 @@ body {
 .footer-copyright-txt {
   font-size: 14px;
 }
+@media screen and (max-width:1024px ){
+    .footer-menu {
+        flex-wrap: wrap;
+    }
+}
 
+/* FOOTER_______________________________________________________________________ */
 /*# sourceMappingURL=overview.css.map */

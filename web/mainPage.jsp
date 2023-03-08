@@ -41,8 +41,8 @@
         <!-- Responsive library -->
         <link rel="stylesheet" href="style/grid.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        
-        
+
+
     </head>
     <body>
         <div class="wrapper">
@@ -222,9 +222,13 @@
                                             </div>
                                         </c:if>
                                         <c:if test="${empty sessionScope.USER}">
-                                            <p style="font-size: 15px; margin: 5px 0">YOU ARE NOT ALREADY LOGGED, PLEASE LOGIN FIRST!!</p><br/>
+                                            <p style="font-size: 15px; margin: 5px 0">You are not already logged <span style="color: red">PLEASE LOGIN FIRST!!</span></p><br/>
                                             <%--<c:set var="URL" value="userCart.jsp" scope="session"/>--%>
-                                            <a style="font-size: 15px; text-decoration: none; font-weight: bold; color: black" href="loginPage">Login here </a>
+                                            <form action="loginPage" method="GET">
+                                                <button class="menu-icon-tab-cart-content-function-method-btn">
+                                                    <a style="font-size: 15px; text-decoration: none; font-weight: bold; color: inherit" href="loginPage">LOGIN</a>
+                                                </button>
+                                            </form>
                                         </c:if>
 
                                     </div>
@@ -262,17 +266,22 @@
                                             </div>
                                             <div class="menu-icon-tab-cart-content-show-txt">
                                                 <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
+                                                <c:set var="totalQuantity" value="${0}" />
+                                                <c:forEach var="quantity" items="${sessionScope.CART.items.values()}">
+                                                    <c:set var="totalQuantity" value="${totalQuantity + quantity}" />
+                                                </c:forEach>
                                                 <c:if test="${empty sessionScope.CART.items.size()}">
-                                                    <c:set var="cartSize" value="${0}"/>
+                                                    <c:set var="totalQuantity" value="${0}"/>
                                                 </c:if>
+
                                                 <p
                                                     class="menu-responsive-icon-tab-cart-content-show-txt-desc"
                                                     >
-                                                    <c:if test="${cartSize eq 0}">
-                                                        There are no currently products.
+                                                    <c:if test="${totalQuantity eq 0}">
+                                                        There are <span id="cart-size-header" style="font-weight: bold">no</span> currently products.
                                                     </c:if>
-                                                    <c:if test="${cartSize ne 0}">
-                                                        There are <span id="cart-size-header" style="font-weight: bold">${cartSize}</span> products
+                                                    <c:if test="${totalQuantity ne 0}">
+                                                        There are <span id="cart-size-header" style="font-weight: bold">${totalQuantity}</span> products
                                                     </c:if>
                                                 </p>
                                             </div>
@@ -297,7 +306,7 @@
                                                 </p>
                                                 <p
                                                     class="menu-icon-tab-cart-content-function-total-price"
-                                                       id="totalPrice"
+                                                    id="totalPrice"
                                                     >
                                                     <fmt:formatNumber var="price" value="${totalPrice}" pattern="#,###"/>
                                                     ${price}₫
@@ -400,7 +409,7 @@
                                                 </p>
                                                 <p
                                                     class="menu-responsive-icon-tab-cart-content-function-total-price"
-                                                 
+
                                                     >
                                                     <fmt:formatNumber var="price" value="${totalPrice}" pattern="#,###" />
                                                     ${price}₫
@@ -409,11 +418,13 @@
                                             <div
                                                 class="menu-responsive-icon-tab-cart-content-function-method"
                                                 >
-                                                <button
-                                                    class="menu-responsive-icon-tab-cart-content-function-method-btn"
-                                                    >
-                                                    VIEW CART
-                                                </button>
+                                                <form action="addToCartPage" method="POST">
+                                                    <button
+                                                        class="menu-responsive-icon-tab-cart-content-function-method-btn"
+                                                        >
+                                                        VIEW CART
+                                                    </button>
+                                                </form>
                                                 <button
                                                     class="menu-responsive-icon-tab-cart-content-function-method-btn"
                                                     >
@@ -425,7 +436,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#!" class="menu-responsive-logo"> LOGO </a>
+                        <a href="mainPage" class="menu-responsive-logo"> LOGO </a>
                         <div class="menu-responsive-icon">
                             <img
                                 class="menu-responsive-icon-img menu-responsive-icon-img-bar"
