@@ -1,5 +1,5 @@
 <%-- 
-    Document   : adminUpdateAccount
+    Document   : adminAccountList
     Created on : Mar 4, 2023, 9:00:48 AM
     Author     : Chau Nhat Truong
 --%>
@@ -509,10 +509,8 @@
                         <button class="button__ban-no">No</button>
                     </div>
                 </div>
-
             </form>
         </div>
-
 
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>

@@ -194,7 +194,8 @@ public class CustomerDAO implements Serializable {
         return result;
     }
 
-    public boolean adminCreateAccount(CustomerDTO dto)
+    public boolean adminCreateAccount(String name, String password, String email,
+            String phone, boolean role)
             throws SQLException, NamingException, ParseException {;
         Connection con = null;
         PreparedStatement stm = null;
@@ -203,30 +204,16 @@ public class CustomerDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Insert Into Customer("
-                        + "Name, Password, DateOfBirth, Email, Phone, Address, Role, RankID, Sex, TypeOfLogin"
+                        + "Name, Password, Email, Phone, Role, TypeOfLogin"
                         + ") "
-                        + "Values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?"
+                        + "Values(?, ?, ?, ?, ?, 1"
                         + ")";
                 stm = con.prepareStatement(sql);
-                stm.setString(1, dto.getName());
-                stm.setString(2, dto.getPassword());
-                if (dto.getBirthDate() != null) {
-                    java.sql.Date sqlDate = new java.sql.Date(dto.getBirthDate().getTime());
-                    stm.setDate(3, sqlDate);
-                } else {
-                    String date = "1-1-1999";
-                    DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
-                    Date defaultDate = df.parse(date);
-                    java.sql.Date sqlDate = new java.sql.Date(defaultDate.getTime());
-                    stm.setDate(3, sqlDate);
-                }
-                stm.setString(4, dto.getEmail());
-                stm.setString(5, dto.getPhone());
-                stm.setString(6, dto.getAddress());
-                stm.setBoolean(7, dto.isRole());
-                stm.setInt(8, dto.getRankID());
-                stm.setBoolean(9, dto.isSex());
-                stm.setBoolean(10, dto.isTypeOfLogin());
+                stm.setString(1, name);
+                stm.setString(2, password);
+                stm.setString(3, email);
+                stm.setString(4, phone);
+                stm.setBoolean(5, role);
                 int effectedRows = stm.executeUpdate();
                 if (effectedRows > 0) {
                     result = true;
@@ -252,6 +239,33 @@ public class CustomerDAO implements Serializable {
             con = DBHelper.makeConnection();
             String sql = "Update Customer "
                     + "Set TypeOfLogin = 2 "
+                    + "Where Email = ?";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, email);
+            int effectedRows = stm.executeUpdate();
+            if (effectedRows > 0) {
+                result = true;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    public boolean adminUpdateAccount(String email)
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+        try {
+            con = DBHelper.makeConnection();
+            String sql = "Update Customer "
+                    + "Set TypeOfLogin = 0 "
                     + "Where Email = ?";
             stm = con.prepareStatement(sql);
             stm.setString(1, email);
@@ -398,6 +412,5 @@ public class CustomerDAO implements Serializable {
         }
         return result;
     }
-    
-    
+
 }

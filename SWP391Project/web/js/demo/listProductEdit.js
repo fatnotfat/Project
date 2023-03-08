@@ -1,31 +1,49 @@
-function showDelete(){
+function showDelete() {
     const formIncludeDelete = document.querySelector('.form__include-delete');
-    if(formIncludeDelete.classList.contains("active")){
+    if (formIncludeDelete.classList.contains("active")) {
         formIncludeDelete.classList.remove('active')
-    }else{
+    } else {
         formIncludeDelete.classList.add('active')
     }
-    
+
 }
 
-function showEdit(){
+function showEdit(brandID) {
     const formIncludeUpdate = document.querySelector('.form__include-update');
-    if(formIncludeUpdate.classList.contains("active")){
+    var txtBrandID = document.getElementById("brandID_" + brandID).value;
+    if (formIncludeUpdate.classList.contains("active")) {
         formIncludeUpdate.classList.remove('active')
-    }else{
+    } else {
         formIncludeUpdate.classList.add('active')
     }
-    
+
 }
 
-function showCreateProduct(){
+
+const updateButton = document.getElementById("update");
+updateButton.addEventListener("click", function () {
+    
+    showEdit(123); // call your function with a sample id
+});
+
+function showCreateProduct() {
     const formIncludeCreate = document.querySelector('.form__create');
-    if(formIncludeCreate.classList.contains("active")){
+    if (formIncludeCreate.classList.contains("active")) {
         formIncludeCreate.classList.remove('active')
-    }else{
+    } else {
         formIncludeCreate.classList.add('active')
     }
-    
+
+}
+
+function showCreateAccount() {
+    const formIncludeCreate = document.querySelector('.form__create');
+    if (formIncludeCreate.classList.contains("active")) {
+        formIncludeCreate.classList.remove('active')
+    } else {
+        formIncludeCreate.classList.add('active')
+    }
+
 }
 
 
@@ -80,7 +98,7 @@ function Validator(options) {
     var formElement = document.querySelector(options.form);
     if (formElement) {
         // Khi submit form ko bị chuyển trang
-        formElement.onsubmit = function (e) { 
+        formElement.onsubmit = function (e) {
             e.preventDefault();
 
             var isFormValid = true
@@ -89,7 +107,7 @@ function Validator(options) {
                 var inputElement = formElement.querySelector(rule.selector);
                 var isValid = validate(inputElement, rule);
                 if (!isValid) {
-                    isFormValid= false;
+                    isFormValid = false;
                 }
             });
 
@@ -102,9 +120,9 @@ function Validator(options) {
                     var formValues = Array.from(enableInputs).reduce(function (values, input) {
                         return (values[input.name] = input.value) && values;
                     }, {});
-                
+
                     options.onSubmit(formValues)
-                }else{
+                } else {
                     // trường hợp submit với yêu cầu mặc định
                     formElement.submit();
                 }
@@ -157,7 +175,7 @@ Validator.isNumber = function (selector, message) {
     return {
         selector: selector,
         test: function (value) {
-            var regex =  /[0-9]+$/;
+            var regex = /[0-9]+$/;
             return regex.test(value) ? undefined : message || "Vui lòng nhập chữ số nhé!!"
         }
     }
@@ -167,7 +185,7 @@ Validator.isPositive = function (selector, message) {
     return {
         selector: selector,
         test: function (value) {
-            var regex =  /^(?!(?:0|0\.0|0\.00)$)[+]?\d+(\.\d|\.\d[0-9])?$/;
+            var regex = /^(?!(?:0|0\.0|0\.00)$)[+]?\d+(\.\d|\.\d[0-9])?$/;
             return regex.test(value) ? undefined : message || "Vui lòng nhập số dương nhé!!"
         }
     }
@@ -257,7 +275,7 @@ function Validator2(options) {
     var formElement = document.querySelector(options.form);
     if (formElement) {
         // Khi submit form ko bị chuyển trang
-        formElement.onsubmit = function (e) { 
+        formElement.onsubmit = function (e) {
             e.preventDefault();
 
             var isFormValid = true
@@ -266,7 +284,7 @@ function Validator2(options) {
                 var inputElement = formElement.querySelector(rule.selector);
                 var isValid = validate(inputElement, rule);
                 if (!isValid) {
-                    isFormValid= false;
+                    isFormValid = false;
                 }
             });
 
@@ -279,9 +297,9 @@ function Validator2(options) {
                     var formValues = Array.from(enableInputs).reduce(function (values, input) {
                         return (values[input.name] = input.value) && values;
                     }, {});
-                
+
                     options.onSubmit(formValues)
-                }else{
+                } else {
                     // trường hợp submit với yêu cầu mặc định
                     formElement.submit();
                 }
@@ -334,7 +352,7 @@ Validator2.isNumber = function (selector, message) {
     return {
         selector: selector,
         test: function (value) {
-            var regex =  /[0-9]+$/;
+            var regex = /[0-9]+$/;
             return regex.test(value) ? undefined : message || "Vui lòng nhập chữ số nhé!!"
         }
     }
@@ -345,7 +363,7 @@ Validator2.isPositive = function (selector, message) {
     return {
         selector: selector,
         test: function (value) {
-            var regex =  /^(?!(?:0|0\.0|0\.00)$)[+]?\d+(\.\d|\.\d[0-9])?$/;
+            var regex = /^(?!(?:0|0\.0|0\.00)$)[+]?\d+(\.\d|\.\d[0-9])?$/;
             return regex.test(value) ? undefined : message || "Vui lòng nhập số dương nhé!!"
         }
     }
@@ -425,7 +443,7 @@ function Validator2(options) {
     var formElement = document.querySelector(options.form);
     if (formElement) {
         // Khi submit form ko bị chuyển trang
-        formElement.onsubmit = function (e) { 
+        formElement.onsubmit = function (e) {
             e.preventDefault();
 
             var isFormValid = true
@@ -434,7 +452,7 @@ function Validator2(options) {
                 var inputElement = formElement.querySelector(rule.selector);
                 var isValid = validate(inputElement, rule);
                 if (!isValid) {
-                    isFormValid= false;
+                    isFormValid = false;
                 }
             });
 
@@ -447,9 +465,9 @@ function Validator2(options) {
                     var formValues = Array.from(enableInputs).reduce(function (values, input) {
                         return (values[input.name] = input.value) && values;
                     }, {});
-                
+
                     options.onSubmit(formValues)
-                }else{
+                } else {
                     // trường hợp submit với yêu cầu mặc định
                     formElement.submit();
                 }

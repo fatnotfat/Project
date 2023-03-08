@@ -86,34 +86,6 @@ public class MyApplicationConstants {
 
     }
 
-    public class AdminNewBrandServlet {
-
-        public static final String ADMINBRANDLIST_PAGE = "adminBrandListController";
-        public static final String ADMIN_PAGE = "adminPage";
-    }
-
-    public class AdminNewCategoryServlet {
-
-        public static final String ADMINCATEGORYLIST_PAGE = "adminCategoryListController";
-        public static final String ADMIN_PAGE = "adminPage";
-    }
-
-    public class AdminNewProductServlet {
-
-        public static final String ADMINPRODUCTLIST_PAGE = "adminProductListController";
-        public static final String ADMIN_PAGE = "adminPage";
-    }
-
-    public class AdminSearchProductServlet {
-
-        public static final String ADMINSEARCHPRODUCT_PAGE = "adminSearchProductPage";
-    }
-
-    public class AdminUpdateProductServlet {
-
-        public static final String ADMINSEARCHPRODUCT_PAGE = "adminSearchProductPage";
-    }
-
     public class ShippingServlet {
 
         public static final String SHIPPING_PAGE = "shippingPage";
@@ -134,7 +106,25 @@ public class MyApplicationConstants {
 
     public class AdminNewAccountServlet {
 
-        public static final String ADMINNEWACCOUNT_PAGE = "adminNewAccountPage";
+        public static final String ADMINACCOUNTLIST_PAGE = "adminAccountListController";
+        public static final String ADMIN_PAGE = "adminPage";
+    }
+
+    public class AdminNewBrandServlet {
+
+        public static final String ADMINBRANDLIST_PAGE = "adminBrandListController";
+        public static final String ADMIN_PAGE = "adminPage";
+    }
+
+    public class AdminNewCategoryServlet {
+
+        public static final String ADMINCATEGORYLIST_PAGE = "adminCategoryListController";
+        public static final String ADMIN_PAGE = "adminPage";
+    }
+
+    public class AdminNewProductServlet {
+
+        public static final String ADMINPRODUCTLIST_PAGE = "adminProductListController";
         public static final String ADMIN_PAGE = "adminPage";
     }
 
@@ -161,9 +151,53 @@ public class MyApplicationConstants {
         public static final String ADMINPRODUCTLIST_PAGE = "adminProductListPage";
         public static final String ADMIN_PAGE = "adminPage";
     }
-    public class AdminDeleteBrandServlet {
 
-        public static final String ADMINBRANDLIST_PAGE = "adminBrandListPage";
+    public class AdminUpdateAccountServlet {
+
+        public static final String ADMINACCOUNTLIST_PAGE = "adminAccountListController";
         public static final String ADMIN_PAGE = "adminPage";
     }
+
+    public class AdminUpdateBrandServlet {
+
+        public static final String ADMINBRANDLIST_PAGE = "adminBrandListController";
+        public static final String ADMIN_PAGE = "adminPage";
+    }
+
+    public class AdminUpdateCategoryServlet {
+
+        public static final String ADMINCATEGORYLIST_PAGE = "adminCategoryListController";
+        public static final String ADMIN_PAGE = "adminPage";
+    }
+
+    public class AdminUpdateProductServlet {
+
+        public static final String ADMINPRODUCTLIST_PAGE = "adminProductListController";
+        public static final String ADMIN_PAGE = "adminPage";
+    }
+
+    public class AdminDeleteAccountServlet {
+
+        public static final String ADMINACCOUNTLIST_PAGE = "adminAccountListController";
+        public static final String ADMIN_PAGE = "adminPage";
+    }
+
+    public class AdminDeleteBrandServlet {
+
+        public static final String ADMINBRANDLIST_PAGE = "adminBrandListController";
+        public static final String ADMIN_PAGE = "adminPage";
+    }
+
+    public class AdminDeleteCategoryServlet {
+
+        public static final String ADMINCATEGORYLIST_PAGE = "adminCategoryListController";
+        public static final String ADMIN_PAGE = "adminPage";
+    }
+
+    public class AdminDeleteProductServlet {
+
+        public static final String ADMINPRODUCTLIST_PAGE = "adminProductListController";
+        public static final String ADMIN_PAGE = "adminPage";
+    }
+
 }

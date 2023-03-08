@@ -1,32 +1,37 @@
+package swp391.controller;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package swp391.controller;
-
+import java.awt.Color;
+import java.awt.Font;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.Properties;
+import java.util.Base64;
+import java.util.List;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import swp391.customer.CustomerDAO;
-import swp391.utils.MyApplicationConstants;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtils;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import swp391.dashboard.ProductDAO;
+import swp391.dashboard.ProductDTO;
 
 /**
  *
- * @author Chau Nhat Truong
+ * @author User
  */
-@WebServlet(name = "AdminNewAccountServlet", urlPatterns = {"/AdminNewAccountServlet"})
-public class AdminNewAccountServlet extends HttpServlet {
+@WebServlet(name = "ChartDetail", urlPatterns = {"/ChartDetail"})
+public class ChartDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,34 +45,49 @@ public class AdminNewAccountServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ServletContext context = this.getServletContext();
-        Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
-        String url = siteMaps.getProperty(
-                MyApplicationConstants.AdminNewAccountServlet.ADMINACCOUNTLIST_PAGE);
-        String name = request.getParameter("txtName");
-        byte[] bytes1 = name.getBytes(StandardCharsets.ISO_8859_1);
-        name = new String(bytes1, StandardCharsets.UTF_8);
-        String password = request.getParameter("txtPassword");
-        String email = request.getParameter("txtEmail");
-        String txtRole = request.getParameter("cboRole");
-        boolean role = Boolean.parseBoolean(txtRole);
+
+        String month = request.getParameter("month");
+        String year = request.getParameter("year");
         try {
-            CustomerDAO dao = new CustomerDAO();
-            boolean result = dao.adminCreateAccount(
-                    name, password, email, name, role);
-            if (result) {
-                url = siteMaps.getProperty(
-                        MyApplicationConstants.AdminNewAccountServlet.ADMINACCOUNTLIST_PAGE);
+            ProductDAO dao = new ProductDAO();
+
+            dao.getTop10ItemsInMonthYear(month, year);
+
+            List<ProductDTO> top10Products = dao.getItemsList();
+            // Create a dataset
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            for (ProductDTO product : top10Products) {
+                dataset.addValue((Number) product.getQuantity(), product.getProductID(), "");
             }
-        } catch (SQLException ex) {
-            log("AdminNewAccountServlet _ SQL _ " + ex.getMessage());
+            // Create a chart
+            JFreeChart chart = ChartFactory.createBarChart(
+                    "Top 10 Products",
+                    "Product ID",
+                    "Sales",
+                    dataset,
+                    PlotOrientation.VERTICAL,
+                    true,
+                    true,
+                    false);
+
+            // Customize the chart
+            chart.getTitle().setFont(new Font("SansSerif", Font.BOLD, 18));
+            chart.setBackgroundPaint(Color.WHITE);
+
+            // Generate a PNG image of the chart
+            byte[] chartImage = ChartUtils.encodeAsPNG(chart.createBufferedImage(600, 400));
+
+            // Store the chart image as a Base64-encoded string in a request attribute
+            String base64EncodedChart = Base64.getEncoder().encodeToString(chartImage);
+            request.setAttribute("base64EncodedChart", base64EncodedChart);
+
         } catch (NamingException ex) {
-            log("AdminNewAccountServlet _ Naming _ " + ex.getMessage());
-        } catch (ParseException ex) {
-            log("AdminNewAccountServlet _ Parse _ " + ex.getMessage());
+            log("Naming" + ex.getMessage());
+        } catch (SQLException ex) {
+            log("SQL" + ex.getMessage());
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("admin.jsp");
+            dispatcher.forward(request, response);
         }
     }
 

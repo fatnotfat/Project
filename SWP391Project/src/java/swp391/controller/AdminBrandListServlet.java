@@ -6,7 +6,6 @@
 package swp391.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
@@ -20,8 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import swp391.brand.BrandDAO;
 import swp391.brand.BrandDTO;
-import swp391.customer.CustomerDAO;
-import swp391.customer.CustomerDTO;
 import swp391.utils.MyApplicationConstants;
 
 /**

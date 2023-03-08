@@ -3,30 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package swp391.controller;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.Properties;
-import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import swp391.customer.CustomerDAO;
-import swp391.utils.MyApplicationConstants;
 
 /**
  *
  * @author Chau Nhat Truong
  */
-@WebServlet(name = "AdminNewAccountServlet", urlPatterns = {"/AdminNewAccountServlet"})
-public class AdminNewAccountServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/AdminDeleteCategoryServlet"})
+public class AdminDeleteCategoryServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,34 +31,17 @@ public class AdminNewAccountServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ServletContext context = this.getServletContext();
-        Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
-        String url = siteMaps.getProperty(
-                MyApplicationConstants.AdminNewAccountServlet.ADMINACCOUNTLIST_PAGE);
-        String name = request.getParameter("txtName");
-        byte[] bytes1 = name.getBytes(StandardCharsets.ISO_8859_1);
-        name = new String(bytes1, StandardCharsets.UTF_8);
-        String password = request.getParameter("txtPassword");
-        String email = request.getParameter("txtEmail");
-        String txtRole = request.getParameter("cboRole");
-        boolean role = Boolean.parseBoolean(txtRole);
-        try {
-            CustomerDAO dao = new CustomerDAO();
-            boolean result = dao.adminCreateAccount(
-                    name, password, email, name, role);
-            if (result) {
-                url = siteMaps.getProperty(
-                        MyApplicationConstants.AdminNewAccountServlet.ADMINACCOUNTLIST_PAGE);
-            }
-        } catch (SQLException ex) {
-            log("AdminNewAccountServlet _ SQL _ " + ex.getMessage());
-        } catch (NamingException ex) {
-            log("AdminNewAccountServlet _ Naming _ " + ex.getMessage());
-        } catch (ParseException ex) {
-            log("AdminNewAccountServlet _ Parse _ " + ex.getMessage());
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AdminDeleteCategoryServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AdminDeleteCategoryServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

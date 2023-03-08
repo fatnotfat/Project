@@ -1,5 +1,5 @@
 <%-- 
-    Document   : adminNewCategory
+    Document   : adminCategoryList
     Created on : Feb 17, 2023, 10:35:30 PM
     Author     : Chau Nhat Truong
 --%>

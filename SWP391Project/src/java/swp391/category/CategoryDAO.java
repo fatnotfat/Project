@@ -75,7 +75,7 @@ public class CategoryDAO implements Serializable {
                     int categoryID = rs.getInt("CateID");
                     String name = rs.getString("Name");
                     String description = rs.getString("Description");
-                    CategoryDTO dto = new CategoryDTO(categoryID, name,description);
+                    CategoryDTO dto = new CategoryDTO(categoryID, name, description);
                     if (this.categorysList == null) {
                         this.categorysList = new ArrayList<>();
                     }
@@ -95,65 +95,64 @@ public class CategoryDAO implements Serializable {
         }
     }
 
-//    public boolean updateCartegory(int categoryID, String name,
-//            String description, boolean status)
-//            throws SQLException, NamingException {
-//        Connection con = null;
-//        PreparedStatement stm = null;
-//        boolean result = false;
-//        try {
-//            con = DBHelper.makeConnection();
-//            String sql = "Update Category "
-//                    + "Set Name = ?, Description = ?, Status = ? "
-//                    + "Where CategoryID = ?";
-//            //3. Create statement
-//            stm = con.prepareStatement(sql);
-//            stm.setString(1, name);
-//            stm.setString(2, description);
-//            stm.setBoolean(3, status);
-//            stm.setInt(4, categoryID);
-//            int effectedRows = stm.executeUpdate();
-//            if (effectedRows > 0) {
-//                result = true;
-//            }
-//        } finally {
-//            if (stm != null) {
-//                stm.close();
-//            }
-//            if (con != null) {
-//                con.close();
-//            }
-//        }
-//        return result;
-//    }
-//
-//    public boolean deleteCategory(int categoryID)
-//            throws SQLException, NamingException {;
-//        Connection con = null;
-//        PreparedStatement stm = null;
-//        boolean result = false;
-//        try {
-//            //1. connect DB
-//            con = DBHelper.makeConnection();
-//            if (con != null) {
-//                String sql = "Update Category "
-//                        + "Set Status = false "
-//                        + "Where CategoryID = ?";
-//                stm = con.prepareStatement(sql);
-//                stm.setInt(1, categoryID);
-//                int effectedRows = stm.executeUpdate();
-//                if (effectedRows > 0) {
-//                    result = true;
-//                }
-//            }
-//        } finally {
-//            if (stm != null) {
-//                stm.close();
-//            }
-//            if (con != null) {
-//                con.close();
-//            }
-//        }
-//        return result;
-//    }
+    public boolean updateCartegory(int categoryID, String name,
+            String description)
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+        try {
+            con = DBHelper.makeConnection();
+            String sql = "Update Category "
+                    + "Set Name = ?, Description = ? "
+                    + "Where CategoryID = ?";
+            //3. Create statement
+            stm = con.prepareStatement(sql);
+            stm.setString(1, name);
+            stm.setString(2, description);
+            stm.setInt(4, categoryID);
+            int effectedRows = stm.executeUpdate();
+            if (effectedRows > 0) {
+                result = true;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    public boolean deleteCategory(int categoryID)
+            throws SQLException, NamingException {;
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+        try {
+            //1. connect DB
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Update Category "
+                        + "Set Status = false "
+                        + "Where CategoryID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, categoryID);
+                int effectedRows = stm.executeUpdate();
+                if (effectedRows > 0) {
+                    result = true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
 }

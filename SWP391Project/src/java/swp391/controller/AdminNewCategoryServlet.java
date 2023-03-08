@@ -51,27 +51,13 @@ public class AdminNewCategoryServlet extends HttpServlet {
         name = new String(bytes1, StandardCharsets.UTF_8);
         byte[] bytes2 = description.getBytes(StandardCharsets.ISO_8859_1);
         description = new String(bytes2, StandardCharsets.UTF_8);
-        boolean errorFound = false;
-        AdminCreateError errors = new AdminCreateError();
         try {
-            if (name.trim().length() < 1) {
-                errorFound = true;
-                errors.setNameLengthError("You can't leave this empty");
-            }
-            if (description.trim().length() < 1) {
-                errorFound = true;
-                errors.setDescriptionLengthError("You can't leave this empty");
-            }
-            if (errorFound) {
-                request.setAttribute("ADMINNEWCATEGORY_ERROR", errors);
-            } else {
-                CategoryDAO dao = new CategoryDAO();
-                CategoryDTO dto = new CategoryDTO(name, description);
-                boolean result = dao.createCategory(dto);
-                if (result) {
-                    url = siteMaps.getProperty(
-                            MyApplicationConstants.AdminNewCategoryServlet.ADMINCATEGORYLIST_PAGE);
-                }
+            CategoryDAO dao = new CategoryDAO();
+            CategoryDTO dto = new CategoryDTO(name, description);
+            boolean result = dao.createCategory(dto);
+            if (result) {
+                url = siteMaps.getProperty(
+                        MyApplicationConstants.AdminNewCategoryServlet.ADMINCATEGORYLIST_PAGE);
             }
         } catch (NamingException ex) {
             log("AdminNewCategoryServlet _ Naming _ " + ex.getMessage());

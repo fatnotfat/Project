@@ -209,7 +209,7 @@ public class ProductDAO implements Serializable {
     }
 
     public boolean updateProduct(int productID, String name, String description, int quantity,
-            float price, boolean status, int size)
+            float price, int size)
             throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -218,16 +218,15 @@ public class ProductDAO implements Serializable {
             con = DBHelper.makeConnection();
             String sql = "Update Product "
                     + "Set Name = ?, Description = ?, Quantity = ?, Price = ?, "
-                    + "Status = ?, Size = ? "
+                    + "Size = ? "
                     + "Where ProductID = ?";
             stm = con.prepareStatement(sql);
             stm.setString(1, name);
             stm.setString(2, description);
             stm.setInt(3, quantity);
             stm.setFloat(4, price);
-            stm.setBoolean(5, status);
-            stm.setInt(6, size);
-            stm.setInt(7, productID);
+            stm.setInt(5, size);
+            stm.setInt(6, productID);
             int effectedRows = stm.executeUpdate();
             if (effectedRows > 0) {
                 result = true;

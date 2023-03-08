@@ -21,6 +21,16 @@ function showEdit(){
     
 }
 
+const updateButtons = document.querySelectorAll("[id^='update_']");
+
+updateButtons.forEach((button) => {
+  const id = button.id.split("_")[1];
+  button.addEventListener("click", function() {
+    showEdit(id);
+  });
+});
+
+
 function showCreateCategory(){
     const formIncludeCreate = document.querySelector('.form__create');
     if(formIncludeCreate.classList.contains("active")){

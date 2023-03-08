@@ -1,5 +1,5 @@
 <%-- 
-    Document   : adminUpdateProduct
+    Document   : adminProductList
     Created on : Feb 16, 2023, 4:16:33 PM
     Author     : Chau Nhat Truong
 --%>
