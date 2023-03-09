@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -22,6 +23,8 @@ import javax.servlet.http.HttpSession;
 import swp391.login.LoginError;
 import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
+import swp391.ordersdetail.OrdersDetailDAO;
+import swp391.ordersdetail.OrdersDetailDTO;
 import swp391.utils.MyApplicationConstants;
 
 /**
@@ -68,8 +71,8 @@ public class LoginServlet extends HttpServlet {
             } else {
                 //Call Model/DAO ==> new object & call method of that object
                 CustomerDAO dao = new CustomerDAO();
-//            boolean result = dao.checkLogin(email, password);
                 CustomerDTO result = dao.checkLogin(email, password);
+
                 if (result == null) {
                     errorFound = true;
                     errors.setLoginFail("Incorrect email or password");
@@ -83,6 +86,11 @@ public class LoginServlet extends HttpServlet {
                             MyApplicationConstants.LoginServlet.MAIN_PAGE);
                     HttpSession session = request.getSession();
                     session.setAttribute("USER", result);
+                    if (result != null) {
+                        OrdersDetailDAO ordersDetailDAO = new OrdersDetailDAO();
+                        List<OrdersDetailDTO> customerOrders = ordersDetailDAO.getCustomerDetailsByCusID(result.getCustomerID());
+                        session.setAttribute("USER_SHIPPINGINFO", customerOrders);
+                    }
 
                     String previousPage = (String) session.getAttribute("shippingPage");
                     if (previousPage != null) {

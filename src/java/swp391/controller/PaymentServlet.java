@@ -23,7 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
+import javax.servlet.http.HttpSession;
 import swp391.cart.CartObject;
 import swp391.customer.CustomerCreateError;
 import swp391.orders.OrdersDAO;
@@ -53,11 +53,10 @@ public class PaymentServlet extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
                 MyApplicationConstants.PaymentServlet.PAYMENT_PAGE);
+        HttpSession session = request.getSession();
 
         //Khai báo parameter của cart trên trang paymentPage đem xuống
-        String txtPaymentID = request.getParameter("method");       
-        String txtDiscount = "0";
-        String txtStatus = "0";        
+        String txtPaymentID = request.getParameter("method");
         String txtShippingID = request.getParameter("location");
         String txtCustomerID = request.getParameter("txtCustomerID");
 
@@ -72,23 +71,35 @@ public class PaymentServlet extends HttpServlet {
                 if (paymentID == 1 || paymentID == 2) {
                     int customerID = Integer.parseInt(txtCustomerID);
                     int shippingID = Integer.parseInt(txtShippingID);
-                    float discount = Float.parseFloat(txtDiscount);
-                    int status = Integer.parseInt(txtStatus);
-
+                    float discount = 0;
+                    int status = 0;
                     OrdersDetailDAO ordersDetailDAO = new OrdersDetailDAO();
-//                    int ordersDetailID = ordersDetailDAO.addToOrdersDetail(productID, quantity, discount, price, paymentID, shippingID, total, status);
-                    //int ordersDetailID = ordersDetailDAO.addToOrdersDetail(cart, discount, paymentID, shippingID, status);
-                    List<Integer> orderDetails = ordersDetailDAO.addToOrdersDetail(cart, discount, paymentID, shippingID, status);
-
-                    OrdersDAO ordersDAO = new OrdersDAO();
-
-                    for (Integer orderDetail : orderDetails) {
-                        ordersDAO.addToOrders(customerID, orderDetail);
+                    String defaultOrNewShippingInfo = (String) session.getAttribute("defaultOrNewShippingInfo");
+                    if (defaultOrNewShippingInfo != null && defaultOrNewShippingInfo.equals("0")) {
+                        // Người dùng đã chọn địa chỉ giao hàng mặc định
+                        String cusName = "";
+                        String cusAddress = "";
+                        String cusPhone = "";
+                        List<Integer> orderDetails = ordersDetailDAO.addToOrdersDetail(cart, discount, paymentID, shippingID, status, cusName, cusPhone, cusAddress);
+                        OrdersDAO ordersDAO = new OrdersDAO();
+                        for (Integer orderDetail : orderDetails) {
+                            ordersDAO.addToOrders(customerID, orderDetail);
+                        }
+                    } else {
+                        // Người dùng đã thêm thông tin giao hàng mới
+                        String firstName = (String) session.getAttribute("firstName");
+                        String lastName = (String) session.getAttribute("lastName");
+                        String customerAddress = (String) session.getAttribute("customerAddress");
+                        String customerPhone = (String) session.getAttribute("customerPhone");
+                        List<Integer> orderDetails = ordersDetailDAO.addToOrdersDetail(cart, discount, paymentID, shippingID, status, firstName + " " + lastName, customerPhone, customerAddress);
+                        OrdersDAO ordersDAO = new OrdersDAO();
+                        for (Integer orderDetail : orderDetails) {
+                            ordersDAO.addToOrders(customerID, orderDetail);
+                        }
                     }
                     url = siteMaps.getProperty(
                             MyApplicationConstants.PaymentServlet.CHECKOUT_PAGE);
                 } else {
-
                     //Call API PayPal then forward to checkout page
                 }
             }

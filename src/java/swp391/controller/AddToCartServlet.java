@@ -8,6 +8,7 @@ package swp391.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -19,6 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import swp391.cart.CartObject;
+import swp391.customer.CustomerDTO;
+import swp391.ordersdetail.OrdersDetailDAO;
+import swp391.ordersdetail.OrdersDetailDTO;
 import swp391.utils.MyApplicationConstants;
 
 /**
@@ -59,6 +63,13 @@ public class AddToCartServlet extends HttpServlet {
             //4. Customer drop items into cart
             cart.addItemToCart(id);
             session.setAttribute("CART", cart);
+            
+             CustomerDTO user = (CustomerDTO) session.getAttribute("USER");
+             if (user != null) {
+                        OrdersDetailDAO ordersDetailDAO = new OrdersDetailDAO();
+                        List<OrdersDetailDTO> customerOrders = ordersDetailDAO.getCustomerDetailsByCusID(user.getCustomerID());
+                        session.setAttribute("USER_SHIPPINGINFO", customerOrders);
+                    }
         } catch (NamingException ex) {
             log("AddToCartServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {

@@ -12,7 +12,8 @@ import java.io.Serializable;
  * @author Chau Nhat Truong
  */
 public class OrdersDetailDTO implements Serializable {
-
+    
+    private int ordersDetailID;
     private int productID;
     private int quantity;
     private float discount;
@@ -21,9 +22,22 @@ public class OrdersDetailDTO implements Serializable {
     private int shippingID;
     private float total;
     private Boolean status;
+    private String cusName;
+    private String cusPhone;
+    private String cusAddress;
 
     public OrdersDetailDTO() {
     }
+
+    public OrdersDetailDTO(int ordersDetailID, String cusName, String cusPhone, String cusAddress) {
+        this.ordersDetailID = ordersDetailID;
+        this.cusName = cusName;
+        this.cusPhone = cusPhone;
+        this.cusAddress = cusAddress;
+    }
+
+    
+    
 
     public OrdersDetailDTO(int productID, int quantity, float discount, float price, int paymentID, int shippingID, float total, Boolean status) {
         this.productID = productID;
@@ -34,6 +48,54 @@ public class OrdersDetailDTO implements Serializable {
         this.shippingID = shippingID;
         this.total = total;
         this.status = status;
+    }
+
+    public OrdersDetailDTO(int productID, int quantity, float discount, float price, int paymentID, int shippingID, float total, Boolean status, String cusName, String cusPhone, String cusAddress) {
+        this.productID = productID;
+        this.quantity = quantity;
+        this.discount = discount;
+        this.price = price;
+        this.paymentID = paymentID;
+        this.shippingID = shippingID;
+        this.total = total;
+        this.status = status;
+        this.cusName = cusName;
+        this.cusPhone = cusPhone;
+        this.cusAddress = cusAddress;
+    }
+
+    public int getOrdersDetailID() {
+        return ordersDetailID;
+    }
+
+    public void setOrdersDetailID(int ordersDetailID) {
+        this.ordersDetailID = ordersDetailID;
+    }
+    
+    
+
+    public String getCusName() {
+        return cusName;
+    }
+
+    public void setCusName(String cusName) {
+        this.cusName = cusName;
+    }
+
+    public String getCusPhone() {
+        return cusPhone;
+    }
+
+    public void setCusPhone(String cusPhpne) {
+        this.cusPhone = cusPhpne;
+    }
+
+    public String getCusAddress() {
+        return cusAddress;
+    }
+
+    public void setCusAddress(String cusAddress) {
+        this.cusAddress = cusAddress;
     }
 
     public OrdersDetailDTO(float total) {

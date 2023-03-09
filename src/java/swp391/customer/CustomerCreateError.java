@@ -25,6 +25,8 @@ public class CustomerCreateError implements Serializable {
     private String emailIsExisted;
     private String shippingIDLengthError;
     private String paymentIDLengthError;
+    private String defaultOrNewShippingInforLengthError;
+    private String cusInfoLengthError;
 
     public CustomerCreateError() {
     }
@@ -43,6 +45,26 @@ public class CustomerCreateError implements Serializable {
         this.shippingIDLengthError = shippingIDLengthError;
         this.paymentIDLengthError = paymentIDLengthError;
     }
+
+    public String getCusInfoLengthError() {
+        return cusInfoLengthError;
+    }
+
+    public void setCusInfoLengthError(String cusInfoLengthError) {
+        this.cusInfoLengthError = cusInfoLengthError;
+    }
+
+    
+    
+    public String getDefaultOrNewShippingInforLengthError() {
+        return defaultOrNewShippingInforLengthError;
+    }
+
+    public void setDefaultOrNewShippingInforLengthError(String defaultOrNewShippingInforLengthError) {
+        this.defaultOrNewShippingInforLengthError = defaultOrNewShippingInforLengthError;
+    }
+    
+    
 
     public String getFirstNameLengthError() {
         return firstNameLengthError;
