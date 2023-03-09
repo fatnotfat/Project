@@ -206,7 +206,7 @@ public class CustomerDAO implements Serializable {
                 String sql = "Insert Into Customer("
                         + "Name, Password, Email, Phone, Role, TypeOfLogin"
                         + ") "
-                        + "Values(?, ?, ?, ?, ?, 1"
+                        + "Values(?, ?, ?, ?, ?, 0"
                         + ")";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, name);

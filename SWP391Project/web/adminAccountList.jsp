@@ -35,6 +35,20 @@
         <!-- lIST ACCOUNT CSS -->
         <link rel="stylesheet" href="style/listAccount.css">
 
+        <!-- Link register css 8/3/2023  -->
+
+        <!-- Custom fonts for this template-->
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+        <!-- Custom styles for this template-->
+        <link href="style/sb-admin-2.min.css" rel="stylesheet">
+        <!-- Register css -->
+        <link rel="stylesheet" href="style/register.css">
+
+
     </head>
 
     <body id="page-top">
@@ -396,7 +410,7 @@
                         <h1 class="h3 mb-2 text-gray-800">List Account</h1>
                         <p class="mb-4">Danh sách các account được tạo trên Store PDDTK <a target="_blank"
                                                                                            href="https://datatables.net">Link edit danh sách</a>.</p>
-
+                        <button class="button__form-create-account" onclick="showCreateAccount()">Add a new Account</button>
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
@@ -512,6 +526,96 @@
             </form>
         </div>
 
+        <!-- Chỗ này hiện ra khi mà mình create Account 8/3/2023 -->
+
+        <div class="form__create">
+            <div class="container ">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+
+                        <div class="row">
+
+                            <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                            <div class="col-lg-7">
+                                <div class="close-tab-register" onclick="showCreateAccount()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
+                                </div>
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                    </div>
+                                    <form action="adminNewAccountController" class="user" id="user" method="POST">
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <input type="text" class="form-control form-control-user" id="name" name="txtName"
+                                                       placeholder="Name">
+                                                <span class="form__message"></span>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="number" class="form-control form-control-user" id="phone" name="txtPhone"
+                                                       placeholder="Phone Number">
+                                                <span class="form__message"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <c:set var="error" value="${requestScope.EMAIL_EXISTED}"/>
+                                            <input type="email" class="form-control form-control-user" id="email" name="txtEmail"
+                                                   placeholder="Email Address">
+                                            <c:if test="${not empty error.emailIsExisted}">
+                                                <font color="red">
+                                                <h4>${error.emailIsExisted}</h4>
+                                                </font>
+                                            </c:if>
+                                            <span class="form__message"></span>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <input type="password" class="form-control form-control-user" name="txtPassword"
+                                                       id="password" placeholder="Password">
+                                                <span class="form__message"></span>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="password" class="form-control form-control-user" name="txtConfirmPassword"
+                                                       id="password_comfirmation" placeholder="Repeat Password">
+                                                <span class="form__message"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6">
+                                                <select name="cboRole" id="" class="selection__roll">
+                                                    <option value="1">Admin</option>
+                                                    <option value="0">User</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                            Register Account
+                                        </button>
+                                        <hr>
+                                        <a href="index.html" class="btn btn-google btn-user btn-block">
+                                            <i class="fab fa-google fa-fw"></i> Register with Google
+                                        </a>
+
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="login.html">Already have an account? Login!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -530,6 +634,31 @@
         <script src="js/demo/datatables-demo.js"></script>
         <!-- list Account -->
         <script src="js/demo/listAccount.js"></script>
+        <!-- Link js register 8/3/2023 -->
+        <script src="js/demo/register.js"></script>
+        <script>
+                                    Validator({
+                                        form: '#user',
+                                        errorSelector: '.form__message',
+                                        rules: [
+                                            Validator.isRequired('#name', 'Vui lòng nhập tên đầy đủ của bạn'),
+                                            Validator.isName('#name'),
+                                            Validator.isRequired('#phone', 'Vui lòng nhập số điện thoại'),
+                                            Validator.isPhone('#phone'),
+                                            Validator.isMinNumberPhone('#phone', 10),
+                                            Validator.isRequired('#email'),
+                                            Validator.isEmail('#email'),
+                                            Validator.minLength('#password', 6),
+                                            Validator.isComfirmed('#password_comfirmation', function () {
+                                                return document.querySelector('#user #password').value;
+                                            }, 'Mật khẩu nhập lại không chính xác')
 
+
+                                        ],
+                                        onsubmit: function (data) {
+                                            console.log(data)
+                                        }
+                                    });
+        </script>
     </body>
 </html>

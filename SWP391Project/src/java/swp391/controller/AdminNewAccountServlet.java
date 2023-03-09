@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import swp391.admin.AdminCreateError;
 import swp391.customer.CustomerDAO;
 import swp391.utils.MyApplicationConstants;
 
@@ -48,16 +49,27 @@ public class AdminNewAccountServlet extends HttpServlet {
         byte[] bytes1 = name.getBytes(StandardCharsets.ISO_8859_1);
         name = new String(bytes1, StandardCharsets.UTF_8);
         String password = request.getParameter("txtPassword");
+        String phone = request.getParameter("txtPhone");
         String email = request.getParameter("txtEmail");
         String txtRole = request.getParameter("cboRole");
         boolean role = Boolean.parseBoolean(txtRole);
+        boolean errorFound = false;
+        AdminCreateError errors = new AdminCreateError();
         try {
             CustomerDAO dao = new CustomerDAO();
-            boolean result = dao.adminCreateAccount(
-                    name, password, email, name, role);
-            if (result) {
-                url = siteMaps.getProperty(
-                        MyApplicationConstants.AdminNewAccountServlet.ADMINACCOUNTLIST_PAGE);
+            if (dao.checkEmail(email)) {
+                errorFound = true;
+                errors.setEmailIsExisted(email + " is existed!!!");
+            }
+            if (errorFound) {
+                request.setAttribute("EMAIL_EXISTED", errors);
+            } else {
+                boolean result = dao.adminCreateAccount(
+                        name, password, email, phone, role);
+                if (result) {
+                    url = siteMaps.getProperty(
+                            MyApplicationConstants.AdminNewAccountServlet.ADMINACCOUNTLIST_PAGE);
+                }
             }
         } catch (SQLException ex) {
             log("AdminNewAccountServlet _ SQL _ " + ex.getMessage());

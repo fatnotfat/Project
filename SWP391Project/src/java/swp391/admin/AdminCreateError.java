@@ -21,18 +21,23 @@ public class AdminCreateError implements Serializable {
     private String sizeError;
     private String confirmNotMatched;
     private String descriptionLengthError;
+    private String emailIsExisted;
 
     public AdminCreateError() {
     }
 
-    public AdminCreateError(String usernameLengthError, String passwordLengthError, String nameLengthError, String confirmNotMatched, String descriptionLengthError) {
+    public AdminCreateError(String usernameLengthError, String passwordLengthError, String nameLengthError, String quantityError, String priceError, String sizeError, String confirmNotMatched, String descriptionLengthError, String emailIsExisted) {
         this.usernameLengthError = usernameLengthError;
         this.passwordLengthError = passwordLengthError;
         this.nameLengthError = nameLengthError;
+        this.quantityError = quantityError;
+        this.priceError = priceError;
+        this.sizeError = sizeError;
         this.confirmNotMatched = confirmNotMatched;
         this.descriptionLengthError = descriptionLengthError;
+        this.emailIsExisted = emailIsExisted;
     }
-    
+
     /**
      * @return the usernameLengthError
      */
@@ -143,6 +148,20 @@ public class AdminCreateError implements Serializable {
      */
     public void setSizeError(String sizeError) {
         this.sizeError = sizeError;
+    }
+
+    /**
+     * @return the emailIsExisted
+     */
+    public String getEmailIsExisted() {
+        return emailIsExisted;
+    }
+
+    /**
+     * @param emailIsExisted the emailIsExisted to set
+     */
+    public void setEmailIsExisted(String emailIsExisted) {
+        this.emailIsExisted = emailIsExisted;
     }
 
 }

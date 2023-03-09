@@ -1,9 +1,20 @@
+function showCreateAccount() {
+    const formIncludeCreate = document.querySelector('.form__create');
+    if (formIncludeCreate.classList.contains("active")) {
+        formIncludeCreate.classList.remove('active')
+    } else {
+        formIncludeCreate.classList.add('active')
+
+    }
+
+}
+
 // Validation 
 function Validator(options) {
 
-    function getParent(element, selector){
-        while(element.parentElement){
-            if(element.parentElement.matches(selector)){
+    function getParent(element, selector) {
+        while (element.parentElement) {
+            if (element.parentElement.matches(selector)) {
                 return element.parentElement
             }
             element = element.parentElement;
@@ -56,7 +67,7 @@ function Validator(options) {
     var formElement = document.querySelector(options.form);
     if (formElement) {
         // Khi submit form ko bị chuyển trang
-        formElement.onsubmit = function (e) { 
+        formElement.onsubmit = function (e) {
             e.preventDefault();
 
             var isFormValid = true
@@ -65,7 +76,7 @@ function Validator(options) {
                 var inputElement = formElement.querySelector(rule.selector);
                 var isValid = validate(inputElement, rule);
                 if (!isValid) {
-                    isFormValid= false;
+                    isFormValid = false;
                 }
             });
 
@@ -79,9 +90,9 @@ function Validator(options) {
                         values[input.name] = input.value
                         return values;
                     }, {});
-                
+
                     options.onsubmit(formValues)
-                }else{
+                } else {
                     // trường hợp submit với yêu cầu mặc định
                     formElement.submit();
                 }
@@ -135,7 +146,7 @@ Validator.isName = function (selector, message) {
     return {
         selector: selector,
         test: function (value) {
-            var regex =  /[a-zA-Z]+$/;
+            var regex = /[a-zA-Z]+$/;
             return regex.test(value) ? undefined : message || "Tên vui lòng không có kí tự đặc biệt hoặc số nhé!"
         }
     }
@@ -146,17 +157,17 @@ Validator.isPhone = function (selector, message) {
     return {
         selector: selector,
         test: function (value) {
-            var regex =  /^[0-9]+$/;
+            var regex = /^[0-9]+$/;
             return regex.test(value) ? undefined : message || "Vui lòng nhập chữ số nhé!"
         }
     }
 }
 
-Validator.isMinNumberPhone = function(selector, min, message){
+Validator.isMinNumberPhone = function (selector, min, message) {
     return{
         selector: selector,
-        test: function(value){
-            return value.length >= min ? undefined : message || `Số điện thoại bao gồm ${min} số nhé!` 
+        test: function (value) {
+            return value.length >= min ? undefined : message || `Số điện thoại bao gồm ${min} số nhé!`
         }
     }
 }
@@ -191,5 +202,5 @@ Validator.isComfirmed = function (selector, getConfirmValue, message) {
             return value === getConfirmValue() ? undefined : message || "Giá trị nhập vào không chính xác"
         }
     }
-}   
+}
 
