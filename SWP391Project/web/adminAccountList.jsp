@@ -411,6 +411,12 @@
                         <p class="mb-4">Danh sách các account được tạo trên Store PDDTK <a target="_blank"
                                                                                            href="https://datatables.net">Link edit danh sách</a>.</p>
                         <button class="button__form-create-account" onclick="showCreateAccount()">Add a new Account</button>
+                        <c:set var="error" value="${requestScope.EMAIL_EXISTED}"/>
+                        <c:if test="${not empty error.emailIsExisted}">
+                            <font color="red">
+                            <h5>${error.emailIsExisted}</h5>
+                            </font>
+                        </c:if>
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
@@ -498,7 +504,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <a class="btn btn-primary" href="logoutController">Logout</a>
                     </div>
                 </div>
             </div>
@@ -561,14 +567,8 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <c:set var="error" value="${requestScope.EMAIL_EXISTED}"/>
                                             <input type="email" class="form-control form-control-user" id="email" name="txtEmail"
                                                    placeholder="Email Address">
-                                            <c:if test="${not empty error.emailIsExisted}">
-                                                <font color="red">
-                                                <h4>${error.emailIsExisted}</h4>
-                                                </font>
-                                            </c:if>
                                             <span class="form__message"></span>
                                         </div>
                                         <div class="form-group row">

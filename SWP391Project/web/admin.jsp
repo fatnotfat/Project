@@ -36,6 +36,7 @@
     </head>
 
     <body id="page-top">
+        <c:set var="adminName" value="${sessionScope.USER}"/>
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -367,11 +368,12 @@
                             <div class="topbar-divider d-none d-sm-block"></div>
 
                             <!-- Nav Item - User Information -->
+
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                        Nguyễn Tiến Phát
+                                        ${adminName.name}
                                     </span>
                                     <!--                                    <img class="img-profile rounded-circle"
                                                                              src="https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/334095979_1611204769341531_5193060445120695864_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=cw79_IXEh3IAX9NXbqC&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfC8_nZh_2-ePeA4Tb4zxjeehgPHnNIQUsFxEd1mGGDLww&oe=6406C088">-->
@@ -790,7 +792,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <a class="btn btn-primary" href="logoutController">Logout</a>
                     </div>
                 </div>
             </div>

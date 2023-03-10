@@ -74,6 +74,15 @@ public class LoginServlet extends HttpServlet {
                     if (result.isRole() == true) {
                         url = siteMaps.getProperty(
                                 MyApplicationConstants.LoginServlet.ADMIN_PAGE);
+
+                        HttpSession session = request.getSession();
+                        session.setAttribute("USER", result);
+                        if (checkLogged != null) {
+                            email = URLEncoder.encode(email, "UTF-8");
+                            Cookie cookie = new Cookie(email, password);
+                            cookie.setMaxAge(60 * 3);
+                            response.addCookie(cookie);
+                        }
                     } else {
                         url = siteMaps.getProperty(
                                 MyApplicationConstants.LoginServlet.MAIN_PAGE);
