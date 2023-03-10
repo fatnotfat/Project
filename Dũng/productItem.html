@@ -472,13 +472,23 @@
                                 </div>
                                 <div class="product__item-info-review-input">
                                   <label for="stored-review" class="field-label">Write your review</label>
-                                  <input type="text" class="field-input" id="stored-review" placeholder="Your review">
+                                  <textarea type="text" class="field-input" id="stored-review" placeholder="Your review">
+                                  </textarea>
+                                </div>
+                                <div class="product__item-info-review-star">
+                                  <button class="star">&#9734;</button>
+                                  <button class="star">&#9734;</button>
+                                  <button class="star">&#9734;</button>
+                                  <button class="star">&#9734;</button>
+                                  <button class="star">&#9734;</button>
+                                  <p class="current-rating">0 of 5</p>
                                 </div>
                                 <div class="product__item-info-review-btn">
                                   <button class="product__item-info-review-btn-submit"><i class="fa-solid fa-pen"></i> SEND</button>
                                 </div>
                               </div>
                               <div class="product__item-info-review-list">
+                                <!-- ITEM COMMENT -->
                                 <div class="product__item-info-review-list-item">
                                   <div>
                                     <img src="./assets/image/default-avatar_120.jpg" alt="picture" class="product__item-info-review-list-item-avatar">
@@ -489,7 +499,7 @@
                                     </p>
                                     <div class="product__item-info-review-list-item-content-rating">
                                       <div class="product__item-info-review-list-item-content-rating rating">
-                                        <span class="star">&#9734;</span> 5
+                                        <span class="star-cmt">&#9733;</span> 5
                                       </div>
                                       <div class="product__item-info-review-list-item-content-rating date">
                                         3/10/2023 
@@ -502,6 +512,7 @@
                                     </div>
                                   </div>
                                 </div>
+                                <!-- ITEM COMMENT -->
                               </div>
                             </div> 
                         </div>
@@ -800,7 +811,8 @@
           </div>
         </footer>
     </div>
-   
+   <script src="./js/app.js"></script>
+   <script src="./js/rating-star.js"></script>
 </body>
 
 </html>
