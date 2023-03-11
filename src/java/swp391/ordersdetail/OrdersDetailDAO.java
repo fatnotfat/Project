@@ -40,6 +40,7 @@ public class OrdersDetailDAO implements Serializable {
                         + "where ProductID = ?";
                 stm1 = con.prepareStatement(sql1);
                 Map<String, Integer> items = cart.getItems();
+//                boolean isFirstTimeInsertProduct = true;
                 for (String productID : items.keySet()) {
                     stm1.setString(1, productID);
                     rs = stm1.executeQuery();
@@ -62,6 +63,16 @@ public class OrdersDetailDAO implements Serializable {
                         stm2.setInt(6, shippingID);
                         stm2.setFloat(7, total);
                         stm2.setInt(8, status);
+//                        if (isFirstTimeInsertProduct == true) {
+//                            stm2.setString(9, cusName);
+//                            stm2.setString(10, cusPhone);
+//                            stm2.setString(11, cusAddress);
+//                            isFirstTimeInsertProduct = false;
+//                        } else{
+//                            stm2.setNull(9, java.sql.Types.VARCHAR);
+//                            stm2.setNull(10, java.sql.Types.VARCHAR);
+//                            stm2.setNull(11, java.sql.Types.VARCHAR);
+//                        }
                         stm2.setString(9, cusName);
                         stm2.setString(10, cusPhone);
                         stm2.setString(11, cusAddress);
@@ -112,13 +123,14 @@ public class OrdersDetailDAO implements Serializable {
         return ordersDetails;
     }
 
-    public List<OrdersDetailDTO> getCustomerDetailsByCusID(int customerId) throws NamingException {
+    public List<OrdersDetailDTO> getCustomerInFoDetailsByCusID(int customerId) throws NamingException {
         List<OrdersDetailDTO> customerDetails = new ArrayList<>();
-        String sql = "SELECT od.OrdersDtID, od.CusName, od.CusPhone, od.CusAddress\n"
+        String sql = "SELECT MIN(od.OrdersDtID) AS OrdersDtID, od.CusName, od.CusPhone, od.CusAddress\n"
                 + "FROM OrdersDetail od\n"
                 + "INNER JOIN Orders o ON o.OrdersDtID = od.OrdersDtID\n"
                 + "INNER JOIN Customer c ON c.CustomerID = o.CustomerID\n"
-                + "WHERE c.CustomerID = ? and od.CusName is not null";
+                + "WHERE c.CustomerID = ? AND od.CusName IS NOT NULL\n"
+                + "GROUP BY od.CusName, od.CusPhone, od.CusAddress";
         try (Connection conn = DBHelper.makeConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, customerId);

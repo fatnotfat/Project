@@ -88,7 +88,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("USER", result);
                     if (result != null) {
                         OrdersDetailDAO ordersDetailDAO = new OrdersDetailDAO();
-                        List<OrdersDetailDTO> customerOrders = ordersDetailDAO.getCustomerDetailsByCusID(result.getCustomerID());
+                        List<OrdersDetailDTO> customerOrders = ordersDetailDAO.getCustomerInFoDetailsByCusID(result.getCustomerID());
                         session.setAttribute("USER_SHIPPINGINFO", customerOrders);
                     }
 

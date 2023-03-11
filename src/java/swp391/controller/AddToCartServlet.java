@@ -64,12 +64,6 @@ public class AddToCartServlet extends HttpServlet {
             cart.addItemToCart(id);
             session.setAttribute("CART", cart);
             
-             CustomerDTO user = (CustomerDTO) session.getAttribute("USER");
-             if (user != null) {
-                        OrdersDetailDAO ordersDetailDAO = new OrdersDetailDAO();
-                        List<OrdersDetailDTO> customerOrders = ordersDetailDAO.getCustomerDetailsByCusID(user.getCustomerID());
-                        session.setAttribute("USER_SHIPPINGINFO", customerOrders);
-                    }
         } catch (NamingException ex) {
             log("AddToCartServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {

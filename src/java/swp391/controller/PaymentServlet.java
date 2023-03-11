@@ -26,8 +26,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import swp391.cart.CartObject;
 import swp391.customer.CustomerCreateError;
+import swp391.customer.CustomerDTO;
 import swp391.orders.OrdersDAO;
 import swp391.ordersdetail.OrdersDetailDAO;
+import swp391.ordersdetail.OrdersDetailDTO;
 import swp391.utils.MyApplicationConstants;
 
 /**
@@ -62,10 +64,12 @@ public class PaymentServlet extends HttpServlet {
 
         CustomerCreateError errors = new CustomerCreateError();
         try {
+
             if (txtPaymentID == null) {
                 errors.setPaymentIDLengthError("Please choose the payment method");
                 request.setAttribute("PAYMENT_ERROR", errors);
             } else {
+
                 CartObject cart = (CartObject) request.getSession().getAttribute("CART");
                 int paymentID = Integer.parseInt(txtPaymentID);
                 if (paymentID == 1 || paymentID == 2) {
@@ -77,15 +81,15 @@ public class PaymentServlet extends HttpServlet {
                     String defaultOrNewShippingInfo = (String) session.getAttribute("defaultOrNewShippingInfo");
                     if (defaultOrNewShippingInfo != null && defaultOrNewShippingInfo.equals("0")) {
                         // Người dùng đã chọn địa chỉ giao hàng mặc định
-                        String cusName = "";
-                        String cusAddress = "";
-                        String cusPhone = "";
+                        String cusName = (String) session.getAttribute("customerName");
+                        String cusAddress = (String) session.getAttribute("customerAddress");
+                        String cusPhone = (String) session.getAttribute("customerPhone");
                         List<Integer> orderDetails = ordersDetailDAO.addToOrdersDetail(cart, discount, paymentID, shippingID, status, cusName, cusPhone, cusAddress);
                         OrdersDAO ordersDAO = new OrdersDAO();
                         for (Integer orderDetail : orderDetails) {
                             ordersDAO.addToOrders(customerID, orderDetail);
                         }
-                    } else {
+                    } else if (defaultOrNewShippingInfo != null && defaultOrNewShippingInfo.equals("1")) {
                         // Người dùng đã thêm thông tin giao hàng mới
                         String firstName = (String) session.getAttribute("firstName");
                         String lastName = (String) session.getAttribute("lastName");
@@ -96,6 +100,22 @@ public class PaymentServlet extends HttpServlet {
                         for (Integer orderDetail : orderDetails) {
                             ordersDAO.addToOrders(customerID, orderDetail);
                         }
+                    } else {
+                        String firstName = (String) session.getAttribute("txtFirstName");
+                        String lastName = (String) session.getAttribute("txtLastName");
+                        String customerAddress = (String) session.getAttribute("txtAddress");
+                        String customerPhone = (String) session.getAttribute("txtPhone");
+                        List<Integer> orderDetails = ordersDetailDAO.addToOrdersDetail(cart, discount, paymentID, shippingID, status, firstName + " " + lastName, customerPhone, customerAddress);
+                        OrdersDAO ordersDAO = new OrdersDAO();
+                        for (Integer orderDetail : orderDetails) {
+                            ordersDAO.addToOrders(customerID, orderDetail);
+                        }
+                    }
+                    CustomerDTO user = (CustomerDTO) session.getAttribute("USER");
+                    if (user != null) {
+                        OrdersDetailDAO ordersDetailDAOs = new OrdersDetailDAO();
+                        List<OrdersDetailDTO> customerOrders = ordersDetailDAOs.getCustomerInFoDetailsByCusID(user.getCustomerID());
+                        session.setAttribute("USER_SHIPPINGINFO", customerOrders);
                     }
                     url = siteMaps.getProperty(
                             MyApplicationConstants.PaymentServlet.CHECKOUT_PAGE);

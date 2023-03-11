@@ -193,6 +193,12 @@ public class ShippingServlet extends HttpServlet {
                     if (errorFound) {
                         request.setAttribute("SIGNUPFORSHIPPING_ERROR", errors);
                     } else {
+                        session.setAttribute("txtFirstName", firstName);
+                        session.setAttribute("txtLastName", lastName);
+                        session.setAttribute("txtAddress", address);
+                        session.setAttribute("txtPhone", phone);
+                        session.setAttribute("txtEmail", email);
+
                         dao.createAccountForShipping(firstName + " " + lastName,
                                 email, phone, address);
 
