@@ -689,6 +689,6 @@
         </div>
 
 
-        <script src="js/app2.js"></script>
+        <script src="js/payment.js"></script>
     </body>
 </html>
