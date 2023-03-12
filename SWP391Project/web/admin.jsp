@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 
 <!DOCTYPE html>
@@ -45,7 +46,7 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="adminPage">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="adminOrdersRevenueController">
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>
@@ -57,7 +58,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="adminPage">
+                    <a class="nav-link" href="adminOrdersRevenueController">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -197,53 +198,65 @@
                         </div>
 
                         <!-- Content Row -->
-
-                        <form class="row" >
+                        <c:set var="monthRevenue" value="${requestScope.MONTHREVENUE_RESULT}"/>
+                        <c:set var="yearRevenue" value="${requestScope.YEARREVENUE_RESULT}"/>
+                        <form action="adminOrdersRevenueController" class="row" method="POST" >
                             <!-- Earnings (Monthly) Card Example -->
-                            <div class="change__card col-md-6 mb-4   ">
-                                <div class="card border-left-primary shadow h-100 py-2 month-year ">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Doanh thu (Tháng)</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-calendar fa-2x text-gray-400" style="position: relative;"
-                                                   onclick="showCalendarMonth()">
-                                                </i>
-                                                <div class="calendar_search">
-                                                    <input class="calendar_month" type="month" name="bday-month"
-                                                           value="2023-01" />
-                                                    <button class="calendar_month-button">Find</button>
+                            <c:if test="${not empty monthRevenue}">
+                                <div class="change__card col-md-6 mb-4   ">
+                                    <div class="card border-left-primary shadow h-100 py-2 month-year ">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <c:forEach var="dto" items="${monthRevenue}">
+                                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                            Doanh thu (tháng ${dto.month} năm ${dto.year}) 
+                                                        </div>
+                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                            <fmt:formatNumber value="${dto.revenue}"/> VNĐ
+                                                        </div>
+                                                    </c:forEach>
                                                 </div>
-
+                                                <div class="col-auto">
+                                                    <i class="fas fa-calendar fa-2x text-gray-400" style="position: relative;"
+                                                       onclick="showCalendarMonth()">
+                                                    </i>
+                                                    <div class="calendar_search">
+                                                        <input class="calendar_month" type="month" name="bday-month"
+                                                               value="2023-01" />
+                                                        <button class="calendar_month-button">Find</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
+                            </c:if>
                             <!-- Earnings (Year) Card Example -->
-                            <div class="change__card col-md-6 mb-4 ">
-                                <div class="card border-left-success shadow h-100 py-2 month-year ">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Doanh thu (năm)</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <c:if test="${not empty yearRevenue}">
+                                <div class="change__card col-md-6 mb-4 ">
+                                    <div class="card border-left-success shadow h-100 py-2 month-year ">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <c:forEach var="dto" items="${yearRevenue}">
+                                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                            Doanh thu (năm ${dto.year})
+                                                        </div>
+                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                            <fmt:formatNumber value="${dto.revenue}"/> VNĐ
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </c:if>
                         </form>
-
                         <div class="row">
                             <!-- Earnings (Monthly) Card Example -->
                             <div class="change__card col-md-6 mb-4">
@@ -496,20 +509,5 @@
         <script src="js/demo/styleCustomize.js"></script>
     </body>
 </html>
-
-<!--<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Administrator Page</title>
-    </head>
-    <body>
-        <h1>Administrator page</h1>
-        <a href="adminNewCategoryPage">New category</a><br/>
-        <a href="adminNewBrandPage">New brand</a><br/>
-        <a href="adminNewProductController">New product</a><br/>
-        <a href="adminSearchProductPage">Update product</a><br/>
-        <a href="adminSearchOrdersController">View Orders</a><br/>
-    </body>
-</html>-->
 
 

@@ -49,18 +49,21 @@ public class AdminProductListServlet extends HttpServlet {
         String url = siteMaps.getProperty(
                 MyApplicationConstants.AdminProductListServlet.ADMINPRODUCTLIST_PAGE);
         try {
-            ProductDAO dao = new ProductDAO();
-            dao.showProduct();
-            List<ProductDTO> result = dao.getItemsList();
-            request.setAttribute("PRODUCT_RESULT", result);
+            ProductDAO productDao = new ProductDAO();
+            productDao.showProduct();
+            List<ProductDTO> productResult = productDao.getItemsList();
+            request.setAttribute("PRODUCT_RESULT", productResult);
+
             CategoryDAO categoryDao = new CategoryDAO();
             categoryDao.showCategory();
             List<CategoryDTO> categoryResult = categoryDao.getCategorysList();
             request.setAttribute("CATEGORY_RESULT", categoryResult);
+
             BrandDAO brandDao = new BrandDAO();
             brandDao.showBrand();
             List<BrandDTO> brandResult = brandDao.getBrandsList();
             request.setAttribute("BRAND_RESULT", brandResult);
+
             url = siteMaps.getProperty(
                     MyApplicationConstants.AdminProductListServlet.ADMINPRODUCTLIST_PAGE);
         } catch (NamingException ex) {

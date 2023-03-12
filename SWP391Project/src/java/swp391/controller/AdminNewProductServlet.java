@@ -51,10 +51,10 @@ public class AdminNewProductServlet extends HttpServlet {
                 MyApplicationConstants.AdminNewProductServlet.ADMINPRODUCTLIST_PAGE);
         String name = request.getParameter("txtName");
         String description = request.getParameter("txtDescription");
-        byte[] bytes1 = name.getBytes(StandardCharsets.ISO_8859_1);
-        name = new String(bytes1, StandardCharsets.UTF_8);
-        byte[] bytes2 = description.getBytes(StandardCharsets.ISO_8859_1);
-        description = new String(bytes2, StandardCharsets.UTF_8);
+//        byte[] bytes1 = name.getBytes(StandardCharsets.ISO_8859_1);
+//        name = new String(bytes1, StandardCharsets.UTF_8);
+//        byte[] bytes2 = description.getBytes(StandardCharsets.ISO_8859_1);
+//        description = new String(bytes2, StandardCharsets.UTF_8);
         String txtQuantity = request.getParameter("txtQuantity");
         int quantity = Integer.parseInt(txtQuantity);
         String txtPrice = request.getParameter("txtPrice");

@@ -6,6 +6,7 @@
 package swp391.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
@@ -17,16 +18,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import swp391.customer.CustomerDAO;
-import swp391.customer.CustomerDTO;
+import swp391.orders.OrdersDAO;
+import swp391.orders.OrdersDTO;
 import swp391.utils.MyApplicationConstants;
 
 /**
  *
  * @author Chau Nhat Truong
  */
-@WebServlet(name = "AdminAccountListServlet", urlPatterns = {"/AdminAccountListServlet"})
-public class AdminAccountListServlet extends HttpServlet {
+@WebServlet(name = "AdminOrdersRevenueServlet", urlPatterns = {"/AdminOrdersRevenueServlet"})
+public class AdminOrdersRevenueServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,18 +44,24 @@ public class AdminAccountListServlet extends HttpServlet {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
-                MyApplicationConstants.AdminAccountListServlet.ADMINACCOUNTLIST_PAGE);
+                MyApplicationConstants.AdminOrdersRevenueServlet.ADMIN_PAGE);
         try {
-            CustomerDAO dao = new CustomerDAO();
-            dao.showCustomer();
-            List<CustomerDTO> result = dao.getAccountList();
-            request.setAttribute("CUSTOMER_RESULT", result);
+            OrdersDAO dao1 = new OrdersDAO();
+            dao1.showOrdersRevenueByMonth();
+            List<OrdersDTO> result1 = dao1.getOrdersList1();
+            request.setAttribute("MONTHREVENUE_RESULT", result1);
+
+            OrdersDAO dao2 = new OrdersDAO();
+            dao2.showOrdersRevenueByYear();
+            List<OrdersDTO> result2 = dao2.getOrdersList2();
+            request.setAttribute("YEARREVENUE_RESULT", result2);
+
             url = siteMaps.getProperty(
-                    MyApplicationConstants.AdminAccountListServlet.ADMINACCOUNTLIST_PAGE);
+                    MyApplicationConstants.AdminOrdersRevenueServlet.ADMIN_PAGE);
         } catch (NamingException ex) {
-            log("AdminAccountListServlet _ Naming _ " + ex.getMessage());
+            log("AdminOrdersRevenueServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {
-            log("AdminAccountListServlet _ SQL _ " + ex.getMessage());
+            log("AdminOrdersRevenueServlet _ SQL _ " + ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

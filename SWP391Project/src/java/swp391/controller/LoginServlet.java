@@ -74,7 +74,6 @@ public class LoginServlet extends HttpServlet {
                     if (result.isRole() == true) {
                         url = siteMaps.getProperty(
                                 MyApplicationConstants.LoginServlet.ADMIN_PAGE);
-
                         HttpSession session = request.getSession();
                         session.setAttribute("USER", result);
                         if (checkLogged != null) {
