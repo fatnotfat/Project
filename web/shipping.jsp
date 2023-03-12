@@ -418,11 +418,11 @@
                                                             class="input-radio"
                                                             />
                                                     </div>
-                                                    <span class="radio-label-primary">Thông tin giao hàng mặc định</span>
+                                                    <span class="radio-label-primary">Default shipping information</span>
                                                 </label>
                                             </div>
 
-                                            <div class="shipping-info-left-form-delivery-address">
+                                            <div class="shipping-info-left-form-delivery-address-option">
                                                 <div class="container">
                                                     <label class="field-label" for="stored-address">Choose your Information here...</label>
                                                     <select class="field-input" id="stored-addresses" name="stored-infoCus-by-orDetID">
@@ -442,6 +442,7 @@
                                                 <font color="red">${errors.defaultOrNewShippingInforLengthError}</font><br/>
                                             </c:if>
                                             <div class="shipping-info-left-form-delivery-store">
+                                                <div class="shipping-info-left-form-delivery-home-new">
                                                 <label class="radio-label">
                                                     <div class="radio-input">
                                                         <input
@@ -453,9 +454,11 @@
                                                             />
                                                     </div>
                                                     <span class="radio-label-primary"
-                                                          >Thêm thông tin giao hàng mới</span
+                                                          >Add new shipping information</span
                                                     >
                                                 </label>
+                                                   </div>     
+                                                <div class="shipping-info-left-form-delivery-store-info"> 
                                                 <div class="shipping-info-left-form-name">
                                                     <div class="container">
                                                         <label class="field-label" for="stored-name"
@@ -477,7 +480,7 @@
                                                     </c:if>
 
                                                 </div>
-                                                <div class="shipping-info-left-form-name">
+                                                <div class="shipping-info-left-form-name-last">
                                                     <div class="container">
                                                         <label class="field-label" for="stored-name"
                                                                >Enter Last Name...</label
@@ -599,6 +602,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
