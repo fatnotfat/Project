@@ -51,10 +51,6 @@ public class AdminNewProductServlet extends HttpServlet {
                 MyApplicationConstants.AdminNewProductServlet.ADMINPRODUCTLIST_PAGE);
         String name = request.getParameter("txtName");
         String description = request.getParameter("txtDescription");
-//        byte[] bytes1 = name.getBytes(StandardCharsets.ISO_8859_1);
-//        name = new String(bytes1, StandardCharsets.UTF_8);
-//        byte[] bytes2 = description.getBytes(StandardCharsets.ISO_8859_1);
-//        description = new String(bytes2, StandardCharsets.UTF_8);
         String txtQuantity = request.getParameter("txtQuantity");
         int quantity = Integer.parseInt(txtQuantity);
         String txtPrice = request.getParameter("txtPrice");
@@ -65,6 +61,8 @@ public class AdminNewProductServlet extends HttpServlet {
         int categoryID = Integer.parseInt(cboCategory);
         String cboBrand = request.getParameter("cboBrand");
         int brandID = Integer.parseInt(cboBrand);
+        String image1 = request.getParameter("image1");
+        String image2 = request.getParameter("image2");
         try {
             CategoryDAO categoryDao = new CategoryDAO();
             categoryDao.showCategory();
@@ -74,16 +72,14 @@ public class AdminNewProductServlet extends HttpServlet {
             brandDao.showBrand();
             List<BrandDTO> brandResult = brandDao.getBrandsList();
             request.setAttribute("BRAND_RESULT", brandResult);
-//            } else {
             ProductDAO dao = new ProductDAO();
             ProductDTO dto = new ProductDTO(name, description, quantity,
-                    price, size, categoryID, brandID);
+                    price, size, categoryID, brandID, image1, image2);
             boolean result = dao.createProduct(dto);
             if (result) {
                 url = siteMaps.getProperty(
                         MyApplicationConstants.AdminNewProductServlet.ADMINPRODUCTLIST_PAGE);
             }
-//            }
         } catch (NamingException ex) {
             log("AdminNewProductServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {
