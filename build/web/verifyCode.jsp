@@ -314,9 +314,18 @@
             <img src="images/Nav-line.png" alt="" />
             <div class="forgot">
                 <div class="container">
-                    <div class="forgot-heading">
-                        <h1>Password Recovery</h1>
-                    </div>
+                    <c:set var="signUp" value="${sessionScope.SIGNUP_URL}" />
+                    <c:if test="${empty signUp}">
+                        <div class="forgot-heading">
+                            <h1>Password Recovery</h1>
+                        </div>
+                    </c:if>
+                    
+                    <c:if test="${not empty signUp}">
+                        <div class="forgot-heading">
+                            <h1>Confirm Email</h1>
+                        </div>
+                    </c:if>
                     <img class="forgot-space" srcset="images/Login-line.png 2x" alt="" />
                     <img class="forgot-space-mobile" srcset="images/register-line-mobile.png 2x" alt="">
                     <div class="forgot-form-container">

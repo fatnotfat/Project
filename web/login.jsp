@@ -470,6 +470,16 @@
                                 <c:if test="${not empty emailExisted}">
                                     <p style="color: red; font-size: 20px; margin-bottom: 20px">${emailExisted}</p>
                                 </c:if>
+                                <%--<c:set var="signUpNoti" value="${requestScope.SIGNUP-NOTI}" />
+                                <c:if test="${not empty signUpNoti}">
+                                    <p style="color: red;">${signUpNoti}</p>
+                                </c:if>
+                                
+                                <c:set var="resetPasswordNoti" value="${requestScope.RESET-NOTI}" />
+                                <c:if test="${not empty signUpNoti}">
+                                    <p style="color: red;">${resetPasswordNoti}</p>
+                                </c:if>
+                                --%>
                                 <button class="login-function-btn" type="submit">Login</button>
                                 <p class="login-function-register">
                                     <span class="login-function-register-question">

@@ -7,7 +7,10 @@ package swp391.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Properties;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,6 +19,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import swp391.customer.CustomerDAO;
+import swp391.customer.CustomerDTO;
 import swp391.customer.CustomerForgotPassword;
 import swp391.utils.MyApplicationConstants;
 import swp391.verify.VerifyError;
@@ -61,13 +66,33 @@ public class VerifyCodeServlet extends HttpServlet {
                 request.setAttribute("VERIFYCODE_SCOPE", errors);
             } else {
                 if (stringCode.equals(customer.getCode())) {
-                    url = siteMaps.getProperty(
-                            MyApplicationConstants.VerifyCodeServlet.RESETPASSWORD_PAGE);
+                    url = (String) session.getAttribute("SIGNUP_URL");
+                    if (url != null) {
+                        CustomerDAO dao = new CustomerDAO();
+                        CustomerDTO dto = (CustomerDTO) session.getAttribute("CREATE_ACCOUNT");
+                        boolean result = dao.createAccount(dto);
+                        if (result) {
+                            session.setAttribute("SIGNUP-NOTI", "Sign Up successfully!!");
+                            url = siteMaps.getProperty(
+                                    MyApplicationConstants.CreateAccountServlet.LOGIN_PAGE);
+                            session.invalidate();
+                        }
+                    } else {
+                        session.setAttribute("RESET-NOTI", "Reset password successfully!!");
+                        url = siteMaps.getProperty(
+                                MyApplicationConstants.VerifyCodeServlet.RESETPASSWORD_PAGE);
+                    }
                 } else {
                     errors.setCodeNotExisted("Sorry, code is not wrong, please recheck and try again!");
                     request.setAttribute("VERIFYCODE_SCOPE", errors);
                 }
             }
+        } catch (NamingException ex) {
+            log("VerifyCodeServlet _ Naming _ " + ex.getMessage());
+        } catch (ParseException ex) {
+            log("VerifyCodeServlet _ Parse _ " + ex.getMessage());
+        } catch (SQLException ex) {
+            log("VerifyCodeServlet _ SQL _ " + ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

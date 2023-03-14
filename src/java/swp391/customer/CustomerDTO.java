@@ -24,7 +24,7 @@ public class CustomerDTO implements Serializable {
     private boolean role;
     private int rankID;
     private boolean sex;
-    private boolean typeOfLogin;
+    private int typeOfLogin;
 
     public CustomerDTO() {
     }
@@ -33,7 +33,7 @@ public class CustomerDTO implements Serializable {
         this.name = name;
     }
 
-    public CustomerDTO(int customerID, String name, Date birthDate, String email, String phone, String address, int rankID, boolean sex, boolean typeOfLogin) {
+    public CustomerDTO(int customerID, String name, Date birthDate, String email, String phone, String address, int rankID, boolean sex, int typeOfLogin) {
         this.customerID = customerID;
         this.name = name;
         this.birthDate = birthDate;
@@ -47,7 +47,7 @@ public class CustomerDTO implements Serializable {
     
     
     public CustomerDTO(String name, String password, Date birthDate,
-            String email, String phone, String address, boolean role, int rankID, boolean sex, boolean typeOfLogin) {
+            String email, String phone, String address, boolean role, int rankID, boolean sex, int typeOfLogin) {
         this.name = name;
         this.password = password;
         this.birthDate = birthDate;
@@ -62,7 +62,7 @@ public class CustomerDTO implements Serializable {
     
     
     public CustomerDTO(String name, Date birthDate,
-            String email, String phone, String address, boolean role, int rankID, boolean sex, boolean typeOfLogin) {
+            String email, String phone, String address, boolean role, int rankID, boolean sex, int typeOfLogin) {
         this.name = name;
         this.birthDate = birthDate;
         this.email = email;
@@ -210,11 +210,11 @@ public class CustomerDTO implements Serializable {
         this.sex = sex;
     }
 
-    public boolean isTypeOfLogin() {
+    public int getTypeOfLogin() {
         return typeOfLogin;
     }
 
-    public void setTypeOfLogin(boolean typeOfLogin) {
+    public void setTypeOfLogin(int typeOfLogin) {
         this.typeOfLogin = typeOfLogin;
     }
 

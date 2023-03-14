@@ -73,7 +73,7 @@
                 background-color: #0c71c3;
             }
         </style>
-        <script src="js/cart.js"></script>
+        <script src="js/cart1.js"></script>
         <link rel="stylesheet" href="style/reset.css" />
         <link rel="stylesheet" href="style/payment-1.css" />
     </head>
@@ -689,9 +689,11 @@
                                                         You can also enter the discount code at the checkout
                                                         page.
                                                     </p>
-                                                    <button class="your-cart-body-right-order-btn">
-                                                        PAY
-                                                    </button>
+                                                    <form action="">
+                                                        <button class="your-cart-body-right-order-btn">
+                                                            PAY
+                                                        </button>
+                                                    </form>
                                                     <a href="SearchByFilterServlet?txtProductCateID=1" class="your-cart-body-right-order-continue">
                                                         Continue shopping
                                                     </a>
@@ -776,6 +778,6 @@
                 </div>
             </footer>
         </div>
-        <script src="js/app.js"></script>
+        <script src="js/header.js"></script>
     </body>
 </html>

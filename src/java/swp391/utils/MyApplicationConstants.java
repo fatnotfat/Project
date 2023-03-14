@@ -15,6 +15,7 @@ public class MyApplicationConstants {
 
         public static final String ERROR_PAGE = "signUpPage";
         public static final String LOGIN_PAGE = "loginPage";
+        public static final String SEND_EMAIL = "verifyCodePage";
     }
 
     public class DeleteAccountServlet {

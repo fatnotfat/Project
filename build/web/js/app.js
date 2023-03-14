@@ -1,4 +1,3 @@
-
 // ______________________________________ICON____________________________________________
 // Get references to the search tab and its content
 const searchTab = document.querySelector(".menu-icon-tab-search");
@@ -107,125 +106,125 @@ document.addEventListener('click', function () {
 });
 
 // ________________________________________________VALIDATE_______________________________________
-
-var firstName = document.querySelector("#first-name");
-var lastName = document.querySelector("#last-name");
-// var male = document.querySelector('#gender-male')
-// var female = document.querySelector('#gender-female')
-var date = document.querySelector("#date");
-var phone = document.querySelector("#phone");
-var address = document.querySelector('#address')
-var password = document.querySelector("#password");
-var confirmPassword = document.querySelector("#confirm-password");
-var form = document.querySelector("form");
-// Ham show error
-function showError(input, message) {
-    let parent = input.parentElement;
-    let small = parent.querySelector("small");
-
-    parent.classList.add("error");
-    small.innerText = message;
-}
-// Ham show no error
-function showSuccess(input) {
-    let parent = input.parentElement;
-    let small = parent.querySelector("small");
-
-    parent.classList.remove("error");
-    small.innerText = "";
-}
-// Ham kiem tra empty
-function checkEmptyError(listInput) {
-    let isEmptyError = false;
-    listInput.forEach((input) => {
-        input.value = input.value.trim();
-
-        if (!input.value) {
-            isEmptyError = true;
-            showError(input, "Does not allow empty!");
-        } else {
-            showSuccess(input);
-        }
-    });
-    return isEmptyError;
-}
-// Ham kiem tra email
-function checkPhone(input) {
-    const regexPhone =
-            /^(0|84)(2(0[3-9]|1[0-6|8|9]|2[0-2|5-9]|3[2-9]|4[0-9]|5[1|2|4-9]|6[0-3|9]|7[0-7]|8[0-9]|9[0-4|6|7|9])|3[2-9]|5[5|6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])([0-9]{7})$/i;
-    input.value = input.value.trim();
-
-    let isPhoneError = !regexPhone.test(input.value);
-
-    if (regexPhone.test(input.value)) {
-        showSuccess(input);
-    } else {
-        showError(input, "Phone Invalid!");
-    }
-
-    return isPhoneError;
-}
-// Ham kiem tra do dai ki tu
-function checkLengthError(input, min, max) {
-    input.value = input.value.trim();
-
-    if (input.value.length < min) {
-        showError(input, `Must contain at least ${min} characters`);
-        return true;
-    }
-    if (input.value.length > max) {
-        showError(input, `No more than ${max} characters`);
-        return true;
-    }
-
-    return false;
-}
-// Ham kiem tra confirm password
-function checkMatchPasswordError(passwordInput, cfPasswordInput) {
-    if (passwordInput.value !== cfPasswordInput.value) {
-        showError(cfPasswordInput, "Password does not match");
-        return true;
-    }
-
-    return false;
-}
-
-
-
-
-
-
-form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    let isEmptyError = checkEmptyError([
-        firstName,
-        lastName,
-        date,
-        phone,
-        address,
-        password,
-        confirmPassword,
-    ]);
-    let isPhoneError = checkPhone(phone);
-    let isFirstNameLengthError = checkLengthError(firstName, 3, 10);
-    let isLastnameLengthError = checkLengthError(lastName, 3, 10);
-    let isPasswordLengthError = checkLengthError(password, 3, 10);
-    let isMatchError = checkMatchPasswordError(password, confirmPassword);
-    let isEmptyGender = checkEmptyGender();
-    if (
-            isEmptyError ||
-            isPhoneError ||
-            isPasswordLengthError ||
-            isMatchError ||
-            isFirstNameLengthError ||
-            isLastnameLengthError
-            ) {
-        //do nothing
-    } else {
-        //logic, call API, gọi service, .....
-    }
-});
+//
+//var firstName = document.querySelector("#first-name");
+//var lastName = document.querySelector("#last-name");
+//// var male = document.querySelector('#gender-male')
+//// var female = document.querySelector('#gender-female')
+//var date = document.querySelector("#date");
+//var phone = document.querySelector("#phone");
+//var address = document.querySelector('#address')
+//var password = document.querySelector("#password");
+//var confirmPassword = document.querySelector("#confirm-password");
+//var form = document.querySelector("form");
+//// Ham show error
+//function showError(input, message) {
+//    let parent = input.parentElement;
+//    let small = parent.querySelector("small");
+//
+//    parent.classList.add("error");
+//    small.innerText = message;
+//}
+//// Ham show no error
+//function showSuccess(input) {
+//    let parent = input.parentElement;
+//    let small = parent.querySelector("small");
+//
+//    parent.classList.remove("error");
+//    small.innerText = "";
+//}
+//// Ham kiem tra empty
+//function checkEmptyError(listInput) {
+//    let isEmptyError = false;
+//    listInput.forEach((input) => {
+//        input.value = input.value.trim();
+//
+//        if (!input.value) {
+//            isEmptyError = true;
+//            showError(input, "Does not allow empty!");
+//        } else {
+//            showSuccess(input);
+//        }
+//    });
+//    return isEmptyError;
+//}
+//// Ham kiem tra email
+//function checkPhone(input) {
+//    const regexPhone =
+//            /^(0|84)(2(0[3-9]|1[0-6|8|9]|2[0-2|5-9]|3[2-9]|4[0-9]|5[1|2|4-9]|6[0-3|9]|7[0-7]|8[0-9]|9[0-4|6|7|9])|3[2-9]|5[5|6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])([0-9]{7})$/i;
+//    input.value = input.value.trim();
+//
+//    let isPhoneError = !regexPhone.test(input.value);
+//
+//    if (regexPhone.test(input.value)) {
+//        showSuccess(input);
+//    } else {
+//        showError(input, "Phone Invalid!");
+//    }
+//
+//    return isPhoneError;
+//}
+//// Ham kiem tra do dai ki tu
+//function checkLengthError(input, min, max) {
+//    input.value = input.value.trim();
+//
+//    if (input.value.length < min) {
+//        showError(input, `Must contain at least ${min} characters`);
+//        return true;
+//    }
+//    if (input.value.length > max) {
+//        showError(input, `No more than ${max} characters`);
+//        return true;
+//    }
+//
+//    return false;
+//}
+//// Ham kiem tra confirm password
+//function checkMatchPasswordError(passwordInput, cfPasswordInput) {
+//    if (passwordInput.value !== cfPasswordInput.value) {
+//        showError(cfPasswordInput, "Password does not match");
+//        return true;
+//    }
+//
+//    return false;
+//}
+//
+//
+//
+//
+//
+//
+//form.addEventListener("submit", function (e) {
+//    e.preventDefault();
+//
+//    let isEmptyError = checkEmptyError([
+//        firstName,
+//        lastName,
+//        date,
+//        phone,
+//        address,
+//        password,
+//        confirmPassword,
+//    ]);
+//    let isPhoneError = checkPhone(phone);
+//    let isFirstNameLengthError = checkLengthError(firstName, 3, 10);
+//    let isLastnameLengthError = checkLengthError(lastName, 3, 10);
+//    let isPasswordLengthError = checkLengthError(password, 3, 10);
+//    let isMatchError = checkMatchPasswordError(password, confirmPassword);
+//    let isEmptyGender = checkEmptyGender();
+//    if (
+//            isEmptyError ||
+//            isPhoneError ||
+//            isPasswordLengthError ||
+//            isMatchError ||
+//            isFirstNameLengthError ||
+//            isLastnameLengthError
+//            ) {
+//        //do nothing
+//    } else {
+//        //logic, call API, gọi service, .....
+//    }
+//});
 
 const provinceSelect = document.getElementById('stored-city');
 const districtSelect = document.getElementById('stored-district');

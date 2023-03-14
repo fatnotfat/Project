@@ -6,12 +6,13 @@
 package swp391.controller;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -52,7 +53,7 @@ public class UpdateAccountServlet extends HttpServlet {
                 MyApplicationConstants.AccountFeature.ACCOUNT_UPDATE_PAGE);
         HttpSession session = request.getSession();
         CustomerDTO user = (CustomerDTO) session.getAttribute("USER");
-        if (!user.isTypeOfLogin()) {
+        if (user.getTypeOfLogin() == 0) {
             String firstName = request.getParameter("txtFirstName");
             String lastName = request.getParameter("txtLastName");
             String birthDateTxt = request.getParameter("txtBirthDate");
@@ -95,6 +96,16 @@ public class UpdateAccountServlet extends HttpServlet {
                     errorFound = true;
                     errors.setPhoneLengthError("You can't leave this empty!!!");
                 }
+
+                String regex = "^(\\+\\d{1,2})?\\s*(0|\\d{2})\\s*\\d{8}$"; // regular expression for valid phone number
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(phone);
+                if(!matcher.matches()){
+                    errorFound = true;
+                    errors.setPhoneLengthError("invalid phone number!!");
+                }
+                
+                
                 if (address.trim().length() < 1 || city.trim().length() < 1 || district.trim().length() < 1 || ward.trim().length() < 1) {
                     errorFound = true;
                     errors.setAddressLengthError("You can't leave this empty!!!");
@@ -116,7 +127,7 @@ public class UpdateAccountServlet extends HttpServlet {
                     }
 
                     CustomerDTO dto
-                            = new CustomerDTO(firstName + " " + lastName, password, birthday, user.getEmail(), phone, address + ", " + ward + ", " + district + ", " + city, user.isRole(), user.getRankID(), sex, false);
+                            = new CustomerDTO(firstName + " " + lastName, password, birthday, user.getEmail(), phone, address + ", " + ward + ", " + district + ", " + city, user.isRole(), user.getRankID(), sex, 0);
                     CustomerDAO dao = new CustomerDAO();
                     boolean result = dao.updateAccount(dto);
                     if (result) {
@@ -137,7 +148,7 @@ public class UpdateAccountServlet extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
-        } else {
+        } else if (user.getTypeOfLogin() == 1) {
             String firstName = request.getParameter("txtFirstName");
             String lastName = request.getParameter("txtLastName");
             String birthDateTxt = request.getParameter("txtBirthDate");
@@ -187,7 +198,7 @@ public class UpdateAccountServlet extends HttpServlet {
                     }
 
                     CustomerDTO dto
-                            = new CustomerDTO(firstName + " " + lastName, birthday, user.getEmail(), phone, address + ", " + ward + ", " + district + ", " + city, user.isRole(), user.getRankID(), sex, true);
+                            = new CustomerDTO(firstName + " " + lastName, birthday, user.getEmail(), phone, address + ", " + ward + ", " + district + ", " + city, user.isRole(), user.getRankID(), sex, 1);
                     CustomerDAO dao = new CustomerDAO();
                     boolean result = dao.updateAccount(dto);
                     if (result) {

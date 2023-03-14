@@ -325,6 +325,7 @@ import="java.sql.*"
                     </div>
                     <img class="register-space" src="images/Login-line.png" alt="" />
                     <img class="register-space-mobile" srcset="images/register-line-mobile.png 2x" alt="" />
+                    <c:set var="SIGNUP_URL" value="signUpPage" scope="session"/>
                     <form action="signUpController" method="POST">
                         <div class="register-form-container">
                             <div class="register-form">
@@ -519,6 +520,6 @@ import="java.sql.*"
                 </div>
             </footer>
         </div>
-        <script src="js/app.js"></script>
+        <script src="js/register.js"></script>
     </body>   
 </html>

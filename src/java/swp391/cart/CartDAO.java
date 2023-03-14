@@ -173,7 +173,7 @@ public class CartDAO implements Serializable {
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, customerID);
                 rs = stm.executeQuery();
-                while(rs.next()){
+                while (rs.next()){
                     int productID = rs.getInt("ProductID");
                     int quantity = rs.getInt("Quantity");
                     

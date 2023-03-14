@@ -69,7 +69,7 @@ public class LoginGoogleHandler extends HttpServlet {
 
                     CustomerDTO dto
                             = new CustomerDTO(name, "none", null, email,
-                                    "none", "none", false, 1, false, true);
+                                    "none", "none", false, 1, false, 1);
                     boolean result = dao.createAccount(dto);
                     if (result) {
                         url = siteMaps.getProperty(

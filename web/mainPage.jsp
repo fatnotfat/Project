@@ -182,8 +182,9 @@
                                                     id="search-button"
                                                     class="menu-icon-tab-search-input"
                                                     placeholder="Search Product..."
-                                                    name="txtSearch" value="${param.txtSearch}"
+                                                    name="txtSearch" value=""
                                                     />
+                                                
                                             </form>
                                         </div>
                                     </div>
@@ -761,7 +762,7 @@
             </footer>
         </div>
     </body>
-    <script src="js/app.js"></script>
+    <script src="js/header.js"></script>
     <script src="js/mainPage.js"></script>
-    <script src="js/cart.js"></script>
+    <script src="js/cart1.js"></script>
 </html>

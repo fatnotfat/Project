@@ -45,7 +45,7 @@ public class CustomerDAO implements Serializable {
                 //ExecuteQuery
                 rs = stm.executeQuery();
                 //Process result
-                if (rs.next()) {
+                while (rs.next()) {
                     String name = rs.getString("Name");
                     int id = rs.getInt("CustomerID");
                     String phone = rs.getString("Phone");
@@ -53,7 +53,7 @@ public class CustomerDAO implements Serializable {
                     int rankID = rs.getInt("RankID");
                     boolean sex = rs.getBoolean("Sex");
                     Date dob = rs.getDate("DateOfBirth");
-                    boolean typeOfLogin = rs.getBoolean("TypeOfLogin");
+                    int typeOfLogin = rs.getInt("TypeOfLogin");
                     result = new CustomerDTO(id, name, dob, email, phone, address, rankID, sex, typeOfLogin);
                 }
             }//end con is available
@@ -112,7 +112,7 @@ public class CustomerDAO implements Serializable {
                 stm.setBoolean(7, dto.isRole());
                 stm.setInt(8, dto.getRankID());
                 stm.setBoolean(9, dto.isSex());
-                stm.setBoolean(10, dto.isTypeOfLogin());
+                stm.setInt(10, dto.getTypeOfLogin());
                 //4. ExecuteQuery
                 int effectedRows = stm.executeUpdate();
                 //5. Process result
@@ -168,7 +168,7 @@ public class CustomerDAO implements Serializable {
         }
         return result;
     }
-    
+
     public CustomerDTO checkEmailAlreadyRegister(String email)
             throws SQLException, NamingException {
         Connection con = null;
@@ -190,7 +190,7 @@ public class CustomerDAO implements Serializable {
                 //4. ExecuteQuery
                 rs = stm.executeQuery();
                 //5. Process result
-                if (rs.next()) {
+                while (rs.next()) {
                     String name = rs.getString("Name");
                     int id = rs.getInt("CustomerID");
                     String phone = rs.getString("Phone");
@@ -198,7 +198,7 @@ public class CustomerDAO implements Serializable {
                     int rankID = rs.getInt("RankID");
                     boolean sex = rs.getBoolean("Sex");
                     Date dob = rs.getDate("DateOfBirth");
-                    boolean typeOfLogin = rs.getBoolean("TypeOfLogin");
+                    int typeOfLogin = rs.getInt("TypeOfLogin");
                     dto = new CustomerDTO(id, name, dob, email, phone, address, rankID, sex, typeOfLogin);
                 }
             }//end con is available
@@ -248,9 +248,9 @@ public class CustomerDAO implements Serializable {
         }
         return result;
     }
-    
-    public boolean updateAccount(CustomerDTO dto) 
-            throws NamingException, SQLException{
+
+    public boolean updateAccount(CustomerDTO dto)
+            throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         boolean result = false;
@@ -267,15 +267,15 @@ public class CustomerDAO implements Serializable {
             stm.setString(1, dto.getName());
             stm.setString(2, dto.getPassword());
             if (dto.getBirthDate() != null) {
-                    java.sql.Date sqlDate = new java.sql.Date(dto.getBirthDate().getTime());
-                    stm.setDate(3, sqlDate);
+                java.sql.Date sqlDate = new java.sql.Date(dto.getBirthDate().getTime());
+                stm.setDate(3, sqlDate);
             }
             stm.setString(4, dto.getPhone());
             stm.setString(5, dto.getAddress());
             stm.setBoolean(6, dto.isRole());
             stm.setInt(7, dto.getRankID());
             stm.setBoolean(8, dto.isSex());
-            stm.setBoolean(9, dto.isTypeOfLogin());
+            stm.setInt(9, dto.getTypeOfLogin());
             stm.setString(10, dto.getEmail());
             //Execute query
             int effectedRows = stm.executeUpdate();
@@ -293,11 +293,9 @@ public class CustomerDAO implements Serializable {
         }
         return result;
     }
-    
-    
-    
-    public boolean updateGoogleAccount(CustomerDTO dto) 
-            throws NamingException, SQLException{
+
+    public boolean updateGoogleAccount(CustomerDTO dto)
+            throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         boolean result = false;
@@ -313,15 +311,15 @@ public class CustomerDAO implements Serializable {
             stm = con.prepareStatement(sql);
             stm.setString(1, dto.getName());
             if (dto.getBirthDate() != null) {
-                    java.sql.Date sqlDate = new java.sql.Date(dto.getBirthDate().getTime());
-                    stm.setDate(2, sqlDate);
+                java.sql.Date sqlDate = new java.sql.Date(dto.getBirthDate().getTime());
+                stm.setDate(2, sqlDate);
             }
             stm.setString(3, dto.getPhone());
             stm.setString(4, dto.getAddress());
             stm.setBoolean(5, dto.isRole());
             stm.setInt(6, dto.getRankID());
             stm.setBoolean(7, dto.isSex());
-            stm.setBoolean(8, dto.isTypeOfLogin());
+            stm.setInt(8, dto.getTypeOfLogin());
             stm.setString(9, dto.getEmail());
             //Execute query
             int effectedRows = stm.executeUpdate();

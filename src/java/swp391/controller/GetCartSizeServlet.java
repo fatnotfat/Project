@@ -7,6 +7,7 @@ package swp391.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,8 +41,7 @@ public class GetCartSizeServlet extends HttpServlet {
         if (cart != null) {
             for (int quantity : cart.getItems().values()) {
                 cartSize += quantity;
-            }
-//            cartSize = cart.getItems().size();
+            } //            cartSize = cart.getItems().size();
         }
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

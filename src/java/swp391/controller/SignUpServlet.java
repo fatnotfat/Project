@@ -12,6 +12,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -20,10 +22,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import swp391.customer.CustomerCreateError;
 import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
+import swp391.customer.CustomerForgotPassword;
 import swp391.utils.MyApplicationConstants;
+import swp391.utils.SendEmail;
 
 /**
  *
@@ -51,11 +56,11 @@ public class SignUpServlet extends HttpServlet {
         String firstName = request.getParameter("txtFirstName");
         byte[] bytes1 = firstName.getBytes(StandardCharsets.ISO_8859_1);
         firstName = new String(bytes1, StandardCharsets.UTF_8);
-        
+
         String lastName = request.getParameter("txtLastName");
         byte[] bytes2 = lastName.getBytes(StandardCharsets.ISO_8859_1);
         lastName = new String(bytes2, StandardCharsets.UTF_8);
-        
+
         String password = request.getParameter("txtPassword");
         String email = request.getParameter("txtEmail");
         String birthDateTxt = request.getParameter("txtBirthDate");
@@ -74,7 +79,7 @@ public class SignUpServlet extends HttpServlet {
                 errorFound = true;
                 errors.setLastNameLengthError("You can't leave this empty");
             }
-            
+
             if (password.trim().length() < 1) {
                 errorFound = true;
                 errors.setPasswordLengthError("You can't leave this empty");
@@ -85,6 +90,25 @@ public class SignUpServlet extends HttpServlet {
             } else if (!password.trim().equals(confirm.trim())) {
                 errorFound = true;
                 errors.setConfirmNotMatched("Confirm must be matched password");
+            }
+            //validation for email
+            String[] parts = email.split("@");
+            if (parts.length < 2) {
+                errorFound = true;
+                errors.setEmailLengthError("Invalid email!");
+            } else {
+                String[] validDomains = {"gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "fpt.edu.vn"};
+                boolean flags = false;
+                for (String validDomain : validDomains) {
+                    if (parts[1].equals(validDomain)) {
+                        flags = true;
+                        break;
+                    }
+                }
+                if (!flags) {
+                    errorFound = true;
+                    errors.setEmailLengthError("Invalid domain!!");
+                }
             }
             if (email.trim().length() < 1) {
                 errorFound = true;
@@ -110,15 +134,31 @@ public class SignUpServlet extends HttpServlet {
                 boolean sex = false;
                 if (sexTxt.equals("Male")) {
                     sex = true;
-                }
-                CustomerDTO dto
+                }         
+//                boolean result = dao.createAccount(dto);
+//                if (result) {
+                    SendEmail sm = new SendEmail();
+                    //get the 6-digit code
+                    String code = sm.getRandom();
+                    //craete new user using all information
+                    CustomerForgotPassword customer = new CustomerForgotPassword(email, code);
+                    //call the send email method
+                    boolean test = sm.sendEmail(customer);
+                    //check if the email send successfully
+                    if (test) {
+                        CustomerDTO dto
                         = new CustomerDTO(firstName + " " + lastName, password, birthDate, email,
-                                 "none", "none", false, 1, sex, false);
-                boolean result = dao.createAccount(dto);
-                if (result) {
-                    url = siteMaps.getProperty(
-                            MyApplicationConstants.CreateAccountServlet.LOGIN_PAGE);
-                }
+                                "none", "none", false, 1, sex, 0);
+                        HttpSession session = request.getSession();
+                        session.setAttribute("authcode", customer);
+                        session.setAttribute("email", email);
+                        session.setAttribute("CREATE_ACCOUNT", dto);
+                        url = siteMaps.getProperty(
+                                MyApplicationConstants.CustomerVerifyServlet.VERIFYCODE_PAGE);
+                    } else {
+                        request.setAttribute("VERIFYMAIL_SCOPE", "Failed to send verification email");
+                    }
+//                }
             }
         } catch (SQLException ex) {
             String msg = ex.getMessage();
