@@ -6,8 +6,9 @@
 package swp391.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Properties;
 import javax.naming.NamingException;
@@ -45,19 +46,64 @@ public class AdminOrdersRevenueServlet extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
                 MyApplicationConstants.AdminOrdersRevenueServlet.ADMIN_PAGE);
+        String date = request.getParameter("txtDate");
         try {
-            OrdersDAO dao1 = new OrdersDAO();
-            dao1.showOrdersRevenueByMonth();
-            List<OrdersDTO> result1 = dao1.getOrdersList1();
-            request.setAttribute("MONTHREVENUE_RESULT", result1);
+            if (date == null) {
+                OrdersDAO dao1 = new OrdersDAO();
+                dao1.showOrdersRevenueByMonth();
+                List<OrdersDTO> result1 = dao1.getOrdersList1();
+                request.setAttribute("MONTHREVENUE_RESULT", result1);
 
-            OrdersDAO dao2 = new OrdersDAO();
-            dao2.showOrdersRevenueByYear();
-            List<OrdersDTO> result2 = dao2.getOrdersList2();
-            request.setAttribute("YEARREVENUE_RESULT", result2);
+                OrdersDAO dao2 = new OrdersDAO();
+                dao2.showOrdersRevenueByYear();
+                List<OrdersDTO> result2 = dao2.getOrdersList2();
+                request.setAttribute("YEARREVENUE_RESULT", result2);
+                
+                OrdersDAO dao3 = new OrdersDAO();
+                dao3.showOrdersRevenueByMonth();
+                List<OrdersDTO> result3 = dao3.getOrdersList3();
+                request.setAttribute("TOTALORDERSINMONTH_RESULT", result3);
+                
+                OrdersDAO dao4 = new OrdersDAO();
+                dao4.showTotalOrdersByYear();
+                List<OrdersDTO> result4 = dao4.getOrdersList4();
+                request.setAttribute("TOTALORDERSINYEAR_RESULT", result4);
 
-            url = siteMaps.getProperty(
-                    MyApplicationConstants.AdminOrdersRevenueServlet.ADMIN_PAGE);
+                url = siteMaps.getProperty(
+                        MyApplicationConstants.AdminOrdersRevenueServlet.ADMIN_PAGE);
+            } else {
+                date += "-01";
+                LocalDate dateSep = LocalDate.parse(
+                        date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                int year = dateSep.getYear();
+                int month = dateSep.getMonthValue();
+                
+                OrdersDAO dao1 = new OrdersDAO();
+                dao1.showOrdersRevenueByMonthAndYear(year, month);
+                List<OrdersDTO> result1 = dao1.getOrdersList1();
+                if (result1 == null) {
+                    dao1.showOrdersRevenueByMonth();
+                    result1 = dao1.getOrdersList1();
+                    request.setAttribute("MONTHREVENUE_RESULT", result1);
+
+                    OrdersDAO dao2 = new OrdersDAO();
+                    dao2.showOrdersRevenueByYear();
+                    List<OrdersDTO> result2 = dao2.getOrdersList2();
+                    request.setAttribute("YEARREVENUE_RESULT", result2);
+
+                    url = siteMaps.getProperty(
+                            MyApplicationConstants.AdminOrdersRevenueServlet.ADMIN_PAGE);
+                } else {
+                    request.setAttribute("MONTHREVENUE_RESULT", result1);
+                    OrdersDAO dao2 = new OrdersDAO();
+                    dao2.showOrdersRevenueByYear();
+                    List<OrdersDTO> result2 = dao2.getOrdersList2();
+                    request.setAttribute("YEARREVENUE_RESULT", result2);
+
+                    url = siteMaps.getProperty(
+                            MyApplicationConstants.AdminOrdersRevenueServlet.ADMIN_PAGE);
+                }
+            }
         } catch (NamingException ex) {
             log("AdminOrdersRevenueServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {

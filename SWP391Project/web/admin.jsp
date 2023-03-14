@@ -210,7 +210,7 @@
                                                 <div class="col mr-2">
                                                     <c:forEach var="dto" items="${monthRevenue}">
                                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                            Doanh thu (tháng ${dto.month} năm ${dto.year}) 
+                                                            Doanh thu tháng ${dto.month} năm ${dto.year}
                                                         </div>
                                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                             <fmt:formatNumber value="${dto.revenue}"/> VNĐ
@@ -222,7 +222,7 @@
                                                        onclick="showCalendarMonth()">
                                                     </i>
                                                     <div class="calendar_search">
-                                                        <input class="calendar_month" type="month" name="bday-month"
+                                                        <input class="calendar_month" type="month" name="txtDate"
                                                                value="2023-01" />
                                                         <button class="calendar_month-button">Find</button>
                                                     </div>
@@ -241,7 +241,7 @@
                                                 <div class="col mr-2">
                                                     <c:forEach var="dto" items="${yearRevenue}">
                                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                            Doanh thu (năm ${dto.year})
+                                                            Doanh thu năm ${dto.year}
                                                         </div>
                                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                             <fmt:formatNumber value="${dto.revenue}"/> VNĐ

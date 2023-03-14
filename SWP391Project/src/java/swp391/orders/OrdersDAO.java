@@ -159,7 +159,8 @@ public class OrdersDAO implements Serializable {
         }
     }
 
-    public void showOrdersRevenueByMonth() throws SQLException, NamingException {
+    public void showOrdersRevenueByMonth()
+            throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -197,7 +198,49 @@ public class OrdersDAO implements Serializable {
         }
     }
 
-    public void showOrdersRevenueByYear() throws SQLException, NamingException {
+    public void showOrdersRevenueByMonthAndYear(int newYear, int newMonth)
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "SELECT MONTH(o.DateOrders) AS month, YEAR(o.DateOrders) AS year, SUM(od.Total) AS revenue "
+                        + "FROM Orders o "
+                        + "INNER JOIN OrdersDetail od ON o.OrdersDtID = od.OrdersDtID "
+                        + "WHERE YEAR(o.DateOrders) = ? AND MONTH(o.DateOrders) = ? "
+                        + "GROUP BY MONTH(o.DateOrders), YEAR(o.DateOrders)";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, newYear);
+                stm.setInt(2, newMonth);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int month = rs.getInt("month");
+                    int year = rs.getInt("year");
+                    float revenue = rs.getFloat("revenue");
+                    OrdersDTO dto = new OrdersDTO(month, year, revenue);
+                    if (this.ordersList1 == null) {
+                        this.ordersList1 = new ArrayList<>();
+                    }
+                    this.ordersList1.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void showOrdersRevenueByYear()
+            throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -234,7 +277,84 @@ public class OrdersDAO implements Serializable {
         }
     }
 
-    public void showTotalOrders() throws SQLException, NamingException {
+    public void showTotalOrdersByMonth() 
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "SELECT MONTH(DateOrders) AS month, COUNT(*) AS totalOrders "
+                        + "FROM Orders "
+                        + "WHERE YEAR(DateOrders) = YEAR(GETDATE()) "
+                        + "GROUP BY MONTH(DateOrders) "
+                        + "ORDER BY MONTH(DateOrders)";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int month = rs.getInt("month");
+                    int totalOrders = rs.getInt("totalOrders");
+                    OrdersDTO dto = new OrdersDTO(month, totalOrders);
+                    if (this.ordersList3 == null) {
+                        this.ordersList3 = new ArrayList<>();
+                    }
+                    this.ordersList3.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    public void showTotalOrdersByMonthAndYear(int newYear, int newMonth) 
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "SELECT MONTH(DateOrders) AS month, COUNT(*) AS totalOrders "
+                        + "FROM Orders "
+                        + "WHERE YEAR(DateOrders) = YEAR(GETDATE()) "
+                        + "GROUP BY MONTH(DateOrders) "
+                        + "ORDER BY MONTH(DateOrders)";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, newYear);
+                stm.setInt(2, newMonth);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int month = rs.getInt("month");
+                    int totalOrders = rs.getInt("totalOrders");
+                    OrdersDTO dto = new OrdersDTO(month, totalOrders);
+                    if (this.ordersList3 == null) {
+                        this.ordersList3 = new ArrayList<>();
+                    }
+                    this.ordersList3.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    public void showTotalOrdersByYear() 
+            throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
