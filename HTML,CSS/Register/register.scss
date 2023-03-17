@@ -777,7 +777,7 @@ header {
     display: flex;
     font-size: 16px;
     flex-direction: column;
-    &-control{
+    &-control {
       margin-bottom: 30px;
     }
     &-control > small {
@@ -935,7 +935,7 @@ header {
         // background-color: white;
         color: white;
       }
-      &:hover::after{
+      &:hover::after {
         left: 0;
         width: 100%;
         // color: white;
@@ -961,7 +961,6 @@ header {
           opacity: 0.6;
         }
       }
-      
     }
   }
   &-link {
@@ -1125,6 +1124,34 @@ header {
   }
   &-copyright-txt {
     font-size: 14px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .footer-menu-connect-desc {
+    text-align: center;
+    padding: 0 10px;
+  }
+  .footer-menu-connect {
+    margin-bottom: 40px;
+    align-items: center;
+  }
+  .footer-menu-cus-service {
+    align-items: center;
+  }
+  .footer-menu-cus-service-desc {
+    text-align: center;
+  }
+  .footer-menu-about {
+    align-items: center;
+  }
+  .footer-menu-about-desc {
+    text-align: center;
+  }
+  .footer-menu-care {
+    align-items: center;
+    &-desc {
+      text-align: center;
+    }
   }
 }
 // _____________________________________________FOOTER______________________________________________

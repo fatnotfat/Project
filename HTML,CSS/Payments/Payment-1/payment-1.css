@@ -978,6 +978,63 @@ header {
   opacity: 0.6;
 }
 
+@media screen and (max-width: 768px) {
+  .your-cart-body .container {
+    display: flex;
+    flex-direction: column;
+  }
+  .container {
+    padding: 0;
+  }
+  .your-cart-body-left {
+    width: auto;
+  }
+  .your-cart-body-left-product .container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    flex-wrap: nowrap;
+  }
+  .your-cart-body-left-product-detail-left .container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .your-cart-body-left-product-detail-left-name {
+    font-size: 14px;
+    padding: 0;
+  }
+  .your-cart-body-left-product-detail-left-price {
+    padding: 0;
+    font-size: 12px;
+  }
+  .your-cart-body-left-product-detail-left-size {
+    padding: 0;
+    font-size: 12px;
+  }
+  .your-cart-body-left-product-detail-right .container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .your-cart-body-left-bot-note {
+    width: 70vw;
+  }
+  .your-cart-body-left-bot-policy-detail {
+    padding: 0;
+  }
+  .your-cart-body-right-all .container {
+    height: auto;
+    width: auto;
+  }
+  .your-cart-body-right-order-border {
+    width: 80vw;
+    margin-bottom: 30px;
+  }
+  .shipping-info-left-breadcrumb {
+    display: none;
+  }
+}
 .footer .container {
   display: flex;
   align-items: center;
@@ -1093,6 +1150,35 @@ header {
 }
 .footer-copyright-txt {
   font-size: 14px;
+}
+
+@media screen and (max-width: 768px) {
+  .footer-menu-connect-desc {
+    text-align: center;
+    padding: 0 10px;
+  }
+  .footer-menu-connect {
+    margin-bottom: 40px;
+    align-items: center;
+  }
+  .footer-menu-cus-service {
+    align-items: center;
+  }
+  .footer-menu-cus-service-desc {
+    text-align: center;
+  }
+  .footer-menu-about {
+    align-items: center;
+  }
+  .footer-menu-about-desc {
+    text-align: center;
+  }
+  .footer-menu-care {
+    align-items: center;
+  }
+  .footer-menu-care-desc {
+    text-align: center;
+  }
 }
 
 /*# sourceMappingURL=payment-1.css.map */

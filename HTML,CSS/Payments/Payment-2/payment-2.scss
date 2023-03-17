@@ -755,6 +755,7 @@ header {
     justify-content: space-evenly;
     align-items: center;
   }
+
   &-left {
     & .container {
       display: flex;
@@ -1098,7 +1099,7 @@ header {
     }
   }
   &-space {
-   height: 1080px;
+    height: 1080px;
   }
 }
 
@@ -1208,6 +1209,97 @@ input[type="radio"].input-radio {
       white-space: nowrap;
       min-height: 1.2em;
       padding: 10px 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .shipping-info-space {
+    display: none;
+  }
+  .shipping-info > .container {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .shipping-info-right-product > .container {
+    // margin-top: 10rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .shipping-info-right-product-content > .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
+  .shipping-info-right-product-content-price > .container {
+    margin-left: 0;
+  }
+  .shipping-info-right-product-content-name-title {
+    font-size: 14px;
+  }
+  .shipping-info-right-product-content-name-size {
+    font-size: 14px;
+  }
+  .shipping-info-right-product-content-price-number {
+    font-size: 14px;
+    padding-top: 30px
+  }
+  .shipping-info-right-product-fee > .container {
+    font-size: 14px;
+  }
+  .shipping-info-right-product-total-name-title {
+    font-size: 14px;
+  }
+  .shipping-info-right-product-total-price-number {
+    font-size: 14px;
+  }
+  .shipping-info-left-breadcrumb {
+    display: none;
+  } 
+  .shipping-info-left-breadcrumb-res {
+    display: block!important;
+  }
+}
+.shipping-info-left-breadcrumb-res {
+  display: none;
+  margin-left: 2vw;
+  margin-top: 10rem;
+  &-menu {
+    list-style: none;
+    padding: 10px 16px;
+    width: max-content;
+    & li {
+      display: inline;
+      font-size: 12px;
+      color: var(--font-color);
+      font-weight: 600;
+      opacity: 0.6;
+      cursor: pointer;
+      &::before {
+        padding: 4px;
+        color: black;
+        content: "/\00a0";
+      }
+      &:first-of-type {
+        &::before {
+          padding: 4px;
+          color: black;
+          content: "";
+        }
+      }
+      &:nth-child(2) {
+        opacity: 1;
+      }
+      & a {
+        color: var(--font-color);
+        text-decoration: none;
+      }
     }
   }
 }
