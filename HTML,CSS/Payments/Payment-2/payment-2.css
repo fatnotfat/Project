@@ -1119,6 +1119,64 @@ input[type=radio].input-radio {
   padding: 10px 10px;
 }
 
+@media screen and (max-width: 600px) {
+  .shipping-info-space {
+    display: none;
+  }
+  .shipping-info > .container {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .shipping-info-right-product > .container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .shipping-info-right-product-content > .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
+  .shipping-info-right-product-content-price > .container {
+    margin-left: 0;
+  }
+  .shipping-info-right-product-content-name-title {
+    font-size: 14px;
+  }
+  .shipping-info-right-product-content-name-size {
+    font-size: 14px;
+  }
+  .shipping-info-right-product-content-price-number {
+    font-size: 14px;
+    padding-top: 30px;
+  }
+  .shipping-info-right-product-fee > .container {
+    font-size: 14px;
+  }
+  .shipping-info-right-product-total-name-title {
+    font-size: 14px;
+  }
+  .shipping-info-right-product-total-price-number {
+    font-size: 14px;
+  }
+  .shipping-info-left-breadcrumb {
+    display: none;
+  }
+  .shipping-info-left-breadcrumb-res {
+    display: block !important;
+  }
+  .shipping-info-left-form-delivery-address-select {
+    flex-wrap: wrap;
+  }
+  .shipping-info-left {
+    margin-bottom: 40px;
+  }
+}
 @media screen and (max-width: 768px) {
   .shipping-info-space {
     display: none;
@@ -1169,6 +1227,12 @@ input[type=radio].input-radio {
   }
   .shipping-info-left-breadcrumb-res {
     display: block !important;
+  }
+  .shipping-info-left {
+    margin-bottom: 40px;
+  }
+  .shipping-info-left-breadcrumb-res {
+    margin-top: 20vw !important;
   }
 }
 .shipping-info-left-breadcrumb-res {
@@ -1322,6 +1386,35 @@ input[type=radio].input-radio {
 }
 .footer-copyright-txt {
   font-size: 14px;
+}
+
+@media screen and (max-width: 768px) {
+  .footer-menu-connect-desc {
+    text-align: center;
+    padding: 0 10px;
+  }
+  .footer-menu-connect {
+    margin-bottom: 40px;
+    align-items: center;
+  }
+  .footer-menu-cus-service {
+    align-items: center;
+  }
+  .footer-menu-cus-service-desc {
+    text-align: center;
+  }
+  .footer-menu-about {
+    align-items: center;
+  }
+  .footer-menu-about-desc {
+    text-align: center;
+  }
+  .footer-menu-care {
+    align-items: center;
+  }
+  .footer-menu-care-desc {
+    text-align: center;
+  }
 }
 
 /*# sourceMappingURL=payment-2.css.map */
