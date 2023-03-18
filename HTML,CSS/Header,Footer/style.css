@@ -433,6 +433,24 @@ header {
   color: var(--font-color);
   font-weight: 700;
   font-size: 27px;
+  overflow: hidden;
+}
+.menu-logo img {
+  display: inline;
+  height: 50px;
+}
+
+.menu-responsive-logo {
+  text-decoration: none;
+  color: var(--font-color);
+  font-weight: 700;
+  font-size: 27px;
+  overflow: hidden;
+}
+.menu-responsive-logo img {
+  display: inline;
+  height: 30px;
+  margin-top: 10px;
 }
 
 .nav-bot-responsive .container {

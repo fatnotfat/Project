@@ -459,7 +459,24 @@
        color: var(--font-color);
        font-weight: 700;
        font-size: 27px;
+       overflow: hidden;
+       & img {
+        display: inline;
+        height: 50px;
+       }
      }
+   }
+   .menu-responsive-logo{
+    text-decoration: none;
+       color: var(--font-color);
+       font-weight: 700;
+       font-size: 27px;
+       overflow: hidden;
+       & img {
+        display: inline;
+        height: 30px;
+        margin-top: 10px;
+       }
    }
    // NAV MOBILE
    .nav-bot-responsive .container {
