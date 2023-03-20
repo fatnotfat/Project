@@ -76,12 +76,14 @@ public class ShippingServlet extends HttpServlet {
                     ShippingMethodDAO shippingDAO = new ShippingMethodDAO();
                     ArrayList<ShippingMethodDTO> shippingList = shippingDAO.getListShippingMethodGPT();
                     session.setAttribute("SHIPPINGMETHOD_LIST", shippingList);
+
                     if (defaultOrNewShippingInfo == null) {
                         errors.setDefaultOrNewShippingInforLengthError("You cannot leave the shipping information option empty");
                         request.setAttribute("SIGNUPFORSHIPPING_ERROR", errors);
                     } else {
                         List<OrdersDTO> ordersDTOs = (List<OrdersDTO>) session.getAttribute("USER_SHIPPINGINFO");
                         if (ordersDTOs != null) {
+
                             if (defaultOrNewShippingInfo.equals("0")) {
                                 if (ordersID == "") {
                                     errors.setCusInfoLengthError("you have to choose your shipping information");
@@ -133,9 +135,13 @@ public class ShippingServlet extends HttpServlet {
                                     errorFound = true;
                                     errors.setLastNameLengthError("You can't leave last name empty");
                                 }
-                                if (customerAddress.trim().length() < 1) {
-                                    errorFound = true;
-                                    errors.setAddressLengthError("You can't leave address empty");
+                                if (shippingID != 2) {
+                                    if (customerAddress.trim().length() < 1) {
+                                        errorFound = true;
+                                        errors.setAddressLengthError("You can't leave address empty");
+                                    }
+                                } else {
+                                    customerAddress = "Pick up at the store";
                                 }
                                 if (customerPhone.trim().length() < 1) {
                                     errorFound = true;
@@ -175,13 +181,13 @@ public class ShippingServlet extends HttpServlet {
                         errorFound = true;
                         errors.setLastNameLengthError("You can't leave last name empty");
                     }
-                    
+
                     if (shippingID != 2) {
                         if (address.trim().length() < 1) {
                             errorFound = true;
                             errors.setAddressLengthError("You can't leave address empty");
                         }
-                    }else{
+                    } else {
                         address = "Pick up at the store";
                     }
 
