@@ -12,21 +12,7 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPTU/HK5/SWP/phat%20update/Project-master/src/java/swp391/filter/DispatcherFilter.java</file>
             <file>file:/D:/FPTU/HK5/SWP/phat%20update/Project-master/src/java/swp391/controller/ShippingServlet.java</file>
-            <file>file:/D:/FPTU/HK5/SWP/phat%20update/Project-master/web/payment.jsp</file>
-            <file>file:/D:/FPTU/HK5/SWP/phat%20update/Project-master/src/java/swp391/customer/CustomerDAO.java</file>
-            <file>file:/D:/FPTU/HK5/SWP/phat%20update/Project-master/src/java/swp391/controller/LoginServlet.java</file>
-            <file>file:/D:/FPTU/HK5/SWP/phat%20update/Project-master/src/java/swp391/controller/PaymentServlet.java</file>
-            <file>file:/D:/FPTU/HK5/SWP/phat%20update/Project-master/web/shipping.jsp</file>
-            <file>file:/D:/FPTU/HK5/SWP/phat%20update/Project-master/src/java/swp391/ordersdetail/OrdersDetailDAO.java</file>
-            <file>file:/D:/FPTU/HK5/SWP/phat%20update/Project-master/web/userCart.jsp</file>
-            <file>file:/D:/FPTU/HK5/SWP/phat%20update/Project-master/src/java/swp391/customer/CustomerCreateError.java</file>
-            <file>file:/D:/FPTU/HK5/SWP/phat%20update/Project-master/src/java/swp391/ordersdetail/OrdersDetailDTO.java</file>
-            <file>file:/D:/FPTU/HK5/SWP/phat%20update/Project-master/src/java/swp391/controller/AddToCartServlet.java</file>
-            <file>file:/D:/FPTU/HK5/SWP/phat%20update/Project-master/src/java/swp391/shippingmethod/ShippingMethodDAO.java</file>
-            <file>file:/D:/FPTU/HK5/SWP/phat%20update/Project-master/src/java/swp391/controller/LogoutServlet.java</file>
-            <file>file:/D:/FPTU/HK5/SWP/phat%20update/Project-master/web/login.jsp</file>
         </group>
     </open-files>
 </project-private>

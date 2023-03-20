@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import javax.naming.NamingException;
 import swp391.cart.CartObject;
+import swp391.orders.OrdersDTO;
 import swp391.utils.DBHelper;
 
 /**
@@ -24,13 +25,48 @@ import swp391.utils.DBHelper;
  */
 public class OrdersDetailDAO implements Serializable {
 
-    public List<Integer> addToOrdersDetail(CartObject cart, float discount, int paymentID, int shippingID, int status, String cusName, String cusPhone, String cusAddress)
+    //    public boolean addToOrders(int customerID, int key)
+//            throws SQLException, NamingException {
+//        Connection con = null;
+//        PreparedStatement stm = null;
+//        long milis = System.currentTimeMillis();
+//        Date date = new Date(milis);
+//        boolean result = false;
+//        try {
+//            con = DBHelper.makeConnection();
+//            if (con != null) {
+//                String sql = "Insert Into Orders("
+//                        + " CustomerID, DateOrders, OrdersDtID"
+//                        + ") "
+//                        + "Values("
+//                        + " ?, ?, ?"
+//                        + ")";
+//                stm = con.prepareStatement(sql);
+//                stm.setInt(1, customerID);
+//                stm.setDate(2, date);
+//                stm.setInt(3, key);
+//                int effectedRows = stm.executeUpdate();
+//                if (effectedRows > 0) {
+//                    result = true;
+//                }
+//            }
+//        } finally {
+//            if (stm != null) {
+//                stm.close();
+//            }
+//            if (con != null) {
+//                con.close();
+//            }
+//        }
+//        return result;
+//    }
+    public boolean addToOrdersDetail(CartObject cart, float discount, int ordersID, int status)
             throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm1 = null;
         PreparedStatement stm2 = null;
         ResultSet rs = null;
-        List<Integer> generatedKeys = new ArrayList<>();
+        boolean result = false;
         try {
             //1. connect DB
             con = DBHelper.makeConnection();
@@ -40,7 +76,6 @@ public class OrdersDetailDAO implements Serializable {
                         + "where ProductID = ?";
                 stm1 = con.prepareStatement(sql1);
                 Map<String, Integer> items = cart.getItems();
-//                boolean isFirstTimeInsertProduct = true;
                 for (String productID : items.keySet()) {
                     stm1.setString(1, productID);
                     rs = stm1.executeQuery();
@@ -48,43 +83,27 @@ public class OrdersDetailDAO implements Serializable {
                         float price = rs.getFloat("Price");
                         float total = (price * items.get(productID)) - discount;
                         String sql2 = "Insert Into OrdersDetail("
-                                + "ProductID, Quantity, Discount, Price, PaymentID, "
-                                + "ShippingID, Total, Status, CusName, CusPhone, CusAddress"
+                                + "ProductID, OrdersID, Quantity, Discount, Price, "
+                                + " Total, Status"
                                 + ") "
                                 + "Values("
-                                + " ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?"
+                                + " ?, ?, ?, ?, ?, ?, ?"
                                 + ")";
-                        stm2 = con.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
+                        stm2 = con.prepareStatement(sql2);
                         stm2.setInt(1, Integer.parseInt(productID));
-                        stm2.setInt(2, items.get(productID));
-                        stm2.setFloat(3, discount);
-                        stm2.setFloat(4, price);
-                        stm2.setInt(5, paymentID);
-                        stm2.setInt(6, shippingID);
-                        stm2.setFloat(7, total);
-                        stm2.setInt(8, status);
-//                        if (isFirstTimeInsertProduct == true) {
-//                            stm2.setString(9, cusName);
-//                            stm2.setString(10, cusPhone);
-//                            stm2.setString(11, cusAddress);
-//                            isFirstTimeInsertProduct = false;
-//                        } else{
-//                            stm2.setNull(9, java.sql.Types.VARCHAR);
-//                            stm2.setNull(10, java.sql.Types.VARCHAR);
-//                            stm2.setNull(11, java.sql.Types.VARCHAR);
-//                        }
-                        stm2.setString(9, cusName);
-                        stm2.setString(10, cusPhone);
-                        stm2.setString(11, cusAddress);
+                        stm2.setInt(2, ordersID);
+                        stm2.setInt(3, items.get(productID));
+                        stm2.setFloat(4, discount);
+                        stm2.setFloat(5, price);
+                        stm2.setFloat(6, total);
+                        stm2.setInt(7, status);
 
-                        stm2.executeUpdate();
-                        rs = stm2.getGeneratedKeys();
-                        if (rs.next()) {
-                            generatedKeys.add(rs.getInt(1));
+                        int effectedRows = stm2.executeUpdate();
+                        if (effectedRows > 0) {
+                            result = true;
                         }
                     }//end of insert cart on DB
                 }
-                return generatedKeys;
             }
         } finally {
             if (stm2 != null) {
@@ -94,62 +113,60 @@ public class OrdersDetailDAO implements Serializable {
                 con.close();
             }
         }
-        return generatedKeys;
+        return result;
     }
 
-    public List<OrdersDetailDTO> getAllOrdersDetails() throws SQLException, NamingException {
-        List<OrdersDetailDTO> ordersDetails = new ArrayList<>();
-        String sql = "SELECT OrdersDtID, ProductID, Quantity, Discount, Price, PaymentID, ShippingID, Total, Status, CusName, CusPhone, CusAddress FROM OrdersDetail";
-        try (Connection conn = DBHelper.makeConnection();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
-                int ordersDtID = rs.getInt("OrdersDtID");
-                int productID = rs.getInt("ProductID");
-                int quantity = rs.getInt("Quantity");
-                Float discount = rs.getFloat("Discount");
-                Float price = rs.getFloat("Price");
-                int paymentID = rs.getInt("PaymentID");
-                int shippingID = rs.getInt("ShippingID");
-                Float total = rs.getFloat("Total");
-                boolean status = rs.getBoolean("Status");
-                String cusName = rs.getString("CusName");
-                String cusPhone = rs.getString("CusPhone");
-                String cusAddress = rs.getString("CusAddress");
-                OrdersDetailDTO ordersDetail = new OrdersDetailDTO(productID, quantity, discount, price, paymentID, shippingID, total, status, cusName, cusPhone, cusAddress);
-                ordersDetails.add(ordersDetail);
-            }
-        }
-        return ordersDetails;
-    }
-
-    public List<OrdersDetailDTO> getCustomerInFoDetailsByCusID(int customerId) throws NamingException {
-        List<OrdersDetailDTO> customerDetails = new ArrayList<>();
-        String sql = "SELECT MIN(od.OrdersDtID) AS OrdersDtID, od.CusName, od.CusPhone, od.CusAddress\n"
-                + "FROM OrdersDetail od\n"
-                + "INNER JOIN Orders o ON o.OrdersDtID = od.OrdersDtID\n"
-                + "INNER JOIN Customer c ON c.CustomerID = o.CustomerID\n"
-                + "WHERE c.CustomerID = ? AND od.CusName IS NOT NULL\n"
-                + "GROUP BY od.CusName, od.CusPhone, od.CusAddress";
-        try (Connection conn = DBHelper.makeConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, customerId);
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                int ordersDtID = rs.getInt("OrdersDtID");
-                String cusName = rs.getString("CusName");
-                String cusPhone = rs.getString("CusPhone");
-                String cusAddress = rs.getString("CusAddress");
-                OrdersDetailDTO ordersDetail = new OrdersDetailDTO(ordersDtID, cusName, cusPhone, cusAddress);
-                customerDetails.add(ordersDetail);
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return customerDetails;
-    }
-
+//    public List<OrdersDetailDTO> getAllOrdersDetails() throws SQLException, NamingException {
+//        List<OrdersDetailDTO> ordersDetails = new ArrayList<>();
+//        String sql = "SELECT OrdersDtID, ProductID, Quantity, Discount, Price, PaymentID, ShippingID, Total, Status, CusName, CusPhone, CusAddress FROM OrdersDetail";
+//        try (Connection conn = DBHelper.makeConnection();
+//                Statement stmt = conn.createStatement();
+//                ResultSet rs = stmt.executeQuery(sql)) {
+//            while (rs.next()) {
+//                int ordersDtID = rs.getInt("OrdersDtID");
+//                int productID = rs.getInt("ProductID");
+//                int quantity = rs.getInt("Quantity");
+//                Float discount = rs.getFloat("Discount");
+//                Float price = rs.getFloat("Price");
+//                int paymentID = rs.getInt("PaymentID");
+//                int shippingID = rs.getInt("ShippingID");
+//                Float total = rs.getFloat("Total");
+//                boolean status = rs.getBoolean("Status");
+//                String cusName = rs.getString("CusName");
+//                String cusPhone = rs.getString("CusPhone");
+//                String cusAddress = rs.getString("CusAddress");
+//                OrdersDetailDTO ordersDetail = new OrdersDetailDTO(productID, quantity, discount, price, paymentID, shippingID, total, status, cusName, cusPhone, cusAddress);
+//                ordersDetails.add(ordersDetail);
+//            }
+//        }
+//        return ordersDetails;
+//    }
+//    public List<OrdersDetailDTO> getCustomerInFoDetailsByCusID(int customerId) throws NamingException {
+//        List<OrdersDetailDTO> customerDetails = new ArrayList<>();
+//        String sql = "SELECT MIN(od.OrdersDtID) AS OrdersDtID, od.CusName, od.CusPhone, od.CusAddress\n"
+//                + "FROM OrdersDetail od\n"
+//                + "INNER JOIN Orders o ON o.OrdersDtID = od.OrdersDtID\n"
+//                + "INNER JOIN Customer c ON c.CustomerID = o.CustomerID\n"
+//                + "WHERE c.CustomerID = ? AND od.CusName IS NOT NULL\n"
+//                + "GROUP BY od.CusName, od.CusPhone, od.CusAddress";
+//        try (Connection conn = DBHelper.makeConnection();
+//                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//            pstmt.setInt(1, customerId);
+//            ResultSet rs = pstmt.executeQuery();
+//            while (rs.next()) {
+//                int ordersDtID = rs.getInt("OrdersDtID");
+//                String cusName = rs.getString("CusName");
+//                String cusPhone = rs.getString("CusPhone");
+//                String cusAddress = rs.getString("CusAddress");
+//                OrdersDetailDTO ordersDetail = new OrdersDetailDTO(ordersDtID, cusName, cusPhone, cusAddress);
+//                customerDetails.add(ordersDetail);
+//            }
+//
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//        return customerDetails;
+//    }
 //    public int addToOrdersDetail(int productID, int quantity, float discount,
 //            float price, int paymentID, int shippingID, float total, int status)
 //            throws SQLException, NamingException {

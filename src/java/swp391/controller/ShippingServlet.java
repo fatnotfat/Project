@@ -26,8 +26,7 @@ import javax.servlet.http.HttpSession;
 import swp391.customer.CustomerCreateError;
 import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
-import swp391.ordersdetail.OrdersDetailDAO;
-import swp391.ordersdetail.OrdersDetailDTO;
+import swp391.orders.OrdersDTO;
 import swp391.shippingmethod.ShippingMethodDAO;
 import swp391.shippingmethod.ShippingMethodDTO;
 import swp391.utils.MyApplicationConstants;
@@ -57,9 +56,10 @@ public class ShippingServlet extends HttpServlet {
                 MyApplicationConstants.ShippingServlet.SHIPPING_PAGE);
         HttpSession session = request.getSession();
         String txtShippingID = request.getParameter("location");
+
         String defaultOrNewShippingInfo = request.getParameter("defaultOrNewShippingInfor");
         session.setAttribute("defaultOrNewShippingInfo", defaultOrNewShippingInfo);
-        String ordersDetailID = request.getParameter("stored-infoCus-by-orDetID");
+        String ordersID = request.getParameter("stored-infoCus-by-orDetID");
 
         boolean errorFound = false;
         CustomerCreateError errors = new CustomerCreateError();
@@ -80,16 +80,16 @@ public class ShippingServlet extends HttpServlet {
                         errors.setDefaultOrNewShippingInforLengthError("You cannot leave the shipping information option empty");
                         request.setAttribute("SIGNUPFORSHIPPING_ERROR", errors);
                     } else {
-                        List<OrdersDetailDTO> ordersDetailDTOs = (List<OrdersDetailDTO>) session.getAttribute("USER_SHIPPINGINFO");
-                        if (ordersDetailDTOs != null) {
+                        List<OrdersDTO> ordersDTOs = (List<OrdersDTO>) session.getAttribute("USER_SHIPPINGINFO");
+                        if (ordersDTOs != null) {
                             if (defaultOrNewShippingInfo.equals("0")) {
-                                if (ordersDetailID == "") {
+                                if (ordersID == "") {
                                     errors.setCusInfoLengthError("you have to choose your shipping information");
                                     request.setAttribute("SIGNUPFORSHIPPING_ERROR", errors);
                                 } else {
-                                    int ordersDetailIDInt = Integer.parseInt(ordersDetailID);
-                                    for (OrdersDetailDTO customer : ordersDetailDTOs) {
-                                        if (customer.getOrdersDetailID() == ordersDetailIDInt) {
+                                    int ordersIDInt = Integer.parseInt(ordersID);
+                                    for (OrdersDTO customer : ordersDTOs) {
+                                        if (customer.getOrdersID() == ordersIDInt) {
                                             String cusName = customer.getCusName();
                                             byte[] bytes0 = cusName.getBytes(StandardCharsets.ISO_8859_1);
                                             cusName = new String(bytes0, StandardCharsets.UTF_8);
@@ -175,10 +175,16 @@ public class ShippingServlet extends HttpServlet {
                         errorFound = true;
                         errors.setLastNameLengthError("You can't leave last name empty");
                     }
-                    if (address.trim().length() < 1) {
-                        errorFound = true;
-                        errors.setAddressLengthError("You can't leave address empty");
+                    
+                    if (shippingID != 2) {
+                        if (address.trim().length() < 1) {
+                            errorFound = true;
+                            errors.setAddressLengthError("You can't leave address empty");
+                        }
+                    }else{
+                        address = "Pick up at the store";
                     }
+
                     if (phone.trim().length() < 1) {
                         errorFound = true;
                         errors.setPhoneLengthError("You can't leave phone empty");
@@ -200,7 +206,7 @@ public class ShippingServlet extends HttpServlet {
                         session.setAttribute("txtEmail", email);
 
                         dao.createAccountForShipping(firstName + " " + lastName,
-                                email, phone, address);
+                                email, phone);
 
                         CustomerDTO result = dao.loadInformationForPayment(email);
                         session.setAttribute("USER", result);

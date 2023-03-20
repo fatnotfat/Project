@@ -428,7 +428,7 @@
                                                     <select class="field-input" id="stored-addresses" name="stored-infoCus-by-orDetID">
                                                         <option class="field-input-item" value="">Choose your Information here</option>
                                                         <c:forEach items="${USER_SHIPPINGINFO}" var="customer">
-                                                            <option class="field-input-item" value="${customer.ordersDetailID}" >
+                                                            <option class="field-input-item" value="${customer.ordersID}" >
                                                                 ${customer.cusName}, ${customer.cusPhone}, ${customer.cusAddress}
                                                             </option>
                                                         </c:forEach>
@@ -846,6 +846,7 @@
                                                     <label class="radio-label">
                                                         <div class="radio-input">
                                                             <input
+                                                                value="${2}"
                                                                 type="radio"
                                                                 id="location"
                                                                 name="location"

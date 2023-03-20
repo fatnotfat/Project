@@ -199,7 +199,7 @@ public class CustomerDAO implements Serializable {
     }
 
     public boolean createAccountForShipping(String name, String email,
-            String phone, String address)
+            String phone)
             throws SQLException, NamingException, ParseException {;
         Connection con = null;
         PreparedStatement stm = null;
@@ -208,15 +208,14 @@ public class CustomerDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Insert Into Customer("
-                        + "Name, Email, Phone, Address"
+                        + "Name, Email, Phone"
                         + ") "
-                        + "Values(?, ?, ?, ?"
+                        + "Values(?, ?, ?"
                         + ")";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, name);
                 stm.setString(2, email);
                 stm.setString(3, phone);
-                stm.setString(4, address);
                 int effectedRows = stm.executeUpdate();
                 if (effectedRows > 0) {
                     result = true;

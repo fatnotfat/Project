@@ -16,77 +16,100 @@ public class OrdersDTO implements Serializable {
 
     private int ordersID;
     private int customerID;
+    private int shippingID;
     private Date dateOrders;
-    private int ordersDtID;
+    private int status;
+    private String cusName;
+    private String cusPhone;
+    private String cusAddress;
 
     public OrdersDTO() {
     }
 
-    public OrdersDTO(int ordersID, int customerID, Date dateOrders, int ordersDtID) {
+    public OrdersDTO(int customerID, String cusName, String cusPhone, String cusAddress) {
+        this.customerID = customerID;
+        this.cusName = cusName;
+        this.cusPhone = cusPhone;
+        this.cusAddress = cusAddress;
+    }
+    
+    
+
+    public OrdersDTO(int ordersID, int customerID, int shippingID, Date dateOrders, int status, String cusName, String cusPhone, String cusAddress) {
         this.ordersID = ordersID;
         this.customerID = customerID;
+        this.shippingID = shippingID;
         this.dateOrders = dateOrders;
-        this.ordersDtID = ordersDtID;
+        this.status = status;
+        this.cusName = cusName;
+        this.cusPhone = cusPhone;
+        this.cusAddress = cusAddress;
     }
 
-    public OrdersDTO(int ordersID) {
-        this.ordersID = ordersID;
-    }
-
-    /**
-     * @return the ordersID
-     */
     public int getOrdersID() {
         return ordersID;
     }
 
-    /**
-     * @param ordersID the ordersID to set
-     */
     public void setOrdersID(int ordersID) {
         this.ordersID = ordersID;
     }
 
-    /**
-     * @return the customerID
-     */
     public int getCustomerID() {
         return customerID;
     }
 
-    /**
-     * @param customerID the customerID to set
-     */
     public void setCustomerID(int customerID) {
         this.customerID = customerID;
     }
 
-    /**
-     * @return the dateOrders
-     */
+    public int getShippingID() {
+        return shippingID;
+    }
+
+    public void setShippingID(int shippingID) {
+        this.shippingID = shippingID;
+    }
+
     public Date getDateOrders() {
         return dateOrders;
     }
 
-    /**
-     * @param dateOrders the dateOrders to set
-     */
     public void setDateOrders(Date dateOrders) {
         this.dateOrders = dateOrders;
     }
 
-    /**
-     * @return the ordersDtID
-     */
-    public int getOrdersDtID() {
-        return ordersDtID;
+    public int getStatus() {
+        return status;
     }
 
-    /**
-     * @param ordersDtID the ordersDtID to set
-     */
-    public void setOrdersDtID(int ordersDtID) {
-        this.ordersDtID = ordersDtID;
+    public void setStatus(int status) {
+        this.status = status;
     }
+
+    public String getCusName() {
+        return cusName;
+    }
+
+    public void setCusName(String cusName) {
+        this.cusName = cusName;
+    }
+
+    public String getCusPhone() {
+        return cusPhone;
+    }
+
+    public void setCusPhone(String cusPhone) {
+        this.cusPhone = cusPhone;
+    }
+
+    public String getCusAddress() {
+        return cusAddress;
+    }
+
+    public void setCusAddress(String cusAddress) {
+        this.cusAddress = cusAddress;
+    }
+
+    
 
 }

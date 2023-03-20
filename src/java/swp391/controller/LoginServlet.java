@@ -23,6 +23,8 @@ import javax.servlet.http.HttpSession;
 import swp391.login.LoginError;
 import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
+import swp391.orders.OrdersDAO;
+import swp391.orders.OrdersDTO;
 import swp391.ordersdetail.OrdersDetailDAO;
 import swp391.ordersdetail.OrdersDetailDTO;
 import swp391.utils.MyApplicationConstants;
@@ -86,10 +88,15 @@ public class LoginServlet extends HttpServlet {
                             MyApplicationConstants.LoginServlet.MAIN_PAGE);
                     HttpSession session = request.getSession();
                     session.setAttribute("USER", result);
+                    
                     if (result != null) {
-                        OrdersDetailDAO ordersDetailDAO = new OrdersDetailDAO();
-                        List<OrdersDetailDTO> customerOrders = ordersDetailDAO.getCustomerInFoDetailsByCusID(result.getCustomerID());
+                        OrdersDAO ordersDAO = new OrdersDAO();
+                        List<OrdersDTO> customerOrders = ordersDAO.getCustomerShippingInFoByCusID(result.getCustomerID());
                         session.setAttribute("USER_SHIPPINGINFO", customerOrders);
+                        
+//                        OrdersDetailDAO ordersDetailDAO = new OrdersDetailDAO();
+//                        List<OrdersDetailDTO> customerOrders = ordersDetailDAO.getCustomerInFoDetailsByCusID(result.getCustomerID());
+//                        session.setAttribute("USER_SHIPPINGINFO", customerOrders);
                     }
 
                     String previousPage = (String) session.getAttribute("shippingPage");

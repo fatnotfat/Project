@@ -28,6 +28,7 @@ import swp391.cart.CartObject;
 import swp391.customer.CustomerCreateError;
 import swp391.customer.CustomerDTO;
 import swp391.orders.OrdersDAO;
+import swp391.orders.OrdersDTO;
 import swp391.ordersdetail.OrdersDetailDAO;
 import swp391.ordersdetail.OrdersDetailDTO;
 import swp391.utils.MyApplicationConstants;
@@ -78,16 +79,19 @@ public class PaymentServlet extends HttpServlet {
                     float discount = 0;
                     int status = 0;
                     OrdersDetailDAO ordersDetailDAO = new OrdersDetailDAO();
+                    OrdersDAO ordersDAO = new OrdersDAO();
                     String defaultOrNewShippingInfo = (String) session.getAttribute("defaultOrNewShippingInfo");
                     if (defaultOrNewShippingInfo != null && defaultOrNewShippingInfo.equals("0")) {
                         // Người dùng đã chọn địa chỉ giao hàng mặc định
                         String cusName = (String) session.getAttribute("customerName");
                         String cusAddress = (String) session.getAttribute("customerAddress");
                         String cusPhone = (String) session.getAttribute("customerPhone");
-                        List<Integer> orderDetails = ordersDetailDAO.addToOrdersDetail(cart, discount, paymentID, shippingID, status, cusName, cusPhone, cusAddress);
-                        OrdersDAO ordersDAO = new OrdersDAO();
-                        for (Integer orderDetail : orderDetails) {
-                            ordersDAO.addToOrders(customerID, orderDetail);
+                        List<Integer> ordersID = ordersDAO.addToOrders(customerID, paymentID, shippingID, status, cusName, cusPhone, cusAddress);
+                        //List<Integer> orderDetails = ordersDetailDAO.addToOrdersDetail(cart, discount, paymentID, shippingID, status, cusName, cusPhone, cusAddress);
+
+                        for (Integer ordersId : ordersID) {
+                            ordersDetailDAO.addToOrdersDetail(cart, discount, ordersId, status);
+//                            ordersDAO.addToOrders(customerID, orderDetail);
                         }
                     } else if (defaultOrNewShippingInfo != null && defaultOrNewShippingInfo.equals("1")) {
                         // Người dùng đã thêm thông tin giao hàng mới
@@ -95,26 +99,44 @@ public class PaymentServlet extends HttpServlet {
                         String lastName = (String) session.getAttribute("lastName");
                         String customerAddress = (String) session.getAttribute("customerAddress");
                         String customerPhone = (String) session.getAttribute("customerPhone");
-                        List<Integer> orderDetails = ordersDetailDAO.addToOrdersDetail(cart, discount, paymentID, shippingID, status, firstName + " " + lastName, customerPhone, customerAddress);
-                        OrdersDAO ordersDAO = new OrdersDAO();
-                        for (Integer orderDetail : orderDetails) {
-                            ordersDAO.addToOrders(customerID, orderDetail);
+//                        List<Integer> orderDetails = ordersDetailDAO.addToOrdersDetail(cart, discount, paymentID, shippingID, status, firstName + " " + lastName, customerPhone, customerAddress);
+//                        OrdersDAO ordersDAO = new OrdersDAO();
+//                        for (Integer orderDetail : orderDetails) {
+//                            ordersDAO.addToOrders(customerID, orderDetail);
+//                        }
+                        List<Integer> ordersID = ordersDAO.addToOrders(customerID, paymentID, shippingID, status, firstName + " " + lastName, customerPhone, customerAddress);
+                        //List<Integer> orderDetails = ordersDetailDAO.addToOrdersDetail(cart, discount, paymentID, shippingID, status, cusName, cusPhone, cusAddress);
+
+                        for (Integer ordersId : ordersID) {
+                            ordersDetailDAO.addToOrdersDetail(cart, discount, ordersId, status);
+//                            ordersDAO.addToOrders(customerID, orderDetail);
                         }
                     } else {
+                        // người dùng là guest (chưa có tài khoản)
                         String firstName = (String) session.getAttribute("txtFirstName");
                         String lastName = (String) session.getAttribute("txtLastName");
                         String customerAddress = (String) session.getAttribute("txtAddress");
                         String customerPhone = (String) session.getAttribute("txtPhone");
-                        List<Integer> orderDetails = ordersDetailDAO.addToOrdersDetail(cart, discount, paymentID, shippingID, status, firstName + " " + lastName, customerPhone, customerAddress);
-                        OrdersDAO ordersDAO = new OrdersDAO();
-                        for (Integer orderDetail : orderDetails) {
-                            ordersDAO.addToOrders(customerID, orderDetail);
+//                        List<Integer> orderDetails = ordersDetailDAO.addToOrdersDetail(cart, discount, paymentID, shippingID, status, firstName + " " + lastName, customerPhone, customerAddress);
+//                        OrdersDAO ordersDAO = new OrdersDAO();
+//                        for (Integer orderDetail : orderDetails) {
+//                            ordersDAO.addToOrders(customerID, orderDetail);
+//                        }
+                        List<Integer> ordersID = ordersDAO.addToOrders(customerID, paymentID, shippingID, status, firstName + " " + lastName, customerPhone, customerAddress);
+                        //List<Integer> orderDetails = ordersDetailDAO.addToOrdersDetail(cart, discount, paymentID, shippingID, status, cusName, cusPhone, cusAddress);
+
+                        for (Integer ordersId : ordersID) {
+                            ordersDetailDAO.addToOrdersDetail(cart, discount, ordersId, status);
+//                            ordersDAO.addToOrders(customerID, orderDetail);
                         }
                     }
                     CustomerDTO user = (CustomerDTO) session.getAttribute("USER");
                     if (user != null) {
-                        OrdersDetailDAO ordersDetailDAOs = new OrdersDetailDAO();
-                        List<OrdersDetailDTO> customerOrders = ordersDetailDAOs.getCustomerInFoDetailsByCusID(user.getCustomerID());
+//                        OrdersDetailDAO ordersDetail = new OrdersDetailDAO();
+//                        List<OrdersDetailDTO> customerOrders = ordersDetail.getCustomerInFoDetailsByCusID(user.getCustomerID());
+//                        session.setAttribute("USER_SHIPPINGINFO", customerOrders);
+
+                        List<OrdersDTO> customerOrders = ordersDAO.getCustomerShippingInFoByCusID(user.getCustomerID());
                         session.setAttribute("USER_SHIPPINGINFO", customerOrders);
                     }
                     url = siteMaps.getProperty(
