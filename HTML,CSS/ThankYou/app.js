@@ -1,3 +1,4 @@
+
 // ______________________________________ICON____________________________________________
 // Get references to the search tab and its content
 const searchTab = document.querySelector(".menu-icon-tab-search");
@@ -103,36 +104,4 @@ document.addEventListener('click', function() {
   if (cartContentR.classList.contains('menu-responsive-icon-tab-cart-content-active')) {
     toggleCartContent();
   }
-});
-// ________________________________CART RESPONSIVE______________________________
-
-// ____________________________________PAY METHODS__________________________________
-// Get references to the relevant elements
-const codRadio = document.querySelector('.shipping-info-left-payment-field-input input[type="radio"]');
-const otherRadio = document.querySelector('.shipping-info-left-payment-field-other-input input[type="radio"]');
-const codDiv = document.querySelector('.shipping-info-left-payment-content-cod');
-const otherDiv = document.querySelector('.shipping-info-left-payment-content-other');
-
-// Add event listeners to the radio buttons
-codRadio.addEventListener('click', function() {
-  codDiv.style.display = 'block';
-  otherDiv.style.display = 'none';
-});
-
-otherRadio.addEventListener('click', function() {
-  codDiv.style.display = 'none';
-  otherDiv.style.display = 'block';
-});
-// ---------------------PRICE SHIPPING-------------------------------
-// Get the radio button and the paragraph element
-const radio = document.getElementById('location');
-const price = document.querySelector('.shipping-info-right-product-fee-price-ship');
-
-// Add an event listener to the radio button
-radio.addEventListener('click', function() {
-  // Get the price of home delivery
-  const homeDeliveryPrice = document.querySelector('.shipping-info-left-form-delivery-home-price-number').textContent;
-
-  // Update the value of the paragraph with the home delivery price
-  price.textContent = homeDeliveryPrice;
 });

@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap"
       rel="stylesheet"
@@ -13,12 +15,11 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     />
     <link rel="stylesheet" href="./reset.css" />
-    <link rel="stylesheet" href="./payment-3.css" />
-    <title>Payment-3</title>
+    <link rel="stylesheet" href="./thankyou.css" />
+    <title>Thank You</title>
   </head>
   <body>
     <div class="wrapper">
-      <!-- HEADER -->
       <header class="header">
         <div class="nav-top">
           <div class="container">
@@ -27,11 +28,13 @@
             </div>
           </div>
         </div>
-        <img src="./../../images/Nav-line.png" alt="" class="nav-line" />
+        <img src="./../images/Nav-line.png" alt="" class="nav-line" />
         <!-- NAV DESKTOP - TABLET -->
         <div class="nav-bot">
           <div class="container">
-            <a href="#!" class="menu-logo"> LOGO </a>
+            <a href="#!" class="menu-logo">
+              <img srcset="./../images/LOGO.png 2x" alt="" />
+            </a>
             <ul class="menu">
               <li class="menu-item">
                 <a href="#!" class="menu-link menu-link-category">Categories</a>
@@ -136,7 +139,7 @@
                 <button class="menu-icon-tab-search" href="#!">
                   <img
                     class="menu-icon-img"
-                    srcset="./../../images/search-normal.png 2x"
+                    srcset="./../images/search-normal.png 2x"
                     alt=""
                   />
                 </button>
@@ -146,7 +149,7 @@
                       <p class="menu-icon-tab-search-content-title-desc">
                         SEARCH
                       </p>
-                      <img srcset="./../../images/Footer-line.png 2x" alt="" />
+                      <img srcset="./../images/Footer-line.png 2x" alt="" />
                     </div>
                     <div class="menu-icon-tab-search-form">
                       <input
@@ -163,7 +166,7 @@
                 <button class="menu-icon-tab-profile" href="#!">
                   <img
                     class="menu-icon-img"
-                    srcset="./../../images/profile-circle.png 2x"
+                    srcset="./../images/profile-circle.png 2x"
                     alt=""
                   />
                 </button>
@@ -173,7 +176,7 @@
                       <p class="menu-icon-tab-profile-content-title-desc">
                         ACCOUNT INFORMATION
                       </p>
-                      <img srcset="./../../images/Footer-line.png 2x" alt="" />
+                      <img srcset="./../images/Footer-line.png 2x" alt="" />
                     </div>
                     <div class="menu-icon-tab-profile-form">
                       <p class="menu-icon-tab-profile-form-name">NAME</p>
@@ -195,7 +198,7 @@
                 <button class="menu-icon-tab-cart" href="#!">
                   <img
                     class="menu-icon-img"
-                    srcset="./../../images/shopping-cart.png 2x"
+                    srcset="./../images/shopping-cart.png 2x"
                     alt=""
                   />
                 </button>
@@ -207,7 +210,7 @@
                           Cart
                         </p>
                         <img
-                          srcset="./../../images/Footer-line.png 2x"
+                          srcset="./../images/Footer-line.png 2x"
                           alt=""
                           class="menu-icon-tab-cart-space"
                         />
@@ -216,7 +219,7 @@
                     <div class="menu-icon-tab-cart-content-show">
                       <div class="menu-icon-tab-cart-content-show-icon">
                         <img
-                          srcset="./../../images/shopping-icon-tab.png 2x"
+                          srcset="./../images/shopping-icon-tab.png 2x"
                           alt=""
                         />
                       </div>
@@ -226,7 +229,7 @@
                         </p>
                       </div>
                     </div>
-                    <img srcset="./../../images/Footer-line.png 2x" alt="" />
+                    <img srcset="./../images/Footer-line.png 2x" alt="" />
                     <div class="menu-icon-tab-cart-content-function">
                       <div class="menu-icon-tab-cart-content-function-total">
                         <p
@@ -264,15 +267,15 @@
           <div class="container">
             <div class="menu-responsive-icon">
               <!-- <img
-                           class="menu-responsive-icon-img"
-                           srcset="./../../images/shopping-cart.png 2x"
-                           alt=""
-                         /> -->
+                       class="menu-responsive-icon-img"
+                       srcset="./../images/shopping-cart.png 2x"
+                       alt=""
+                     /> -->
               <div class="menu-responsive-icon-tab">
                 <button class="menu-responsive-icon-tab-cart" href="#!">
                   <img
                     class="menu-responsive-icon-img menu-responsive-icon-img-cart"
-                    srcset="./../../images/shopping-cart.png 2x"
+                    srcset="./../images/shopping-cart.png 2x"
                     alt=""
                   />
                 </button>
@@ -288,7 +291,7 @@
                           Cart
                         </p>
                         <img
-                          srcset="./../../images/Footer-line.png 2x"
+                          srcset="./../images/Footer-line.png 2x"
                           alt=""
                           class="menu-responsive-icon-tab-cart-space"
                         />
@@ -299,7 +302,7 @@
                         class="menu-responsive-icon-tab-cart-content-show-icon"
                       >
                         <img
-                          srcset="./../../images/shopping-icon-tab.png 2x"
+                          srcset="./../images/shopping-icon-tab.png 2x"
                           alt=""
                         />
                       </div>
@@ -313,7 +316,7 @@
                         </p>
                       </div>
                     </div>
-                    <img srcset="./../../images/Footer-line.png 2x" alt="" />
+                    <img srcset="./../images/Footer-line.png 2x" alt="" />
                     <div class="menu-responsive-icon-tab-cart-content-function">
                       <div
                         class="menu-responsive-icon-tab-cart-content-function-total"
@@ -348,241 +351,181 @@
                 </div>
               </div>
             </div>
-            <a href="#!" class="menu-responsive-logo"> LOGO </a>
+            <a href="#!" class="menu-responsive-logo">
+              <img srcset="./../images/LOGO.png 2x" alt="" />
+            </a>
             <div class="menu-responsive-icon">
               <img
                 class="menu-responsive-icon-img menu-responsive-icon-img-bar"
-                srcset="./../../images/textalign-justifycenter.png 2x"
+                srcset="./../images/textalign-justifycenter.png 2x"
                 alt=""
               />
             </div>
           </div>
         </div>
         <!--  -->
-        <img src="./../../images/Nav-line.png" alt="" class="nav-line-bot" />
+        <img src="./../images/Nav-line.png" alt="" class="nav-line-bot" />
       </header>
-      <section class="shipping-info">
+      <div class="overview">
         <div class="container">
-          <div class="shipping-info-left">
-            <div class="container">
-              <div class="shipping-info-left-breadcrumb">
-                <div class="container">
-                  <ul class="shipping-info-left-breadcrumb-menu">
-                    <li><a href="#">Cart</a></li>
-                    <li><a href="#">Shipping infomation</a></li>
-                    <li><a href="#">Payment methods</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="shipping-info-left-title">
-                <div class="container">
-                  <p class="shipping-info-left-title-txt">Shipping method</p>
-                </div>
-              </div>
-              <div class="shipping-info-left-form-delivery-home">
-                <label class="radio-label">
-                  <div class="radio-input">
-                    <input
-                      type="radio"
-                      id="location"
-                      name="location"
-                      class="input-radio"
-                    />
-                  </div>
-                  <span class="radio-label-primary">Home delivery</span>
-                </label>
-                <div class="shipping-info-left-form-delivery-home-price">
-                  <p class="shipping-info-left-form-delivery-home-price-number">
-                    25,000₫
-                  </p>
-                </div>
-              </div>
-              <div class="shipping-info-left-payment">
-                <div class="shipping-info-left-payment-title">
-                  <div class="container">
-                    <p class="shipping-info-left-payment-title-txt">
-                      Payment Methods
-                    </p>
-                  </div>
-                </div>
-                <div class="shipping-info-left-payment-all">
-                  <div class="shipping-info-left-payment-field">
-                    <div class="shipping-info-left-payment-field-input">
-                      <label class="radio-label" id="shipping-info-cod-radio">
-                        <div class="radio-input">
-                          <input
-                            type="radio"
-                            id="method"
-                            name="method"
-                            class="input-radio"
-                          />
-                        </div>
-                        <img
-                          src="./../../images/cod.svg"
-                          alt=""
-                          class="main-img"
-                        />
-                        <span class="radio-label-primary"
-                          >Collecting Household (COD)</span
-                        >
-                      </label>
-                    </div>
-                  </div>
-                  <div class="shipping-info-left-payment-content-cod">
-                    The customer will pay the product invoice and delivery fee
-                    upon receipt.
-                  </div>
-                  <div class="shipping-info-left-payment-field-other">
-                    <div class="shipping-info-left-payment-field-other-input">
-                      <label class="radio-label" id="shipping-info-other-radio">
-                        <div class="radio-input">
-                          <input
-                            type="radio"
-                            id="method"
-                            name="method"
-                            class="input-radio"
-                          />
-                        </div>
-                        <img
-                          src="./../../images/other.svg"
-                          alt=""
-                          class="main-img"
-                        />
-                        <span class="radio-label-primary">Bank transfer</span>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="shipping-info-left-payment-content-other">
-                    Customers transfer via bank's number:<br />
-                    0781000487810 - VCB - NGUYEN VAN DUNG <br />
-                    Content: Full name + phone number
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button class="shipping-info-left-btn">Complete your order</button>
+          <div class="overview-left">
+            <h1 class="overview-left-title">THANK YOU FOR YOUR ORDER
+               <i class="fa-sharp fa-solid fa-check"></i>
+            </h1>
+            <ul class="overview-left-list">
+              <li class="overview-left-item--circle">
+                <a href="#!" class="overview-left-item-link"
+                  >Go back to shopping</a
+                >
+              </li>
+            </ul>
           </div>
+          <!-- ____________________________________________________ -->
           <img
-            srcset="./../../images/Login-line.png 2x"
+            class="overview-space"
+            srcset="./../images/Login-line.png 2x"
             alt=""
-            class="shipping-info-space"
           />
-          <!-- RIGHT -->
-          <div class="shipping-info-right">
-            <div class="container">
-              <div class="shipping-info-left-breadcrumb-res">
-                <div class="container">
-                  <ul class="shipping-info-left-breadcrumb-res-menu">
-                    <li><a href="#">Cart</a></li>
-                    <li><a href="#">Shipping infomation</a></li>
-                    <li><a href="#">Payment methods</a></li>
+          <div class="overview-right">
+            <div class="overview-right-account-info">
+              <h1 class="overview-right-account-info-title">
+                YOUR INFORMATION
+              </h1>
+              <img srcset="./../images/Overview-line.png 2x" alt="" />
+              <ul class="overview-right-account-info-option">
+                <li class="overview-right-account-info-option-item">
+                  <p class="overview-right-account-info-option-item-name">
+                    NAME
+                  </p>
+                </li>
+                <li class="overview-right-account-info-option-item">
+                  <p class="overview-right-account-info-option-item-name">
+                    Phone number:
+                  </p>
+                  <p
+                    href="#!"
+                    class="overview-right-account-info-option-item-orders"
+                  >
+                    0123456789
+                  </p>
+                </li>
+
+                <li class="overview-right-account-info-option-item">
+                  <p class="overview-right-account-info-option-item-mail">
+                    name@gmail.com
+                  </p>
+                </li>
+                <!-- <li class="overview-right-account-info-option-item">
+                           <a href="#!" class="overview-right-account-info-option-item-address">View address</a>
+                      </li> -->
+                <li class="overview-right-account-info-option-item">
+                  <p class="overview-right-account-info-option-item-mail">
+                    Address:
+                  </p>
+                  <p
+                    href="#!"
+                    class="overview-right-account-info-option-item-orders"
+                  >
+                    123 District 1, TP. HO CHI MINH
+                  </p>
+                </li>
+                <li class="overview-right-account-info-option-item">
+                  <p class="overview-right-account-info-option-item-mail">
+                    Payment method:
+                  </p>
+                  <p
+                    href="#!"
+                    class="overview-right-account-info-option-item-acc"
+                  >
+                    COD
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <div class="overview-right-latest-order">
+              <div class="overview-right-latest-order-title">
+                ORDER
+                <img srcset="./../images/Overview-line.png 2x" alt="" />
+              </div>
+              <div class="overview-right-latest-order-table">
+                <div class="overview-right-latest-order-table-title">
+                  <ul class="overview-right-latest-order-table-title-list">
+                    <li
+                      class="overview-right-latest-order-table-title-list-item"
+                    >
+                      Order Id
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-title-list-item"
+                    >
+                      Product Name
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-title-list-item"
+                    >
+                      Booking date
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-title-list-item"
+                    >
+                      Into money
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-title-list-item"
+                    >
+                      Status
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-title-list-item"
+                    >
+                      Transport
+                    </li>
                   </ul>
-                </div>
-              </div>
-              <div class="shipping-info-right-product">
-                <div class="container">
-                  <div class="shipping-info-right-product-logo">
-                    <div class="container">
-                      <div class="shipping-info-right-product-logo-img">
-                        <img
-                          src="./../../images/product-demo.png"
-                          alt=""
-                          class="shipping-info-right-product-logo-img-pic"
-                        />
-                      </div>
-                      <span class="shipping-info-right-product-logo-quantity">
-                        1
-                      </span>
-                    </div>
-                  </div>
-                  <div class="shipping-info-right-product-content">
-                    <div class="container">
-                      <div class="shipping-info-right-product-content-name">
-                        <div class="container">
-                          <p
-                            class="shipping-info-right-product-content-name-title"
-                          >
-                            Product name
-                          </p>
-                          <p
-                            class="shipping-info-right-product-content-name-size"
-                          >
-                            M
-                          </p>
-                        </div>
-                      </div>
-                      <div class="shipping-info-right-product-content-price">
-                        <div class="container">
-                          <p
-                            class="shipping-info-right-product-content-price-number"
-                          >
-                            000,000₫
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="shipping-info-right-product-fee">
-                <div class="container">
-                  <div class="shipping-info-right-product-fee-name">
-                    <div class="container">
-                      <p
-                        class="shipping-info-right-product-fee-name-provisional"
-                      >
-                        Provisional
-                      </p>
-                      <p class="shipping-info-right-product-fee-name-ship">
-                        Shipping fee
-                      </p>
-                    </div>
-                  </div>
-                  <div class="shipping-info-right-product-fee-price">
-                    <div class="container">
-                      <p
-                        class="shipping-info-right-product-fee-price-provisional"
-                      >
-                        000,000₫
-                      </p>
-                      <p class="shipping-info-right-product-fee-price-ship">
-                        —
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="shipping-info-right-product-total">
-                <div class="container">
-                  <div class="shipping-info-right-product-total-name">
-                    <div class="container">
-                      <p class="shipping-info-right-product-total-name-title">
-                        Total
-                      </p>
-                    </div>
-                  </div>
-                  <div class="shipping-info-right-product-total-price">
-                    <div class="container">
-                      <p
-                        class="shipping-info-right-product-total-price-country"
-                      >
-                        VND
-                      </p>
-                      <p class="shipping-info-right-product-total-price-number">
-                        000,000₫
-                      </p>
-                    </div>
-                  </div>
+                  <hr />
+                  <ul class="overview-right-latest-order-table-desc-list">
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      000000
+                    </li>
+                    <li
+                      style="
+                        width: 100px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                      "
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      ABCDEFGHZIJKdádasd
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      mm/dd/yyyyy
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      000,000 vnđ
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      Finished
+                    </li>
+                    <li
+                      class="overview-right-latest-order-table-desc-list-item"
+                    >
+                      Delivered
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
-          <!-- RIGHT -->
         </div>
-      </section>
-
-      <!-- FOOTER -->
-      <img src="./../../images/Footer-line.png" alt="" class="footer-space"/>
+      </div>
+      <img src="./../images/Footer-line.png" alt="" />
       <footer class="footer">
         <div class="container">
           <div class="footer-menu">
