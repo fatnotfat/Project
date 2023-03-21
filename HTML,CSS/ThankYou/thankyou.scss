@@ -862,7 +862,7 @@ header {
         padding-bottom: 2rem;
       }
       &-table {
-        padding: 40px 20px;
+        padding: 40px 40px;
         border: 1px solid black;
         &-title {
           &-list {
@@ -871,11 +871,11 @@ header {
             list-style: none;
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: space-evenly;
+            justify-content: space-between;
             align-items: center;
             padding-bottom: 20px;
             &-item {
-              width: 110px;
+          //     width: 110px;
               font-size: 14px;
               font-weight: 600;
             }
@@ -888,11 +888,11 @@ header {
             list-style: none;
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: space-evenly;
+            justify-content: space-between;
             align-items: center;
             padding-top: 20px;
             &-item {
-              width: 110px;
+          //     width: 110px;
               font-size: 14px;
             }
           }
@@ -937,7 +937,7 @@ header {
           padding-bottom: 1rem;
         }
         &-table {
-          padding: 30px 0;
+          padding: 30px 30px;
           &-title {
             &-list {
               padding-bottom: 10px;
@@ -1003,7 +1003,7 @@ header {
           padding-bottom: 1rem;
         }
         &-table {
-          padding: 20px 0;
+          padding: 20px 20px;
           &-title {
             &-list {
               padding-bottom: 10px;
