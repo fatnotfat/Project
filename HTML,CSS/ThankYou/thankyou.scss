@@ -929,8 +929,8 @@ header {
         }
       }
       &-latest-order {
-        width: 50rem;
-        transform: translateX(-45%);
+        width: unset;
+        transform: none;
         padding-bottom: 5rem;
         &-title {
           font-size: 30px;
@@ -959,6 +959,14 @@ header {
       }
     }
   }
+  .overview .container {
+     display: flex;
+     flex-direction: column;
+     padding-top: 5rem;
+   }
+   .overview-space {
+     display: none;
+   }
 }
 @media screen and (max-width: 600px) {
   .overview .container {

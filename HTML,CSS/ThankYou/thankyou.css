@@ -863,8 +863,8 @@ header {
     font-size: 14px;
   }
   .overview-right-latest-order {
-    width: 50rem;
-    transform: translateX(-45%);
+    width: unset;
+    transform: none;
     padding-bottom: 5rem;
   }
   .overview-right-latest-order-title {
@@ -884,6 +884,14 @@ header {
   .overview-right-latest-order-table-desc-list-item {
     width: unset;
     font-size: 12px;
+  }
+  .overview .container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5rem;
+  }
+  .overview-space {
+    display: none;
   }
 }
 @media screen and (max-width: 600px) {
