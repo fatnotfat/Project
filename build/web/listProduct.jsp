@@ -71,27 +71,30 @@
             <%
                 try {
                     // Assuming that your servlet stores the JSON data as a string in a variable called jsonData
-                    String jsonData = (String) session.getAttribute("products");
-                    System.out.println(jsonData);
-                    JSONArray jsonArray = new JSONArray(jsonData);
-                    for (int i = 0; i < jsonArray.length(); i++) {
+                    
+                    String jsonData = (String) request.getAttribute("products");
+                    if (jsonData != null) {
+                        System.out.println(jsonData);
+                        JSONArray jsonArray = new JSONArray(jsonData);
+                        for (int i = 0; i < jsonArray.length(); i++) {
 //                                    if (jsonArray.get(i) instanceof String) {
 //                                        String item = jsonArray.getString(i);
 //                                        out.print("dataSource.push('" + item + "');\n");
 //                                    }
-                        Object element = jsonArray.get(i);
-                        if (element instanceof String) {
-                            String item = (String) element;
-                            out.print("dataSource.push('" + item + "');\n");
-                        } else if (element instanceof Number) {
-                            Number item = (Number) element;
-                            out.print("dataSource.push(" + item.toString() + ");\n");
-                        } else if (element instanceof JSONObject) {
-                            JSONObject obj = (JSONObject) element;
+                            Object element = jsonArray.get(i);
+                            if (element instanceof String) {
+                                String item = (String) element;
+                                out.print("dataSource.push('" + item + "');\n");
+                            } else if (element instanceof Number) {
+                                Number item = (Number) element;
+                                out.print("dataSource.push(" + item.toString() + ");\n");
+                            } else if (element instanceof JSONObject) {
+                                JSONObject obj = (JSONObject) element;
 
-                            out.print("dataSource.push(" + obj.toString(2) + ");\n");
-                            // Handle object element
-                            System.out.println(obj.toString());
+                                out.print("dataSource.push(" + obj.toString(2) + ");\n");
+                                // Handle object element
+                                System.out.println(obj.toString());
+                            }
                         }
                     }
                 } catch (JSONException ex) {
@@ -103,42 +106,35 @@
                 var options = {
                     dataSource: dataSource,
                     pageSize: 9,
-                    callback: function (data, pagination) {
+                    callback: function (data, pagination) {                       
                         var html = '';
-//                        for (var i = 0; i < data.length; i++) {
-//                            html += '<div>' + JSON.stringify(data[i].name) + '</div>';
-//                        }
-                        for (var i = 0; i < data.length; i++) {
-//                            if (i % 3 === 0) {
-//                                html += '<div class="product__row">';
-//                            }
-
-                            html += '<div class="grid__column-3-4">'
-                                    + '<div class="product__item">'
-                                    + '<div class="product__item-img">'
-                                    + '<div  class="card">'
-                                    + '<img  class="img-back" src="assets/image/necklake.png" alt="Card Back">'
-                                    + '<img class="img-top" src="assets/image/duck-light.jpg" alt="Card Front">'
-                                    + '</div>'
-                                    + '</div>'
-                                    + '<div class="product__item-name">'
-                                    + JSON.stringify(data[i].name).replace(/^"(.*)"$/, '$1')
-                                    + '</div>'
-                                    + '<div class="product__item-price">'
-                                    + 'Price:' + '<span>' + JSON.stringify(data[i].price) + '</span>'
-                                    + '</div>'
-                                    + '<div class="product__item-info">'
-                                    + '<form action="viewProductController" method="POST" class="form__product-item-view">'
-                                    + '<input type="hidden" name="txtProductID" value="' + JSON.stringify(data[i].id) + '" />'
-                                    + '<button class="product__item-view">Xem Ngay</button>'
-                                    + '</form>'
-                                    + '</div>'
-                                    + '</div>'
-                                    + '</div>';
-
-//                            if (i % 3 === 2 || i === data.length - 1) {
-//                                html += '</div>';
-//                            }
+                        if (data.length > 1) {
+                            for (var i = 0; i < data.length; i++) {
+                                html += '<div class="grid__column-3-4">'
+                                        + '<div class="product__item">'
+                                        + '<div class="product__item-img">'
+                                        + '<div  class="card">'
+                                        + '<img  class="img-back" src="assets/image/necklake.png" alt="Card Back">'
+                                        + '<img class="img-top" src="assets/image/duck-light.jpg" alt="Card Front">'
+                                        + '</div>'
+                                        + '</div>'
+                                        + '<div class="product__item-name">'
+                                        + JSON.stringify(data[i].name).replace(/^"(.*)"$/, '$1')
+                                        + '</div>'
+                                        + '<div class="product__item-price">'
+                                        + 'Price:' + '<span>' + JSON.stringify(data[i].price) + '</span>'
+                                        + '</div>'
+                                        + '<div class="product__item-info">'
+                                        + '<form action="viewProductController" method="POST" class="form__product-item-view">'
+                                        + '<input type="hidden" name="txtProductID" value="' + JSON.stringify(data[i].id) + '" />'
+                                        + '<button class="product__item-view">Xem Ngay</button>'
+                                        + '</form>'
+                                        + '</div>'
+                                        + '</div>'
+                                        + '</div>';
+                            }
+                        }else{
+                            html = '<div class="grid__row" style="align-items: center!important; justify-content: center; font-size: 16px; color: red; margin-bottom: 20px;"><p>There are no related product!!</p></div>';
                         }
                         dataContainer.html(html);
                     }
@@ -304,6 +300,7 @@
                                         alt=""
                                         />
                                 </button>
+                                <c:set var="uri" value="${pageContext.request.requestURI}" scope="session"/>
                                 <div class="menu-icon-tab-profile-content">
                                     <div class="container">
                                         <c:if test="${not empty sessionScope.USER}">

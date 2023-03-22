@@ -11,7 +11,6 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
@@ -296,6 +295,7 @@
                                             </div>
                                             <div class="menu-icon-tab-cart-content-show-txt">
                                                 <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
+                                                <input type="hidden" name="txtCartSizeValue" value="${sessionScope.CART.items.size()}" />
                                                 <c:set var="totalQuantity" value="${0}" />
                                                 <c:forEach var="quantity" items="${sessionScope.CART.items.values()}">
                                                     <c:set var="totalQuantity" value="${totalQuantity + quantity}" />
@@ -336,7 +336,7 @@
                                                     class="menu-icon-tab-cart-content-function-total-price"
                                                     >
                                                     <fmt:formatNumber var="price" value="${totalPrice}" pattern="#,###"/>
-                                                    ${price}₫   
+                                                    ${price}      
                                                 </p>
                                             </div>
                                             <div class="menu-icon-tab-cart-content-function-method">
@@ -610,7 +610,7 @@
                                 </div>
                                 <div class="your-cart-body-left-bot">
                                     <div class="container">
-                                        <div class="your-cart-body-left-bot-note">
+<!--                                        <div class="your-cart-body-left-bot-note">
                                             <h1 class="your-cart-body-left-bot-note-title">
                                                 Order Notes
                                             </h1>
@@ -622,7 +622,7 @@
                                                 class="your-cart-body-left-bot-note-area"
                                                 >
                                             </textarea>
-                                        </div>
+                                        </div>-->
                                         <div class="your-cart-body-left-bot-policy">
                                             <div class="container">
                                                 <h1 class="your-cart-body-left-bot-policy-title">
@@ -689,11 +689,11 @@
                                                         You can also enter the discount code at the checkout
                                                         page.
                                                     </p>
-                                                    <form action="">
+                                                    <!--<form action="shippingPage">-->
                                                         <button class="your-cart-body-right-order-btn">
                                                             PAY
                                                         </button>
-                                                    </form>
+                                                    <!--</form>-->
                                                     <a href="SearchByFilterServlet?txtProductCateID=1" class="your-cart-body-right-order-continue">
                                                         Continue shopping
                                                     </a>

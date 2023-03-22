@@ -1022,4 +1022,33 @@ header {
   font-size: 14px;
 }
 
+@media screen and (max-width: 768px) {
+    .footer-menu-connect-desc {
+      text-align: center;
+      padding: 0 10px;
+    }
+    .footer-menu-connect {
+      margin-bottom: 40px;
+      align-items: center;
+    }
+    .footer-menu-cus-service {
+      align-items: center;
+    }
+    .footer-menu-cus-service-desc {
+      text-align: center;
+    }
+    .footer-menu-about {
+      align-items: center;
+    }
+    .footer-menu-about-desc {
+      text-align: center;
+    }
+    .footer-menu-care {
+      align-items: center;     
+    }
+    .footer-menu-care-desc{
+        text-align: center;
+    }
+  }
+
 /*# sourceMappingURL=login.css.map */

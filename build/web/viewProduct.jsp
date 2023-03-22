@@ -197,6 +197,7 @@
                                         />
                                 </button>
                                 <div class="menu-icon-tab-profile-content">
+                                    <c:set var="uri" value="${pageContext.request.requestURI}" scope="session"/>
                                     <div class="container">
                                         <c:if test="${not empty sessionScope.USER}">
                                             <div class="menu-icon-tab-profile-content-title">
@@ -224,6 +225,7 @@
                                             <form action="loginPage" method="GET">
                                                 <button class="menu-icon-tab-cart-content-function-method-btn">
                                                     <a style="font-size: 15px; text-decoration: none; font-weight: bold; color: inherit" href="loginPage">LOGIN</a>
+
                                                 </button>
                                             </form>
                                         </c:if>
@@ -268,7 +270,7 @@
                                                 </c:if>
                                                 <p class="menu-icon-tab-cart-content-show-txt-desc">
                                                     <c:if test="${cartSize eq 0}">
-                                                        There are no currently products.
+                                                        There are <span id="cart-size-header" style="font-weight: bold">no</span> currently products.
                                                     </c:if>
                                                     <c:if test="${cartSize ne 0}">
                                                         There are <span id="cart-size-header" style="font-weight: bold">${cartSize}</span> products
@@ -457,15 +459,21 @@
 
                                 </div>
                             </div>
+                            <c:if test="${not empty requestScope.FEEDBACK_SUCCESS}">
+                                <script>alert('${requestScope.FEEDBACK_SUCCESS}');</script>
+                            </c:if>
+                            <c:if test="${not empty requestScope.FEEDBACK_ERROR_RESULT}">
+                                <script>alert('${requestScope.FEEDBACK_ERROR_RESULT}');</script>
+                            </c:if>
 
                             <c:set var="itemDetail" value="${sessionScope.ITEM_DETAIL}" />
-
+                            
                             <div class="grid__column-4">
                                 <div class="product__item-include">
                                     <div class="product__item-info">
                                         <h4 class="product__item-info-title">${itemDetail.name}</h4>
                                         <fmt:formatNumber var="price" value="${itemDetail.price}" pattern="###,###" />
-                                                    
+
                                         <span class="product__item-info-price">${price}đ</span>
                                         <div class="product__item-info-description">
                                             <p>${itemDetail.description}</p>
@@ -496,6 +504,87 @@
                                     </div>
 
                                     <hr>
+                                    <c:set var="user" value="${sessionScope.USER}" />
+                                    <c:set var="fbError" value="${requestScope.FEEDBACK_ERROR}"/>
+                                    <div class="product__item-info-review">
+                                        <div class="product__item-info-review-btn">
+                                            <button class="product__item-info-review-btn-input"><i class="fa-solid fa-pen"></i> Write a review</button>
+                                        </div>
+                                        <c:if test="${not empty user}">
+                                            <form class="product__item-info-review-content" action="addCommentController" method="POST">
+                                                <div class="product__item-info-review-input">
+                                                    <label for="stored-name" class="field-label">Name</label>
+                                                    <input type="text" class="field-input" disabled id="stored-name" placeholder="Your name" value="${user.name}">
+                                                    <input type="hidden" name="txtCustomerID" value="${user.customerID}" />
+                                                    <input id="product-id" type="hidden" name="txtProductID" value="${itemDetail.id}" />
+
+                                                </div>
+                                                <div class="product__item-info-review-input">
+                                                    <label for="stored-review" class="field-label">Write your review</label>
+                                                    <textarea name="txtComment" type="text" class="field-input" id="stored-review" placeholder="Your review">
+                                                    </textarea>
+                                                </div>
+                                                <c:if test="${not empty fbError.commentError}">
+                                                    <p style="color: red; text-align: center; font-size: 15px;">${fbError.commentError}</p>
+                                                </c:if>
+                                                <div class="product__item-info-review-star">
+                                                    <span class="star">&#9734;</span>
+                                                    <span class="star">&#9734;</span>
+                                                    <span class="star">&#9734;</span>
+                                                    <span class="star">&#9734;</span>
+                                                    <span class="star">&#9734;</span>
+                                                    <p class="current-rating">0 of 5</p>
+                                                    <input type="hidden" name="txtVoting" value="" />
+                                                </div>
+                                                <c:if test="${not empty fbError.votingError}">
+                                                    <p style="color: red; text-align: center; font-size: 15px;"> ${fbError.votingError} </p>
+                                                </c:if>
+                                                <div class="product__item-info-review-btn">
+                                                    <button class="product__item-info-review-btn-submit"><i class="fa-solid fa-pen"></i> SEND</button>
+                                                </div>
+                                            </form>
+                                        </c:if>
+                                        <c:if test="${empty user}">
+                                            <div style="display: flex;
+                                                 flex-direction: column;
+                                                 align-items: center;" class="product__item-info-review-content">
+                                                <p style="margin-bottom: 15px;">You must login before do this feature!</p>
+                                                <form action="loginPage" method="GET">
+                                                    <button class="menu-icon-tab-cart-content-function-method-btn">
+                                                        <a style="font-size: 15px; text-decoration: none; font-weight: bold; color: inherit" href="loginPage">LOGIN</a>
+
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </c:if>
+                                        <div class="product__item-info-review-list">
+                                            <!-- ITEM COMMENT -->
+                                            <div class="product__item-info-review-list-item">
+                                                <div>
+                                                    <img src="images/default-avatar_120.jpg" alt="picture" class="product__item-info-review-list-item-avatar">
+                                                </div>
+                                                <div class="product__item-info-review-list-item-content">
+                                                    <p class="product__item-info-review-list-item-content-name">
+                                                        Name
+                                                    </p>
+                                                    <div class="product__item-info-review-list-item-content-rating">
+                                                        <div class="product__item-info-review-list-item-content-rating rating">
+                                                            <span class="star-cmt">&#9733;</span> 5
+                                                        </div>
+                                                        <div class="product__item-info-review-list-item-content-rating date">
+                                                            3/10/2023 
+                                                        </div>
+                                                    </div>
+                                                    <div class="product__item-info-review-list-item-content-comment">
+                                                        <p class="product__item-info-review-list-item-content-comment-txt">
+                                                            Good product
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- ITEM COMMENT -->
+                                        </div>
+                                    </div> 
 
                                     <!--                                    <div class="product__item-info-description">
                                                                             <span class="product__item-info-description-describe">Mô tả:</span></br>
@@ -729,22 +818,22 @@
 
             <!-- Initialize Swiper -->
             <script>
-                var swiper = new Swiper(".mySwiper", {
-                    slidesPerView: 3,
-                    spaceBetween: 30,
-                    freeMode: true,
-                    cssMode: true,
-                    navigation: {
-                        nextEl: ".swiper-button-next",
-                        prevEl: ".swiper-button-prev",
-                    },
-                    pagination: {
-                        el: ".swiper-pagination",
-                        clickable: true,
-                    },
-                    mousewheel: true,
-                    keyboard: true,
-                });
+                                    var swiper = new Swiper(".mySwiper", {
+                                        slidesPerView: 3,
+                                        spaceBetween: 30,
+                                        freeMode: true,
+                                        cssMode: true,
+                                        navigation: {
+                                            nextEl: ".swiper-button-next",
+                                            prevEl: ".swiper-button-prev",
+                                        },
+                                        pagination: {
+                                            el: ".swiper-pagination",
+                                            clickable: true,
+                                        },
+                                        mousewheel: true,
+                                        keyboard: true,
+                                    });
             </script>
 
             <!-- tới đây nha..... -->
@@ -821,5 +910,6 @@
         <!--<script src="js/productItem.js"></script>-->
         <script src="js/cart2.js"></script>
         <script src="js/app.js"></script>
+        <script src="js/rating-star.js"></script>
     </body>
 </html>

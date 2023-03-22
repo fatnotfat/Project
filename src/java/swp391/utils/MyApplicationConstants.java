@@ -108,5 +108,23 @@ public class MyApplicationConstants {
         public static final String ACCOUNT_UPDATE_PAGE = "updateInforPage";
         public static final String ACCOUNT_INFOR_PAGE = "userInforPage";
     }
+    
+    
+    public class CommentFeature{
+        public static final String ADD_COMMENT_SERVLET = "addCommentController"; 
+        public static final String PRODUCT_PAGE = "viewProductPage";
+    }
+    
+    public class ShippingServlet {
+
+        public static final String SHIPPING_PAGE = "shippingPage";
+        public static final String PAYMENT_PAGE = "paymentPage";
+    }
+
+    public class PaymentServlet {
+
+        public static final String PAYMENT_PAGE = "paymentPage";
+        public static final String CHECKOUT_PAGE = "checkOutPage";
+    }
 
 }

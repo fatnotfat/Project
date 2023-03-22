@@ -5,68 +5,115 @@
  */
 package swp391.feedback;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
- * @author Duy
+ * @author nguye
  */
-public class FeedbackDTO {
-    private int feBID;
-    private Date feedBackTime;
-    private String textComments;
-    private double voting;
+public class FeedBackDTO implements Serializable{
+    private int productID;
+    private int customerID;
+    private String textComment;
+    private int voting;
     private boolean status;
+    private Date feedBackTime;
 
-    public FeedbackDTO() {
+    public FeedBackDTO() {
     }
 
-    public FeedbackDTO(int feBID, Date feedBackTime, String textComments, double voting, boolean status) {
-        this.feBID = feBID;
-        this.feedBackTime = feedBackTime;
-        this.textComments = textComments;
+    public FeedBackDTO(int productID, int customerID, String textComment, int voting, boolean status, Date feedBackTime) {
+        this.productID = productID;
+        this.customerID = customerID;
+        this.textComment = textComment;
         this.voting = voting;
         this.status = status;
-    }
-
-    public int getFeBID() {
-        return feBID;
-    }
-
-    public void setFeBID(int feBID) {
-        this.feBID = feBID;
-    }
-
-    public Date getFeedBackTime() {
-        return feedBackTime;
-    }
-
-    public void setFeedBackTime(Date feedBackTime) {
         this.feedBackTime = feedBackTime;
     }
 
-    public String getTextComments() {
-        return textComments;
+    /**
+     * @return the productID
+     */
+    public int getProductID() {
+        return productID;
     }
 
-    public void setTextComments(String textComments) {
-        this.textComments = textComments;
+    /**
+     * @param productID the productID to set
+     */
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
-    public double getVoting() {
+    /**
+     * @return the customerID
+     */
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    /**
+     * @param customerID the customerID to set
+     */
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
+
+    /**
+     * @return the textComment
+     */
+    public String getTextComment() {
+        return textComment;
+    }
+
+    /**
+     * @param textComment the textComment to set
+     */
+    public void setTextComment(String textComment) {
+        this.textComment = textComment;
+    }
+
+    /**
+     * @return the voting
+     */
+    public int getVoting() {
         return voting;
     }
 
-    public void setVoting(double voting) {
+    /**
+     * @param voting the voting to set
+     */
+    public void setVoting(int voting) {
         this.voting = voting;
     }
 
+    /**
+     * @return the status
+     */
     public boolean isStatus() {
         return status;
     }
 
+    /**
+     * @param status the status to set
+     */
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    /**
+     * @return the feedBackTime
+     */
+    public Date getFeedBackTime() {
+        return feedBackTime;
+    }
+
+    /**
+     * @param feedBackTime the feedBackTime to set
+     */
+    public void setFeedBackTime(Date feedBackTime) {
+        this.feedBackTime = feedBackTime;
     }
     
     

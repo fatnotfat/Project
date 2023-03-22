@@ -26,6 +26,8 @@ import swp391.cart.CartObject;
 import swp391.login.LoginError;
 import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
+import swp391.orders.OrdersDAO;
+import swp391.orders.OrdersDTO;
 import swp391.product.ProductDAO;
 import swp391.product.ProductDTO;
 import swp391.utils.MyApplicationConstants;
@@ -88,8 +90,13 @@ public class LoginServlet extends HttpServlet {
                     request.setAttribute("LOGIN_ERROR", errors);
                     //transfer to inform users
                 } else {
+
                     HttpSession session = request.getSession();
-                    String url2 = (String) session.getAttribute("URL");
+                    String url2 = (String) session.getAttribute("uri");
+                    OrdersDAO ordersDAO = new OrdersDAO();
+                    List<OrdersDTO> customerOrders = ordersDAO.getCustomerShippingInFoByCusID(result.getCustomerID());
+                    session.setAttribute("USER_SHIPPINGINFO", customerOrders);
+
                     if (url2 == null) {
                         url = siteMaps.getProperty(
                                 MyApplicationConstants.LoginServlet.MAIN_PAGE);
@@ -115,7 +122,8 @@ public class LoginServlet extends HttpServlet {
                             response.addCookie(cookie);
                         }//check if user want to logged for next access
                     } else {
-                        url = url2;
+                        String latestPart = url2.substring(url2.lastIndexOf("/") + 1);
+                        url = latestPart;
                         session.setAttribute("USER", result);
                         List<CartDTO> list = cartDao.getCart(result.getCustomerID());
                         if (list != null) {
@@ -134,6 +142,7 @@ public class LoginServlet extends HttpServlet {
                             Cookie cookie = new Cookie(email, password);
                             cookie.setMaxAge(60 * 99999);
                             response.addCookie(cookie);
+
                         }//check if user want to logged for next access
                     }
 

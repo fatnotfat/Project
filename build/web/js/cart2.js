@@ -345,11 +345,11 @@ function updateTotalPrice(itemPrice) {
 $(document).ready(function () {
     document.getElementById("add-to-cart-btn").addEventListener("click", function (event) {
         event.preventDefault();
-        alert('hi');
+//        alert('hi');
         const itemId = document.getElementById("product-id").value;
         var itemPrice = Math.floor(parseFloat(document.querySelector(".product__item-info-price").textContent.replace(/\D/g, '')));
 
-        alert(itemPrice);
+//        alert(itemPrice);
         // make the AJAX call with the itemId
         $.ajax({
             type: "POST",

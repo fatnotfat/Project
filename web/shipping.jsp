@@ -6,10 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="js/app.js"></script>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -42,14 +43,14 @@
                 <!-- NAV DESKTOP - TABLET -->
                 <div class="nav-bot">
                     <div class="container">
-                        <a href="#!" class="menu-logo"> LOGO </a>
+                        <a href="mainPage" class="menu-logo"> LOGO </a>
                         <ul class="menu">
                             <li class="menu-item">
                                 <a href="#!" class="menu-link menu-link-category">Categories</a>
                                 <ul class="menu-link-category-tab">
                                     <div class="container">
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-bracelet"
+                                            <a href="SearchByFilterServlet?txtProductCateID=1" class="menu-link menu-link-bracelet"
                                                >BRACELET</a
                                             >
                                             <ul class="menu-link-category-tab-list">
@@ -71,7 +72,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-ring"> RING </a>
+                                            <a href="SearchByFilterServlet?txtProductCateID=2!" class="menu-link menu-link-ring"> RING </a>
                                             <ul class="menu-link-category-tab-list">
                                                 <li class="menu-link-category-tab-list-item">
                                                     <a href="#!" class="menu-link menu-link-ring"> 1 </a>
@@ -85,7 +86,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-necklace">
+                                            <a href="SearchByFilterServlet?txtProductCateID=3" class="menu-link menu-link-necklace">
                                                 NECKLACE
                                             </a>
                                             <ul class="menu-link-category-tab-list">
@@ -107,7 +108,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-link-category-tab-title">
-                                            <a href="#!" class="menu-link menu-link-earring">
+                                            <a href="SearchByFilterServlet?txtProductCateID=4" class="menu-link menu-link-earring">
                                                 EARRINGS
                                             </a>
                                             <ul class="menu-link-category-tab-list">
@@ -160,11 +161,14 @@
                                             <img srcset="images/Footer-line.png 2x" alt="" />
                                         </div>
                                         <div class="menu-icon-tab-search-form">
-                                            <input
-                                                type="text"
-                                                class="menu-icon-tab-search-input"
-                                                placeholder="Search Product..."
-                                                />
+                                            <form action="searchTextController">
+                                                <input
+                                                    type="text"
+                                                    class="menu-icon-tab-search-input"
+                                                    placeholder="Search Product..."
+                                                    name="txtSearch" value="${param.txtSearch}"
+                                                    />
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -180,24 +184,35 @@
                                 </button>
                                 <div class="menu-icon-tab-profile-content">
                                     <div class="container">
-                                        <div class="menu-icon-tab-profile-content-title">
-                                            <p class="menu-icon-tab-profile-content-title-desc">
-                                                ACCOUNT INFORMATION
-                                            </p>
-                                            <img srcset="images/Footer-line.png 2x" alt="" />
-                                        </div>
-                                        <div class="menu-icon-tab-profile-form">
-                                            <p class="menu-icon-tab-profile-form-name">NAME</p>
-                                            <a href="#!" class="menu-icon-tab-profile-form-link"
-                                               >My account</a
-                                            >
-                                            <a href="#!" class="menu-icon-tab-profile-form-link"
-                                               >Address List</a
-                                            >
-                                            <a href="#!" class="menu-icon-tab-profile-form-link"
-                                               >Log out</a
-                                            >
-                                        </div>
+                                        <c:if test="${not empty sessionScope.USER}">
+                                            <div class="menu-icon-tab-profile-content-title">
+                                                <p class="menu-icon-tab-profile-content-title-desc">
+                                                    ACCOUNT INFORMATION
+                                                </p>
+                                                <img srcset="images/Footer-line.png 2x" alt="" />
+                                            </div>
+                                            <div class="menu-icon-tab-profile-form">
+                                                <p class="menu-icon-tab-profile-form-name">${sessionScope.USER.name}</p>
+                                                <a href="userInforPage" class="menu-icon-tab-profile-form-link"
+                                                   >My account</a
+                                                >
+                                                <!--                                            <a href="#!" class="menu-icon-tab-profile-form-link"
+                                                                                               >Address List</a
+                                                                                            >-->
+                                                <a href="logoutController" class="menu-icon-tab-profile-form-link"
+                                                   >Log out</a
+                                                >
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${empty sessionScope.USER}">
+                                            <p style="font-size: 15px; margin: 5px 0">You are not already logged <span style="color: red">PLEASE LOGIN FIRST!!</span></p><br/>
+                                            <%--<c:set var="URL" value="userCart.jsp" scope="session"/>--%>
+                                            <form action="loginPage" method="GET">
+                                                <button class="menu-icon-tab-cart-content-function-method-btn">
+                                                    <a style="font-size: 15px; text-decoration: none; font-weight: bold; color: inherit" href="loginPage">LOGIN</a>
+                                                </button>
+                                            </form>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
@@ -232,12 +247,37 @@
                                                     />
                                             </div>
                                             <div class="menu-icon-tab-cart-content-show-txt">
+                                                <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
+                                                <c:set var="totalQuantity" value="${0}" />
+                                                <c:forEach var="quantity" items="${sessionScope.CART.items.values()}">
+                                                    <c:set var="totalQuantity" value="${totalQuantity + quantity}" />
+                                                </c:forEach>
+
+                                                <c:if test="${empty sessionScope.CART.items.size()}">
+                                                    <c:set var="totalQuantity" value="${0}"/>
+                                                </c:if>
                                                 <p class="menu-icon-tab-cart-content-show-txt-desc">
-                                                    There are currently no products
+                                                    <c:if test="${cartSize eq 0}">
+                                                        There are no currently products.
+                                                    </c:if>
+                                                    <c:if test="${cartSize ne 0}">
+                                                        There are <span id="cart-size-header" style="font-weight: bold">${totalQuantity}</span> products
+                                                    </c:if>
                                                 </p>
                                             </div>
                                         </div>
                                         <img srcset="images/Footer-line.png 2x" alt="" />
+                                        <c:set var="listCart" value="${sessionScope.CART}"/>
+                                        <c:set var="totalPrice" value="${0}"/>
+
+                                        <c:forEach var="item" items="${sessionScope.CART.items}">
+                                            <c:forEach var="detail" items="${sessionScope.CART.itemDetail}">
+                                                <c:if test="${item.key eq detail.key}">
+                                                    <c:set var="totalPrice" value="${totalPrice + (item.value * detail.value.price)}"/>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:forEach>
+                                        <%--<fmt:parseNumber var="totalPrice" type="number" value="${totalPrice}"/>--%>
                                         <div class="menu-icon-tab-cart-content-function">
                                             <div class="menu-icon-tab-cart-content-function-total">
                                                 <p
@@ -248,7 +288,9 @@
                                                 <p
                                                     class="menu-icon-tab-cart-content-function-total-price"
                                                     >
-                                                    0₫
+
+                                                    <fmt:formatNumber var="price" value="${totalPrice}" pattern="#,##0" groupingUsed="true"/>
+                                                    ${price}đ
                                                 </p>
                                             </div>
                                             <div class="menu-icon-tab-cart-content-function-method">
@@ -381,9 +423,9 @@
                             <div class="shipping-info-left-breadcrumb">
                                 <div class="container">
                                     <ul class="shipping-info-left-breadcrumb-menu">
-                                        <li><a href="userCart.jsp">Cart</a></li>
-                                        <li><a href="shipping.jsp">Shipping information</a></li>
-                                        <li><a href="payment.jsp">Payment methods</a></li>
+                                        <li>Cart</li>
+                                        <li>Shipping information</li>
+                                        <li>Payment methods</li>
                                     </ul>
                                 </div>
                             </div>
@@ -418,17 +460,17 @@
                                                             class="input-radio"
                                                             />
                                                     </div>
-                                                    <span class="radio-label-primary">Thông tin giao hàng mặc định</span>
+                                                    <span class="radio-label-primary">Default shipping information</span>
                                                 </label>
                                             </div>
 
-                                            <div class="shipping-info-left-form-delivery-address">
+                                            <div class="shipping-info-left-form-delivery-address-option">
                                                 <div class="container">
                                                     <label class="field-label" for="stored-address">Choose your Information here...</label>
                                                     <select class="field-input" id="stored-addresses" name="stored-infoCus-by-orDetID">
                                                         <option class="field-input-item" value="">Choose your Information here</option>
                                                         <c:forEach items="${USER_SHIPPINGINFO}" var="customer">
-                                                            <option class="field-input-item" value="${customer.ordersDetailID}" >
+                                                            <option class="field-input-item" value="${customer.ordersID}" >
                                                                 ${customer.cusName}, ${customer.cusPhone}, ${customer.cusAddress}
                                                             </option>
                                                         </c:forEach>
@@ -442,160 +484,164 @@
                                                 <font color="red">${errors.defaultOrNewShippingInforLengthError}</font><br/>
                                             </c:if>
                                             <div class="shipping-info-left-form-delivery-store">
-                                                <label class="radio-label">
-                                                    <div class="radio-input">
-                                                        <input
-                                                            value="${1}"
-                                                            type="radio"
-                                                            id="location"
-                                                            name="defaultOrNewShippingInfor"
-                                                            class="input-radio"
-                                                            />
-                                                    </div>
-                                                    <span class="radio-label-primary"
-                                                          >Thêm thông tin giao hàng mới</span
-                                                    >
-                                                </label>
-                                                <div class="shipping-info-left-form-name">
-                                                    <div class="container">
-                                                        <label class="field-label" for="stored-name"
-                                                               >Enter First Name...</label
-                                                        >
-                                                        <input
-                                                            type="text"
-                                                            name="txtFirstName"
-                                                            value="${param.txtFirstName}"
-                                                            class="field-input"
-                                                            id="stored-name"
-                                                            placeholder="First Name"
-                                                            />
-                                                    </div>
-                                                    <c:if test="${not empty errors.firstNameLengthError}">
-                                                        <font color="red">
-                                                        ${errors.firstNameLengthError}
-                                                        </font><br/>
-                                                    </c:if>
-
-                                                </div>
-                                                <div class="shipping-info-left-form-name">
-                                                    <div class="container">
-                                                        <label class="field-label" for="stored-name"
-                                                               >Enter Last Name...</label
-                                                        >                                           
-                                                        <input
-                                                            type="text"
-                                                            name="txtLastName"
-                                                            value="${param.txtLastName}"
-                                                            class="field-input"
-                                                            id="stored-name"
-                                                            placeholder="Last Name"
-                                                            />
-                                                        <!-- Ở ĐÂY CŨNG CÓ THỂ TRUYỀN ID NAME VÀ VALUE ĐÊ TỰ ĐIỀN -->
-                                                    </div>
-                                                    <c:if test="${not empty errors.lastNameLengthError}">
-                                                        <font color="red">
-                                                        ${errors.lastNameLengthError}
-                                                        </font><br/>
-                                                    </c:if>
-                                                </div>
-                                                <div class="shipping-info-left-form-phone">                                                                                           
-                                                    <div class="container">
-                                                        <label class="field-label" for="stored-phone"
-                                                               >Enter phone number...</label
-                                                        >
-                                                        <input
-                                                            type="tel"
-                                                            name="txtPhone"
-                                                            value="${param.txtPhone}"
-                                                            class="field-input"
-                                                            id="stored-phone"
-                                                            placeholder="Enter phone number"
-                                                            />
-                                                        <!-- Ở ĐÂY CŨNG CÓ THỂ TRUYỀN ID NAME VÀ VALUE ĐÊ TỰ ĐIỀN -->
-                                                    </div>
-                                                    <c:if test="${not empty errors.phoneLengthError}">
-                                                        <font color="red">
-                                                        ${errors.phoneLengthError}
-                                                        </font><br/>
-                                                    </c:if>
-                                                </div>
-                                                <div class="shipping-info-left-form-delivery-address">
-                                                    <div class="container">
-                                                        <label class="field-label" for="stored-address"
-                                                               >Enter your address...</label
-                                                        >
-                                                        <input
-                                                            name="txtAddress"
-                                                            type="text"
-                                                            class="field-input"
-                                                            id="stored-phone"
-                                                            placeholder="Enter Address"
-                                                            />                                                   
-                                                        <!-- Ở ĐÂY CŨNG CÓ THỂ TRUYỀN ID NAME VÀ VALUE ĐÊ TỰ ĐIỀN -->
-                                                    </div>
-                                                    <c:if test="${not empty errors.addressLengthError}">
-                                                        <font color="red">
-                                                        ${errors.addressLengthError}
-                                                        </font><br/>
-                                                    </c:if>
-                                                </div>
-
-                                                <div
-                                                    class="shipping-info-left-form-delivery-address-select"
-                                                    >
-                                                    <!-- CITY -->
-                                                    <div class="shipping-info-left-form-city">
-                                                        <div class="container">
-                                                            <label class="field-label" for="stored-city"
-                                                                   >Province / City</label
-                                                            >
-                                                            <select class="field-input" id="stored-city">
-                                                                <option
-                                                                    class="field-input-item"
-                                                                    data-code=""
-                                                                    value=""
-                                                                    >
-                                                                    Choose Province / city
-                                                                    <!-- Ở ĐÂY OPTION MÌNH CÓ THỂ TRUYỀN ĐƯỢC data-properties={"nội dung"} và value ={} -->
-                                                                </option>
-
-                                                            </select>
+                                                <div class="shipping-info-left-form-delivery-home-new">
+                                                    <label class="radio-label">
+                                                        <div class="radio-input">
+                                                            <input
+                                                                value="${1}"
+                                                                type="radio"
+                                                                id="location"
+                                                                name="defaultOrNewShippingInfor"
+                                                                class="input-radio"
+                                                                />
                                                         </div>
-                                                    </div>
-                                                    <!-- DISTRICT -->
-                                                    <div class="shipping-info-left-form-district">
+                                                        <span class="radio-label-primary"
+                                                              >Add new shipping information</span
+                                                        >
+                                                    </label>
+                                                </div>     
+                                                <div class="shipping-info-left-form-delivery-store-info"> 
+                                                    <div class="shipping-info-left-form-name">
                                                         <div class="container">
-                                                            <label class="field-label" for="stored-district"
-                                                                   >District</label
+                                                            <label class="field-label" for="stored-name"
+                                                                   >Enter First Name...</label
                                                             >
-                                                            <select class="field-input" id="stored-district">
-                                                                <option
-                                                                    class="field-input-item"
-                                                                    data-code=""
-                                                                    value=""
-                                                                    >
-                                                                    Choose District
-                                                                    <!-- Ở ĐÂY OPTION MÌNH CÓ THỂ TRUYỀN ĐƯỢC data-properties={"nội dung"} và value ={} -->
-                                                                </option>
-                                                            </select>
+                                                            <input
+                                                                type="text"
+                                                                name="txtFirstName"
+                                                                value="${param.txtFirstName}"
+                                                                class="field-input"
+                                                                id="stored-name"
+                                                                placeholder="First Name"
+                                                                />
                                                         </div>
+                                                        <c:if test="${not empty errors.firstNameLengthError}">
+                                                            <font color="red">
+                                                            ${errors.firstNameLengthError}
+                                                            </font><br/>
+                                                        </c:if>
+
                                                     </div>
-                                                    <!-- WARD -->
-                                                    <div class="shipping-info-left-form-ward">
+                                                    <div class="shipping-info-left-form-name-last">
                                                         <div class="container">
-                                                            <label class="field-label" for="stored-ward"
-                                                                   >Wards</label
+                                                            <label class="field-label" for="stored-name"
+                                                                   >Enter Last Name...</label
+                                                            >                                           
+                                                            <input
+                                                                type="text"
+                                                                name="txtLastName"
+                                                                value="${param.txtLastName}"
+                                                                class="field-input"
+                                                                id="stored-name"
+                                                                placeholder="Last Name"
+                                                                />
+                                                            <!-- Ở ĐÂY CŨNG CÓ THỂ TRUYỀN ID NAME VÀ VALUE ĐÊ TỰ ĐIỀN -->
+                                                        </div>
+                                                        <c:if test="${not empty errors.lastNameLengthError}">
+                                                            <font color="red">
+                                                            ${errors.lastNameLengthError}
+                                                            </font><br/>
+                                                        </c:if>
+                                                    </div>
+                                                    <div class="shipping-info-left-form-phone">                                                                                           
+                                                        <div class="container">
+                                                            <label class="field-label" for="stored-phone"
+                                                                   >Enter phone number...</label
                                                             >
-                                                            <select class="field-input" id="stored-ward">
-                                                                <option
-                                                                    class="field-input-item"
-                                                                    data-code=""
-                                                                    value=""
-                                                                    >
-                                                                    Choose Wards
-                                                                    <!-- Ở ĐÂY OPTION MÌNH CÓ THỂ TRUYỀN ĐƯỢC data-properties={"nội dung"} và value ={} -->
-                                                                </option>
-                                                            </select>
+                                                            <input
+                                                                type="tel"
+                                                                name="txtPhone"
+                                                                value="${param.txtPhone}"
+                                                                class="field-input"
+                                                                id="stored-phone"
+                                                                placeholder="Enter phone number"
+                                                                />
+                                                            <!-- Ở ĐÂY CŨNG CÓ THỂ TRUYỀN ID NAME VÀ VALUE ĐÊ TỰ ĐIỀN -->
+                                                        </div>
+                                                        <c:if test="${not empty errors.phoneLengthError}">
+                                                            <font color="red">
+                                                            ${errors.phoneLengthError}
+                                                            </font><br/>
+                                                        </c:if>
+                                                    </div>
+                                                    <div class="shipping-info-left-form-delivery-address">
+                                                        <div class="container">
+                                                            <label class="field-label" for="stored-address"
+                                                                   >Enter your address...</label
+                                                            >
+                                                            <input
+                                                                name="txtAddress"
+                                                                type="text"
+                                                                class="field-input"
+                                                                id="stored-phone"
+                                                                placeholder="Enter Address"
+                                                                />                                                   
+                                                            <!-- Ở ĐÂY CŨNG CÓ THỂ TRUYỀN ID NAME VÀ VALUE ĐÊ TỰ ĐIỀN -->
+                                                        </div>
+                                                        <c:if test="${not empty errors.addressLengthError}">
+                                                            <font color="red">
+                                                            ${errors.addressLengthError}
+                                                            </font><br/>
+                                                        </c:if>
+                                                    </div>
+
+                                                    <div
+                                                        class="shipping-info-left-form-delivery-address-select"
+                                                        >
+                                                        <!-- CITY -->
+                                                        <div class="shipping-info-left-form-city">
+                                                            <div class="container">
+                                                                <label class="field-label" for="stored-city"
+                                                                       >Province / City</label
+                                                                >
+                                                                <select class="field-input" id="stored-city">
+                                                                    <option
+                                                                        class="field-input-item"
+                                                                        data-code=""
+                                                                        value=""
+                                                                        >
+                                                                        Choose Province / city
+                                                                        <!-- Ở ĐÂY OPTION MÌNH CÓ THỂ TRUYỀN ĐƯỢC data-properties={"nội dung"} và value ={} -->
+                                                                    </option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <!-- DISTRICT -->
+                                                        <div class="shipping-info-left-form-district">
+                                                            <div class="container">
+                                                                <label class="field-label" for="stored-district"
+                                                                       >District</label
+                                                                >
+                                                                <select class="field-input" id="stored-district">
+                                                                    <option
+                                                                        class="field-input-item"
+                                                                        data-code=""
+                                                                        value=""
+                                                                        >
+                                                                        Choose District
+                                                                        <!-- Ở ĐÂY OPTION MÌNH CÓ THỂ TRUYỀN ĐƯỢC data-properties={"nội dung"} và value ={} -->
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <!-- WARD -->
+                                                        <div class="shipping-info-left-form-ward">
+                                                            <div class="container">
+                                                                <label class="field-label" for="stored-ward"
+                                                                       >Wards</label
+                                                                >
+                                                                <select class="field-input" id="stored-ward">
+                                                                    <option
+                                                                        class="field-input-item"
+                                                                        data-code=""
+                                                                        value=""
+                                                                        >
+                                                                        Choose Wards
+                                                                        <!-- Ở ĐÂY OPTION MÌNH CÓ THỂ TRUYỀN ĐƯỢC data-properties={"nội dung"} và value ={} -->
+                                                                    </option>
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -643,7 +689,7 @@
                                         </c:if>
                                     </div>
                                 </c:if>
-
+                                <c:set var="uri" value="${pageContext.request.requestURI}" scope="session"/>
                                 <c:if test="${empty sessionScope.USER}">
 
                                     <p style="font-size: 15px; margin: 5px 0">YOU ARE NOT ALREADY LOGGED, PLEASE LOGIN FIRST!! <a href="loginPage">Login here </a></p>
@@ -673,7 +719,7 @@
                                             </c:if>
 
                                         </div>
-                                        <div class="shipping-info-left-form-name">
+                                        <div class="shipping-info-left-form-name-last">
                                             <div class="container">
                                                 <label class="field-label" for="stored-name"
                                                        >Enter Last Name...</label
@@ -922,7 +968,9 @@
                                                         <div class="shipping-info-right-product-content-price">                                                            
                                                             <div class="container">
                                                                 <p class="shipping-info-right-product-content-price-number">
-                                                                    ${detail.value.price * item.value}₫
+
+                                                                    <fmt:formatNumber var="price" value="${detail.value.price * item.value}" pattern="#,##0" groupingUsed="true"/>
+                                                                    ${price}₫
                                                                 </p>
                                                             </div>
                                                             <c:set var="total" value="${total + detail.value.price * item.value}" />
@@ -954,10 +1002,11 @@
                                     <div class="shipping-info-right-product-fee-price">
                                         <div class="container">
                                             <p class="shipping-info-right-product-fee-price-provisional">
-                                                ${total}₫
+                                                <fmt:formatNumber var="totalDisplay1" value="${total}" pattern="#,##0" groupingUsed="true"/>
+                                                ${totalDisplay1}₫
                                             </p>
                                             <!--                                            <p class="shipping-info-right-product-fee-price-ship">
-                                            <c:set var="fee-price-ship" value="10" />10
+                                            <c:set var="fee-price-ship" value="${10}" />10
                                         </p>-->
                                         </div>
                                     </div>
@@ -980,7 +1029,8 @@
                                                 VND
                                             </p>
                                             <p class="shipping-info-right-product-total-price-number">
-                                                ${total + fee-price-ship}₫
+                                                <fmt:formatNumber var="totalDisplay2" value="${total}" pattern="#,##0" groupingUsed="true"/>
+                                                ${totalDisplay2}₫
                                             </p>
                                         </div>
                                     </div>
@@ -1053,6 +1103,6 @@
                 </div>
             </footer>
         </div>
-
+        <script src="js/shipping.js"></script>                                  
     </body>
 </html>

@@ -34,24 +34,6 @@ public class ProductDAO implements Serializable {
         return listProductByFilter;
     }
 
-    public List<ProductDTO> getProducts(int start, int total)
-            throws NamingException, SQLException {
-        List<ProductDTO> list = new ArrayList<>();
-        try (Connection connection = DBHelper.makeConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Product LIMIT " + start + "," + total)) {
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt("ProductID");
-                String name = resultSet.getString("Name");
-                String description = resultSet.getString("Description");
-                list.add(new ProductDTO(id, name, description));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-
     public int searchProduct(String searchValue)
             throws NamingException, SQLException {
         Connection con = null;
@@ -61,9 +43,9 @@ public class ProductDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "SELECT ProductID, Name, Description, Quantity, Price, Status, Size, CreateTime, Avatar "
-                        + "FROM Product "
-                        + "WHERE Name LIKE ? AND Status =1";
+                String sql = "SELECT ProductID, Name, Description, Quantity, Price, p.Status, ps.Size, CreateTime, Avatar, Avatar2 \n"
+                        + "from Product p join ProductSize ps on p.SizeID = ps.SizeID\n"
+                        + "where p.Name like ? and p.Status = 1";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + searchValue + "%");
@@ -102,56 +84,6 @@ public class ProductDAO implements Serializable {
         return this.listProduct.size();
     }
 
-    public List<ProductDTO> pagingAccount(int index, String searchValue, int recordsPerPage)
-            throws NamingException, SQLException {
-
-        Connection con = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        List<ProductDTO> list = new ArrayList<>();
-
-        try {
-            con = DBHelper.makeConnection();
-            String sql = "SELECT ProductID, Name, Description, Quantity, Price, Status, Size, CreateTime, Avatar "
-                    + "FROM Product\n"
-                    + "WHERE Name LIKE ? "
-                    + "ORDER BY ProductID\n"
-                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
-            stm = con.prepareStatement(sql);
-            stm.setString(1, "%" + searchValue + "%");
-            stm.setInt(2, (index - 1) * recordsPerPage);
-            stm.setInt(3, recordsPerPage);
-            rs = stm.executeQuery();
-
-            while (rs.next()) {
-                list.add(new ProductDTO(rs.getInt("ProductID"),
-                        rs.getString("Name"),
-                        rs.getString("Description"),
-                        rs.getInt("Quantity"),
-                        rs.getDouble("Price"),
-                        rs.getBoolean("Status"),
-                        rs.getInt("Size"),
-                        rs.getDate("CreateTime"),
-                        rs.getString("Avatar")
-                ));
-            }
-
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-
-            if (stm != null) {
-                stm.close();
-            }
-
-            if (con != null) {
-                con.close();
-            }
-        }
-        return list;
-    }
-
     public void searchByFilter(int cateID, double priceFrom, double priceTo, int size)
             throws SQLException, NamingException {
         Connection con = null;
@@ -160,20 +92,20 @@ public class ProductDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select ProductID, Name, Description, Quantity, Price, Size, Avatar "
-                        + "From Product "
+                String sql = "Select ProductID, Name, Description, Quantity, Price, ps.Size, Avatar, Avatar2 "
+                        + "From Product p, ProductSize ps "
                         + "Where ";
                 if (cateID > 0) {
-                    sql += " CateID = ? AND Status = 1";
+                    sql += " CateID = ? AND p.Status = 1 and p.SizeID = ps.SizeID";
                 }
                 if (priceFrom >= 0) {
-                    sql += " And Price >= ? AND Status = 1";
+                    sql += " And Price >= ? AND p.Status = 1 and p.SizeID = ps.SizeID";
                 }
                 if (priceTo != 0) {
-                    sql += " And Price <= ? AND Status =1";
+                    sql += " And Price <= ? AND p.Status = 1 and p.SizeID = ps.SizeID";
                 }
                 if (size != 0) {
-                    sql += " And Size = ? AND Status = 1";
+                    sql += " And ps.Size = ? AND p.Status = 1 and p.SizeID = ps.SizeID";
                 }
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, cateID);
@@ -237,9 +169,9 @@ public class ProductDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "SELECT ProductID, Name, Description, Quantity, Price, Status, Size, CreateTime, Avatar "
-                        + "FROM Product "
-                        + "WHERE ProductID = ?";
+                String sql = "SELECT ProductID, Name, Description, Quantity, Price, p.Status, Size, CreateTime, Avatar, Avatar2\n"
+                        + " FROM Product p, ProductSize ps\n"
+                        + " WHERE ProductID = ? and p.SizeID = ps.SizeID";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, Integer.parseInt(ID));
                 rs = stm.executeQuery();
@@ -281,9 +213,9 @@ public class ProductDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
 
-                String sql = "select ProductID, Name, Description, Price, Size, Avatar \n"
-                        + "from Product \n"
-                        + "where Name LIKE (select Name from Product where ProductID = (select max(ProductID) from Product))";
+                String sql = "select ProductID, Name, Description, Price, ps.Size, Avatar, Avatar2\n"
+                        + "                        from Product p, ProductSize ps\n"
+                        + "                        where Name LIKE (select Name from Product where ProductID = (select max(ProductID) from Product)) and p.SizeID = ps.SizeID";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -329,15 +261,15 @@ public class ProductDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
 
-                String sql = "SELECT ProductID, Name, Description, Price, Size, Avatar \n"
-                        + "FROM Product \n"
-                        + "WHERE Name = (\n"
-                        + "SELECT TOP 1 Name\n"
-                        + "FROM Product\n"
-                        + "WHERE ProductID < (SELECT MAX(ProductID) FROM Product) \n"
-                        + "AND Name not like (select Name from Product where ProductID = (SELECT MAX(ProductID) FROM Product))\n"
-                        + "ORDER BY ProductID DESC\n"
-                        + ")";
+                String sql = "SELECT ProductID, Name, Description, Price, ps.Size, Avatar, Avatar2 \n"
+                        + "                        FROM Product p, ProductSize ps\n"
+                        + "                        WHERE Name = (\n"
+                        + "                        SELECT TOP 1 Name\n"
+                        + "                        FROM Product\n"
+                        + "                        WHERE ProductID < (SELECT MAX(ProductID) FROM Product) \n"
+                        + "                        AND Name not like (select Name from Product where ProductID = (SELECT MAX(ProductID) FROM Product))\n"
+                        + "                        ORDER BY ProductID DESC\n"
+                        + "                        ) and p.SizeID = ps.SizeID";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {

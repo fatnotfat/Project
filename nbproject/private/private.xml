@@ -11,6 +11,47 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/listProduct.jsp</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/forgot-password-2.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/base.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/payment-1.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/WEB-INF/siteMaps.properties</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/register.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/google/LoginGoogleHandler.java</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/controller/AddCommentOfProductServlet.java</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/info-update.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/controller/SignUpServlet.java</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/controller/UpdateAccountServlet.java</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/mainPage.jsp</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/login.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/listFilterProduct.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/forgot-password-1.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/reset.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/grid.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/viewProduct.jsp</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/checkOut.jsp</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/listProduct.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/paging.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/controller/SearchTextServlet.java</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/info-update2.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/customer/CustomerDAO.java</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/js/rating-star.js</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/slideShow.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/feedback/FeedBackDAO.java</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/customer/CustomerDTO.java</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/mainPage.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/payment-2.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/forgot-password-3.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/feedback/FeedBackErrorDTO.java</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/controller/LoginServlet.java</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/feedback/FeedBackDTO.java</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/login.jsp</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/userCart.jsp</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/product/ProductDTO.java</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/shipping.jsp</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/web/style/overview.css</file>
+            <file>file:/E:/Tai_lieu_cua_o_F/FU/Ky5/SWP391/SWP391Project-main/src/java/swp391/utils/MyApplicationConstants.java</file>
+        </group>
     </open-files>
 </project-private>

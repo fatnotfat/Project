@@ -32,7 +32,7 @@ function updateQuantity(itemId, operation) {
         quantity++;
         price = price / (quantity - 1) * quantity;
     }
-    
+
 
     document.getElementById('quantity' + itemId).innerHTML = quantity;
 //                priceElement.innerHTML = price.toLocaleString();
@@ -43,7 +43,7 @@ function updateQuantity(itemId, operation) {
     $('#total-price').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
     $('#total-price-header').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
     $('#total-price-mobile').text(formatNumberWithCommas(totalPrice.toFixed()) + '₫');
-    
+
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'UpdateCartServlet', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -51,7 +51,7 @@ function updateQuantity(itemId, operation) {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             var response = JSON.parse(xhr.responseText);
             var quantityElement = document.querySelector("#quantity" + itemId);
-            
+
             if (quantityElement) {
                 quantityElement.textContent = response.quantity;
             }
@@ -61,7 +61,8 @@ function updateQuantity(itemId, operation) {
     };
     xhr.send('txtID=' + itemId + '&txtQuantity=' + quantity);
 //    updateCartSize();
-};
+}
+;
 
 
 $(document).ready(function () {
@@ -219,7 +220,8 @@ function updateCartSize() {
             // handle error
         }
     });
-};
+}
+;
 
 $(document).ready(function () {
     // Code that runs on page load
@@ -333,9 +335,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     document.getElementById("add-to-cart-btn").addEventListener("click", function (event) {
         event.preventDefault();
-        alert('hi');
         const itemId = document.getElementById("product-id").value;
-        alert(itemId);
         // make the AJAX call with the itemId
         $.ajax({
             type: "POST",
@@ -351,6 +351,24 @@ $(document).ready(function () {
         });
     });
 });
+
+
+
+const payButton = document.querySelector('.your-cart-body-right-order-btn');
+
+payButton.addEventListener('click', (event) => {
+    const cartSizeValue = document.querySelector('input[name="txtCartSizeValue"]').value;
+    if (cartSizeValue > 0) {
+        // cart has items, proceed to shippingPage
+        event.preventDefault(); // prevent the default form submission behavior
+        window.location.href = 'shippingPage'; // navigate to the shipping page
+    } else {
+        // cart is empty, show alert message
+        alert('You should buy something first!!');
+        event.preventDefault(); // prevent the form from submitting
+    }
+});
+
 
 
 

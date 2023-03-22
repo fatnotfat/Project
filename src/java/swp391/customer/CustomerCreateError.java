@@ -23,8 +23,61 @@ public class CustomerCreateError implements Serializable {
     private String sexLengthError;
     private String confirmNotMatched;
     private String emailIsExisted;
+    private String shippingIDLengthError;
+    private String paymentIDLengthError;
+    private String defaultOrNewShippingInforLengthError;
+    private String cusInfoLengthError;
+
+    public String getShippingIDLengthError() {
+        return shippingIDLengthError;
+    }
+
+    public void setShippingIDLengthError(String shippingIDLengthError) {
+        this.shippingIDLengthError = shippingIDLengthError;
+    }
+
+    public String getPaymentIDLengthError() {
+        return paymentIDLengthError;
+    }
+
+    public void setPaymentIDLengthError(String paymentIDLengthError) {
+        this.paymentIDLengthError = paymentIDLengthError;
+    }
+
+    public String getDefaultOrNewShippingInforLengthError() {
+        return defaultOrNewShippingInforLengthError;
+    }
+
+    public void setDefaultOrNewShippingInforLengthError(String defaultOrNewShippingInforLengthError) {
+        this.defaultOrNewShippingInforLengthError = defaultOrNewShippingInforLengthError;
+    }
+
+    public String getCusInfoLengthError() {
+        return cusInfoLengthError;
+    }
+
+    public void setCusInfoLengthError(String cusInfoLengthError) {
+        this.cusInfoLengthError = cusInfoLengthError;
+    }
 
     public CustomerCreateError() {
+    }
+
+    public CustomerCreateError(String firstNameLengthError, String lastNameLengthError, String passwordLengthError, String emailLengthError, String phoneLengthError, String addressLengthError, String birthDateLengthError, String sexLengthError, String confirmNotMatched, String emailIsExisted, String shippingIDLengthError, String paymentIDLengthError, String defaultOrNewShippingInforLengthError, String cusInfoLengthError) {
+        this.firstNameLengthError = firstNameLengthError;
+        this.lastNameLengthError = lastNameLengthError;
+        this.passwordLengthError = passwordLengthError;
+        this.emailLengthError = emailLengthError;
+        this.phoneLengthError = phoneLengthError;
+        this.addressLengthError = addressLengthError;
+        this.birthDateLengthError = birthDateLengthError;
+        this.sexLengthError = sexLengthError;
+        this.confirmNotMatched = confirmNotMatched;
+        this.emailIsExisted = emailIsExisted;
+        this.shippingIDLengthError = shippingIDLengthError;
+        this.paymentIDLengthError = paymentIDLengthError;
+        this.defaultOrNewShippingInforLengthError = defaultOrNewShippingInforLengthError;
+        this.cusInfoLengthError = cusInfoLengthError;
     }
 
     public CustomerCreateError(String firstNameLengthError, String lastNameLengthError, String passwordLengthError, String emailLengthError, String phoneLengthError, String addressLengthError, String birthDateLengthError, String sexLengthError, String confirmNotMatched, String emailIsExisted) {

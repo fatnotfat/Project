@@ -215,6 +215,77 @@ public class CustomerDAO implements Serializable {
         }
         return dto;
     }
+    
+    public boolean createAccountForShipping(String name, String email,
+            String phone)
+            throws SQLException, NamingException, ParseException {;
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Insert Into Customer("
+                        + "Name, Email, Phone"
+                        + ") "
+                        + "Values(?, ?, ?"
+                        + ")";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, name);
+                stm.setString(2, email);
+                stm.setString(3, phone);
+                int effectedRows = stm.executeUpdate();
+                if (effectedRows > 0) {
+                    result = true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+    
+    public CustomerDTO loadInformationForPayment(String email)
+            throws SQLException, NamingException {;
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        CustomerDTO result = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select CustomerID, Name, Email, Phone, Address "
+                        + "From Customer "
+                        + "Where Email = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, email);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    int customerID = rs.getInt("CustomerID");
+                    String name = rs.getString("Name");
+                    String phone = rs.getString("Phone");
+                    String address = rs.getString("Address");
+                    result = new CustomerDTO(customerID, name, email, phone, address);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
 
     public boolean updatePassword(String email, String password)
             throws SQLException, NamingException {

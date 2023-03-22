@@ -56,7 +56,7 @@ public class ViewProductServlet extends HttpServlet {
         } catch (NamingException ex) {
             log("NumberFormatException :" + ex.getMessage());
         } catch (SQLException ex) {
-
+            log("SQLException :" + ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
