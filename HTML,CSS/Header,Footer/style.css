@@ -660,9 +660,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 30px 60px;
     flex-wrap: nowrap;
-    flex-direction: row;
+    flex-direction: column;
   }
   .nav-bot {
     display: block;
@@ -691,7 +690,22 @@ header {
     display: block;
   }
   .menu-icon {
+    flex-direction: column;
+  }
+  .menu-icon-tab:nth-child(3) {
     display: none;
+  }
+  .menu-icon-tab-search-content .container {
+    left: -191px;
+  }
+  .menu-icon-tab-search-content .container::after {
+    right: 180px;
+  }
+  .menu-icon-tab-profile-content .container {
+    left: -117px;
+  }
+  .menu-icon-tab-profile-content .container::after {
+    right: 110px;
   }
   .menu-link {
     font-size: 18px;

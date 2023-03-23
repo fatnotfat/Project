@@ -697,9 +697,9 @@
        display: flex;
        align-items: center;
        justify-content: center;
-       padding: 30px 60px;
+      //  padding: 30px 60px;
        flex-wrap: nowrap;
-       flex-direction: row;
+       flex-direction: column;
      }
      .nav-bot {
        display: block;
@@ -729,7 +729,23 @@
          display: block;
        }
        &-icon {
-         display: none;
+        &-tab:nth-child(3) {
+          display: none;
+        }
+        &-tab-search-content .container {
+          left: -191px;
+          &::after {
+            right: 180px;
+          }
+        }
+        &-tab-profile-content .container {
+          left: -117px;
+          &::after {
+            right: 110px;
+          }
+        }
+        //  display: none;
+        flex-direction: column;
        }
        &-link {
          font-size: 18px;
