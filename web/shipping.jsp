@@ -542,9 +542,8 @@
                                                         </c:if>
                                                     </div>
 
-                                                    <div
-                                                        class="shipping-info-left-form-delivery-address-select"
-                                                        >
+                                                    <!-- ADDRESS CHOOSE -->
+                                                    <div class="shipping-info-left-form-delivery-address-select">
                                                         <!-- CITY -->
                                                         <div class="shipping-info-left-form-city">
                                                             <div class="container">
@@ -554,15 +553,15 @@
                                                                 <select class="field-input" id="stored-city">
                                                                     <option
                                                                         class="field-input-item"
-                                                                        data-code=""
+                                                                        data-name=""
                                                                         value=""
                                                                         >
                                                                         Choose Province / city
                                                                         <!-- Ở ĐÂY OPTION MÌNH CÓ THỂ TRUYỀN ĐƯỢC data-properties={"nội dung"} và value ={} -->
                                                                     </option>
-
                                                                 </select>
                                                             </div>
+                                                            <input type="hidden" id="txtCityDataName" name="txtCityDataName" value="">
                                                         </div>
                                                         <!-- DISTRICT -->
                                                         <div class="shipping-info-left-form-district">
@@ -573,7 +572,7 @@
                                                                 <select class="field-input" id="stored-district">
                                                                     <option
                                                                         class="field-input-item"
-                                                                        data-code=""
+                                                                        data-name=""
                                                                         value=""
                                                                         >
                                                                         Choose District
@@ -581,17 +580,18 @@
                                                                     </option>
                                                                 </select>
                                                             </div>
+                                                            <input type="hidden" id="txtDistrictDataName" name="txtDistrictDataName" value="">
                                                         </div>
                                                         <!-- WARD -->
                                                         <div class="shipping-info-left-form-ward">
                                                             <div class="container">
                                                                 <label class="field-label" for="stored-ward"
-                                                                       >Wards</label
+                                                                       >Ward</label
                                                                 >
                                                                 <select class="field-input" id="stored-ward">
                                                                     <option
                                                                         class="field-input-item"
-                                                                        data-code=""
+                                                                        data-name=""
                                                                         value=""
                                                                         >
                                                                         Choose Wards
@@ -599,8 +599,10 @@
                                                                     </option>
                                                                 </select>
                                                             </div>
+                                                            <input type="hidden" id="txtWardDataName" name="txtWardDataName" value="">
                                                         </div>
                                                     </div>
+                                                    <!--  -->
                                                 </div>
                                             </div>
                                         </div>
@@ -1058,5 +1060,6 @@
             </footer>
         </div>
         <script src="js/shipping.js"></script>                                  
+<!--        <script src="js/app.js"></script>-->
     </body>
 </html>

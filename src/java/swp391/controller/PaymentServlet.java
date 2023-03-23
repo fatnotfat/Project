@@ -6,12 +6,9 @@
 package swp391.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -125,6 +122,8 @@ public class PaymentServlet extends HttpServlet {
 
                         List<OrdersDTO> customerOrders = ordersDAO.getCustomerShippingInFoByCusID(user.getCustomerID());
                         session.setAttribute("USER_SHIPPINGINFO", customerOrders);
+                        OrdersDTO shippingInfor = ordersDAO.getShippingInFoByCusID(user.getCustomerID());
+                        request.setAttribute("SHIPPING_INFO_FOR_CHECKOUT", shippingInfor); 
                     }
                     url = siteMaps.getProperty(
                             MyApplicationConstants.PaymentServlet.CHECKOUT_PAGE);

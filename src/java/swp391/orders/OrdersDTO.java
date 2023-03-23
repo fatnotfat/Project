@@ -17,6 +17,7 @@ public class OrdersDTO implements Serializable {
     private int ordersID;
     private int customerID;
     private int shippingID;
+    private int paymentID;
     private Date dateOrders;
     private int status;
     private String cusName;
@@ -26,14 +27,29 @@ public class OrdersDTO implements Serializable {
     public OrdersDTO() {
     }
 
-    public OrdersDTO(int customerID, String cusName, String cusPhone, String cusAddress) {
-        this.customerID = customerID;
+    public OrdersDTO(int ordersID, String cusName, String cusPhone, String cusAddress) {
+        this.ordersID = ordersID;
         this.cusName = cusName;
         this.cusPhone = cusPhone;
         this.cusAddress = cusAddress;
     }
     
     
+
+//    public OrdersDTO(int customerID, String cusName, String cusPhone, String cusAddress) {
+//        this.customerID = customerID;
+//        this.cusName = cusName;
+//        this.cusPhone = cusPhone;
+//        this.cusAddress = cusAddress;
+//    }
+    
+    public OrdersDTO(int ordersID, Date dateOrders, String cusName, String cusPhone, String cusAddress) {
+        this.ordersID = ordersID;
+        this.dateOrders = dateOrders;
+        this.cusName = cusName;
+        this.cusPhone = cusPhone;
+        this.cusAddress = cusAddress;
+    }
 
     public OrdersDTO(int ordersID, int customerID, int shippingID, Date dateOrders, int status, String cusName, String cusPhone, String cusAddress) {
         this.ordersID = ordersID;
@@ -44,6 +60,14 @@ public class OrdersDTO implements Serializable {
         this.cusName = cusName;
         this.cusPhone = cusPhone;
         this.cusAddress = cusAddress;
+    }
+
+    public int getPaymentID() {
+        return paymentID;
+    }
+
+    public void setPaymentID(int paymentID) {
+        this.paymentID = paymentID;
     }
 
     public int getOrdersID() {
@@ -109,7 +133,5 @@ public class OrdersDTO implements Serializable {
     public void setCusAddress(String cusAddress) {
         this.cusAddress = cusAddress;
     }
-
-    
 
 }

@@ -60,6 +60,10 @@ public class ShippingServlet extends HttpServlet {
         String defaultOrNewShippingInfo = request.getParameter("defaultOrNewShippingInfor");
         session.setAttribute("defaultOrNewShippingInfo", defaultOrNewShippingInfo);
         String ordersID = request.getParameter("stored-infoCus-by-orDetID");
+        
+        String txtCity = request.getParameter("txtCityDataName");
+        String txtDistrict = request.getParameter("txtDistrictDataName");
+        String txtWards = request.getParameter("txtWardDataName");
 
         boolean errorFound = false;
         CustomerCreateError errors = new CustomerCreateError();
