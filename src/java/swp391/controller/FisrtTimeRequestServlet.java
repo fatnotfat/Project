@@ -27,6 +27,8 @@ import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
 import swp391.product.ProductDAO;
 import swp391.product.ProductDTO;
+import swp391.size.SizeDAO;
+import swp391.size.SizeDTO;
 import swp391.utils.MyApplicationConstants;
 
 /**
@@ -91,7 +93,6 @@ public class FisrtTimeRequestServlet extends HttpServlet {
 
                 }
             }//end cookies has existed
-
             List<ProductDTO> productList = productDao.getNewestProduct();
             session.setAttribute("NEWEST_PRODUCT", productList);
             List<ProductDTO> productList2 = productDao.getSecondNewestProduct();
@@ -101,7 +102,6 @@ public class FisrtTimeRequestServlet extends HttpServlet {
         } catch (NamingException ex) {
             log("FirstTimeRequestServlet _ Naming _ " + ex.getMessage());
         } finally {
-
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             //cái nào cũng được vì trình duyệt hỗ trợ hàm lưu cookie nên send Redirect 

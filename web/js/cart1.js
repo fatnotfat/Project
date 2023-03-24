@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+
+
 function formatNumberWithCommas(number) {
     var parts = number.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -100,6 +102,11 @@ $(document).ready(function () {
 
             // Call the removeProduct function with the product ID
             removeProduct(productId);
+            const cartSizeValue = document.getElementById("cart-size");
+            alert(cartSizeValue);
+            if(cartSizeValue === 0){
+                location.reload();
+            }
         });
     });
 });
@@ -354,20 +361,6 @@ $(document).ready(function () {
 
 
 
-const payButton = document.querySelector('.your-cart-body-right-order-btn');
-
-payButton.addEventListener('click', (event) => {
-    const cartSizeValue = document.querySelector('input[name="txtCartSizeValue"]').value;
-    if (cartSizeValue > 0) {
-        // cart has items, proceed to shippingPage
-        event.preventDefault(); // prevent the default form submission behavior
-        window.location.href = 'shippingPage'; // navigate to the shipping page
-    } else {
-        // cart is empty, show alert message
-        alert('You should buy something first!!');
-        event.preventDefault(); // prevent the form from submitting
-    }
-});
 
 
 

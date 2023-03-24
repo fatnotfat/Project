@@ -72,7 +72,7 @@
                 background-color: #0c71c3;
             }
         </style>
-        <script src="js/cart1.js"></script>
+        <script src="js/cart1.1.js"></script>
         <link rel="stylesheet" href="style/reset.css" />
         <link rel="stylesheet" href="style/payment-1.css" />
     </head>
@@ -211,6 +211,7 @@
                                             <form action="searchTextController">
                                                 <input
                                                     type="text"
+                                                    id="search-button"
                                                     class="menu-icon-tab-search-input"
                                                     placeholder="Search Product..."
                                                     name="txtSearch" value="${param.txtSearch}"
@@ -295,7 +296,7 @@
                                             </div>
                                             <div class="menu-icon-tab-cart-content-show-txt">
                                                 <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
-                                                <input type="hidden" name="txtCartSizeValue" value="${sessionScope.CART.items.size()}" />
+                                                
                                                 <c:set var="totalQuantity" value="${0}" />
                                                 <c:forEach var="quantity" items="${sessionScope.CART.items.values()}">
                                                     <c:set var="totalQuantity" value="${totalQuantity + quantity}" />
@@ -304,6 +305,7 @@
                                                 <c:if test="${empty sessionScope.CART.items.size()}">
                                                     <c:set var="totalQuantity" value="${0}"/>
                                                 </c:if>
+                                                    
                                                 <p class="menu-icon-tab-cart-content-show-txt-desc">
                                                     <c:if test="${cartSize eq 0}">
                                                         There are no currently products.
@@ -348,7 +350,7 @@
                                                     </button> 
                                                 </form>
                                                 <button
-                                                    class="menu-icon-tab-cart-content-function-method-btn"
+                                                    class="pay-button menu-icon-tab-cart-content-function-method-btn"
                                                     >
                                                     PAY
                                                 </button>
@@ -555,7 +557,7 @@
                                                                     <p
                                                                         class="your-cart-body-left-product-detail-left-size"
                                                                         >
-                                                                        Size:${detail.value.size}
+                                                                        Size: ${detail.value.size}
                                                                     </p>
                                                                     <div
                                                                         class="your-cart-body-left-product-detail-left-count"
@@ -779,5 +781,7 @@
             </footer>
         </div>
         <script src="js/header.js"></script>
+        <script src="js/handleEvent.js"></script>
+        <script src="js/handleEvent1.js"></script>
     </body>
 </html>

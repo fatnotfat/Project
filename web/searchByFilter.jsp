@@ -104,37 +104,35 @@
                     pageSize: 9,
                     callback: function (data, pagination) {
                         var html = '';
-//                        for (var i = 0; i < data.length; i++) {
-//                            html += '<div>' + JSON.stringify(data[i].name) + '</div>';
-//                        }
-                        for (var i = 0; i < data.length; i++) {
+                        if (data.length > 1) {
+                            for (var i = 0; i < data.length; i++) {
 
 
-                            html += '<div class="grid__column-3-4">'
-                                    + '<div class="product__item"'
-//                                    + ' href= "#" onclick="addToCart('
-//                                    + JSON.stringify(data[i].id)
-//                                    + ');"'
-                                    + '>'
-                                    + '<div class="product__item-img"><img src="assets/image/Vector.png"/>'
-                                    + '</div>'
-                                    + '<div class="product__item-name">'
-                                    + JSON.stringify(data[i].name).replace(/^"(.*)"$/, '$1')
-                                    + '</div>'
-                                    + '<div class="product__item-price">'
-                                    + 'Price:' + '<span>' + JSON.stringify(data[i].price) + '</span>'
-                                    + '</div>'
-                                    + '<div class="product__item-info">'
-                                    + '<form action="viewProductController" method="POST" class="form__product-item-view">'
-                                    + '<input type="hidden" name="txtProductID" value="'+JSON.stringify(data[i].id)+'" />'
-                                    + '<button class="product__item-view">View more</button>'
-                                    + '</form>'
-                                    + '</div>'
+                                html += '<div class="grid__column-3-4">'
+                                        + '<div class="product__item"'
+                                        + '>'
+                                        + '<div class="product__item-img"><img src="assets/image/Vector.png"/>'
+                                        + '</div>'
+                                        + '<div class="product__item-name">'
+                                        + JSON.stringify(data[i].name).replace(/^"(.*)"$/, '$1')
+                                        + '</div>'
+                                        + '<div class="product__item-price">'
+                                        + 'Price:' + '<span>' + JSON.stringify(data[i].price) + '</span>'
+                                        + '</div>'
+                                        + '<div class="product__item-info">'
+                                        + '<form action="viewProductController" method="POST" class="form__product-item-view">'
+                                        + '<input type="hidden" name="txtProductID" value="' + JSON.stringify(data[i].id) + '" />'
+                                        + '<button class="product__item-view">View more</button>'
+                                        + '</form>'
+                                        + '</div>'
 //                                    + '<a href="#" onclick="addToCart('
 //                                    + JSON.stringify(data[i].id)
 //                                    + ');">Add to Cart</a>'
-                                    + '</div>'
-                                    + '</div>';
+                                        + '</div>'
+                                        + '</div>';
+                            }
+                        } else {
+                            html = '<div class="grid__row" style="align-items: center!important; justify-content: center; font-size: 16px; color: red; margin-bottom: 20px;"><p>There are no related product!!</p></div>';
                         }
                         dataContainer.html(html);
                     }
@@ -172,7 +170,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <img src="images/Nav-line.png" alt="" class="nav-line" />
                 <!-- NAV DESKTOP - TABLET -->
                 <div class="nav-bot">
@@ -384,17 +382,27 @@
                                                     />
                                             </div>
                                             <div class="menu-icon-tab-cart-content-show-txt">
-                                                <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
+                                                <%--<c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
                                                 <c:if test="${empty sessionScope.CART.items.size()}">
                                                     <c:set var="cartSize" value="${0}"/>
-                                                    <%--<c:set var="CART_PRICE" value="${calculateTotalPrice()}" scope="session"/>--%>
+                                                    
+                                                </c:if>--%>
+                                                <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
+
+                                                <c:set var="totalQuantity" value="${0}" />
+                                                <c:forEach var="quantity" items="${sessionScope.CART.items.values()}">
+                                                    <c:set var="totalQuantity" value="${totalQuantity + quantity}" />
+                                                </c:forEach>
+
+                                                <c:if test="${empty sessionScope.CART.items.size()}">
+                                                    <c:set var="totalQuantity" value="${0}"/>
                                                 </c:if>
                                                 <p class="menu-icon-tab-cart-content-show-txt-desc">
                                                     <c:if test="${cartSize eq 0}">
                                                         There are no currently products.
                                                     </c:if>
                                                     <c:if test="${cartSize ne 0}">
-                                                        There are <span id="cart-size-header" style="font-weight: bold">${cartSize}</span> products
+                                                        There are <span id="cart-size-header" style="font-weight: bold">${totalQuantity}</span> products
                                                     </c:if>
                                                 </p>
                                             </div>
@@ -433,7 +441,7 @@
                                                     </button>
                                                 </form>
                                                 <button
-                                                    class="menu-icon-tab-cart-content-function-method-btn"
+                                                    class="pay-button menu-icon-tab-cart-content-function-method-btn"
                                                     >
                                                     PAY
                                                 </button>
@@ -988,6 +996,8 @@
         <script src="js/listProduct.js"></script>
         <script src="js/slideShow.js"></script>
         <script src="js/app.js"></script>
+        <script src="js/handleEvent.js"></script>
+        <script src="js/handleEvent1.js"></script>
     </body>
 
 </html>

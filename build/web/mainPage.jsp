@@ -322,7 +322,7 @@
                                                     </button>
                                                 </form>
                                                 <button
-                                                    class="menu-icon-tab-cart-content-function-method-btn"
+                                                    class="pay-button menu-icon-tab-cart-content-function-method-btn"
                                                     >
                                                     PAY
                                                 </button>
@@ -487,9 +487,9 @@
                                         <div class="second-ring">
                                             <p class="second-title">Our Story</p>
                                             <p class="second-content">
-                                                Lorem ipsum dolor sit amet consectetur. Sollicitudin morbi
-                                                molestie at amet praesent tortor. Maecenas non tempus at
-                                                consequat ac est varius. Tortor aliquet nulia consequat risus.
+                                                With the mission of bringing customers the best products,
+                                                we have always sought and created a place to provide the 
+                                                magnificent and beautiful jewelry for customers
                                             </p>
                                             <img src="assets/image/2_1-removebg-preview.png" alt="humuhumu">
                                         </div>
@@ -765,4 +765,6 @@
     <script src="js/header.js"></script>
     <script src="js/mainPage.js"></script>
     <script src="js/cart1.js"></script>
+    <script src="js/handleEvent.js"></script>
+    <script src="js/handleEvent1.js"></script>
 </html>

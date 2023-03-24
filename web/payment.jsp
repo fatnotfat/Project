@@ -162,6 +162,7 @@
                                             <form action="searchTextController">
                                                 <input
                                                     type="text"
+                                                    id="search-button"
                                                     class="menu-icon-tab-search-input"
                                                     placeholder="Search Product..."
                                                     name="txtSearch" value="${param.txtSearch}"
@@ -298,7 +299,7 @@
                                                     </button> 
                                                 </form>
                                                 <button
-                                                    class="menu-icon-tab-cart-content-function-method-btn"
+                                                    class="pay-button menu-icon-tab-cart-content-function-method-btn"
                                                     >
                                                     PAY
                                                 </button>
@@ -758,5 +759,8 @@
 
 
         <script src="js/payment.js"></script>
+        <script src="js/handleEvent.js"></script>
+        <script src="js/header.js"></script>
+        <script src="js/handleEvent1.js"></script>
     </body>
 </html>

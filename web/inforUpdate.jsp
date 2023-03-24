@@ -170,6 +170,7 @@
                                             <form action="searchTextController">
                                                 <input
                                                     type="text"
+                                                    id="search-button"
                                                     class="menu-icon-tab-search-input"
                                                     placeholder="Search Product..."
                                                     name="txtSearch" value="${param.txtSearch}"
@@ -294,13 +295,15 @@
                                                 </p>
                                             </div>
                                             <div class="menu-icon-tab-cart-content-function-method">
+                                                <form action="addToCartPage" method="POST">
+                                                    <button
+                                                        class="menu-icon-tab-cart-content-function-method-btn"
+                                                        >
+                                                        VIEW CART
+                                                    </button>
+                                                </form>
                                                 <button
-                                                    class="menu-icon-tab-cart-content-function-method-btn"
-                                                    >
-                                                    VIEW CART
-                                                </button>
-                                                <button
-                                                    class="menu-icon-tab-cart-content-function-method-btn"
+                                                    class="pay-button menu-icon-tab-cart-content-function-method-btn"
                                                     >
                                                     PAY
                                                 </button>
@@ -777,6 +780,8 @@
                 </div>
             </footer>
         </div>
+        <script src="js/handleEvent.js"></script>                      
         <script src="js/app.js"></script>
+        <script src="js/handleEvent1.js"></script>
     </body>
 </html>

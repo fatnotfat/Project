@@ -60,7 +60,18 @@ public class ShippingServlet extends HttpServlet {
         String defaultOrNewShippingInfo = request.getParameter("defaultOrNewShippingInfor");
         session.setAttribute("defaultOrNewShippingInfo", defaultOrNewShippingInfo);
         String ordersID = request.getParameter("stored-infoCus-by-orDetID");
-
+        String city = request.getParameter("txtCityDataName");
+        byte[] bytes1 = city.getBytes(StandardCharsets.ISO_8859_1);
+        city = new String(bytes1, StandardCharsets.UTF_8);
+        
+        String district = request.getParameter("txtDistrictDataName");
+        byte[] bytes2 = district.getBytes(StandardCharsets.ISO_8859_1);
+        district = new String(bytes2, StandardCharsets.UTF_8);
+        
+        String ward = request.getParameter("txtWardDataName");
+        byte[] bytes3 = ward.getBytes(StandardCharsets.ISO_8859_1);
+        ward = new String(bytes3, StandardCharsets.UTF_8);
+        
         boolean errorFound = false;
         CustomerCreateError errors = new CustomerCreateError();
         try {
@@ -85,7 +96,7 @@ public class ShippingServlet extends HttpServlet {
                         if (ordersDTOs != null) {
 
                             if (defaultOrNewShippingInfo.equals("0")) {
-                                if (ordersID.length()<1) {
+                                if (ordersID.length() < 1) {
                                     errors.setCusInfoLengthError("you have to choose your shipping information");
                                     request.setAttribute("SIGNUPFORSHIPPING_ERROR", errors);
                                 } else {
@@ -93,18 +104,19 @@ public class ShippingServlet extends HttpServlet {
                                     for (OrdersDTO customer : ordersDTOs) {
                                         if (customer.getOrdersID() == ordersIDInt) {
                                             String cusName = customer.getCusName();
-                                            byte[] bytes0 = cusName.getBytes(StandardCharsets.ISO_8859_1);
-                                            cusName = new String(bytes0, StandardCharsets.UTF_8);
+//                                            byte[] bytes0 = cusName.getBytes(StandardCharsets.ISO_8859_1);
+//                                            cusName = new String(bytes0, StandardCharsets.UTF_8);
 
                                             String cusPhone = customer.getCusPhone();
 
                                             String cusAddress = customer.getCusAddress();
-                                            byte[] bytes = cusAddress.getBytes(StandardCharsets.ISO_8859_1);
-                                            cusAddress = new String(bytes, StandardCharsets.UTF_8);
+//                                            byte[] bytes = cusAddress.getBytes(StandardCharsets.ISO_8859_1);
+//                                            cusAddress = new String(bytes, StandardCharsets.UTF_8);
 
                                             session.setAttribute("customerName", cusName);
                                             session.setAttribute("customerAddress", cusAddress);
                                             session.setAttribute("customerPhone", cusPhone);
+
                                             break;
                                         }
                                     }
@@ -114,15 +126,15 @@ public class ShippingServlet extends HttpServlet {
 
                             } else {
                                 String firstName = request.getParameter("txtFirstName");
-                                byte[] bytes1 = firstName.getBytes(StandardCharsets.ISO_8859_1);
+                                 bytes1 = firstName.getBytes(StandardCharsets.ISO_8859_1);
                                 firstName = new String(bytes1, StandardCharsets.UTF_8);
 
                                 String lastName = request.getParameter("txtLastName");
-                                byte[] bytes2 = lastName.getBytes(StandardCharsets.ISO_8859_1);
+                                 bytes2 = lastName.getBytes(StandardCharsets.ISO_8859_1);
                                 lastName = new String(bytes2, StandardCharsets.UTF_8);
 
                                 String customerAddress = request.getParameter("txtAddress");
-                                byte[] bytes3 = customerAddress.getBytes(StandardCharsets.ISO_8859_1);
+                                 bytes3 = customerAddress.getBytes(StandardCharsets.ISO_8859_1);
                                 customerAddress = new String(bytes3, StandardCharsets.UTF_8);
 
                                 String customerPhone = request.getParameter("txtPhone");
@@ -154,6 +166,9 @@ public class ShippingServlet extends HttpServlet {
                                     session.setAttribute("lastName", lastName);
                                     session.setAttribute("customerAddress", customerAddress);
                                     session.setAttribute("customerPhone", customerPhone);
+                                    session.setAttribute("txtCityDataName", city);
+                                    session.setAttribute("txtDistrictDataName", district);
+                                    session.setAttribute("txtWardDataName", ward);
                                     url = siteMaps.getProperty(
                                             MyApplicationConstants.ShippingServlet.PAYMENT_PAGE);
                                 }
@@ -162,10 +177,10 @@ public class ShippingServlet extends HttpServlet {
                     }
                 } else {
                     String firstName = request.getParameter("txtFirstName");
-                    byte[] bytes1 = firstName.getBytes(StandardCharsets.ISO_8859_1);
+                    bytes1 = firstName.getBytes(StandardCharsets.ISO_8859_1);
                     firstName = new String(bytes1, StandardCharsets.UTF_8);
                     String lastName = request.getParameter("txtLastName");
-                    byte[] bytes2 = lastName.getBytes(StandardCharsets.ISO_8859_1);
+                    bytes2 = lastName.getBytes(StandardCharsets.ISO_8859_1);
                     lastName = new String(bytes2, StandardCharsets.UTF_8);
                     String address = request.getParameter("txtAddress");
                     String phone = request.getParameter("txtPhone");
@@ -210,6 +225,9 @@ public class ShippingServlet extends HttpServlet {
                         session.setAttribute("txtAddress", address);
                         session.setAttribute("txtPhone", phone);
                         session.setAttribute("txtEmail", email);
+                        session.setAttribute("txtCityDataName", city);
+                        session.setAttribute("txtDistrictDataName", district);
+                        session.setAttribute("txtWardDataName", ward);
 
                         dao.createAccountForShipping(firstName + " " + lastName,
                                 email, phone);
@@ -219,7 +237,7 @@ public class ShippingServlet extends HttpServlet {
 
                         ShippingMethodDAO shippingDAO = new ShippingMethodDAO();
                         ArrayList<ShippingMethodDTO> shippingList = shippingDAO.getListShippingMethodGPT();
-                        
+
                         session.setAttribute("SHIPPINGMETHOD_LIST", shippingList);
 
                         session.setAttribute("SHIPPING_ID", shippingID);

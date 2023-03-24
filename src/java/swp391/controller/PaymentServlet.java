@@ -58,7 +58,7 @@ public class PaymentServlet extends HttpServlet {
         String txtPaymentID = request.getParameter("method");
         String txtShippingID = request.getParameter("location");
         String txtCustomerID = request.getParameter("txtCustomerID");
-        
+
         CustomerCreateError errors = new CustomerCreateError();
         try {
 
@@ -83,7 +83,6 @@ public class PaymentServlet extends HttpServlet {
                         String cusAddress = (String) session.getAttribute("customerAddress");
                         String cusPhone = (String) session.getAttribute("customerPhone");
                         List<Integer> ordersID = ordersDAO.addToOrders(customerID, paymentID, shippingID, status, cusName, cusPhone, cusAddress);
-                       
 
                         for (Integer ordersId : ordersID) {
                             ordersDetailDAO.addToOrdersDetail(cart, discount, ordersId);
@@ -95,9 +94,10 @@ public class PaymentServlet extends HttpServlet {
                         String lastName = (String) session.getAttribute("lastName");
                         String customerAddress = (String) session.getAttribute("customerAddress");
                         String customerPhone = (String) session.getAttribute("customerPhone");
-
-                        List<Integer> ordersID = ordersDAO.addToOrders(customerID, paymentID, shippingID, status, firstName + " " + lastName, customerPhone, customerAddress);
-                       
+                        String city = (String) session.getAttribute("txtCityDataName");
+                        String district = (String) session.getAttribute("txtDistrictDataName");
+                        String ward = (String) session.getAttribute("txtWardDataName");
+                        List<Integer> ordersID = ordersDAO.addToOrders(customerID, paymentID, shippingID, status, firstName + " " + lastName, customerPhone, customerAddress+", " + city + ", " + district + ", " + ward);
 
                         for (Integer ordersId : ordersID) {
                             ordersDetailDAO.addToOrdersDetail(cart, discount, ordersId);
@@ -109,8 +109,10 @@ public class PaymentServlet extends HttpServlet {
                         String lastName = (String) session.getAttribute("txtLastName");
                         String customerAddress = (String) session.getAttribute("txtAddress");
                         String customerPhone = (String) session.getAttribute("txtPhone");
-                        List<Integer> ordersID = ordersDAO.addToOrders(customerID, paymentID, shippingID, status, firstName + " " + lastName, customerPhone, customerAddress);
-                       
+                        String city = (String) session.getAttribute("txtCityDataName");
+                        String district = (String) session.getAttribute("txtDistrictDataName");
+                        String ward = (String) session.getAttribute("txtWardDataName");
+                        List<Integer> ordersID = ordersDAO.addToOrders(customerID, paymentID, shippingID, status, firstName + " " + lastName, customerPhone, customerAddress+", " + city + ", " + district + ", " + ward);
 
                         for (Integer ordersId : ordersID) {
                             ordersDetailDAO.addToOrdersDetail(cart, discount, ordersId);
@@ -123,7 +125,7 @@ public class PaymentServlet extends HttpServlet {
                         List<OrdersDTO> customerOrders = ordersDAO.getCustomerShippingInFoByCusID(user.getCustomerID());
                         session.setAttribute("USER_SHIPPINGINFO", customerOrders);
                         OrdersDTO shippingInfor = ordersDAO.getShippingInFoByCusID(user.getCustomerID());
-                        request.setAttribute("SHIPPING_INFO_FOR_CHECKOUT", shippingInfor);               
+                        request.setAttribute("SHIPPING_INFO_FOR_CHECKOUT", shippingInfor);
                     }
                     url = siteMaps.getProperty(
                             MyApplicationConstants.PaymentServlet.CHECKOUT_PAGE);
@@ -134,7 +136,7 @@ public class PaymentServlet extends HttpServlet {
         } catch (SQLException ex) {
             log("PaymentServlet _ SQL _ " + ex.getMessage());
         } finally {
-            
+
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }

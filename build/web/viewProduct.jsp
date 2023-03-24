@@ -178,6 +178,7 @@
                                             <form action="searchTextController">
                                                 <input
                                                     type="text"
+                                                    id="search-button"
                                                     class="menu-icon-tab-search-input"
                                                     placeholder="Search Product..."
                                                     name="txtSearch" value="${param.txtSearch}"
@@ -263,17 +264,28 @@
                                                     />
                                             </div>
                                             <div class="menu-icon-tab-cart-content-show-txt">
+                                                <%--
                                                 <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
                                                 <c:if test="${empty sessionScope.CART.items.size()}">
                                                     <c:set var="cartSize" value="${0}"/>
-                                                    <%--<c:set var="CART_PRICE" value="${calculateTotalPrice()}" scope="session"/>--%>
+                                                </c:if>
+                                                --%>
+                                                <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
+                                                
+                                                <c:set var="totalQuantity" value="${0}" />
+                                                <c:forEach var="quantity" items="${sessionScope.CART.items.values()}">
+                                                    <c:set var="totalQuantity" value="${totalQuantity + quantity}" />
+                                                </c:forEach>
+
+                                                <c:if test="${empty sessionScope.CART.items.size()}">
+                                                    <c:set var="totalQuantity" value="${0}"/>
                                                 </c:if>
                                                 <p class="menu-icon-tab-cart-content-show-txt-desc">
                                                     <c:if test="${cartSize eq 0}">
                                                         There are <span id="cart-size-header" style="font-weight: bold">no</span> currently products.
                                                     </c:if>
                                                     <c:if test="${cartSize ne 0}">
-                                                        There are <span id="cart-size-header" style="font-weight: bold">${cartSize}</span> products
+                                                        There are <span id="cart-size-header" style="font-weight: bold">${totalQuantity}</span> products.
                                                     </c:if>
                                                 </p>
                                             </div>
@@ -285,7 +297,7 @@
                                         <c:forEach var="item" items="${sessionScope.CART.items}">
                                             <c:forEach var="detail" items="${sessionScope.CART.itemDetail}">
                                                 <c:if test="${item.key eq detail.key}">
-                                                    <c:set var="totalPrice" value="${totalPrice + (item.value * detail.value.price)}"/>
+                                                    <c:set var="totalPrice" value="${totalPrice + (item.value * detail.value.price)}" />
                                                 </c:if>
                                             </c:forEach>
                                         </c:forEach>
@@ -313,7 +325,7 @@
                                                     </button>
                                                 </form>
                                                 <button
-                                                    class="menu-icon-tab-cart-content-function-method-btn"
+                                                    class="pay-button menu-icon-tab-cart-content-function-method-btn"
                                                     >
                                                     PAY
                                                 </button>
@@ -386,7 +398,6 @@
                                                         There are <span id="cart-size-header" style="font-weight: bold">${cartSize}</span> products
                                                     </c:if>
                                                 </p>
-
                                             </div>
                                         </div>
                                         <img srcset="assets/image/Footer-line.png 2x" alt="" />
@@ -911,5 +922,7 @@
         <script src="js/cart2.js"></script>
         <script src="js/app.js"></script>
         <script src="js/rating-star.js"></script>
+        <script src="js/handleEvent.js"></script>
+        <script src="js/handleEvent1.js"></script>
     </body>
 </html>

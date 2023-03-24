@@ -25,13 +25,20 @@ public class OrdersDTO implements Serializable {
 
     public OrdersDTO() {
     }
-
-    public OrdersDTO(int customerID, String cusName, String cusPhone, String cusAddress) {
-        this.customerID = customerID;
+    
+    public OrdersDTO(int ordersID, String cusName, String cusPhone, String cusAddress) {
+        this.ordersID = ordersID;
         this.cusName = cusName;
         this.cusPhone = cusPhone;
         this.cusAddress = cusAddress;
     }
+
+//    public OrdersDTO(int customerID, String cusName, String cusPhone, String cusAddress) {
+//        this.customerID = customerID;
+//        this.cusName = cusName;
+//        this.cusPhone = cusPhone;
+//        this.cusAddress = cusAddress;
+//    }
 
     public OrdersDTO(int ordersID, Date dateOrders, String cusName, String cusPhone, String cusAddress) {
         this.ordersID = ordersID;

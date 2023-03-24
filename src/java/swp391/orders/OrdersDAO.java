@@ -81,8 +81,11 @@ public class OrdersDAO implements Serializable {
 
     public List<OrdersDTO> getCustomerShippingInFoByCusID(int customerId) throws NamingException {
         List<OrdersDTO> customerDetails = new ArrayList<>();
-        String sql = "SELECT OrdersID, CusName, CusPhone, CusAddress\n"
-                + "  FROM Orders where CustomerID = ? and CusName is not null and CusPhone is not null and CusAddress is not null";
+        String sql = "SELECT MIN(o.OrdersID) AS OrdersID, o.CusName, o.CusPhone, o.CusAddress\n"
+                + "FROM Orders o\n"
+                + "INNER JOIN Customer c ON c.CustomerID = o.CustomerID\n"
+                + "WHERE c.CustomerID = ? AND o.CusName IS NOT NULL\n"
+                + "GROUP BY o.CusName, o.CusPhone, o.CusAddress";
         try (Connection conn = DBHelper.makeConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, customerId);

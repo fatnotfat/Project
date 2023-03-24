@@ -23,6 +23,15 @@ public class ProductDTO implements Serializable{
     private int size;
     private Date createTime;
     private String avatar;
+    private String avatar2;
+
+    public String getAvatar2() {
+        return avatar2;
+    }
+
+    public void setAvatar2(String avatar2) {
+        this.avatar2 = avatar2;
+    }
 
     public ProductDTO() {
     }
@@ -55,16 +64,16 @@ public class ProductDTO implements Serializable{
         this.price = price;
     }
 
-    public ProductDTO(int id, String name, String description, int quantity, double price, boolean status, int size, Date createTime,String avatar) {
+    public ProductDTO(int id, String name, String description, int quantity, double price, boolean status,int size ,Date createTime, String avatar) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.quantity = quantity;
         this.price = price;
         this.status = status;
-        this.size = size;
         this.createTime = createTime;
         this.avatar = avatar;
+        this.size = size;
     }
 
     public ProductDTO(String name, String description, int quantity, double price, boolean status, int size, Date createTime) {
@@ -77,14 +86,24 @@ public class ProductDTO implements Serializable{
         this.createTime = createTime;
     }
 
-    public ProductDTO(int id, String name, String description, int quantity, double price, int size, String avatar) {
+//    public ProductDTO(int id, String name, String description, int quantity, double price, int size, String avatar) {
+//        this.id = id;
+//        this.name = name;
+//        this.price = price;
+//        this.quantity = quantity;
+//        this.description = description;
+//        this.size = size;
+//        this.avatar = avatar;
+//    }
+    
+    public ProductDTO(int id, String name, String description, int quantity, double price,int size, String avatar) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.description = description;
-        this.size = size;
         this.avatar = avatar;
+        this.size = size;
     }
 
     /**

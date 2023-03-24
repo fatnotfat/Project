@@ -213,8 +213,38 @@ function updateCartSize() {
             // handle error
         }
     });
-}
-;
+};
+
+
+//function updateCartSize(callback) {
+//    // Code for updating the cart size in the UI
+//    $.ajax({
+//        type: "GET",
+//        url: "GetCartSizeServlet",
+//        success: function (response) {
+//            $("#cart-size").text(response.cartSize);
+//            $("#cart-size-header").text(response.cartSize);
+//            
+//            // Get the value of response.cartSize as a string
+//            const cartSizeText = response.cartSize.toString();
+//            
+//            // Call the callback function with the cart size text
+//            callback(cartSizeText);
+//        },
+//        error: function (jqXHR, textStatus, errorThrown) {
+//            // handle error
+//        }
+//    });
+//};
+//
+//
+//updateCartSize(function(cartSize) {
+//    // Do something with the cart size value as a string
+//    alert(cartSize);
+//});
+
+
+
 
 $(document).ready(function () {
     // Code that runs on page load
