@@ -271,7 +271,7 @@
                                                 </c:if>
                                                 --%>
                                                 <c:set var="cartSize" value="${sessionScope.CART.items.size()}"/>
-                                                
+
                                                 <c:set var="totalQuantity" value="${0}" />
                                                 <c:forEach var="quantity" items="${sessionScope.CART.items.values()}">
                                                     <c:set var="totalQuantity" value="${totalQuantity + quantity}" />
@@ -478,7 +478,7 @@
                             </c:if>
 
                             <c:set var="itemDetail" value="${sessionScope.ITEM_DETAIL}" />
-                            
+
                             <div class="grid__column-4">
                                 <div class="product__item-include">
                                     <div class="product__item-info">
@@ -498,7 +498,7 @@
                                                 <!--</form>-->
                                             </div>
                                             <div class="product__item-buy">
-                                                <button class="product__item-buy-now">Buy Now</button>
+                                                <button id="buy-now-cart-btn" class="product__item-buy-now">Buy Now</button>
                                             </div>
                                         </div>
 
@@ -570,29 +570,45 @@
                                         </c:if>
                                         <div class="product__item-info-review-list">
                                             <!-- ITEM COMMENT -->
-                                            <div class="product__item-info-review-list-item">
-                                                <div>
-                                                    <img src="images/default-avatar_120.jpg" alt="picture" class="product__item-info-review-list-item-avatar">
-                                                </div>
-                                                <div class="product__item-info-review-list-item-content">
-                                                    <p class="product__item-info-review-list-item-content-name">
-                                                        Name
-                                                    </p>
-                                                    <div class="product__item-info-review-list-item-content-rating">
-                                                        <div class="product__item-info-review-list-item-content-rating rating">
-                                                            <span class="star-cmt">&#9733;</span> 5
-                                                        </div>
-                                                        <div class="product__item-info-review-list-item-content-rating date">
-                                                            3/10/2023 
-                                                        </div>
-                                                    </div>
-                                                    <div class="product__item-info-review-list-item-content-comment">
-                                                        <p class="product__item-info-review-list-item-content-comment-txt">
-                                                            Good product
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <c:set var="feedbackList" value="${requestScope.FEEDBACK_LIST}"/>
+                                            <c:set var="feedbackCustomer" value="${requestScope.CUSTOMER_FEEDBACK}"/>
+                                            <c:if test="${not empty feedbackList}">
+                                                <c:forEach var="dto" items="${feedbackList}">
+                                                    <c:forEach var="cusDTO" items="${feedbackCustomer}">
+                                                        <c:if test="${dto.customerID eq cusDTO.customerID}">
+                                                            <div class="product__item-info-review-list-item">
+                                                                <div>
+                                                                    <img src="images/default-avatar_120.jpg" alt="picture" class="product__item-info-review-list-item-avatar">
+                                                                </div>
+                                                                <div class="product__item-info-review-list-item-content">
+                                                                    <p class="product__item-info-review-list-item-content-name">
+                                                                        ${cusDTO.name}
+                                                                    </p>
+                                                                    <div class="product__item-info-review-list-item-content-rating">
+                                                                        <div class="product__item-info-review-list-item-content-rating rating">
+                                                                            <span class="star-cmt">&#9733;</span> ${dto.voting}
+                                                                        </div>
+                                                                        <div class="product__item-info-review-list-item-content-rating date">
+                                                                            <fmt:formatDate var="feedBackDate" value="${dto.feedBackTime}" pattern="dd-MM-yyyy" />
+                                                                            ${feedBackDate}                                                                             
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="product__item-info-review-list-item-content-comment">
+                                                                        <p class="product__item-info-review-list-item-content-comment-txt">
+                                                                            ${dto.textComment}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </c:forEach>
+                                            </c:if>
+                                            <c:if test="${empty feedbackList}">
+                                                <p style="text-align: center; color: red;" class="product__item-info-review-list-item-content-name">
+                                                    There is no comment yet!!
+                                                </p>
+                                            </c:if>
                                             <!-- ITEM COMMENT -->
                                         </div>
                                     </div> 
@@ -641,173 +657,30 @@
                             <div class="slider__include">
                                 <div class="swiper mySwiper">
                                     <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <a class="more__item">
-                                                <div class="more__item-img">
-                                                    <div class="card">
-                                                        <img class="img-back" src="assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
-                                                        <img src="assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
+                                        <c:set var="relatedList" value="${requestScope.RELATED_PRODUCT}" />
+                                        <c:forEach var="dto" items="${relatedList}">
+                                            <div class="swiper-slide">
+                                                <a class="more__item">
+                                                    <div class="more__item-img">
+                                                        <div class="card">
+                                                            <img class="img-back" src="assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
+                                                            <img src="assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
-                                                    0000C000582 </div>
-                                                <div class="more__item-price">
-                                                    Giá:<span>7.954.000đ</span>
-                                                </div>
-                                                <div class="more__item-info">
-
-                                                    <button class="more__item-view">Xem Ngay</button>
-                                                </div>
-                                            </a>
-
-                                        </div>
-
-                                        <div class="swiper-slide">
-                                            <a class="more__item">
-                                                <div class="more__item-img">
-                                                    <div class="card">
-                                                        <img class="img-back" src="assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
-                                                        <img src="assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
+                                                    <div class="more__item-name">${dto.name}</div>
+                                                    <div class="more__item-price">
+                                                        <fmt:formatNumber var="priceRelatedProduct" value="${dto.price}" pattern="#,###" />
+                                                        Price:<span>${priceRelatedProduct}đ</span>
                                                     </div>
-                                                </div>
-                                                <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
-                                                    0000C000582 </div>
-                                                <div class="more__item-price">
-                                                    Giá:<span>7.954.000đ</span>
-                                                </div>
-                                                <div class="more__item-info">
+                                                    <form class="more__item-info" action="viewProductController">
+                                                        <input type="hidden" name="txtProductID" value="${dto.id}" />
+                                                        <button class="more__item-view">View now</button>
+                                                    </form>
+                                                </a>
 
-                                                    <button class="more__item-view">Xem Ngay</button>
-                                                </div>
-                                            </a>
+                                            </div>
+                                        </c:forEach>
 
-                                        </div>
-
-                                        <div class="swiper-slide">
-                                            <a class="more__item">
-                                                <div class="more__item-img">
-                                                    <div class="card">
-                                                        <img class="img-back" src="assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
-                                                        <img src="assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
-                                                    </div>
-                                                </div>
-                                                <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
-                                                    0000C000582 </div>
-                                                <div class="more__item-price">
-                                                    Giá:<span>7.954.000đ</span>
-                                                </div>
-                                                <div class="more__item-info">
-
-                                                    <button class="more__item-view">Xem Ngay</button>
-                                                </div>
-                                            </a>
-
-                                        </div>
-
-                                        <div class="swiper-slide">
-                                            <a class="more__item">
-                                                <div class="more__item-img">
-                                                    <div class="card">
-                                                        <img class="img-back" src="assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
-                                                        <img src="assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
-                                                    </div>
-                                                </div>
-                                                <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
-                                                    0000C000582 </div>
-                                                <div class="more__item-price">
-                                                    Giá:<span>7.954.000đ</span>
-                                                </div>
-                                                <div class="more__item-info">
-
-                                                    <button class="more__item-view">Xem Ngay</button>
-                                                </div>
-                                            </a>
-
-                                        </div>
-
-                                        <div class="swiper-slide">
-                                            <a class="more__item">
-                                                <div class="more__item-img">
-                                                    <div class="card">
-                                                        <img class="img-back" src="assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
-                                                        <img src="assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
-                                                    </div>
-                                                </div>
-                                                <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
-                                                    0000C000582 </div>
-                                                <div class="more__item-price">
-                                                    Giá:<span>7.954.000đ</span>
-                                                </div>
-                                                <div class="more__item-info">
-
-                                                    <button class="more__item-view">Xem Ngay</button>
-                                                </div>
-                                            </a>
-
-                                        </div>
-
-                                        <div class="swiper-slide">
-                                            <a class="more__item">
-                                                <div class="more__item-img">
-                                                    <div class="card">
-                                                        <img class="img-back" src="assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
-                                                        <img src="assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
-                                                    </div>
-                                                </div>
-                                                <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
-                                                    0000C000582 </div>
-                                                <div class="more__item-price">
-                                                    Giá:<span>7.954.000đ</span>
-                                                </div>
-                                                <div class="more__item-info">
-
-                                                    <button class="more__item-view">Xem Ngay</button>
-                                                </div>
-                                            </a>
-
-                                        </div>
-
-                                        <div class="swiper-slide">
-                                            <a class="more__item">
-                                                <div class="more__item-img">
-                                                    <div class="card">
-                                                        <img class="img-back" src="assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
-                                                        <img src="assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
-                                                    </div>
-                                                </div>
-                                                <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
-                                                    0000C000582 </div>
-                                                <div class="more__item-price">
-                                                    Giá:<span>7.954.000đ</span>
-                                                </div>
-                                                <div class="more__item-info">
-
-                                                    <button class="more__item-view">Xem Ngay</button>
-                                                </div>
-                                            </a>
-
-                                        </div>
-
-                                        <div class="swiper-slide">
-                                            <a class="more__item">
-                                                <div class="more__item-img">
-                                                    <div class="card">
-                                                        <img class="img-back" src="assets/image/4.Vòng tay bạc nam, nữ HeliSilver Chain Helios Gle x Lotus Helios Original S925 (5).jpg" alt="Card Back">
-                                                        <img src="assets/image/6.Vòng tay bạc nam, nữ HeliSilver Cuban Twinkle 2 hàng đá S950 (2).jpg" class="img-top" alt="Card Front">
-                                                    </div>
-                                                </div>
-                                                <div class="more__item-name">Nhẫn cưới nam Vàng 18K Disney|PNJ Sleeping Beauty
-                                                    0000C000582 </div>
-                                                <div class="more__item-price">
-                                                    Giá:<span>7.954.000đ</span>
-                                                </div>
-                                                <div class="more__item-info">
-
-                                                    <button class="more__item-view">Xem Ngay</button>
-                                                </div>
-                                            </a>
-
-                                        </div>
                                     </div>
 
                                     <div class="swiper-scroll">

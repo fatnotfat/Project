@@ -24,6 +24,17 @@ public class ProductDTO implements Serializable{
     private Date createTime;
     private String avatar;
     private String avatar2;
+    private int cateID;
+
+    public int getCateID() {
+        return cateID;
+    }
+
+    public void setCateID(int cateID) {
+        this.cateID = cateID;
+    }
+    
+    
 
     public String getAvatar2() {
         return avatar2;
@@ -64,7 +75,7 @@ public class ProductDTO implements Serializable{
         this.price = price;
     }
 
-    public ProductDTO(int id, String name, String description, int quantity, double price, boolean status,int size ,Date createTime, String avatar) {
+    public ProductDTO(int id, String name, String description, int quantity, double price,int cateID, boolean status,int size ,Date createTime, String avatar) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -74,6 +85,7 @@ public class ProductDTO implements Serializable{
         this.createTime = createTime;
         this.avatar = avatar;
         this.size = size;
+        this.cateID = cateID;
     }
 
     public ProductDTO(String name, String description, int quantity, double price, boolean status, int size, Date createTime) {

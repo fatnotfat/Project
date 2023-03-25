@@ -8,11 +8,14 @@ package swp391.feedback;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.naming.NamingException;
 import swp391.utils.DBHelper;
 
@@ -54,7 +57,7 @@ public class FeedBackDAO implements Serializable {
                 stm.setDate(5, sqlDate);
                 stm.setString(6, textComment);
                 int effectedRows = stm.executeUpdate();
-                if(effectedRows>0){
+                if (effectedRows > 0) {
                     result = true;
                 }
             }
@@ -67,5 +70,39 @@ public class FeedBackDAO implements Serializable {
             }
         }
         return result;
+    }
+
+    public List<FeedBackDTO> getListFeedBackOfProduct(int productID)
+            throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<FeedBackDTO> list = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+
+                String sql = "select ProductID, CustomerID, Voting, TextComments, FeedBackTime from FeedBack\n"
+                        + "where ProductID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, productID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    FeedBackDTO dto = new FeedBackDTO(rs.getInt("ProductID"), rs.getInt("CustomerID"), rs.getString("TextComments"), rs.getInt("Voting"), rs.getDate("FeedBackTime"));
+                    if (list == null) {
+                        list = new ArrayList<>();
+                    }
+                    list.add(dto);
+                }
+            }
+        } finally {
+            if (con != null) {
+                con.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }
+        return list;
     }
 }

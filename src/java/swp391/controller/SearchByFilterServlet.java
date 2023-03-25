@@ -48,6 +48,7 @@ public class SearchByFilterServlet extends HttpServlet {
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(
                 MyApplicationConstants.FirstTimeRequestServlet.MAIN_PAGE);
+        
         String txtProductCateID = request.getParameter("txtProductCateID");
         int cateID = Integer.parseInt(txtProductCateID);
         String txtPriceFrom = request.getParameter("txtPriceFrom");
@@ -79,6 +80,9 @@ public class SearchByFilterServlet extends HttpServlet {
             log("SearchByFilterServlet _ Naming _ " + ex.getMessage());
         } catch (SQLException ex) {
             log("SearchByFilterServlet _ SQL _ " + ex.getMessage());
+        } catch (NumberFormatException ex){
+            log("SearchByFilterServlet _ Number _ " + ex.getMessage());
+            request.setAttribute("INVALID_INPUT", "Please input valid input!!");
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

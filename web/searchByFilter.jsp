@@ -71,26 +71,28 @@
                 try {
                     // Assuming that your servlet stores the JSON data as a string in a variable called jsonData
                     String jsonData = (String) session.getAttribute("products");
-                    System.out.println(jsonData);
-                    JSONArray jsonArray = new JSONArray(jsonData);
-                    for (int i = 0; i < jsonArray.length(); i++) {
+                    if (jsonData != null) {
+                        System.out.println(jsonData);
+                        JSONArray jsonArray = new JSONArray(jsonData);
+                        for (int i = 0; i < jsonArray.length(); i++) {
 //                                    if (jsonArray.get(i) instanceof String) {
 //                                        String item = jsonArray.getString(i);
 //                                        out.print("dataSource.push('" + item + "');\n");
 //                                    }
-                        Object element = jsonArray.get(i);
-                        if (element instanceof String) {
-                            String item = (String) element;
-                            out.print("dataSource.push('" + item + "');\n");
-                        } else if (element instanceof Number) {
-                            Number item = (Number) element;
-                            out.print("dataSource.push(" + item.toString() + ");\n");
-                        } else if (element instanceof JSONObject) {
-                            JSONObject obj = (JSONObject) element;
+                            Object element = jsonArray.get(i);
+                            if (element instanceof String) {
+                                String item = (String) element;
+                                out.print("dataSource.push('" + item + "');\n");
+                            } else if (element instanceof Number) {
+                                Number item = (Number) element;
+                                out.print("dataSource.push(" + item.toString() + ");\n");
+                            } else if (element instanceof JSONObject) {
+                                JSONObject obj = (JSONObject) element;
 
-                            out.print("dataSource.push(" + obj.toString(2) + ");\n");
-                            // Handle object element
-                            System.out.println(obj.toString());
+                                out.print("dataSource.push(" + obj.toString(2) + ");\n");
+                                // Handle object element
+                                System.out.println(obj.toString());
+                            }
                         }
                     }
                 } catch (JSONException ex) {
@@ -630,7 +632,12 @@
 
                         <div class="grid__column-9 col l-9">
                             <div class="product">
-                                <div id="data-container" class="grid__row"></div>                               
+                                <c:if test="${not empty requestScope.INVALID_INPUT}">
+                                    <div class="grid__row" style="align-items: center!important; justify-content: center; font-size: 16px; color: red; margin-bottom: 20px;"><p>There are no related product!!</p></div>
+                                </c:if>
+                                <c:if test="${empty requestScope.INVALID_INPUT}">
+                                <div id="data-container" class="grid__row"></div>   
+                                </c:if>
                                 <div id="pagination-container"></div>
                             </div>
                         </div>

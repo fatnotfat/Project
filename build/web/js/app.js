@@ -128,7 +128,7 @@ const getProvince = async () => {
         option.setAttribute('data-name', `${province.name}`);
         provinceSelect.appendChild(option);
     });
-    
+
 };
 
 const getDistrict = async (key) => {
@@ -159,16 +159,17 @@ const getWard = async (key) => {
 };
 
 
-
-provinceSelect.addEventListener('change', (event) => {
-    const selectedProvinceName = event.target.value;
-    if (selectedProvinceName) {
-        getDistrict(selectedProvinceName);
-    } else {
-        districtSelect.innerHTML = '<option value="" disabled selected>Select District</option>';
-        wardSelect.innerHTML = '<option value="" disabled selected>Select Ward</option>';
-    }
-});
+if (provinceSelect !== null) {
+    provinceSelect.addEventListener('change', (event) => {
+        const selectedProvinceName = event.target.value;
+        if (selectedProvinceName) {
+            getDistrict(selectedProvinceName);
+        } else {
+            districtSelect.innerHTML = '<option value="" disabled selected>Select District</option>';
+            wardSelect.innerHTML = '<option value="" disabled selected>Select Ward</option>';
+        }
+    });
+}
 
 districtSelect.addEventListener('change', (event) => {
     const selectedDistrictName = event.target.value;

@@ -23,6 +23,8 @@ import javax.servlet.http.HttpSession;
 import swp391.cart.CartDAO;
 import swp391.cart.CartDTO;
 import swp391.cart.CartObject;
+import swp391.category.CategoryDAO;
+import swp391.category.CategoryDTO;
 import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
 import swp391.product.ProductDAO;
@@ -64,6 +66,7 @@ public class FisrtTimeRequestServlet extends HttpServlet {
             Cookie[] cookies = request.getCookies();
             //Read last cookies
             ProductDAO productDao = new ProductDAO();
+            CategoryDAO categoryDao = new CategoryDAO();
             if (cookies != null) {
 //                Cookie lastCookies = cookies[cookies.length - 1];
                 for (Cookie cookie : cookies) {
@@ -97,6 +100,8 @@ public class FisrtTimeRequestServlet extends HttpServlet {
             session.setAttribute("NEWEST_PRODUCT", productList);
             List<ProductDTO> productList2 = productDao.getSecondNewestProduct();
             session.setAttribute("SECOND_NEWEST_PRODUCT", productList2);
+            List<CategoryDTO> categoryList = categoryDao.getListCategory();
+            session.setAttribute("CATEGORY", categoryList);
         } catch (SQLException ex) {
             log("FirstTimeRequestServlet _ SQL _ " + ex.getMessage());
         } catch (NamingException ex) {

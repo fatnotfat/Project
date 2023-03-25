@@ -353,7 +353,7 @@
                                                                 <a href="#!" class="overview-left-item-link">Address List</a> 
                                                             </li>-->
                                 <li class="overview-left-item--circle">
-                                    <a href="#!" class="overview-left-item-link">Log out</a> 
+                                    <a href="logoutController" class="overview-left-item-link">Log out</a> 
                                 </li>
                             </ul>
                         </div>

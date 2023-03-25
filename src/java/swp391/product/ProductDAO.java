@@ -43,7 +43,7 @@ public class ProductDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "SELECT ProductID, Name, Description, Quantity, Price, p.Status, ps.Size, CreateTime, Avatar, Avatar2 \n"
+                String sql = "SELECT ProductID, Name, Description, Quantity, Price,p.CateID, p.Status, ps.Size, CreateTime, Avatar, Avatar2 \n"
                         + "from Product p join ProductSize ps on p.SizeID = ps.SizeID\n"
                         + "where p.Name like ? and p.Status = 1";
 
@@ -56,11 +56,12 @@ public class ProductDAO implements Serializable {
                     String descr = rs.getString("Description");
                     int quantity = rs.getInt("Quantity");
                     double price = rs.getDouble("Price");
+                    int cateID = rs.getInt("CateID");
                     boolean status = rs.getBoolean("Status");
                     int size = rs.getInt("Size");
                     Date date = rs.getDate("CreateTime");
                     String avatar = rs.getString("Avatar");
-                    ProductDTO dto = new ProductDTO(id, name, descr, quantity, price, status, size, date, avatar);
+                    ProductDTO dto = new ProductDTO(id, name, descr, quantity, price,cateID, status, size, date, avatar);
 
                     if (this.listProduct == null) {
                         this.listProduct = new ArrayList<>();
@@ -169,7 +170,7 @@ public class ProductDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "SELECT ProductID, Name, Description, Quantity, Price, p.Status, Size, CreateTime, Avatar, Avatar2\n"
+                String sql = "SELECT ProductID, Name, Description, Quantity, Price, p.Status, Size,p.CateID, CreateTime, Avatar, Avatar2\n"
                         + " FROM Product p, ProductSize ps\n"
                         + " WHERE ProductID = ? and p.SizeID = ps.SizeID";
                 stm = con.prepareStatement(sql);
@@ -183,9 +184,10 @@ public class ProductDAO implements Serializable {
                     double price = rs.getDouble("Price");
                     boolean status = rs.getBoolean("Status");
                     int size = rs.getInt("Size");
+                    int cateID = rs.getInt("CateID");
                     Date date = rs.getDate("CreateTime");
                     String avatar = rs.getString("Avatar");
-                    dto = new ProductDTO(id, name, descr, quantity, price, status, size, date, avatar);
+                    dto = new ProductDTO(id, name, descr, quantity, price,cateID, status, size, date, avatar);
                 }
             }
         } finally {
@@ -297,6 +299,57 @@ public class ProductDAO implements Serializable {
             if (stm != null) {
                 stm.close();
             }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return list;
+    }
+    
+    
+    public List<ProductDTO> searchRelatedProduct(int cateID)
+            throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<ProductDTO> list = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "SELECT ProductID, Name, Description, Quantity, Price,p.CateID, p.Status, ps.Size, CreateTime, Avatar, Avatar2 \n"
+                        + "from Product p join ProductSize ps on p.SizeID = ps.SizeID\n"
+                        + "where p.CateID = ? and p.Status = 1";
+
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, cateID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("ProductID");
+                    String name = rs.getString("Name");
+                    String descr = rs.getString("Description");
+                    int quantity = rs.getInt("Quantity");
+                    double price = rs.getDouble("Price");
+                    boolean status = rs.getBoolean("Status");
+                    int size = rs.getInt("Size");
+                    Date date = rs.getDate("CreateTime");
+                    String avatar = rs.getString("Avatar");
+                    ProductDTO dto = new ProductDTO(id, name, descr, quantity, price,cateID, status, size, date, avatar);
+
+                    if (list == null) {
+                        list = new ArrayList<>();
+                    }
+                    list.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (stm != null) {
+                stm.close();
+            }
+
             if (con != null) {
                 con.close();
             }

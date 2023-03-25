@@ -441,283 +441,293 @@
             <img src="images/Nav-line.png" alt="" />
             <div class="update">
                 <div class="container">
-
-                    <div class="update-heading">
-                        <h1>
-                            Update <br />
-                            Account
-                        </h1>
-                    </div>
-                    <img
-                        class="update-space"
-                        srcset="images/Login-line.png 2x"
-                        alt=""
-                        />
-                    <img
-                        class="update-space-mobile"
-                        srcset="images/update-line-mobile.png 2x"
-                        alt=""
-                        />
-                    <c:set var="updateError" value="${requestScope.UPDATE_ERROR}" />
-                    <form action="updateAccountController">
-                        <div class="update-form-container">
-                            <div class="update-form">
-                                <c:set var="firstName" value="${sessionScope.USER.name}"/>
-                                <div class="update-form-control">
-                                    <input
-                                        type="text"
-                                        id="first-name"
-                                        class="update-input-first-name"
-                                        placeholder="First name"
-                                        name="txtFirstName"
-                                        value="${fn:substringBefore(firstName, ' ')}"
-                                        />
-                                    <c:if test="${not empty updateError.firstNameLengthError}">
-                                        <small>${updateError.firstNameLengthError}</small>
-                                    </c:if>
-                                </div>
-                                <!--  -->
-                                <c:set var="lastName" value="${sessionScope.USER.name}"/>
-                                <div class="update-form-control">
-                                    <input
-                                        type="text"
-                                        id="last-name"
-                                        class="update-input-last-name"
-                                        placeholder="Last name"
-                                        name="txtLastName"
-                                        value="${fn:substringAfter(lastName, ' ')}"
-                                        />
-                                    <c:if test="${not empty updateError.lastNameLengthError}">
-                                        <small>${updateError.lastNameLengthError}</small>
-                                    </c:if>
-                                </div>
-                                <!--  -->
-                                <div class="update-form-gender">
-
-
-                                    <div class="update-form-radio">
-
-                                        <input
-                                            type="radio"
-                                            class="update-form-input-radio"
-                                            id="gender-male"
-                                            name="txtSex"
-                                            value="Male"
-                                            <c:if test="${sessionScope.USER.sex eq true}">
-                                                checked
-                                            </c:if>
-                                            />
-                                        <span class="update-form-input-check-logo"></span>
-                                        <label for="gender-male" class="update-form-input-male"
-                                               >Male</label
-                                        >
-                                        <c:if test="${not empty updateError.sexLengthError}">
-                                            <small>${updateError.sexLengthError}</small>
-                                        </c:if>
-                                    </div>
-
-                                    <!--  -->
-
-
-
-                                    <div class="update-form-radio">
-
-                                        <input
-                                            type="radio"
-                                            class="update-form-input-radio"
-                                            id="gender-female"
-                                            name="txtSex"
-                                            value="Female"
-                                            <c:if test="${sessionScope.USER.sex eq false}">
-                                                checked
-                                            </c:if>
-                                            />
-
-                                        <span class="update-form-input-check-logo"></span>
-                                        <label for="gender-female" class="update-form-input-female"
-                                               >Female</label
-                                        >
-                                        <c:if test="${not empty updateError.sexLengthError}">
-                                            <small>${updateError.sexLengthError}</small>
-                                        </c:if>
-                                    </div>
-
-
-                                    <!--  -->
-                                </div>
-                                <div class="update-form-control">
-
-                                    <input
-                                        type="date"
-                                        id="date"
-                                        class="update-input-date"
-                                        placeholder="mm-dd-yyyy"
-                                        name="txtBirthDate"
-                                        <c:if test="${ not empty sessionScope.USER.birthDate}">
-                                            value="${sessionScope.USER.birthDate}"
-                                        </c:if>
-                                        />
-
-                                    <c:if test="${not empty updateError.birthDateLengthError}">
-                                        <small>${updateError.birthDateLengthError}</small>
-                                    </c:if>
-                                </div>
-                                <!--  -->
-                                <div class="update-form-control">
-                                    <input
-                                        type="text"
-                                        id="phone"
-                                        class="update-input-phone"
-                                        placeholder="Phone number"
-                                        name="txtPhoneNumber"
-                                        <c:if test="${not empty sessionScope.USER.phone}">
-                                            value="${sessionScope.USER.phone}"
-                                        </c:if>
-                                        />
-                                    <c:if test="${not empty updateError.phoneLengthError}">
-                                        <small>${updateError.phoneLengthError}</small>
-                                    </c:if>
-                                </div>
-                                <!--  -->
-                                <!--  -->
-                                <div class="update-form-control">
-                                    <input
-                                        type="text"
-                                        id="address"
-                                        class="update-input-address"
-                                        placeholder="Address detail..."
-                                        name="txtAddressDetail"
-                                        <c:if test="${not empty sessionScope.USER.address}">
-                                            value="${sessionScope.USER.address}"
-                                        </c:if>
-                                        />
-                                    <c:if test="${not empty updateError.addressLengthError}">
-                                        <small>${updateError.addressLengthError}</small>
-                                    </c:if>
-
-                                </div>
-                                <!--  -->
-                                <!-- ADDRESS CHOOSE -->
-                                <div class="shipping-info-left-form-delivery-address-select">
-                                    <!-- CITY -->
-                                    <div class="shipping-info-left-form-city">
-                                        <div class="container">
-                                            <label class="field-label" for="stored-city"
-                                                   >Province / City</label
-                                            >
-                                            <select class="field-input" id="stored-city" name="txtCity">
-                                                <option
-                                                    class="field-input-item"
-                                                    data-name=""
-                                                    value=""
-                                                    >
-                                                    Choose Province / city
-                                                    <!-- Ở ĐÂY OPTION MÌNH CÓ THỂ TRUYỀN ĐƯỢC data-properties={"nội dung"} và value ={} -->
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <input type="hidden" id="txtCityDataName" name="txtCityDataName" value="">
-                                    </div>
-                                    <!-- DISTRICT -->
-                                    <div class="shipping-info-left-form-district">
-                                        <div class="container">
-                                            <label class="field-label" for="stored-district"
-                                                   >District</label
-                                            >
-                                            <select class="field-input" id="stored-district" name="txtDistrict">
-                                                <option
-                                                    class="field-input-item"
-                                                    data-name=""
-                                                    value=""
-                                                    >
-                                                    Choose District
-                                                    <!-- Ở ĐÂY OPTION MÌNH CÓ THỂ TRUYỀN ĐƯỢC data-properties={"nội dung"} và value ={} -->
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <input type="hidden" id="txtDistrictDataName" name="txtDistrictDataName" value="">
-                                    </div>
-                                    <!-- WARD -->
-                                    <div class="shipping-info-left-form-ward">
-                                        <div class="container">
-                                            <label class="field-label" for="stored-ward"
-                                                   >Ward</label
-                                            >
-                                            <select class="field-input" id="stored-ward" name="txtWard">
-                                                <option
-                                                    class="field-input-item"
-                                                    data-name=""
-                                                    value=""
-                                                    >
-                                                    Choose Wards
-                                                    <!-- Ở ĐÂY OPTION MÌNH CÓ THỂ TRUYỀN ĐƯỢC data-properties={"nội dung"} và value ={} -->
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" id="txtWardDataName" name="txtWardDataName" value="">
-                                </div>
-                                <c:if test="${not empty updateError.addressLengthError}">
-                                    <small style="color: red;">${updateError.addressLengthError}</small>
-                                </c:if>
-                                <!--  -->
-                                <!--  -->
-                                <c:set var="typeOfLogin" value="${USER.typeOfLogin}" />
-                                <c:if test="${typeOfLogin eq 0}">
-                                    <div class="update-form-control">
-                                        <input
-                                            type="password"
-                                            id="password"
-                                            class="update-input-password"
-                                            name="txtPassword"
-                                            placeholder="Password"
-                                            value=""
-                                            />
-                                        <c:if test="${not empty updateError.passwordLengthError}">
-                                            <small color="red">
-                                                ${updateError.passwordLengthError}
-                                            </small><br/>
-                                        </c:if>
-                                    </div>
-                                    <!--  -->
-                                    <div class="update-form-control">
-                                        <input
-                                            type="password"
-                                            id="confirm-password"
-                                            class="update-input-confirm-password"
-                                            name="txtConfirm"
-                                            placeholder="Confirm Password"
-                                            value=""
-                                            />
-                                        <c:if test="${not empty updateError.confirmNotMatched}">
-                                            <small color="red">
-                                                ${updateError.confirmNotMatched}
-                                            </small><br/>
-                                        </c:if>
-                                    </div>
-                                </c:if>
-                                <!--  -->
-                            </div>
-                            <div class="update-function">
-                                <p class="update-function-security">
-                                    This site is protected by reCAPTCHA and the Google
-                                    <a href="https://policies.google.com/terms">Privacy Policy</a>
-                                    and
-                                    <a href="https://policies.google.com/privacy"
-                                       >Terms of Service</a
-                                    >
-                                    apply.
-                                </p>
-                                <button class="update-function-btn">CONFIRM</button>
-                                <p class="update-function-update">
-                                    <a href="userInforPage" class="update-function-update-hightlight"
-                                       ><i class="fa-solid fa-arrow-left-long"></i> Back to Account
-                                        Infomation Page</a
-                                    >
-                                </p>
-                            </div>
+                    <c:if test="${not empty sessionScope.USER}">
+                        <div class="update-heading">
+                            <h1>
+                                Update <br />
+                                Account
+                            </h1>
                         </div>
-                    </form>
+                        <img
+                            class="update-space"
+                            srcset="images/Login-line.png 2x"
+                            alt=""
+                            />
+                        <img
+                            class="update-space-mobile"
+                            srcset="images/update-line-mobile.png 2x"
+                            alt=""
+                            />
+                        <c:set var="updateError" value="${requestScope.UPDATE_ERROR}" />
+                        <form action="updateAccountController">
+                            <div class="update-form-container">
+                                <div class="update-form">
+                                    <c:set var="firstName" value="${sessionScope.USER.name}"/>
+                                    <div class="update-form-control">
+                                        <input
+                                            type="text"
+                                            id="first-name"
+                                            class="update-input-first-name"
+                                            placeholder="First name"
+                                            name="txtFirstName"
+                                            value="${fn:substringBefore(firstName, ' ')}"
+                                            />
+                                        <c:if test="${not empty updateError.firstNameLengthError}">
+                                            <small>${updateError.firstNameLengthError}</small>
+                                        </c:if>
+                                    </div>
+                                    <!--  -->
+                                    <c:set var="lastName" value="${sessionScope.USER.name}"/>
+                                    <div class="update-form-control">
+                                        <input
+                                            type="text"
+                                            id="last-name"
+                                            class="update-input-last-name"
+                                            placeholder="Last name"
+                                            name="txtLastName"
+                                            value="${fn:substringAfter(lastName, ' ')}"
+                                            />
+                                        <c:if test="${not empty updateError.lastNameLengthError}">
+                                            <small>${updateError.lastNameLengthError}</small>
+                                        </c:if>
+                                    </div>
+                                    <!--  -->
+                                    <div class="update-form-gender">
+
+
+                                        <div class="update-form-radio">
+
+                                            <input
+                                                type="radio"
+                                                class="update-form-input-radio"
+                                                id="gender-male"
+                                                name="txtSex"
+                                                value="Male"
+                                                <c:if test="${sessionScope.USER.sex eq true}">
+                                                    checked
+                                                </c:if>
+                                                />
+                                            <span class="update-form-input-check-logo"></span>
+                                            <label for="gender-male" class="update-form-input-male"
+                                                   >Male</label
+                                            >
+                                            <c:if test="${not empty updateError.sexLengthError}">
+                                                <small>${updateError.sexLengthError}</small>
+                                            </c:if>
+                                        </div>
+
+                                        <!--  -->
+
+
+
+                                        <div class="update-form-radio">
+
+                                            <input
+                                                type="radio"
+                                                class="update-form-input-radio"
+                                                id="gender-female"
+                                                name="txtSex"
+                                                value="Female"
+                                                <c:if test="${sessionScope.USER.sex eq false}">
+                                                    checked
+                                                </c:if>
+                                                />
+
+                                            <span class="update-form-input-check-logo"></span>
+                                            <label for="gender-female" class="update-form-input-female"
+                                                   >Female</label
+                                            >
+                                            <c:if test="${not empty updateError.sexLengthError}">
+                                                <small>${updateError.sexLengthError}</small>
+                                            </c:if>
+                                        </div>
+
+
+                                        <!--  -->
+                                    </div>
+                                    <div class="update-form-control">
+
+                                        <input
+                                            type="date"
+                                            id="date"
+                                            class="update-input-date"
+                                            placeholder="mm-dd-yyyy"
+                                            name="txtBirthDate"
+                                            <c:if test="${ not empty sessionScope.USER.birthDate}">
+                                                value="${sessionScope.USER.birthDate}"
+                                            </c:if>
+                                            />
+
+                                        <c:if test="${not empty updateError.birthDateLengthError}">
+                                            <small>${updateError.birthDateLengthError}</small>
+                                        </c:if>
+                                    </div>
+                                    <!--  -->
+                                    <div class="update-form-control">
+                                        <input
+                                            type="text"
+                                            id="phone"
+                                            class="update-input-phone"
+                                            placeholder="Phone number"
+                                            name="txtPhoneNumber"
+                                            <c:if test="${not empty sessionScope.USER.phone}">
+                                                value="${sessionScope.USER.phone}"
+                                            </c:if>
+                                            />
+                                        <c:if test="${not empty updateError.phoneLengthError}">
+                                            <small>${updateError.phoneLengthError}</small>
+                                        </c:if>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="update-form-control">
+                                        <input
+                                            type="text"
+                                            id="address"
+                                            class="update-input-address"
+                                            placeholder="Address detail..."
+                                            name="txtAddressDetail"
+                                            <c:if test="${not empty sessionScope.USER.address}">
+                                                value="${sessionScope.USER.address}"
+                                            </c:if>
+                                            />
+                                        <c:if test="${not empty updateError.addressLengthError}">
+                                            <small>${updateError.addressLengthError}</small>
+                                        </c:if>
+
+                                    </div>
+                                    <!--  -->
+                                    <!-- ADDRESS CHOOSE -->
+                                    <div class="shipping-info-left-form-delivery-address-select">
+                                        <!-- CITY -->
+                                        <div class="shipping-info-left-form-city">
+                                            <div class="container">
+                                                <label class="field-label" for="stored-city"
+                                                       >Province / City</label
+                                                >
+                                                <select class="field-input" id="stored-city" name="txtCity">
+                                                    <option
+                                                        class="field-input-item"
+                                                        data-name=""
+                                                        value=""
+                                                        >
+                                                        Choose Province / city
+                                                        <!-- Ở ĐÂY OPTION MÌNH CÓ THỂ TRUYỀN ĐƯỢC data-properties={"nội dung"} và value ={} -->
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <input type="hidden" id="txtCityDataName" name="txtCityDataName" value="">
+                                        </div>
+                                        <!-- DISTRICT -->
+                                        <div class="shipping-info-left-form-district">
+                                            <div class="container">
+                                                <label class="field-label" for="stored-district"
+                                                       >District</label
+                                                >
+                                                <select class="field-input" id="stored-district" name="txtDistrict">
+                                                    <option
+                                                        class="field-input-item"
+                                                        data-name=""
+                                                        value=""
+                                                        >
+                                                        Choose District
+                                                        <!-- Ở ĐÂY OPTION MÌNH CÓ THỂ TRUYỀN ĐƯỢC data-properties={"nội dung"} và value ={} -->
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <input type="hidden" id="txtDistrictDataName" name="txtDistrictDataName" value="">
+                                        </div>
+                                        <!-- WARD -->
+                                        <div class="shipping-info-left-form-ward">
+                                            <div class="container">
+                                                <label class="field-label" for="stored-ward"
+                                                       >Ward</label
+                                                >
+                                                <select class="field-input" id="stored-ward" name="txtWard">
+                                                    <option
+                                                        class="field-input-item"
+                                                        data-name=""
+                                                        value=""
+                                                        >
+                                                        Choose Wards
+                                                        <!-- Ở ĐÂY OPTION MÌNH CÓ THỂ TRUYỀN ĐƯỢC data-properties={"nội dung"} và value ={} -->
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="txtWardDataName" name="txtWardDataName" value="">
+                                    </div>
+                                    <c:if test="${not empty updateError.addressLengthError}">
+                                        <small style="color: red;">${updateError.addressLengthError}</small>
+                                    </c:if>
+                                    <!--  -->
+                                    <!--  -->
+                                    <c:set var="typeOfLogin" value="${USER.typeOfLogin}" />
+                                    <c:if test="${typeOfLogin eq 0}">
+                                        <div class="update-form-control">
+                                            <input
+                                                type="password"
+                                                id="password"
+                                                class="update-input-password"
+                                                name="txtPassword"
+                                                placeholder="Password"
+                                                value=""
+                                                />
+                                            <c:if test="${not empty updateError.passwordLengthError}">
+                                                <small color="red">
+                                                    ${updateError.passwordLengthError}
+                                                </small><br/>
+                                            </c:if>
+                                        </div>
+                                        <!--  -->
+                                        <div class="update-form-control">
+                                            <input
+                                                type="password"
+                                                id="confirm-password"
+                                                class="update-input-confirm-password"
+                                                name="txtConfirm"
+                                                placeholder="Confirm Password"
+                                                value=""
+                                                />
+                                            <c:if test="${not empty updateError.confirmNotMatched}">
+                                                <small color="red">
+                                                    ${updateError.confirmNotMatched}
+                                                </small><br/>
+                                            </c:if>
+                                        </div>
+                                    </c:if>
+                                    <!--  -->
+                                </div>
+                                <div class="update-function">
+                                    <p class="update-function-security">
+                                        This site is protected by reCAPTCHA and the Google
+                                        <a href="https://policies.google.com/terms">Privacy Policy</a>
+                                        and
+                                        <a href="https://policies.google.com/privacy"
+                                           >Terms of Service</a
+                                        >
+                                        apply.
+                                    </p>
+                                    <button class="update-function-btn">CONFIRM</button>
+                                    <p class="update-function-update">
+                                        <a href="userInforPage" class="update-function-update-hightlight"
+                                           ><i class="fa-solid fa-arrow-left-long"></i> Back to Account
+                                            Infomation Page</a
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    </c:if>
+                    <c:if test="${empty sessionScope.USER}">
+                        <div style="text-align: center; margin: 300px 0;">
+                            <h1 style="font-size: 30px; margin: 20px 0;">YOU ARE NOT ALREADY LOGGED, PLEASE LOGIN FIRST!!</h1>
+                            <a style="font-size: 20px; text-decoration: none; font-weight: bold" href="loginPage">Login here </a><span style="font-size: 20px">or </span><a style="font-size: 20px; text-decoration: none; font-weight: bold" href="signUpPage">Register here!</a><br/>
+                            <span style="font-size: 20px">Or</span><br/>
+                            <a style="font-size: 20px; text-decoration: none; font-weight: bold" href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/SWP391ProjectMVC/LoginGoogleHandler&response_type=code
+                               &client_id=781842961263-gokuov74qslei1a1t44nufilc8u0d8sb.apps.googleusercontent.com&approval_prompt=force">Login with Google</a>
+                        </div>
+                    </c:if>
                 </div>
             </div>
             <img src="images/Footer-line.png" alt="" />

@@ -5,8 +5,10 @@
  */
 package swp391.controller;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -17,6 +19,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import swp391.customer.CustomerDAO;
+import swp391.customer.CustomerDTO;
+import swp391.feedback.FeedBackDAO;
+import swp391.feedback.FeedBackDTO;
 import swp391.product.ProductDAO;
 import swp391.product.ProductDTO;
 import swp391.utils.MyApplicationConstants;
@@ -48,9 +54,18 @@ public class ViewProductServlet extends HttpServlet {
             String id = request.getParameter("txtProductID");
             if (id != null) {
                 ProductDAO dao = new ProductDAO();
+                FeedBackDAO fbDao = new FeedBackDAO();
+                CustomerDAO cusDao = new CustomerDAO();
                 ProductDTO dto = dao.getItemByID(id);
+                List<ProductDTO> relatedList = dao.searchRelatedProduct(dto.getCateID());
+                List<FeedBackDTO> feedbackList = fbDao.getListFeedBackOfProduct(dto.getId());
+                List<CustomerDTO> customerFbList = cusDao.getListFeedBackCustomer(Integer.parseInt(id));
+                request.setAttribute("CUSTOMER_FEEDBACK", customerFbList);        
+//                String json = new Gson().toJson(relatedList);
                 HttpSession session = request.getSession();
                 session.setAttribute("ITEM_DETAIL", dto);
+                request.setAttribute("RELATED_PRODUCT", relatedList);
+                request.setAttribute("FEEDBACK_LIST", feedbackList);
             }
 
         } catch (NamingException ex) {

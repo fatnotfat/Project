@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import swp391.category.CategoryDAO;
+import swp391.category.CategoryDTO;
 import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
 import swp391.product.ProductDAO;
@@ -89,10 +91,13 @@ public class LogoutServlet extends HttpServlet {
             session.invalidate();
             session = request.getSession(true);
             ProductDAO productDao = new ProductDAO();
+            CategoryDAO categoryDao = new CategoryDAO();
             List<ProductDTO> productList = productDao.getNewestProduct();
             session.setAttribute("NEWEST_PRODUCT", productList);
             List<ProductDTO> productList2 = productDao.getSecondNewestProduct();
             session.setAttribute("SECOND_NEWEST_PRODUCT", productList2);
+            List<CategoryDTO> categoryList = categoryDao.getListCategory();
+            session.setAttribute("CATEGORY", categoryList);
         } catch (SQLException ex) {
             log("LogoutServlet_SQLException:" + ex.getMessage());
         } catch (NamingException ex) {

@@ -48,4 +48,14 @@ public class DBHelper implements Serializable{
             }
         }
     }
+    
+    
+    public static String getUrl(ServletContext context, String key) {
+        //get attribute from context scope
+        Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
+        if (key == null) {
+            return siteMaps.getProperty("");
+        }
+        return siteMaps.getProperty(key);
+    }
 }

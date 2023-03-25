@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.naming.NamingException;
@@ -215,7 +216,7 @@ public class CustomerDAO implements Serializable {
         }
         return dto;
     }
-    
+
     public boolean createAccountForShipping(String name, String email,
             String phone)
             throws SQLException, NamingException, ParseException {;
@@ -249,7 +250,7 @@ public class CustomerDAO implements Serializable {
         }
         return result;
     }
-    
+
     public CustomerDTO loadInformationForPayment(String email)
             throws SQLException, NamingException {;
         Connection con = null;
@@ -407,5 +408,42 @@ public class CustomerDAO implements Serializable {
             }
         }
         return result;
+    }
+
+    public List<CustomerDTO> getListFeedBackCustomer(int productID)
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<CustomerDTO> list = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "select c.CustomerID, Name "
+                        + "from Customer c, FeedBack b\n"
+                        + "where c.CustomerID = b.CustomerID and b.ProductID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, productID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    CustomerDTO dto = new CustomerDTO(rs.getInt("CustomerID"), rs.getString("Name"));
+                    if(list == null){
+                        list = new ArrayList<>();
+                    }
+                    list.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return list;
     }
 }

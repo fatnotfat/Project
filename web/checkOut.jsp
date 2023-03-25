@@ -8,6 +8,7 @@
 <%@page import="swp391.product.ProductDAO" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%--<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>--%>
 <!DOCTYPE html>
 <html lang="en">
 

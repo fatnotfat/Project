@@ -213,7 +213,8 @@ function updateCartSize() {
             // handle error
         }
     });
-};
+}
+;
 
 
 //function updateCartSize(callback) {
@@ -394,6 +395,40 @@ $(document).ready(function () {
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 // handle error response from servlet
+            }
+        });
+    });
+});
+
+
+$(document).ready(function () {
+    document.getElementById("buy-now-cart-btn").addEventListener("click", function (event) {
+        event.preventDefault();
+        const itemId = document.getElementById("product-id").value;
+        alert(itemId);
+        var itemPrice = Math.floor(parseFloat(document.querySelector(".product__item-info-price").textContent.replace(/\D/g, '')));
+
+//        alert(itemPrice);
+        // make the AJAX call with the itemId
+        $.ajax({
+            type: "POST",
+            url: "addToCartController",
+            data: {txtProductID: itemId},
+            success: function (response) {
+                // handle success response from servlet
+                alert('Add successfully !!');
+                updateTotalPrice(itemPrice);
+                updateCartSize();
+
+                setTimeout(function () {
+                    location.reload();
+                }, 2000); // waits for 2 seconds before reloading
+
+                window.location.href = 'shippingPage';
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                // handle error response from servlet
+                alert('error');
             }
         });
     });

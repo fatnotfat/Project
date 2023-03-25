@@ -23,6 +23,8 @@ import javax.servlet.http.HttpSession;
 import swp391.cart.CartDAO;
 import swp391.cart.CartDTO;
 import swp391.cart.CartObject;
+import swp391.category.CategoryDAO;
+import swp391.category.CategoryDTO;
 import swp391.login.LoginError;
 import swp391.customer.CustomerDAO;
 import swp391.customer.CustomerDTO;
@@ -81,6 +83,7 @@ public class LoginServlet extends HttpServlet {
                 CartObject cartObject = new CartObject();
                 CustomerDTO result = dao.checkLogin(email, password);
                 ProductDAO productDao = new ProductDAO();
+                CategoryDAO categoryDao = new CategoryDAO();
                 if (result == null) {
                     errorFound = true;
                     errors.setLoginFail("Incorrect email or password");
@@ -114,7 +117,8 @@ public class LoginServlet extends HttpServlet {
                         session.setAttribute("NEWEST_PRODUCT", productList);
                         List<ProductDTO> productList2 = productDao.getSecondNewestProduct();
                         session.setAttribute("SECOND_NEWEST_PRODUCT", productList2);
-
+                        List<CategoryDTO> categoryList = categoryDao.getListCategory();
+                        session.setAttribute("CATEGORY", categoryList);
                         if (checkLogged != null) {
                             email = URLEncoder.encode(email, "UTF-8");
                             Cookie cookie = new Cookie(email, password);
@@ -136,7 +140,8 @@ public class LoginServlet extends HttpServlet {
                         session.setAttribute("NEWEST_PRODUCT", productList);
                         List<ProductDTO> productList2 = productDao.getSecondNewestProduct();
                         session.setAttribute("SECOND_NEWEST_PRODUCT", productList2);
-
+                        List<CategoryDTO> categoryList = categoryDao.getListCategory();
+                        session.setAttribute("CATEGORY", categoryList);
                         if (checkLogged != null) {
                             email = URLEncoder.encode(email, "UTF-8");
                             Cookie cookie = new Cookie(email, password);

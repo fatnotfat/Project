@@ -23,6 +23,14 @@ public class FeedBackDTO implements Serializable{
     public FeedBackDTO() {
     }
 
+    public FeedBackDTO(int productID, int customerID, String textComment, int voting, Date feedBackTime) {
+        this.productID = productID;
+        this.customerID = customerID;
+        this.textComment = textComment;
+        this.voting = voting;
+        this.feedBackTime = feedBackTime;
+    }
+
     public FeedBackDTO(int productID, int customerID, String textComment, int voting, boolean status, Date feedBackTime) {
         this.productID = productID;
         this.customerID = customerID;

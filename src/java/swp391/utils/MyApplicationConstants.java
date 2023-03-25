@@ -126,5 +126,16 @@ public class MyApplicationConstants {
         public static final String PAYMENT_PAGE = "paymentPage";
         public static final String CHECKOUT_PAGE = "checkOutPage";
     }
+    
+    
+    public enum AuthorizationFilterConstant {
+        LOGIN_JSP_PAGE("loginPage"),
+        NOT_FOUND_PAGE("404Page");
+        
+        public final String value;
 
+        private AuthorizationFilterConstant(String value) {
+            this.value = value;
+        }
+    }
 }
