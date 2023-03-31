@@ -28,6 +28,7 @@
    //_________________________________ HEADER______________________________________________
    header {
      // position: fixed;
+     max-width: 1920px;
      z-index: 999;
      background-color: var(--primary-color);
    }
@@ -777,6 +778,45 @@
      }
    }
    //_________________________________ HEADER______________________________________________
+  //  _____________________________CONTACT__________________________________________________
+   .contact {
+    margin: 10rem 0;
+    & .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    &-title {
+      text-align: center;
+      font-size: 30px;
+      padding-bottom: 3rem;
+
+    }
+    &-line {
+      border-bottom: 3px solid black;
+      width: 30px;
+      margin: 0 auto;
+    }
+    &-list {
+      font-weight: 700;
+      font-size: 18px;
+      &-menu {
+        margin-top: 5rem;
+        font-size: 14px;
+        &-item {
+          font-weight: 500;
+          width: 20em;
+        }
+      }
+    }
+   }
+
+
+  //  _____________________________CONTACT__________________________________________________
+
+
+
    // ____________________________________________FOOTER___________________________________
 .footer .container {
      display: flex;

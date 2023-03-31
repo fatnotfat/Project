@@ -1,4 +1,3 @@
-
 // ______________________________________ICON____________________________________________
 // Get references to the search tab and its content
 const searchTab = document.querySelector(".menu-icon-tab-search");

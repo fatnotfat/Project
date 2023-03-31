@@ -27,6 +27,7 @@ body {
 }
 
 header {
+  max-width: 1920px;
   z-index: 999;
   background-color: var(--primary-color);
 }
@@ -733,6 +734,38 @@ header {
     width: 370px;
   }
 }
+.contact {
+  margin: 10rem 0;
+}
+.contact .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.contact-title {
+  text-align: center;
+  font-size: 30px;
+  padding-bottom: 3rem;
+}
+.contact-line {
+  border-bottom: 3px solid black;
+  width: 30px;
+  margin: 0 auto;
+}
+.contact-list {
+  font-weight: 700;
+  font-size: 18px;
+}
+.contact-list-menu {
+  margin-top: 5rem;
+  font-size: 14px;
+}
+.contact-list-menu-item {
+  font-weight: 500;
+  width: 20em;
+}
+
 .footer .container {
   display: flex;
   align-items: center;

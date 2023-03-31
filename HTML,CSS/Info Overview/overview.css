@@ -25,7 +25,7 @@ body {
   margin: 0 auto;
   padding: 0 15px;
 }
-
+/* --------------------------------HEADER---------------------------- */
 header {
   position: fixed;
   z-index: 999;
@@ -702,6 +702,8 @@ header {
     width: 370px;
   }
 }
+/* -------------------------------HEADER-------------------------------- */
+/* ----------------------------OVERVIEW------------------------------------ */
 .overview .container {
   display: flex;
   align-items: flex-start;
@@ -910,6 +912,7 @@ header {
     border-bottom: 3px solid black;
   }
 }
+/* ---------------------------------OVERVIEW------------------------------------ */
 .footer .container {
   display: flex;
   align-items: center;
